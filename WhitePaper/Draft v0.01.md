@@ -93,7 +93,7 @@ OP_TOKEN和常规OP_GROUP最大的区别在于, OP_TOKEN发行了一种特殊的
 许可证(license) 全部来自于创世区块的coinbase 交易, 等交易成熟后(100个区块), 该coinbase 中的100个HLC全部转给100个预留的委员会地址, 由于一个HLC可以表示一亿个最小单位 聪, 所以每个委员最多可以颁发一亿张许可证.
 
 生成许可证
-```JSON
+```JS
 {
      INPUTS
      {
@@ -132,7 +132,7 @@ OP_TOKEN和常规OP_GROUP最大的区别在于, OP_TOKEN发行了一种特殊的
 
 颁发许可证交易
 
-```JSON
+```JS
 {
      INPUTS
      {
@@ -170,8 +170,7 @@ OP_TOKEN和常规OP_GROUP最大的区别在于, OP_TOKEN发行了一种特殊的
 发行资产(Issuance)
 在申请到许可证后, 组织就可以用发布资产. 资产不能凭空产生, 根据资产的数量, 必须要染色等量最小单位的基础货币HLC. 例如, 组织A要发布100万枚山寨币, 用于A所在的山寨建设, 由于山寨币的最小单位是分, 一枚山寨币等于100分, 所以总共需要100* 10000* 100=10^8(一亿), 而一个HLC刚好等于一亿聪, 所以需要转化一个HLC. 
 
-```JSON
-
+```JS
 {
      INPUTS
     {
@@ -225,7 +224,7 @@ OP_TOKEN和常规OP_GROUP最大的区别在于, OP_TOKEN发行了一种特殊的
 资产交易
 不同资产之间可以通过去中心化的形式进行原子交换, 相对于中心化交易所更加安全, 手续费更低. 根据场景的不同, Halal Chain 支持哈希时间锁的原子交换以及混币方案的原子交换. 
 
-```
+```JS
 {
      INPUTS
      {
@@ -272,7 +271,7 @@ OP_TOKEN和常规OP_GROUP最大的区别在于, OP_TOKEN发行了一种特殊的
 资产销毁(unmint)
 资产是有等量最小单位的基础货币转换而发行, 同样, 资产也支持通过转换成等量的基础货币而销毁. 跟资产不会凭空发行一样, 资产同样也不会凭空消失. Halal Chain希望资产的用户能将资产作出价值, 不鼓励资产销毁. 所以只开放了资产发行方才有销毁权限.
 
-```
+```JS
 {
      INPUTS
      {
@@ -309,19 +308,20 @@ OP_TOKEN和常规OP_GROUP最大的区别在于, OP_TOKEN发行了一种特殊的
 跟据设计原则, Halal Chain 力求在经典的区块链设定下追求最高的扩容能力. 即在保证50%容错安全性, 全网全节点, 完全去中心. 目前满足这一设定的只有Block DAG.
 
 
-## SPECTRE
+## Consensus
+### SPECTRE
 
 
 SPECTRE是支持快速确认并具有极高的吞吐量的Block DAG协议. SPECTRE具有跟比特币相当的确认速度, 对于诚实的节点发布的区块有极快的确认速度, 理论上的吞吐量只受网络的绝大多数带宽限制. 
 
-### The basic properties of SPECTRE
+#### The basic properties of SPECTRE
 SPECTRE guarantees two main properties with regards to transactions:
 
 **Weak Liveness:** Transactions issued by an honest user gain fast confirmations and are quickly “accepted”.
 **Safety:** Once a transaction is “accepted” by a recipient it is unlikely to be double spent or reversed.
 
 
-### Pairwise voting in SPECTRE
+#### Pairwise voting in SPECTRE
 
 ![An example of the voting procedure in the DAG for blocks x,y.](https://cdn-images-1.medium.com/max/1600/1*q82YuxF11M7LnxWWEkQzUw.png)
 
@@ -331,7 +331,19 @@ SPECTRE guarantees two main properties with regards to transactions:
 * Block x always votes for itself relative to any other block that isn’t in its past.
 
 
-### 改进
+
+### PHANTOM
+
+![Stepwise examples of the clustering algorithm execution, taken from PHANTOM paper](https://cdn-images-1.medium.com/max/1200/1*bjxmg-HgBF7I_0YmkEpoHg.png)
+
+PHANTOM uses purely topological tools for achieving consensus. Differing from the voting scheme used by SPECTRE, the PHANTOM protocol actually determines a “correct blockchain” within the blockDAG as it builds the set of valid blocks in aggregate. Finding this chain happens recursively and forces the total ordering on the transactions included within such a chain. PHANTOM adds these blocks using a greedy approximation algorithm to an optimization problem that will be defined below. For some intuition into this process, the picture below will be useful.
+
+
+
+The main task at the heart of finding the best, honest blocks begins with finding the maximum k-cluster subDAG indicated by the picture above. The formal problem is defined below. The task of picking the best parameter k also presents an interesting problem, since it involves various tradeoffs given the actual network delay is unknown. For starters, the parameter is closely tied to the expected propagation delay of the entire network. Since we operate under the partial synchronous model, this delay is bounded but not explicitly known.
+
+
+## 改进
 1.	弱活性
 SPECTRE的快速确认只针对诚实的区块. 但在节点恶意快速发布双花区块的情况下, 有可能出现区块无法被确认的情况.
 
@@ -344,17 +356,9 @@ Halal Chain 是基于UTXO模型的价值交换网络, 双花交易虽说不会�
 论文参考实现效率低的原因在于, SPECTRE需要统计每个区块的票数. 而每个区块的投票又依赖于其他所有区块. Halal Chain 优化了SPECTRE的排序算法, 把算法效率到了O(m^2), 其中m 是将来区块的数量, 规模很小, 而且计算量不受区块数量增加的影响.
 	
 
-## PHANTOM
- 算法介绍
-
-一张图
-
-SPECTRE和PHANTOM 的结合
-
-
 ## 奖励
-### CoinBase
 
+### CoinBase
 #### 成熟期
 固定100个区块
 
@@ -405,8 +409,8 @@ Block DAG 物理极限
 
 # 生态
 
-应用这块还是交给刚总写吧, 不知道怎么下笔.
-
+~~应用这块还是交给刚总写吧, 不知道怎么下笔.
+~~
 
 	区块链钱包是一个统一区块链资产管理的地方，不仅管理着用户的Token资产，还管理着用户的身份信息。随着代币种类的增加，整个区块链生态系统的完善，目前钱包不再单纯是存储代币、发送代币、参与众筹的工具，会从跟交易所、众筹项目打交道为主，逐步转向代币实现自身应用（DApp）用途为主。也就是说，以后的钱包除了具有原有的资产管理功能外，重点会集成基于公链的各种应用，使用户方便的访问基于区块链的各种DApp。
 	HLC钱包将是满足上面功能的综合类的区块链钱包，其目标是：搭建一个基于HLC公链生态的DApp分发平台，汇集EOS钱包、行业应用、平台工具等诸多应用，提供数字资产管理、DApp分发、资讯行情等服务。将为用户提供DApp集合，为开发者搭建DApp分发渠道，打造一站式的HLC公链生态流量入口。
@@ -423,4 +427,4 @@ HLC钱包将有以下特点：
 第四阶段：集成多语言支持，实时行情，更多的基于HLC的DApp应用接入等。此阶段需要根据第三阶段的开发状态进行计划。
 区块链浏览器
 	区块链浏览器实际上是一个查询区块链数据信息的web应用，所以，区块链浏览器是作为区块信息浏览的主要窗口，每一个区块所记载的内容都可以从区块链浏览器上进行查阅。通常，数字资产用户会使用它查询记录在区块中的交易信息，用户只要输入钱包地址或某笔交易ID，就可以很快查询到对应的交易信息。当然，区块链浏览器能做的不只是查询交易这么简单，它可以详细的查询每一个区块的确认过程和数字币的产生、分配过程，并且完整的记录了每个区块间的数字币流转情况，从而更加完整的、公开的披露了数字币的存量、增量、换手率等信息，唯一无法知道的就是每个区块背后的人是谁，这也是匿名性的一大特征。
-	HLC区块浏览器和其他区块链浏览器一样，主要提供HLC区块数据信息的查询。目前，HLC区块链已经完成开发工作，并已部署至内部测试环境中，下面为HLC区块链浏览器的概要介绍： 
+
