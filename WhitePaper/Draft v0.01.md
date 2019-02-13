@@ -305,8 +305,22 @@ OP_TOKEN和常规OP_GROUP最大的区别在于, OP_TOKEN发行了一种特殊的
 
 
 # DAG
-跟据设计原则, Halal Chain 力求在经典的区块链设定下追求最高的扩容能力. 即在保证50%容错安全性, 全网全节点, 完全去中心. 目前满足这一设定的只有Block DAG.
+## Block DAG
+### Blockchain’s orphan rate problem
+Accelerating block creation and/or increasing block sizes increases the orphan rate: by the time a new block propagates throughout the network, other new blocks which do not reference it are likely to be created. It is well established that a high orphan rate amounts to compromised security; the more honest blocks that end up outside the longest chain due to spontaneous forks, the less secure is the chain.¹
 
+### The blockDAG paradigm
+The notion of a fork is organically absorbed in the DAG framework, so it seems worthwhile to consider if a DAG could do better than the chain/linked list structure of blockchains. Accordingly, with Satoshi’s proof-of-work system as the starting point, we need to make one change to the mining protocol in order to yield a blockDAG: blocks may reference multiple predecessors instead of a single parent. A canonical way to extend the ledger is to have blocks reference all tips of the graph (that their miners observe locally) instead of referencing the tip of the single longest chain, as in Satoshi’s original protocol.
+
+
+### Advantages of blockDAGs
+BlockDAG protocols such as SPECTRE and PHANTOM circumvent the problems associated with high orphan rates. This comes with many advantages:
+
+* It allows for confirmation times on the order of seconds, at least when there are visible double-spends and conflicts
+* It allows for a large transaction throughput, limited only by the network backbone and endpoints’ capacity; as a derivative, it implies low fees
+* It contributes to mining decentralization by allowing for roughly 100,000 blocks per day, which reduces the incentive to join a mining pool
+* It avoids the risk of orphaning, which comes with many additional benefits (such as Layer Two compatibility)
+* It eliminates selfish mining by rewarding all blocks without discriminating between on-chain and off-chain blocks
 
 ## Consensus
 ### SPECTRE
@@ -343,7 +357,10 @@ PHANTOM uses purely topological tools for achieving consensus. Differing from th
 The main task at the heart of finding the best, honest blocks begins with finding the maximum k-cluster subDAG indicated by the picture above. The formal problem is defined below. The task of picking the best parameter k also presents an interesting problem, since it involves various tradeoffs given the actual network delay is unknown. For starters, the parameter is closely tied to the expected propagation delay of the entire network. Since we operate under the partial synchronous model, this delay is bounded but not explicitly known.
 
 
-## 改进
+## Halal Chain 改进
+
+配图
+
 1.	弱活性
 SPECTRE的快速确认只针对诚实的区块. 但在节点恶意快速发布双花区块的情况下, 有可能出现区块无法被确认的情况.
 
@@ -354,17 +371,32 @@ Halal Chain 是基于UTXO模型的价值交换网络, 双花交易虽说不会�
 论文中SPECTRE的参考实现算法, 效率极低, 进行一次排序, 需要O(n^3)的, 其中n是区块数量, DAG出块速度很大. 一旦有冲突交易就会涉及到执行共识算法, 而网络每台机器都需要执行, 所以很有可能攻击者通过不断故意制造冲突交易, 拖垮整个网络. 
 
 论文参考实现效率低的原因在于, SPECTRE需要统计每个区块的票数. 而每个区块的投票又依赖于其他所有区块. Halal Chain 优化了SPECTRE的排序算法, 把算法效率到了O(m^2), 其中m 是将来区块的数量, 规模很小, 而且计算量不受区块数量增加的影响.
-	
+
+3. 存储
+Block DAG 据有极高的出块速度, 频繁的广播区块造成网络负荷非常大, 其次Block DAG区块交易的重复率较高, 也会造成带宽利用率的降低. xThin 广播区块时不会广播已经同步过的交易, 极大提高了消息传播的效率, 从而提高吞吐量.
+
+Xtreme Thinblocks
+ 
+In order to scale the Bitcoin network, a faster less bandwidth intensive method is needed in order to send larger blocks. The thinblock strategy is designed to speed up the relay of blocks by using the transactions that already exist in the requester's memory pool as a way to rebuild the block, rather than download it in its entirety. 
+
+Differing from other thinblock strategies, “Xtreme Thinblocks” uses simple bloom filtering and a new class of transactions to ensure that almost all block requests only require a single round trip, which is essential for good performance on a system where transaction rates are steadily climbing and only a single threaded network layer exists. In addition, Xtreme Thinblocks uses a 64 bit transaction hash which further reduces thinblock size; in doing so a typical 1MB block can be reduced to a 10KB to 25KB thinblock.
+
+Thinblock Relay Network: During the testing of this implementation the need to download blocks only from a specified node was required while at the same time allowing transactions from all nodes into the memory pool. This feature will also allow anyone to easily setup their own “thinblock relay network”. (see section Testing for setup). This might be of benefit until the time comes that thinblocks are more widely supported. 
 
 ## 奖励
-
+Block DAG 和区块链在
 ### CoinBase
 #### 成熟期
 固定100个区块
 
 ### 交易费
+
 #### 重复交易
-最先的区块得到交易
+Block DAG 的高孤块率带来高吞吐量的同时也带来了较高的区块重复率, 除了之前提到过重复率会降低网络带宽利用率, 还带来了交易手续费的问题. 矿工是趋利的, 会优先选择交易费较高的交易, 这样不仅造成低手续费的用户长时间不会被打包的情况, 也会提高区块交易的重复率. Inclusive 提出了一个博弈论的模型, 奖励会被所有打包该交易的矿工平分, 造成如果某个交易被多个区块打包的情况下, 矿工会有较高的风险得到较少的奖励. 
+最终矿工会达成一个平衡, 采用
+通过模拟, Inclusive 可以将重复率控制在30%左右.
+
+Halal Chain 在此基础上, 做了调整. 
 # 挖矿
 
 挖矿算法跟Block DAG的关系
