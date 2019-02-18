@@ -3,3 +3,6 @@ In 2008, Satoshi Nakamoto introduced the first fully decentralized cryptocurrenc
 Bitcoin proposed the economic  solution to an ideal world, where every member has votes , in the form of electronic power, to win not only their economic rights also speaking right. However, after 10 years running, bitcoin is heading far away from its vision. Due to the huge difficulty of mining, ordinary users have no chance to participate in the network unless they join in a mining pool, which however introduces  a highly  centralization concern,   furthermore, scalabity is the most public concern due the low transaction speed (7 TPS in theory).
 
 Various solution on solving these problems, like sharding, off-chain payment, proof-of-authority, parent-child architect... we do embrace and appericate these innovative explorations and we promise we will leverage them in the future. But we are somewhat blockchain  fundamentalists, currently we are more intersted in schemas that follow Nakamoto's   original intention - a secure, scalable, decentralized cryptocurrency, as far as we know, block DAG is one of the best solution to achieve that.
+
+C <box>dV<sub>out</sub><over>dt</box> = I<sub>b</sub>
+	&tanh;(<box>κ(V<sub>in</sub>-V<sub>out</sub>)<over>2</box>)
