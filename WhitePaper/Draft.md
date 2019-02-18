@@ -4,5 +4,4 @@ Bitcoin proposed the economic  solution to an ideal world, where every member ha
 
 Various solution on solving these problems, like sharding, off-chain payment, proof-of-authority, parent-child architect... we do embrace and appericate these innovative explorations and we promise we will leverage them in the future. But we are somewhat blockchain  fundamentalists, currently we are more intersted in schemas that follow Nakamoto's   original intention - a secure, scalable, decentralized cryptocurrency, as far as we know, block DAG is one of the best solution to achieve that.
 
-C <box>dV<sub>out</sub><over>dt</box> = I<sub>b</sub>
-	&tanh;(<box>κ(V<sub>in</sub>-V<sub>out</sub>)<over>2</box>)
+C <box>dV<sub>out</sub><over>dt</box> = I<sub>b</sub>tanh(<box>κ(V<sub>in</sub>-V<sub>out</sub>)<over>2</box>)
