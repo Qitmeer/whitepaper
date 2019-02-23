@@ -305,44 +305,39 @@ OP_TOKEN和常规OP_GROUP最大的区别在于, OP_TOKEN发行了一种特殊的
 
 
 # DAG
+HLC 账本采用DAG技术, 降低区块了延迟, 从而提高吞吐量. 高吞吐带来的高分叉率, 中本聪共识已经无法适用, 所以我们选择了支持快速确认的SPECTRE的共识协议, 在此基础上我们引入了PHANTOM协议解决SPECTRE协议的弱活性的问题.
+
 ## Block DAG
-### Blockchain’s orphan rate problem
-Accelerating block creation and/or increasing block sizes increases the orphan rate: by the time a new block propagates throughout the network, other new blocks which do not reference it are likely to be created. It is well established that a high orphan rate amounts to compromised security; the more honest blocks that end up outside the longest chain due to spontaneous forks, the less secure is the chain.¹
+### Block DAG 简介
+DAG技术一点也不特殊, 相反其实是一种非常直观的扩容方案. 假设某人想提高比特币的吞吐量, 很容易想到的就是增加区块尺寸(BCH), 或者加快出块速度(莱特币). 比特币之所以没有这么做, 是因为这样会造成区块链分叉增多, 形成大家熟悉的图式区块账本结构, 也就是Block DAG(事实上链式账本也是一种特殊的DAG, 即分叉数为一的DAG). 根据中本聪共识, 只有最长的分叉才会胜出, 很明显在分叉很多的情况下, 推翻最长分叉其实已经不需要50%算力,所以这种方案是牺牲了安全性而提高的吞吐量. 中本聪因为安全考虑没有采用DAG作为账本, 并不代表Block DAG不安全, 只是当时他没有找到适合Block DAG的共识协议. 随着对Block DAG技术的研究深入, 越来越多的安全的Block DAG的协议发表, 包括GHOST, SPECTRE, PHANTOM, 以及最新的基于GHOST协议改进的CONFLUX. 其中作为全球最大的智能合约平台的以太坊, 采用的就是修改版的GHOST协议, 这也就是为什么以太能讲确认速度提高到15秒的重要原因.
 
-### The blockDAG paradigm
-The notion of a fork is organically absorbed in the DAG framework, so it seems worthwhile to consider if a DAG could do better than the chain/linked list structure of blockchains. Accordingly, with Satoshi’s proof-of-work system as the starting point, we need to make one change to the mining protocol in order to yield a blockDAG: blocks may reference multiple predecessors instead of a single parent. A canonical way to extend the ledger is to have blocks reference all tips of the graph (that their miners observe locally) instead of referencing the tip of the single longest chain, as in Satoshi’s original protocol.
+### Block DAG 和 Transtional DAG
+以太出于稳定考虑人为限制了GHOST协议的吞吐量, 造成Block DAG的技术并不被熟知, 而知名的DAG项目IOTA和ByteBall都采用的是交易型DAG, 即账本的每个节点是一笔交易而非一个区块, 造成许多用户以为只有交易型DAG才适合区做账本. 根据我们尊重经典, 大胆创新的哲学. 我们认为比特币经典的区块结构空间利用效率高(区块头), 长期以来也没有发现明显的问题, 所以我们沿用. 只是账本结构变了, 带来了新的安全问题, 所以我们才采用了较新的SPECTRE和PHANTOM协议. 简单来说Block DAG是在比特币区块链账本上的扩展, 但是解决了吞吐量的问题. 
 
-
-### Advantages of blockDAGs
-BlockDAG protocols such as SPECTRE and PHANTOM circumvent the problems associated with high orphan rates. This comes with many advantages:
-
-* It allows for confirmation times on the order of seconds, at least when there are visible double-spends and conflicts
-* It allows for a large transaction throughput, limited only by the network backbone and endpoints’ capacity; as a derivative, it implies low fees
-* It contributes to mining decentralization by allowing for roughly 100,000 blocks per day, which reduces the incentive to join a mining pool
-* It avoids the risk of orphaning, which comes with many additional benefits (such as Layer Two compatibility)
-* It eliminates selfish mining by rewarding all blocks without discriminating between on-chain and off-chain blocks
 
 ## Consensus
-### SPECTRE
+SPECTRE 是DAGLabs推出的BlockDAG协议. 具有如下优点:
 
+### SPECTRE 的优势
+* 支持较高的确认速度, 可以达到秒级
+* 支持较高的吞吐量, 吞吐量只受网络的物理参数限制, 例如带宽和节点计算能力
+* 网络中所有节点都能参与, 没有特殊节点, 完全的去中心化
+* 工作在账本层面, 能链上扩容技术比如分片和链下扩容技术如状态通道完美结合
+* 跟比特币相当的50%算力安全保障
 
-SPECTRE是支持快速确认并具有极高的吞吐量的Block DAG协议. SPECTRE具有跟比特币相当的确认速度, 对于诚实的节点发布的区块有极快的确认速度, 理论上的吞吐量只受网络的绝大多数带宽限制. 
+### 快速确认与线性排序的权衡
+SPECTRE牺牲了交易线性排序的能力而换来了快速确认的能力, 而交易线性排序是基于状态的链上智能合约的基础. 根据简单可扩展原则, 我们主网的职能专注在价值流通和沉淀, 所以我们的账本是非状态的基于UTXO的支付模型, 因此采用支持线性排序的BlockDAG协议意义不是太大, 但支持线性排序的BlockDAG往往确认时间相对较长. 作为价值交换网络, 确认时间的速度对于用户体验来说至关重要. 当然智能合约所需的线性排序的能力在我们的架构中也非常重要, 根据我们的设计, 我们认为智能合约是属于应用级别, 而且计算复杂, 需要消耗非常多的计算资源. 为了保证主链的稳定, 避免热门应用影响主链的性能, 我们未来会支持二层的智能合约, 到时候会采用支持线性排序的协议.
 
-#### The basic properties of SPECTRE
-SPECTRE guarantees two main properties with regards to transactions:
-
-**Weak Liveness:** Transactions issued by an honest user gain fast confirmations and are quickly “accepted”.
-**Safety:** Once a transaction is “accepted” by a recipient it is unlikely to be double spent or reversed.
-
-
-#### Pairwise voting in SPECTRE
+#### 共识算法简介
 
 ![An example of the voting procedure in the DAG for blocks x,y.](https://cdn-images-1.medium.com/max/1600/1*q82YuxF11M7LnxWWEkQzUw.png)
 
-* If x is in z’s past but y is not, then z votes x < y and vice versa.
-* If both x and y are in the past of z, then z votes according to the majority of votes in its past (a recursive call for the vote in the DAG past(z)).
-* If neither x nor y are in the past of z, then z votes according the majority of blocks in its future.
-* Block x always votes for itself relative to any other block that isn’t in its past.
+SPECTRE解决双花交易的规则由如下四条组成, 假设区块x,y存在双花交易, 区块z为投票区块
+
+* 如果区块z只在x的将来集, 而不在y的将来集中, 则z投票给x.
+* 如果z同时在x和y的将来集中, 则z根据其过去集中大多数的投票结果来投票.
+* 如果z既不在x的将来集也不在y的将来集中, 则z根据其将来集中大多数投票来投票.
+* x,y如果互为祖先和后代关系, 则投祖先, 否则投自己.
 
 
 
@@ -350,11 +345,22 @@ SPECTRE guarantees two main properties with regards to transactions:
 
 ![Stepwise examples of the clustering algorithm execution, taken from PHANTOM paper](https://cdn-images-1.medium.com/max/1200/1*bjxmg-HgBF7I_0YmkEpoHg.png)
 
-PHANTOM uses purely topological tools for achieving consensus. Differing from the voting scheme used by SPECTRE, the PHANTOM protocol actually determines a “correct blockchain” within the blockDAG as it builds the set of valid blocks in aggregate. Finding this chain happens recursively and forces the total ordering on the transactions included within such a chain. PHANTOM adds these blocks using a greedy approximation algorithm to an optimization problem that will be defined below. For some intuition into this process, the picture below will be useful.
+PHANTOM 是DAGlabs为了解决SPECTRE协议无法线性排序的共识协议, 同时具备SPECTRE不具有的强活性, 具体说就是如果两笔冲突交易如果很快提交,可能导致两笔交易都无法安全确认, 即弱活性. SPECTRE的观点认为, 在账本模型下, 双花交易只会由作恶节点发布, 所以即使都无法确认也不会影响诚实用户. 但我们从用户角度来讲, 我们希望能做到体验的统一性. 所以我们决定结合PHANTOM,解决SPECTRE的弱活性问题.此外, 我们虽然不需要用到PHANTOM的线性排序来解决价值流通问题, 但是PHANTOM安全确认后, 其线性排序对于我们确定奖励顺序有重要价值.
+
+## PHANTOM 协议简介
+DAG的高并发性, 造成账本会有分叉, 分叉间由于没有继承关系, 是无法直接通过图的拓扑排序来排序. 但是一个网络的物理特性一般来说是确定的, 比如说网络绝大多数节点的带宽, 网络可以承受下的设定的出块速度, 加上容错级别(作恶节点的比例)可以估算出分叉的上限. 比如说比特币的分叉数为一, 以太坊为二, 等等. 
+
+反映在账本上就是, 某个区块不能从图的继承关系直接得到先后次序的区块数量最多不会超过并发量, 以下简称上限. 所以一旦发现某个区块的无序区块数超过该上限, 则说明该区块是异常的, 有可能是网络临时拥堵, 也有可能是恶意扣留区块, 只要我们保证绝大多数用户是正常的, 账本中会形成一个最大的子图, 该子图的任意区块的无序区块数都不会超过上限, PHANTOM把该子图定义为蓝色集, 把不属于该集合的其他区块定义为红色集. 
 
 
+![PHANTOM](https://cdn-images-1.medium.com/max/1200/1*bjxmg-HgBF7I_0YmkEpoHg.png)
 
-The main task at the heart of finding the best, honest blocks begins with finding the maximum k-cluster subDAG indicated by the picture above. The formal problem is defined below. The task of picking the best parameter k also presents an interesting problem, since it involves various tradeoffs given the actual network delay is unknown. For starters, the parameter is closely tied to the expected propagation delay of the entire network. Since we operate under the partial synchronous model, this delay is bounded but not explicitly known.
+
+如图所示, {A,B,C,D,F,G,I,J}是蓝色集, {E,H,K}是红色集, 可以看到蓝色集和红色集内内部任何区块最多只和另外三个区块之间的顺序是无法直接确定的, 但是蓝色集的规模比红色集大, 所以最终蓝色集中的区块认为是诚实的, 顺序会比较靠前, 红色区块被认为是作恶的, 顺序会比较靠后.
+
+## 线性全序
+![PHANTOM](https://cdn-images-1.medium.com/max/2000/1*Fgjcr4iLLNe2QH2ez-kTaA.png)
+PHANTOM 支持所有区块的全排序, 即线性排序. 虽然HLC是基于非状态的UTXO交易模型, 但PHANTOM的线性排序仍然可以解决SPECTRE的弱活性问题以及通过顺序确定区块奖励的问题.
 
 
 ## Halal Chain 改进
