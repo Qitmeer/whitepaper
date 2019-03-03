@@ -33,11 +33,11 @@ TODO: Difference between HLC and IOTA
 ## Consensus
 ## SPECTRE
 ### Advantage
-### Fast comformation
-### High througput
-### Fully decentrialized
-### High extensibility
-### High security
+#### Fast comformation
+#### High througput
+#### Fully decentrialized
+#### High extensibility
+#### High security
 
 ### Total ordering and fast confirmation trade-off
 TODO: fast confiramtion over total ordering for better user expeirence
