@@ -1,6 +1,6 @@
 # Introduction
-## Goal
-Simple but hard: a usable public blockchain serving for islamic bussiness. 
+## Objectives
+Simple but hard: a usable public blockchain serving for islamic bussiness.
 
 ## Ideal setting
 A public chain has various performance metrics, the most of which we care about are confirmation time, security including decetrialization degree and faulty tolerance threshold and high throuput. Specificly, we are persuing:
