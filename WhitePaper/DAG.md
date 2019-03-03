@@ -1,4 +1,4 @@
-# Architect  
+# Section 3 
 ## Public Chain
 ### Introduction
 HLC public chain is a common block DAG framework, it seperates consensus layer, which is usually mutable in different scenarios,  from foundamental and is open to developers. 
