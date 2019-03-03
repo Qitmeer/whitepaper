@@ -27,10 +27,38 @@ It is intuitive to improve scalability by increasing the block rate, let's say 1
 
 So we could know that DAG and blockchain is essentially homologous and the main cause that prevent DAG from prevalency is the DAG-compatitble consensus algorithms or  protocols. More and more researches and projects dedicate on DAG protocols. PHANTOM, SPECTRE and Conflux are the most farmous block
 
-### Total Ordering and Main Chain
- Most 
+### Block DAG and Transactional DAG
+TODO: Difference between HLC and IOTA 
 
-## dApp Chain
-## Account Chain
+## Consensus
+## SPECTRE
+### Advantage
+### Fast comformation
+### High througput
+### Fully decentrialized
+### High extensibility
+### High security
 
+### Total ordering and fast confirmation trade-off
+TODO: fast confiramtion over total ordering for better user expeirence
+### Birief Introduction
+![An example of the voting procedure in the DAG for blocks x,y.](https://cdn-images-1.medium.com/max/1600/1*q82YuxF11M7LnxWWEkQzUw.png)
+
+TODO: 5 rules
+
+## PHANTOM
+![PHANTOM](https://cdn-images-1.medium.com/max/1200/1*bjxmg-HgBF7I_0YmkEpoHg.png)
+
+TODO: Total ordering to solve fair reward mechanism
+
+## HLC improvement
+### Both liveness and fast confirmation
+### Consenus algorithms efficiency
+### Storage efficiency
+### Transaction replication
+
+## Award
+### CoinBase
+### Transaction Fee
+TODO:First Come First Get
  
