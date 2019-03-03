@@ -1,4 +1,4 @@
-# Asset Issurance
+# Section 2 Asset Issuance
 Individuls or organizations are able to issure assets on HLC to increase the liquility and offer finicial services. Our solution is reliable, user-friendly and practical.
 ## Problem identification
 ### Asset compliance 
