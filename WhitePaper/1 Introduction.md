@@ -40,7 +40,6 @@ Faulty tolerance is refering the percentage of incapable nodes: including malici
 ### High throughput
 Throughput is a repsentative metric of scalabilty, also it is a strong factor affecing practical scenarios. Bitcoin and ethereum don't scale, which have only 7 TPS and 15 TPS in theory. As a global value transfer network, such low throughput limits the vairious applications. HLC is using Block DAG as our ledger underlying data structure and it could provde a conservative estimation of at least one thousand transaction per second throughput to meet most applications on blockchain so far.
 
-This white paper proposes an alternative to traditional applications and use cases currently used to support the issuance Islamic securities (Smart Sukuk) in the Islamic capital markets industry. Instead of physical certificates/notes, Sukuk can be represented digitally in a public permissioned ledger using Blockchain in HLC Smart Sukuk platform as well as other use cases for Islamic Financial Institutions.
 
 ## Methodology 
 Blockchain has a big picture and HLC think that it requres an architecture to undertake. The ideaology of Blockchain technology is value transfer, so this paper firstly focuses on this point and make it better than all public chains so far, then on top of that, we will extend it with much functionalities like virtual machines for smart contracts.
@@ -52,6 +51,9 @@ Bitcoin has various challenges so far, like scability, like centralization due t
 HLC acknowledge that there is no perfect in the innovation technology, and Bitcoin is not perfect. As it just mentioned, scability and centralization, in addition, long confirmation time is also a big problem in confirming the transactions. So HLC is facing these challenges and solve it with the new Block DAG protocols, SPECTRE and SPECTRE.
 ### Simple and extensible
 The scenarios in blockchain are complex and we won't solve all of them in a single complex system, which is probably unmaintainable. Instead, we design an extensilbe architect, each layer of which is simple enought to solve only a core problem. Moreover, communications are through flexible interfaces between layers. For instance, public chain is a strong foundamental value transfer network and we will make off-chain smart contracts solution on top of it. Another case is we are using block DAG to gain suffienct scalabilty for current application scenarios, since it is a leger tech, it natually could combine Sharding and layer 2 scalabilty solution to provide further scalability.
+
+This white paper proposes an alternative to traditional applications and Blockchain solutions for Islamic Economy ecosystem and Global Islamic Financial Institutions. Currently HLC public chain shall support the issuance Islamic securities (Smart Sukuk) in the Islamic capital markets industry. Instead of physical certificates/notes, Sukuk can be represented digitally in a public permissioned ledger using Blockchain in HLC Smart Sukuk platform as well as other use cases for Islamic Financial Institutions.
+
 
 
 
