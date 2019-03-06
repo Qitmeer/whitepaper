@@ -1,4 +1,5 @@
-# Mining
+# Section 4 
+Mining
 ## Relationship with BlockDAG
 ### Fairness
 ### Anti-ASIC
