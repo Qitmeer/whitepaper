@@ -1,5 +1,5 @@
 # Section 1 Introduction
-Executive Summary
+## Executive Summary
 HLC Foundation (HalalChain) is a public chain based on DAG technology to serve the global Islamic economy and serve as an open, distributed ledger that can record transactions between two parties efficiently and in a verifiable and permanent way. Subject to design, HalalChain is inherently resistant to modification of the data and connects the other consortium blockchain in various jurisdictions through cross-chain protocol. 
 In Halal industry it focuses on building alliance chains of traceability of halal products; And in Islamic finance industry, it mainly concentrates on developing Islamic financial products and stable cryptocurrency; All above is striving to establish an ecosystem combined with development of the underlying technologies and practical applications.
 HLC is building advanced blockchain based platform for Islamic economy ecosystem that will allow users investors to easily engage in the trading their ecosystem tokens using various payment methods. HLC Foundation’s goal is to provide and promote the mass adoption of Blockchain technologies by becoming a globally trusted service provider. In various segment of Islamic economy ecosystem. To this end, HLC have created a unique solutions with relevant regulatory compliances built into the products and services to be offered in Islamic economy ecosystem.
@@ -33,13 +33,14 @@ Confirmation time is the waiting time when user has high confidence that a trans
 ### High security
 #### Fully decentrialized
 Decetrialization is the soul of a public blockchain because this is what the trust comes from for an fully autonomous system. Numbers of projects sacrifice their dectrialization to gain better throughput because of less consensus workload. This is a risky trade-off becuase less nodes to participate in consensus would bring higher possiblility to be targeted by attackers and prone to make collusion. HLC's consensus protocol SPECTRE is fully decentrailized, so all nodes have full ledger and there are no super nodes.
-#### 50 % faulty tolerance threshold
-Faulty tolerance is refering the percentage of incapable nodes: including malicious nodes and non-operational nodes. For an autonomous network, it obeys the marjority law, so 50% would be the highest standard. HLC has the same 50% faulty tolerance threshold with bitcoin, so HLC can provides as much security as bitcoin.
+
+#### Faulty tolerance threshold
+Faulty tolerance is refering the percentage of incapable nodes: including malicious nodes and non-operational nodes. For an autonomous network, it obeys the marjority law, so fifty percent (50%) would be the highest standard. HLC has the same 50% faulty tolerance threshold with bitcoin, so HLC can provides as much security as bitcoin.
 
 ### High throughput
 Throughput is a repsentative metric of scalabilty, also it is a strong factor affecing practical scenarios. Bitcoin and ethereum don't scale, which have only 7 TPS and 15 TPS in theory. As a global value transfer network, such low throughput limits the vairious applications. HLC is using Block DAG as our ledger underlying data structure and it could provde a conservative estimation of at least one thousand transaction per second throughput to meet most applications on blockchain so far.
 
-This white paper proposes an alternative to traditional applications and use cases currently used to support the issuance Islamic securities (Smart Sukuk) in the Islamic capital markets industry. Instead of physical certificates/notes, Sukuk can be represented digitally in a public permissioned ledger using Blockchain in HLC Smart Sukuk platform.
+This white paper proposes an alternative to traditional applications and use cases currently used to support the issuance Islamic securities (Smart Sukuk) in the Islamic capital markets industry. Instead of physical certificates/notes, Sukuk can be represented digitally in a public permissioned ledger using Blockchain in HLC Smart Sukuk platform as well as other use cases for Islamic Financial Institutions.
 
 ## Methodology 
 Blockchain has a big picture and HLC think that it requres an architecture to undertake. The ideaology of Blockchain technology is value transfer, so this paper firstly focuses on this point and make it better than all public chains so far, then on top of that, we will extend it with much functionalities like virtual machines for smart contracts.
