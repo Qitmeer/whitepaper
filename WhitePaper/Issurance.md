@@ -15,10 +15,21 @@ OP_TOKEN is based on OP_GROUP, a referenced solution of issuring assets on Bitco
 
 ## Related concepts
 ### UTXO
+UTXO represents Unspent Transaction Output. One transaction has multiple sources and destinations, we call them as inputs and outpus. There are no accounts in HLC, what users have and spend are a bunch of unspent transaction ouputs and we could get  balance by summing up them. 
+
 ### Script system
-### Color coins
+The mechanism behind how users spend their UTXOs is to execute a special script. The output stores a half of the script and we have to present the other half and combine both to verify if we could spend the money. The former half is called locking script, like a locked treasure box, and the latter is unlocking script, like the only key to the box.
+
+### Color coin
+Color coin is a class of methods to represent assets on top of the blockchain, so it can leverage the temper-proof capibility of blockchain. It is like an organization issues their conference tickets with cash to make sure the tickets cannot be forged. There are a lot of ways to implement color coin and the most common way is to use a special script operation - OP_RETURN - to interupt script execution early, so we can add information of the assets after it without violating the script validation.
+
 ### OP_GROUP
+The OP_RETURN scheme is more suitable to apply on mature blockchain since it doesn't change the underlying blockchain protocol and won't risk forking. However, the weakness OP_RETURN is that miners cannot verify its protocol so there would be some security risks.
+
+OP_GROUP is a proposal of assets issurance  on Bitcoin Cash (BCH) from Bitcoin Unlimited (BU) and has been approved by BU. OP_GROUP supports token issurance, tranfer, destroy, etc. Since OP_GROUP is an extention to BCH script sytem,  it is part of BCH protocol and can be verified by miners, which is more reliable.
+
 ### OP_TOKEN
+HLC extends OP_GROUP, i.e. OP_TOKEN, to support assets authentication.
 
 ## OP_TOKEN Design
 The biggest difference between OP_TOKEN and OP_GROUP is that OP_TOKEN issues a special token named LICENSE. Licenses are hold by renowned expects or organizations with public credibility. Any entitity plans to issue a token needs to be warrant a license. 
