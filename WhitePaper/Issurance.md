@@ -1,16 +1,30 @@
 # Section 2 Asset Issuance
-Individuls or organizations are able to issure assets on HLC to increase the liquility and offer finicial services. Our solution is reliable, user-friendly and practical.
-## Problem identification
+Individuls or organizations are able to issure assets on HLC to increase the liquility and offer finicial services. The HLc solution is reliable, user-friendly and practical especially in the field of Islamic economy and finance.
+The main efforts in Islamic economics so far has been to create new forms Shariah compliance instruments to operationalise Shariah and ethical values into the current conventional economic system and financial services products. While this is crucial to sustain the global economy as it is today, the Islamic economics needs to develop new strategies to cope with the next economy, which starts with a clear and deliverable vision of a new world economy. And the new vision of a new world economy will be driven by those who embrace innovation that will build the future. 
+
+However, it is necessary to look at the main building block to enable trust in impersonal financial transactions in a highly globalized society. This innovation called the “blockchain” will play a crucial role in boosting the Islamic financial sectors in all its segments which include banking, insurance, Capital market, Zakah and Waqf management. Addressing the digital revolution that is happening right now will foster competitive advantage for the Islamic economy and finance industry. This innovation is in accordance with Shariah rules and principles
+The blockchain lets people who have no particular confidence in each other collaborate without having to go through a neutral central authority. Simply put, it is a mechanism for creating trust. Within this open ledger system, the blockchain offers an inherent level of trust for the user, eliminating the need for the middleman and mitigating the risk of human error. Justice and creditworthiness has been emphasized in the Holy Quran in Surat al Nisa which Allah says: 
+O you who believe! Stand firmly for justice, as witnesses to Allah, even if against yourselves, or your parents, or your relatives. Whether one is rich or poor, Allah takes care of both. So do not follow your desires, lest you swerve. If you deviate, or turn away—then God is Aware of what you do” (4:135)
+In the blockchain transaction, it is publicly accessible log of transactions ensures that the data is protected against tampering and revision, and it is virtually impossible for individuals to modify or replace parts of the blockchain secretly. The need for transparency, justice is, above all, an important Sharī`ah consideration in blockchain transaction. Any form of concealment, fraud or attempt at misrepresentation violates the principles of justice and fairness in Sharī`ah as mentioned in the Qur’an in Sūrah Al-Mutaffifin: 
+Woe to the defrauders. Those who, when they take a measure from people, they take in full. But when they measure or weigh to others, they cheat. (83: 1-3)
+A full copy of the blockchain contains every transaction ever executed, making information on the value belonging to every active address (account) accessible at any point in history. Every block contains a long reference number or hash of the previous block, thus creating a chain of blocks from the genesis block to the current block. The below paragraphs explain the concept of blockchain and how a transaction is recorded on the blockchain, based on the cryptocurrency protocol.
+ 
+
+The HLC public chain platform is one of the latest underlying technologies based on Directed Acyclic Graph which has been defined as Blockchain 3.0 technology. The DAG involves and supports quick transactions, and is friendly to small payment. This innovation shows that there is correlation between revealing civilization and blockchain consensus, which is transparency, justice, creditworthiness, trust and witness described in the Holy Quran and shared by the whole humanity. The public blockchain could act as a complete set of ecosystems to support start-ups in the Islamic digital economy and beyond. 
+
+
+## Asset Compliance and Applicable use cases on HLC public chain
 ### Asset compliance 
 There is a contradiction between the openess of public blockchain and the compliance of assets issued on it. Blockchain is an autonomous peer-to-peer network, so there is no central authority to authorize who can join and leave. However, for a specific application scenario, we have to make sure the assets we issue is compliable on local law, saying, Muslics don't eat pork by their faith, so if someone wants to sell foods to Islamic market, how could he to convince his customers. 
 ### Value relevance
 All the current assets issurance platforms, like ethereum, don't have a threshold to issure assets. So people could create assets whatever "market value" they want. Firstly it makes users hard to tell which asset is valuable or just a spam; secondly, abuse issurance increases the computation load and finally user will have to pay for it in the form of transaction fees.
+
 ## Problem analysis
 ### Asset compliance 
 The problems of asset compliance is that the current solutions don't seperate application governance from consensus. Public blockchain itself is just a temper-proof ledger or database, so it is able to provide trustful computation services, which means the service will deliver what its code promises, so we could deem it as a technology problem. However, application governance is a bussiness problem and should be managed by the users rather than miners or developers. 
 ### Asset relevance
 The cause of asset relevance problem is that the value of asset (tokens) and underlying currency (coin) don't  enter in a unified ecosystem. For instance, some token could be no connection with the ETH coin. In theory, this problem cannot be solved because we cannot estimate the market value of one toke, however, at least we should offer a benign mechanism that make tokens related to the coin, so it will encourgae the issuer to devote more value to gain more their customer's trust.
-# Solution
+# HLC Technical Solution
 OP_TOKEN is based on OP_GROUP, a referenced solution of issuring assets on Bitcoin Cash, and redesigned to fit various practical scenarios with unique features like asset compliable and value relevent.
 
 ## Related concepts
