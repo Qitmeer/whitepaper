@@ -1,5 +1,5 @@
-# Section 2 Asset Issuance
-Individuls or organizations are able to issure assets on HLC to increase the liquility and offer finicial services. The HLc solution is reliable, user-friendly and practical especially in the field of Islamic economy and finance.
+# Section 2 Asset Management
+There is no doubt that a high level of disruption by financial innovation has already started to reshape the global Islamic economy and the nature of payment practices; a new wave of disruption is making its way into asset management. The HLC public chainblockchain records provide pseudoanonymity, as all on-chain ownership is tracked via abstract public addresses, the ownership and provenance of assets can be easily tracked and overtime particular users may be identified. While privacy may be challenging to manage, for certain applications such transparency aspects can be helpful – for example from a regulatory and compliance perspective. The Corporate entities Individuls or organizations are able to issue their assets on HLC public chain platform to increase the liquility and offer finicial services. The HLc solution is reliable, user-friendly and practical especially in the Global Islamic economy and finance.
 The main efforts in Islamic economics so far has been to create new forms Shariah compliance instruments to operationalise Shariah and ethical values into the current conventional economic system and financial services products. While this is crucial to sustain the global economy as it is today, the Islamic economics needs to develop new strategies to cope with the next economy, which starts with a clear and deliverable vision of a new world economy. And the new vision of a new world economy will be driven by those who embrace innovation that will build the future. 
 
 However, it is necessary to look at the main building block to enable trust in impersonal financial transactions in a highly globalized society. This innovation called the “blockchain” will play a crucial role in boosting the Islamic financial sectors in all its segments which include banking, insurance, Capital market, Zakah and Waqf management. Addressing the digital revolution that is happening right now will foster competitive advantage for the Islamic economy and finance industry. This innovation is in accordance with Shariah rules and principles
@@ -14,17 +14,57 @@ The HLC public chain platform is one of the latest underlying technologies based
 
 
 ## Asset Compliance and Applicable use cases on HLC public chain
-### Asset compliance 
-There is a contradiction between the openess of public blockchain and the compliance of assets issued on it. Blockchain is an autonomous peer-to-peer network, so there is no central authority to authorize who can join and leave. However, for a specific application scenario, we have to make sure the assets we issue is compliable on local law, saying, Muslics don't eat pork by their faith, so if someone wants to sell foods to Islamic market, how could he to convince his customers. 
+# HLC Stable Coin
+There is a contradiction between the openess of public blockchain and the compliance of assets issued on it. Blockchain is an autonomous peer-to-peer network, so there is no central authority to authorize who can join and leave. However, for a specific application scenario, HLC have to make sure that the assets issued on HLC public chain platform are compliable with Shariah law principles. It is mentioned that innovation is important as the humanity are living in the age of technology and in an era of extreme innovation; with every passing day human being are harnessing new possibilities and existing opportunities using technology. Nowadays, one of the most talked-about topics in the financial services industry is to enable Capital markets, money markets and banks to process payments more quickly and more accurately while reducing the costs of processing transactions. However, The technology could be adopted in the area of Stable coin, sukuk, takaful, banking, waqf, zakat,etc.
+
+## Concept of HLC Stable Coin
+
+A stable coin is a currency which successfully performs its functions as a means of exchange, unit of account and a store of value because its purchasing power is stable. but is not tied to a central bank and has low volatility. On any given day, it is common to see an increase to 10-20% or even a decrease. That makes using most cryptocurrencies for daily transactions inconvenient. The adoption of stable currencies/coins will be a catalyst to the new decentralized internet becoming mainstream.
+Stable coins is  core product is a Shariah compliant smart contract that represents an equity stake in Sukuk portfolio, which successfully combines traditional Islamic finance principles with those of mainstream finance. Stable Coin is a token whose smart contract represents the owners’ share in a financial fund formed by investment grade Sukuk. When consumers purchase the token, they are buying in to a fund of diversified Sukuk of high quality and high liquidity Sukuk.
+
+
+### Features Of The Stable Coin 
+ 
+Currency & Security As a currency, HLC is a system that enables payments settlement between two parties, directly, without the need of a central party to monitor transactions. Also, as a security, HLC is backed by investment grade Sukuk that allows the token to not only remain stable, but steadily appreciate in value, making it ideal as a savings instrument. HLC carries divisibility, homogeneity, portability and stability due to its asset-backed nature.
+
+**Equity and Debt**  
+As a token, Stable Coin represents an owner’s equity stake in a financial fund that is comprised of investment grade sukuk. We estimate that this fixed-income product will, return between 3-7% for retail investors, which is the average range for high quality sovereign and private Sukuk issuance. At the peak of its development, Fasset will also be able to support the raising of Shariah-Compliant debt for both corporates and sovereigns through its wider community of retail and institutional investors.  
+
+**Stability  **
+The final feature of the coin is in its stability. Backed by a real asset, the coin will not be subject to huge variations in price and thus will in effect become a form of stable coin. Coins will be issued 1:1 against the value of the Sukuk fund.
+
+Insert Diagram or Table here
+
+## Applicable uses of HLC Stable Coin 
+The use of Blockchain technology holds great potential across the Islamic economy and finance industry. One of the key principles of Islamic economy is based on having enforceable contracts which are fair, transparent and agreeable between the parties that engage in a banking transaction.
+
+**Payments**  
+As a currency, Stable currency can be a payments system for goods and services. The Shariah-compliance and homogeneity offered by HLC can form as a reliable and low cost payments settlement vehicle for SMEs and large companies. 
+
+**Transfers **
+Our ecosystem will provide the infrastructure for an instantaneous international transfer system. The stability, portability and real world liquidity of Fasset will allow for fast, cost-less remittances across borders – especially given the fact that the Fasset ecosystem will be built on the DAG protocol (see Section 3: Technology Context for more information).  
+
+**Savings** 
+As of now, retail customers are unable to access the Sukuk market for long term savings - HLC will democratize access to a Shariah compliant fixed-income investment fund for retail consumers. The fixed-income nature of Sukuk and the divisibility offered by Fasset will allow retail investors to transfer their savings into Fasset for safe, secure and steady returns. 
+
+**Liquid asset**  
+Stable Coin can replace commodities such as copper that are required for debt based Shariah financing. Thus, HLC can accommodate many real-life transactions, for instances al Murabahah, Tawarruq, etc. 
+
+**Liquidity management**  
+Perhaps the most important use case for the HLC ecosystem will be in playing a vital role as a much-needed and oft-requested secondary market for the Islamic Finance industry. The speed, security and cost savings from encoding smart contracts using distributed ledger technology will provide strong options for liquidity management. This will enable numerous functions that have so far stalled the growth of Islamic Finance – such as inter-bank lending, monetary supply management by central banks and in enabling the development of other bespoke Shariah compliant institutional products.
+
+
+
 ### Value relevance
 All the current assets issurance platforms, like ethereum, don't have a threshold to issure assets. So people could create assets whatever "market value" they want. Firstly it makes users hard to tell which asset is valuable or just a spam; secondly, abuse issurance increases the computation load and finally user will have to pay for it in the form of transaction fees.
 
 ## Problem analysis
 ### Asset compliance 
-The problems of asset compliance is that the current solutions don't seperate application governance from consensus. Public blockchain itself is just a temper-proof ledger or database, so it is able to provide trustful computation services, which means the service will deliver what its code promises, so we could deem it as a technology problem. However, application governance is a bussiness problem and should be managed by the users rather than miners or developers. 
+The challenges of asset compliance is that the current solutions don't seperate application governance from consensus. Public blockchain itself is just a temper-proof ledger or database, so it is able to provide trustful computation services, which means the service will deliver what its code promises, so we could deem it as a technology problem. However, application governance is a bussiness problem and should be managed by the users rather than miners or developers. 
 ### Asset relevance
 The cause of asset relevance problem is that the value of asset (tokens) and underlying currency (coin) don't  enter in a unified ecosystem. For instance, some token could be no connection with the ETH coin. In theory, this problem cannot be solved because we cannot estimate the market value of one toke, however, at least we should offer a benign mechanism that make tokens related to the coin, so it will encourgae the issuer to devote more value to gain more their customer's trust.
-# HLC Technical Solution
+# HLC Technology Solution
+The HLC public chain is a powerful innovative technology that has the potential to transform the global Islamic financial services industry. it is a distributed database of records or public ledger of all transactions or digital events that have been executed and shared by corporate entities. HLC technology is cryptographically authentacated. it is developed to provide an alternative secure approach to exchange value without the involvement of third party. The technology enables simplification and brings in greater security, scaleability, speed, and reliability. The results is reduced costs and improved efficiency. 
 OP_TOKEN is based on OP_GROUP, a referenced solution of issuring assets on Bitcoin Cash, and redesigned to fit various practical scenarios with unique features like asset compliable and value relevent.
 
 ## Related concepts
