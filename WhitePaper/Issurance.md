@@ -53,6 +53,73 @@ Stable Coin can replace commodities such as copper that are required for debt ba
 **Liquidity management**  
 Perhaps the most important use case for the HLC ecosystem will be in playing a vital role as a much-needed and oft-requested secondary market for the Islamic Finance industry. The speed, security and cost savings from encoding smart contracts using distributed ledger technology will provide strong options for liquidity management. This will enable numerous functions that have so far stalled the growth of Islamic Finance – such as inter-bank lending, monetary supply management by central banks and in enabling the development of other bespoke Shariah compliant institutional products.
 
+# Smart Sukuk on HLC public chain
+One important application in Islamic capital markets for blockchain is the sukuk (Islamic bonds) market. Sukuk are securitized, and hence tradable on secondary markets much like a stock can be traded on a stock exchange. Islamic finance prohibits interest payments on loans and the sale of debt; Sukuk markets evolved to securitize Islamic modes of financing such as profit sharing through asset ownership for a given tenure.
+Sukuk has been a popular approach for governments seeking to finance infrastructure projects, but the legal complexity and overall cost to issue sukuk has kept it out of reach for smaller corporations and MSMEs. It has been an excellent way to raise much needed capital, but investors have also been always restricted to the much larger institutional investors due to the high barrier of entry, which usually starts in the millions. However, the inability to lower these barriers of entry at the retail level to thousands or hundreds of dollars to enable wider participation (and access to more funds) for sukuk participation, and hence wider risk and profit-sharing in the Islamic capital market, is still persistent and remains an impediment to true shared prosperity.
+
+Sukuk investment: An Ethical Investment For  Stable  Returns
+According to IFSB 9 (IFSB, 2007) Sukuk commonly refers to the Islamic bonds. However, as opposed to conventional bonds, which merely confer ownership of a debt, Sukuk grants the investor a share of an asset, along with the commensurate cash flows and risk. As such, Sukuk securities adhere to Islamic law, referred to as Shari’ah principles, which prohibit the charging or payment of interest.
+
+Put simply, Sukuk instruments act as a bridge. They link their issuers, primarily sovereigns and corporations in the Middle East and Southeast Asia, with a wide pool of investors, many of whom are seeking to diversify their holdings beyond traditional asset classes. In this way, funds raised through Sukuk can be allocated in an efficient and transparent way to infrastructure initiatives and other deserving projects linked directly to the real economy sector.
+
+Development of Traditional Sukuk market 
+2017 ended on an optimistic note for the global Sukuk market. There were relatively higher commodity prices (particularly of oil), a gradual rise of reference rates, and a marked increase in Sovereign Sukuk issuances, stable Corporate Sukuk issuances in certain jurisdictions and a healthy Sukuk issuance pipeline. Sukuk continued to gain attention from new issuers while the investor base expanded, which is an encouraging development. During the year, Sukuk were issued as a viable alternative source of financing for infrastructure development, aircraft financing, project financing, corporate general purpose needs, capital adequacy and budgetary requirements. Other interesting developments are the issuance of Green Sukuk and increased interest in SRI Sukuk issuances.
+
+The year’s landmark event was Saudi Arabia’s entry as a sovereign Sukuk issuer. The country’s first issuance was the largest international Sukuk issuance ever of USD 9 billion, followed by several sovereign domestic Sukuk issuances. The other new sovereign issuer was Nigeria with the country’s domestic issuance being around USD 312 million. In addition, continued interest from well established sovereign, quasi sovereign and financial institutions issuers such as the Governments of Bahrain, Indonesia, Turkey, Pakistan, Oman, Hong Kong, Investment Corporation of Dubai, and Islamic Development Bank has kept the Sukuk market active. New issuers, such as Saudi Arabia, have helped keep the growth trajectory of Sukuk issuance intact.
+
+Global Sukuk Issuances
+Total global issuance amounted to USD 116.7 billion in 2017. As illustrated in Chart 1 below, global Sukuk issuance has increased from USD 87.9 billion in 2016 to USD 116.7 billion in 2017, an impressive jump of around 32% in volume. The increase in volume during 2017 was mainly due to sovereign Sukuk issuances by Saudi Arabia coupled with steady issuances from Asia, GCC, Africa and certain other jurisdictions. Malaysia continues to dominate the Sukuk market, though shares from countries like Indonesia, the UAE and to some extent from Turkey, are close behind in value.
+
+Insert Diagram or Table here
+
+Sukuk - has thus far been limited to governments and large institutions due to the high issuing costs and complexity. But there is new approach and innovation in Islamic Economy from HLC perspective aims to using the blockchain. Using blockchain technology can solve most of the Shariah and legal  issues in the Sukuk issuance. Islamic Securities can be executed according to predefined rules can be coded as a smart contract in capital markets. 
+Experiments are ongoing on the issuance of smart bonds. Sukuk issuance follows strictly Shariah law and principles of permissible variance, cleansing, the balance-sheet ratios to be satisfied, the 'conglomerate' issue and the 'core' activities. The following Table shows the traditional Sukuk.
+Insert Diagram or Table here
+These Smart Sukuk can also be coded as if-then statements to ensure both compliance to the Shariah and transparency for all involved. This would increase the investors satisfactions on the Shariah compliance of Sukuk product.
+Smart Sukuk standardizes and automates much of the legal, accounting, and payment overhead of conventional sukuk offerings - all backed by fully licensed legal entities in the issuing jurisdiction.
+
+Smart Contract and Blockchain 
+The role of smart contracts in the smart Sukuk.  A smart contract is a piece of code within a blockchain record that is executed by each node on the network to automate (potentially) a particular state resulting from a contractual deliverable without further human interaction. For example, in the context of a loan or a bond you could put in place a smart contract at the time of issue that automates the payment of interest to each investor on the given due dates. Accordingly, the bond or loan would service itself when triggered by the borrower sending funds to the smart contract. It is therefore a very useful tool to automate operative parts of normal legal contracts, but all the regular contractual protections such as representations, warranties and indemnities drafted in natural language are still needed. These cannot currently be replaced with code It’s fair to say there is some confusion and concern about smart contracts among lawyers with many concerned that regular natural language contracts will be replaced by code. This is not currently viable or realistic. Smart contracts are not a replacement for normal legal contracts but rather sit behind and augment a legal contract where by snippets of code replicate and automatically perform certain terms of the contract.
+
+The Investors in a sukuk are issued a share of ownership, which represents their fractional ownership in the underlying asset or structure with the terms of the sukuk ownership. Holders of sukuk receive periodic payments from the fund-raising institution. Investors can hold a sukuk until maturity, or they can sell their ownership in the sukuk to a third party. This subsequent sale to a third party is known as “secondary trading” and is what distinguishes a sukuk as a “securitized” asset.
+Smart Sukuk runs on the HLC public chain, which supports “smart contracts”. A smart contract encodes business rules directly into the underlying payment currency itself – the blockchain itself enforces the contract rules regarding payments and transfer of ownership.
+
+What is Smart Sukuk 
+The experimental bond was also issued by Fasset  through HLC’s public chain platform, but this is new  denominated in ether. As such, it will be the first ever cryptocurrency Sukuk fully settled on an open public blockchain using smart contracts. While cryptocurrency Sukuk have been issued under crypto asset conditions, and there have been some bonds issued where payment has been made in cryptocurrency, this was the first time a Sukuk has actually been denominated in cryptocurrency, fully settled on a blockchain and issued on a commercial basis by a trading company in a regulated way. It is significant because HLC foundation will able, for the first time, to issue and pay for a legally enforceable financial instrument without using any of the traditional existing financial infrastructure.
+Smart Sukuk, can be defined as tokenization by collecting funds from investors in exchange for Sukuk Tokens representing an ownership portion of the Sukuk investment. When the institution makes payments, the funds are automatically distributed back to the Sukuk Token holders via the blockchain according to the rules of the smart contract in Islamic Economics - without the need of conventional banks or intermediaries.
+Smart Sukuk is where the investors transferred Ether from their existing blockchain wallets, such as a Coinbase account, to their HLC cryptocurrency wallets. On settlement, ether passed from investors’ cryptocurrency wallet addresses to Fasset’s address, and the Sukuk passed from Fasset’sIslamic securities wallet address to the investors’ addresses. All of this is recorded on the public blockchain technology and represented through the HLC public blockchain interface on the HLC platform. 
+Insert Diagram or Table here
+
+From a Islamic securities perspective, the blockchain served as the register and denoted legal and beneficial ownership. Because the Financial Authority recognised the blockchain as an independent third party, there was no need for a registrar to keep a register of Sukuk holders: the register is the blockchain. Smart contract code was put in place behind the regular legal contracts to automate delivery of the Sukuk and payment flows, so Fasset issued the smart Sukuk and paid investors’ returns and principal automatically, without further action.
+Smart Sukuk Tokens support an industry standard protocol, called ERC20. The standard allows tokens to be traded globally on a variety of public cryptocurrency exchanges.
+
+Structure of Smart Sukuk
+Islamic Economics and finance is bound by Shariah rules and regulations from the regulatory authorities. The HLC token and other Cryptocurrencies in Islamic Economy is permissible based on its attributes and underlying asset which is HLC commodity. The Halalchain will offer the Smart Sukuk in jurisdictions with clear and viable legal and regulatory frameworks to support the issuance of Smart Sukuk. 
+The structure of the Sukuk above will be base on Sukuk Ijarah and hybrid Sukuk projects “Take Sukuk al-ijarah (lease based) as an example – an Sukuk ijarah is permissible and Shariah compliance if the true ownership of the underlying asset is legally transferred to the Sukuk holders. And for a Smart Sukuk, it’s only acceptable because of its regulation on trading and exchange in the Cryptocurrency Assets.”
+Smart Sukuk supports issuance of the sukuk in global/local currencies and eliminates the need for institutions to add cryptocurrency to their balance sheet. The use of blockchain allows for legal and beneficial title to be united. This meant that the global/definitive note structure that underpins most Islamic securities issuance was dispensed with, removing a lot of the detailed language that first-time issuers often struggle with.
+
+Features of Smart Sukuk 
+The adoption of stable currencies/coins will be a catalyst to the new decentralized internet becoming mainstream. Sukuk issuance on Blockchain simplifies Islamic securities issuance and reduces cost in a number of ways: .
+
+Firstly, it means legal fees and complexity are both lessened because the documents and structure are simpler. As described above, the use of   blockchain allows for legal and beneficial title to be united. This meant that the global/definitive note structure that underpins most securities issuance was dispensed with, removing a lot of the detailed language that first-time issuers often struggle with. 
+
+Secondly, the absence of a registrar meant that the normal contractual relationships that needs to be created between issuer and registrar could be dispensed with, and the issuer does not need to pay a registrar to perform the function. Thirdly, payments could be made on a peer to peer basis ie the issuer pays interest and principal directly to investors automatically via the use of smart contracts. Accordingly, there was no need to have a paying agent, which again reduced the complexity of the documentation and also meant that the issuer did not need to pay a large bank to fulfil the role. Finally, on the investor side, the ease with which someone can open a blockchain wallet means that there is less need for a long chain of custody.
+
+As a result there were fewer parties involved and substantially shorter and less complex bond documents. This reduces the cost and time to market for issuers and it should be clear from the structure diagram below how much simpler this is than the traditional structures described above.
+It is important to note that any party can independently verify the allocation of cash and assets on the blockchain without using HalalChain’s system. This is important, because if the system were to fall away for any reason, the contracts could still be enforced as between holders and the issuer. Enforcement would work in much the same manner as a regular bond issuance. For this issuance Link acted as trustee so if there were to be an event of default then holders would be able to enforce their rights via the trustee in the usual fashion and ultimately through the courts. On an issuance without a trustee, bondholders would be able to enforce rights directly. Smart contracts do not change or diminish enforcement rights, there were still regular legal contracts that any capital markets lawyer and the courts would recognise, and understand.
+
+# Waqf Chain Endowment
+In the Islamic Finance, there is a particular opportunity in Waqf’s tremendous potential and development. For decades, the administration of Waqf assets has been a challenge in Islamic Economics and finance. Billions of Waqf funds/assets globally that could be used to education and alleviate poverty, are simply not being utilized efficiently. However, the advent of blockchain technology has brought hope and optimism to Waqf administrators and Shariah scholars in Islamic Economy. 
+In 2010, Ernst & Young estimated the global WAQF sector to be worth over US 105 billion. Informal estimates by experts suggest that Waqf assets could be as high as SAR 1 trillion (US266.6) in Saudi Arabia alone, while in Malaysia, Waqf assets have been estimated at RM1 trillion (US325.4 billion), and in Egypt a recent report by ministry of Religious Endowment estimated Waqf endowments of around US 82 billion. HLC has identifies endowment as an underserved market niche commensurate with its vocation to be the social Solution for Blockchain.
+
+Insert Diagram or Table here
+
+With the use of continuous innovations and disruptions happening in the financial and technological, Islamic economics, including Waqf principles are being forced to maneuver and reinvent themselves, especially in terms of governance and regulations so as to remain relevant since they constitute a major socio economic institution in the modern financial market. 
+HLC intends to provide a smart contract ecosystem and accompanying blockchain to allow Waqf boards and other interested stakeholders the opportunity to submit project outlines/plans in order to fund and develop projects on top of Waqf properties. 
+HLC will develop a specific interface for this selected asset. Contributors will then be able to select, visualize and assess those properties before deciding on their contributions to their development.
+These contributions will be made possible through token or other means and will include the possibility for various purpose and interests depending on funders’ expectations. Specifically contribution as charity , Waqf investments or Islamic bonds all are intended to be integrated. Each project will have its own attached digital token under the HLC coin standard. This token will be placed into a project crowdfunding smart contract that can only be started once the project has passed all due diligence requirements.
+After the crowdfund has been completed, any resulting project tokens are claimable by participants, these tokens are digital assets representative of a participants stake in that project. The following diagrams show the various stakeholders and institutions involved in executing and delivering a Waqf property project along with the flow of funding and project development.
+
 
 
 ### Value relevance
@@ -63,44 +130,4 @@ All the current assets issurance platforms, like ethereum, don't have a threshol
 The challenges of asset compliance is that the current solutions don't seperate application governance from consensus. Public blockchain itself is just a temper-proof ledger or database, so it is able to provide trustful computation services, which means the service will deliver what its code promises, so we could deem it as a technology problem. However, application governance is a bussiness problem and should be managed by the users rather than miners or developers. 
 ### Asset relevance
 The cause of asset relevance problem is that the value of asset (tokens) and underlying currency (coin) don't  enter in a unified ecosystem. For instance, some token could be no connection with the ETH coin. In theory, this problem cannot be solved because we cannot estimate the market value of one toke, however, at least we should offer a benign mechanism that make tokens related to the coin, so it will encourgae the issuer to devote more value to gain more their customer's trust.
-# HLC Technology Solution
-The HLC public chain is a powerful innovative technology that has the potential to transform the global Islamic financial services industry. it is a distributed database of records or public ledger of all transactions or digital events that have been executed and shared by corporate entities. HLC technology is cryptographically authentacated. it is developed to provide an alternative secure approach to exchange value without the involvement of third party. The technology enables simplification and brings in greater security, scaleability, speed, and reliability. The results is reduced costs and improved efficiency. 
-OP_TOKEN is based on OP_GROUP, a referenced solution of issuring assets on Bitcoin Cash, and redesigned to fit various practical scenarios with unique features like asset compliable and value relevent.
 
-## Related concepts
-### UTXO
-UTXO represents Unspent Transaction Output. One transaction has multiple sources and destinations, we call them as inputs and outpus. There are no accounts in HLC, what users have and spend are a bunch of unspent transaction ouputs and we could get  balance by summing up them. 
-
-### Script system
-The mechanism behind how users spend their UTXOs is to execute a special script. The output stores a half of the script and we have to present the other half and combine both to verify if we could spend the money. The former half is called locking script, like a locked treasure box, and the latter is unlocking script, like the only key to the box.
-
-### Color coin
-Color coin is a class of methods to represent assets on top of the blockchain, so it can leverage the temper-proof capibility of blockchain. It is like an organization issues their conference tickets with cash to make sure the tickets cannot be forged. There are a lot of ways to implement color coin and the most common way is to use a special script operation - OP_RETURN - to interupt script execution early, so we can add information of the assets after it without violating the script validation.
-
-### OP_GROUP
-The OP_RETURN scheme is more suitable to apply on mature blockchain since it doesn't change the underlying blockchain protocol and won't risk forking. However, the weakness OP_RETURN is that miners cannot verify its protocol so there would be some security risks.
-
-OP_GROUP is a proposal of assets issurance  on Bitcoin Cash (BCH) from Bitcoin Unlimited (BU) and has been approved by BU. OP_GROUP supports token issurance, tranfer, destroy, etc. Since OP_GROUP is an extention to BCH script sytem,  it is part of BCH protocol and can be verified by miners, which is more reliable.
-
-### OP_TOKEN
-HLC extends OP_GROUP, i.e. OP_TOKEN, to support assets authentication.
-
-## OP_TOKEN Design
-There is a special token named LICENSE in OP_TOKEN. Licenses are held by renowned expects or organizations with public credibility. Any entitity planing to issue a token needs to be warranted a license. Since license is also a token, it is able to be transfered between peers. However, license transfer can be tracked through transaction history, so the originator would be very cautious in case transfering to a wrong hand.
-
-### Issue a license
-Licenses are all generated in genesis block and distribted to 100 preserved committe members. One smallest unit of HLC (SAND) represents a license,  one block has 100 HLC,  1 HLC= 10^8   SAND , so we have 10 ^10 license in total, which is sufficient for asset issurance.
-
-### warrant a license
-Oraganizations must be warranted a license to issue assets. They can request license from any committe member. Once approved, they would receive a special token transfer from the commitee member and the token is the license.
-### Issurance assets
-Once warranted a license, organizations are able to issue assets. Assets cannot be built from the air, they required equal amount smallest unit (sand) of HLC to be converted. We also call the process as token mint. Just like to mint a gold coin requires the same weight of gold sands, tokens need same amount HLC sands. The advantage is not only that the token has a value support by underlying currency but also that all tokens and HLC are invovled in the same ecosytem, which would improve the liquidity and make whole network healthier.
-
-### Transfer
-Assets can be transfered between parties. Moreover, we could transfer mulitple assets within one transaction. The transaction needs to ensure the  input sum of each asset equals the output sum of each asset. 
-
-
-### Unmint
-In addition to mint token, we can unmint token. Like we cannot build token from nothing, we cannot destroy tokens into ashes, instead, we melt  tokens into HLC. Also, tokens can be melt into the same amount of HLC sands. So, tokens have minimum value sustain. 
-
-HLC encourages token holders to increase their token values rather than unminting them. But there are some scenarios to make unminting practical, such as stable coins. So, HLC only allow the token issuer to umint tokens.
