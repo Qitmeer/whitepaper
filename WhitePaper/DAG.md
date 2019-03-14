@@ -2,7 +2,7 @@
 
 ## Public Chain
 ### Introduction
-HLC public chain is a common block DAG framework, it seperates consensus layer, which is usually mutable in different scenarios,  from foundamental and is open to developers. 
+HLC public chain is a common block DAG framework, it seperates consensus layer, which is usually mutable in different scenarios,  from foundamental and is open to developers. HLC public chain reduces the delay of the block, and improve its throughput. But the high throughput leads to the high fork rate. The Nakamoto consensus is no longer applicable, so we chose the consensus of SPECTRE to support fast confirmation, based on which we introduced PHANTOM protocol to solve the weak liveness of SPECTRE protocol.
 ## Methodology
 ### Vision
 HLC's vision is always simple, we just want to build a practical and usable public chain based on our traditional value of blockchain - decentrailzed, secure and scalable. 
