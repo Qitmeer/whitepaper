@@ -45,11 +45,9 @@ OP_TOKEN is based on OP_GROUP, a referenced solution of issuring assets on Bitco
 ### UTXO
 UTXO represents Unspent Transaction Output. One transaction has multiple sources and destinations, we call them as inputs and outpus. There are no accounts in HLC, what users have and spend are a bunch of unspent transaction ouputs and we could get  balance by summing up them. 
 ![Figure 1](https://lh3.googleusercontent.com/5rq02r0s4c2c5ApbAjNRcrx3vuZTj_uodHWK1kV98yNfgbfamHANjc9eIyQXuonIb2-Uah1kw40Y "UTXO")
-```
-The first transaction tx1 has 3 outputs and the first output of them is spent, so  tx1 has 2+3=5 coins balance. 
+>The first transaction tx1 has 3 outputs and the first output of them is spent, so  tx1 has 2+3=5 coins balance. 
 The second transaction tx2 spends the 2 UTXOs of tx1 and pays to 3 addresses and creates 3 new UTXOs. 
 Note: now the old UTXOs (of tx1) are no longer UTXO so cannot be spent later.  
-```
 
 ### Script system
 The mechanism behind how users spend their UTXOs is to execute a special script. The output stores a half of the script and we have to present the other half and combine both to verify if we could spend the money. The former half is called locking script, like a locked treasure box, and the latter is unlocking script, like the only key to the box.
@@ -113,17 +111,118 @@ There is a special token named LICENSE in OP_TOKEN. Licenses are held by renowne
 
 ### Issue a license
 Licenses are all generated in genesis block and distribted to 100 preserved committe members. One smallest unit of HLC (SAND) represents a license,  one block has 100 HLC,  1 HLC= 10^8   SAND , so we have 10 ^10 license in total, which is sufficient for asset issuance.
+```YAML
+INPUTS:
+	- INPUT:
+		PREVIOUS_OUTPUT: # (COINBASE of GENESIS)
+			SCRIPT: “DUP HASH160 [GENESIS_HASH] EQUALVERIFY CHECKSIG"
+			VALUE: 10000000000 (10 billion)
+		SCRIPT: “[SIG] [GENESIS_PK]”
+OUTPUTS:
+	- OUTPUT:
+		SCRIPT: “[LICENSE_HASH] TOKEN DROP DUP HASH160 [COMMITTEE_1_HASH] EQUALVERIFY CHECKSIG"
+		VALUE: 100000000 (100 million)
+	# … … (COMMITTEE 2~99)
+	- OUTPUT:
+		SCRIPT: “[LICENSE_HASH] TOKEN DROP DUP HASH160 [COMMITTEE_100_HASH] EQUALVERIFY CHECKSIG"
+		VALUE:100000000#(100 million)
+	- OUTPUT:
+		SCRIPT: "RETURN [DATA]" 
+		VALUE: 0
+```
+
+
 
 ### warrant a license
 Oraganizations must be warranted a license to issue assets. They can request license from any committe member. Once approved, they would receive a special token transfer from the commitee member and the token is the license.
-### Issuance assets
+
+```YAML
+INPUTS:
+	- INPUT:
+		PREVIOUS_OUTPUT:
+			SCRIPT: “[LICENSE_HASH] TOKEN DROP DUP HASH160 [COMMITTE_HASH] EQUALVERIFY CHECKSIG"
+			VALUE: 100000000
+		SCRIPT: “[SIG] [COMMITTE_PK]”
+OUTPUTS:
+	- OUTPUT:
+		SCRIPT: “[LICENSE_HASH] TOKEN DROP DUP HASH160 [ISSUER_HASH] EQUALVERIFY CHECKSIG"
+		VALUE: 1
+	- OUTPUT:
+		SCRIPT: “[LICENSE_HASH] TOKEN DROP DUP HASH160 [COMMITTE_HASH] EQUALVERIFY CHECKSIG"
+		VALUE: 99999999
+	- OUTPUT:
+		SCRIPT: "RETURN [DATA]" 
+		VALUE: 0
+```
+
+### Issue assets
 Once warranted a license, organizations are able to issue assets. Assets cannot be built from the air, they required equal amount smallest unit (sand) of HLC to be converted. We also call the process as token mint. Just like to mint a gold coin requires the same weight of gold sands, tokens need same amount HLC sands. The advantage is not only that the token has a value support by underlying currency but also that all tokens and HLC are invovled in the same ecosytem, which would improve the liquidity and make whole network healthier.
+
+```YAML
+INPUTS:
+	- INPUT:
+		PREVIOUS_OUTPUT: #(1 LICENSE)
+			SCRIPT: “[LICENSE_HASH] TOKEN DROP DUP HASH160 [ISSUER_HASH] EQUALVERIFY CHECKSIG"
+			VALUE: 1
+		SCRIPT: “[SIG] [LICENSE_PK]”
+	- INPUT:
+		PREVIOUS_OUTPUT: #(1 HLC)
+			SCRIPT “DUP HASH160 [COIN_HASH] EQUALVERIFY CHECKSIG"
+			VALUE: 100000000
+		SCRIPT “[SIG] [COIN_PK]”
+OUTPUTS:
+	- OUTPUT:
+		SCRIPT: “[LICENSE_HASH] TOKEN DROP DUP HASH160 [ISSUER_HASH] EQUALVERIFY CHECKSIG"
+		VALUE: 1
+	- OUTPUT:
+		SCRIPT: “[TOKEN_HASH] TOKEN DROP DUP HASH160 [PK_HASH] EQUALVERIFY CHECKSIG"
+		VALUE: 100000000
+	- OUTPUT:
+		SCRIPT: "RETURN [DATA]"
+		VALUE: 0
+```
+
 
 ### Transfer
 Assets can be transfered between parties. Moreover, we could transfer mulitple assets within one transaction. The transaction needs to ensure the  input sum of each asset equals the output sum of each asset. 
-
+```YAML
+INPUTS:
+	- INPUT:
+		PREVIOUS_OUTPUT:
+			SCRIPT: “[RMB] TOKEN DROP DUP HASH160 [ACLICE_PKHASH] EQUALVERIFY CHECKSIG"
+			VALUE: 100
+		SCRIPT: “[ALICE_SIG] 0X83 [ACLIE_PUBKEY]”
+	- INPUT:
+		PREVIOUS_OUTPUT:
+			SCRIPT: “[USD] TOKEN DROP DUP HASH160 [BOB_PKHASH] EQUALVERIFY CHECKSIG"
+			VALUE: 20
+		SCRIPT: “[BOB_SIG] 0X83 [BOB_PUBKEY]”
+OUTPUTS:
+	- OUTPUT:
+		SCRIPT: “[USD] TOKEN DROP DUP HASH160 [ALICE_PKHASH] CHECKSIG”
+		VALUE: 20
+	- OUTPUT:
+		SCRIPT: “[RMB] TOKEN DROP DUP HASH160 [BOB_PKHASH] CHECKIG”
+		VALUE: 100
+```
 
 ### Unmint
 In addition to mint token, we can unmint token. Like we cannot build token from nothing, we cannot destroy tokens into ashes, instead, we melt  tokens into HLC. Also, tokens can be melt into the same amount of HLC sands. So, tokens have minimum value sustain. 
 
 HLC encourages token holders to increase their token values rather than unminting them. But there are some scenarios to make unminting practical, such as stable coins. So, HLC only allow the token issuer to umint tokens.
+
+```YAML
+INPUTS:
+	- INPUT:
+		PREVIOUS_OUTPUT:
+			SCRIPT: “[TOKENHASH] TOKEN DROP DUP HASH160 [ISSUER_HASH] EQUALVERIFY CHECKSIG"
+			VALUE: 100
+		SCRIPT: “[SIG] [ISSUER_PUBKEY]”
+OUTPUTS:
+	- OUTPUT:
+		SCRIPT: “DUP HASH160 [COIN_HASH] EQUALVERIFY CHECKSIG"
+		VALUE: 100
+	- OUTPUT:
+		SCRIPT: "RETURN [DATA]”
+		VALUE: 0
+```
