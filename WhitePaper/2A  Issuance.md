@@ -123,7 +123,7 @@ After the crowdfund has been completed, any resulting project tokens are claimab
 
 
 ### Value relevance
-The assets issued on HLC public chain All the current assets issuance platforms, like ethereum, don't have a threshold to issure assets. So people could create assets whatever "market value" they want. Firstly it makes users hard to tell which asset is valuable or just a spam; secondly, abuse issurance increases the computation load and finally user will have to pay for it in the form of transaction fees.
+The assets issued on HLC public chain All the current assets issuance platforms, like ethereum, don't have a threshold to issure assets. So people could create assets whatever "market value" they want. Firstly it makes users hard to tell which asset is valuable or just a spam; secondly, abuse issuance increases the computation load and finally user will have to pay for it in the form of transaction fees.
  (what is difference between asset relevance and value relevance, it is possible to merge it?)
 
 
