@@ -44,17 +44,66 @@ OP_TOKEN is based on OP_GROUP, a referenced solution of issuring assets on Bitco
 ## Related concepts
 ### UTXO
 UTXO represents Unspent Transaction Output. One transaction has multiple sources and destinations, we call them as inputs and outpus. There are no accounts in HLC, what users have and spend are a bunch of unspent transaction ouputs and we could get  balance by summing up them. 
+![Figure 1](https://lh3.googleusercontent.com/5rq02r0s4c2c5ApbAjNRcrx3vuZTj_uodHWK1kV98yNfgbfamHANjc9eIyQXuonIb2-Uah1kw40Y "UTXO")
+```
+The first transaction tx1 has 3 outputs and the first output of them is spent, so  tx1 has 2+3=5 coins balance. 
+The second transaction tx2 spends the 2 UTXOs of tx1 and pays to 3 addresses and creates 3 new UTXOs. 
+Note: now the old UTXOs (of tx1) are no longer UTXO so cannot be spent later.  
+```
 
 ### Script system
 The mechanism behind how users spend their UTXOs is to execute a special script. The output stores a half of the script and we have to present the other half and combine both to verify if we could spend the money. The former half is called locking script, like a locked treasure box, and the latter is unlocking script, like the only key to the box.
 
+Let's take a look at the typical instance of  Pay-2-Public-Key-Hash(P2PKH)
+
+Locking Script in UTXO:
+OP_DUP OP_HASH160 <PUBLIC_KEY> OP_EQUALVERIFY OP_CHECKSIG
+
+Unlocking Script in a newly created transaction:
+<Signature><PublicKey>
+
+Combine unlocking script with locking script:
+<Signature><PublicKey> OP_DUP OP_HASH160 <PUBLIC_KEY> OP_EQUALVERIFY OP_CHECKSIG
+This whole script consists two steps
+1. <PublicKey>  OP_HASH160 <PUBLIC_KEY> OP_EQUALVERIFY
+	To very if the public key in the unlocking script matches that in the locking script.
+2.  <Signature><PublicKey> OP_CHECKSIG
+	To check if the signature is valid.
+
+
 ### Color coin
 Color coin is a class of methods to represent assets on top of the blockchain, so it can leverage the temper-proof capibility of blockchain. It is like an organization issues their conference tickets with cash to make sure the tickets cannot be forged. There are a lot of ways to implement color coin and the most common way is to use a special script operation - OP_RETURN - to interupt script execution early, so we can add information of the assets after it without violating the script validation.
 
-### OP_GROUP
-The OP_RETURN scheme is more suitable to apply on mature blockchain since it doesn't change the underlying blockchain protocol and won't risk forking. However, the weakness OP_RETURN is that miners cannot verify its protocol so there would be some security risks.
+Locking Script:
+OP_RETURN <DATA>
 
-OP_GROUP is a proposal of assets issurance  on Bitcoin Cash (BCH) from Bitcoin Unlimited (BU) and has been approved by BU. OP_GROUP supports token issurance, tranfer, destroy, etc. Since OP_GROUP is an extention to BCH script sytem,  it is part of BCH protocol and can be verified by miners, which is more reliable.
+The most presentative color coin protocol using OP_RETURN is omni layer on which the famous stable coin Tether (USDT) based.  
+
+Here is a typical USDT transacation and we are going to dive into its protocol
+https://www.blockchain.com/btc/tx/efc50d9e1f23e687e304cfca4ef2c5412b67d5737888ff80a0cbb6853cd865c
+OP_RETURN 6f6d6e69000000000000001f00000015c9054900
+![USDT here](https://lh3.googleusercontent.com/2tlNJDUgh6IFXSK-Tc83TowYP2I0toT6y9_MRMVMaWS3AT2MBSKrhxgXlbNt93XwNVMuPvOrlVqk "Tether")
+We may see it only takes 20 bytes to support a powerful asset issuance protocol. 
+
+### OP_GROUP
+The OP_RETURN scheme is more suitable to apply on mature blockchain since it doesn't change the underlying blockchain protocol and won't risk forking. However, the weakness  is that miners cannot verify its protocol so there would be some security risks.
+
+OP_GROUP is a proposal of assets issuance  on Bitcoin Cash (BCH) from Bitcoin Unlimited (BU) and has been approved by BU. OP_GROUP supports token issuance, tranfer, destroy, etc. Since OP_GROUP is an extention to BCH script sytem,  it is part of BCH protocol and can be verified by miners, which is more reliable.
+
+The basic “colored” pay 2 public key hash script would be like: [^1]
+
+> **OP_DATA(group address)  
+OP_GROUP**  
+OP_DROP  
+OP_DUP  
+OP_HASH160  
+OP_DATA(pubkeyhash)  
+OP_EQUALVERIFY  
+OP_CHECKSIG
+
+The main difference is simple, just adding a group address to distiguish different groups, and the other operations ,such as create and destroy assets, are similar.
+
+[^1]:  https://medium.com/@g.andrew.stone/bitcoin-scripting-applications-representative-tokens-ece42de81285
 
 ### OP_TOKEN
 HLC extends OP_GROUP, i.e. OP_TOKEN, to support assets authentication.
@@ -63,11 +112,11 @@ HLC extends OP_GROUP, i.e. OP_TOKEN, to support assets authentication.
 There is a special token named LICENSE in OP_TOKEN. Licenses are held by renowned expects or organizations with public credibility. Any entitity planing to issue a token needs to be warranted a license. Since license is also a token, it is able to be transfered between peers. However, license transfer can be tracked through transaction history, so the originator would be very cautious in case transfering to a wrong hand.
 
 ### Issue a license
-Licenses are all generated in genesis block and distribted to 100 preserved committe members. One smallest unit of HLC (SAND) represents a license,  one block has 100 HLC,  1 HLC= 10^8   SAND , so we have 10 ^10 license in total, which is sufficient for asset issurance.
+Licenses are all generated in genesis block and distribted to 100 preserved committe members. One smallest unit of HLC (SAND) represents a license,  one block has 100 HLC,  1 HLC= 10^8   SAND , so we have 10 ^10 license in total, which is sufficient for asset issuance.
 
 ### warrant a license
 Oraganizations must be warranted a license to issue assets. They can request license from any committe member. Once approved, they would receive a special token transfer from the commitee member and the token is the license.
-### Issurance assets
+### Issuance assets
 Once warranted a license, organizations are able to issue assets. Assets cannot be built from the air, they required equal amount smallest unit (sand) of HLC to be converted. We also call the process as token mint. Just like to mint a gold coin requires the same weight of gold sands, tokens need same amount HLC sands. The advantage is not only that the token has a value support by underlying currency but also that all tokens and HLC are invovled in the same ecosytem, which would improve the liquidity and make whole network healthier.
 
 ### Transfer
