@@ -40,8 +40,8 @@ This Smart Takaful will help the Takaful operator to record transactions on a bl
 
 # HLC Technology Innovation
 The HLC public chain is a powerful innovative technology that has the potential to transform the global Islamic financial services industry. it is a distributed database of records or public ledger of all transactions or digital events that have been executed and shared by corporate entities. HLC technology is cryptographically authentacated. it is developed to provide an alternative secure approach to exchange value without the involvement of third party. The technology enables simplification and brings in greater security, scaleability, speed, and reliability. The results is reduced costs and improved efficiency. 
-OP_TOKEN is based on OP_GROUP, a referenced solution of issuring assets on Bitcoin Cash, and redesigned to fit various practical scenarios with unique features like asset compliable and value relevent.
-## Related concepts
+However, the OP_TOKEN is based on OP_GROUP, a referenced solution of issuring assets on Bitcoin Cash, and redesigned to fit various practical scenarios with unique features like asset compliable and value relevent. There are some related concept in the details below:  
+
 ### UTXO
 UTXO represents Unspent Transaction Output. One transaction has multiple sources and destinations, we call them as inputs and outpus. There are no accounts in HLC, what users have and spend are a bunch of unspent transaction ouputs and we could get  balance by summing up them. 
 ![Figure 1](https://lh3.googleusercontent.com/5rq02r0s4c2c5ApbAjNRcrx3vuZTj_uodHWK1kV98yNfgbfamHANjc9eIyQXuonIb2-Uah1kw40Y "UTXO")
@@ -109,7 +109,7 @@ HLC extends OP_GROUP, i.e. OP_TOKEN, to support assets authentication.
 ## OP_TOKEN Design
 There is a special token named LICENSE in OP_TOKEN. Licenses are held by renowned expects or organizations with public credibility. Any entitity planing to issue a token needs to be warranted a license. Since license is also a token, it is able to be transfered between peers. However, license transfer can be tracked through transaction history, so the originator would be very cautious in case transfering to a wrong hand.
 
-### Issue a license
+### Issuance of License
 Licenses are all generated in genesis block and distribted to 100 preserved committe members. One smallest unit of HLC (SAND) represents a license,  one block has 100 HLC,  1 HLC= 10^8   SAND , so we have 10 ^10 license in total, which is sufficient for asset issuance.
 ```YAML
 INPUTS:
@@ -134,7 +134,7 @@ OUTPUTS:
 
 
 ### warrant a license
-Oraganizations must be warranted a license to issue assets. They can request license from any committe member. Once approved, they would receive a special token transfer from the commitee member and the token is the license.
+The individul conpanies and Oraganizations must be warranted a license to issue assets. The companies can request license from any committee member. Once the license is granted and approved, it would receive a special token transfer from the commitee member and the token is the license.
 
 ```YAML
 INPUTS:
