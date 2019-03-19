@@ -1,4 +1,4 @@
-# Section 4 Mining
+# Section 4 : Mining ecosystem
 ## Relationship with BlockDAG
 BlockDAG 通过挖矿, 可以让节点自由地加入或者退出网络. 挖矿算法本身的公平性对于保证网络的去中心化至关重要. 因此挖矿算法必须保证大致的成本和收益的比例大致是稳定的, 也就是说很难通过设计出专有ASIC 矿机.
 ## POS V.S. POW
