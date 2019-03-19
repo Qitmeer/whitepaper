@@ -1,11 +1,9 @@
-# Section 4 
-Mining
+# Section 4 Mining
 ## Relationship with BlockDAG
-### Fairness
-### Anti-ASIC
+BlockDAG 通过挖矿, 可以让节点自由地加入或者退出网络. 挖矿算法本身的公平性对于保证网络的去中心化至关重要. 因此挖矿算法必须保证大致的成本和收益的比例大致是稳定的, 也就是说很难通过设计出专有ASIC 矿机.
 ## POS V.S. POW
 TODO: POW is more reliable due to physical resource devotion
+POW是比特币长期稳定运行被证明安全的共识算法, 目前PoW最大的问题还是在于算力的浪费, 因此PoS 似乎成了了一个更理想的方案. 但PoS 算法目前总体看还是没法解决数字资产没有物理资源作为价值依托的问题, 因此会有各种PoS特有的攻击, 比如长程攻击, 无股权攻击等, 此外还有PoS是无法做到像POW那样完全去中心化的分发, 必须在创世的时候就分配出去. HLC 长期看好PoS的发展, 目前的这些问题虽然都有解决方案, 但总体还未得到长时间的验证, 因此PoW是更稳定的选择. 
+
 ## Algorithm 
-TODO: Cuckoo Cycle, graphice theory based, GPU mining, ASIC resistance
-## Mining Pool
-TODO: From monopolized industry to service industry
+布谷鸟环是第一个基于图理论的GPU挖矿算法, 布谷鸟环会随机地从消息中生成二分图, 然后判断是否有满足环状的图. 由于计算需要大量显存, 而目前显卡的制作工艺只掌握在Nvidia和AMD两家手上, 矿机厂商想要生产专用ASIC矿机的技术门槛和成本极高. 虽然矿机虽然可以通过规模效应占据一定的成本优势, 但是相对有限, 能保证相当的公平性.
