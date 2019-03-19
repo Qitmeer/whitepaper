@@ -44,12 +44,17 @@ TODO: To English
 DAG 奖励机制
 矿工都是逐利的, 会倾向于打包手续费较高的交易. 这样会造成区块的重复率很高. 而重复的交易不会贡献吞吐量. 所以我们需要设计一种激励机制, 引导矿工尽量不要打包重复的交易. Inclusive [https://www.cs.huji.ac.il/~yoni_sompo/pubs/15/inclusive_full.pdf] 推出了一种平分交易费的机制, 这样如果矿工都去打包高手续费的交易, 最终可能导致矿工如果只打包交易费高的交易, 收益反而会降低, 最后通过博弈, 大家会从内存池随机选择交易, 达到纳什均衡. 根据论文的数据, 重复率可以控制在30%左右.  
 
-Miners are profitable and tend to pack the transaction with higher fees. This will result in high repetition rates of blocks. Repeated transactions will not contribute to the throughput. So we need to design an incentive mechanism to guide the miners, which makes them try not to pack duplicate transactions. Inclusive [https://www.cs.huji.ac.il/~yoni_sompo/pubs/15/inclusive_full.pdf] introduced a mechanism to split the transaction fee. In this way, if all the miners go to package a high-fee transaction, it may eventually cause the miner to only package the transaction with high transaction fee, but the income will decrease. Finally, through the game, everyone will randomly select the transaction from the memory pool to reach the Nash equilibrium. According to the data of the paper, the repetition rate can be controlled at around 30%.
+Miners are profitable and tend to pack the transaction with higher fees. This will result in high repetition rates of blocks. Repeated transactions will not contribute to the throughput. So we need to design an incentive mechanism to guide the miners, which makes them try not to pack duplicate transactions. Inclusive[https://www.cs.huji.ac.il/~yoni_sompo/pubs/15/inclusive_full.pdf] introduced a mechanism to split the transaction fee. In this way, if all the miners go to package a high-fee transaction, it may eventually cause the miner to only package the transaction with high transaction fee, but the income will decrease. Finally, through the game, everyone will randomly select the transaction from the memory pool to reach the Nash equilibrium. According to the data of the paper, the repetition rate can be controlled at around 30%.
  
-Inclusive的交易平分方案实现起来比较复杂, 因为区块确认数是不固定的.  区块随时有可能被新产出的区块确认, 所以要实现这个逻辑得加许多的控制逻辑. 其次这样的设计其实是并没有激励用户去快速发布区块, 因为早点发布和晚一点发布, 都是可以平分到手续费. 此外, 简单地随机选取交易其实并不公平, 如果手续费高低被随机的概率都一样的话, 交易都会选择低手续费甚至发送垃圾交易, 也无法满足想要通过提高手续费得到快速确认的需求.  
+Inclusive的交易平分方案实现起来比较复杂, 因为区块确认数是不固定的. 区块随时有可能被新产出的区块确认, 所以要实现这个逻辑得加许多的控制逻辑. 其次这样的设计其实是并没有激励用户去快速发布区块, 因为早点发布和晚一点发布, 都是可以平分到手续费. 此外, 简单地随机选取交易其实并不公平, 如果手续费高低被随机的概率都一样的话, 交易都会选择低手续费甚至发送垃圾交易, 也无法满足想要通过提高手续费得到快速确认的需求.  
 
+The trasaction halving scheme of Inclusive is complicated to implement, because the block confirmed number is not fixed. The block may be confirmed by the newly generated block at any time, so it is supposed to add a lot of control logic to implement this. Secondly, this design, in fact, it does not motivate users to quickly release blocks. Because whether it is released early or later, it can be divided into fees. In addition, it is unfair to simply randomly select transactions. If the probability how much the fees is random, the transaction will choose a low fee or even send a junk transaction, nor will it meet the need to quickly be confirmed by increasing the fee.
 
 所以HLC的方案是, 首先根据每笔交易的手续费加权随机选出想要的交易, 这样保证用户有意愿用更高的手续费吸引矿工去打包交易, 矿工的综合收益也提高了, 更有意愿去挖矿. 其次, 交易费只能被最早打包该交易的矿工所有. 交易所在区块的顺序通过PHANTOM协议来确定. 这样可以鼓励用户尽早地发布区块.
 
-为了保证区块顺序的稳定, 区块奖励需要等待100个区块才能被花费. 
+Therefore, HLC's plan, firstly, is to randomly select the desired transaction according to the weight of each transaction, so as to ensure that the user is willing to use the higher handling fee to attract the miners to pack the transaction, and the comprehensive income of the miner is also improved and they are more willing to mine. Secondly, the transaction fee can only be owned by the miners who originally packed the transaction. The order of the blocks in the transaction is determined by the PHANTOM protocol. This encourages the user to publish the block as early as possible.
+
+为了保证区块顺序的稳定, 区块奖励需要等待100个区块才能被花费.   
+
+In order to ensure the stability of the block order, the block reward needs to wait for 100 confirmed blocks to be spent.
  
