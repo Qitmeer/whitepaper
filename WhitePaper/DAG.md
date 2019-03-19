@@ -20,9 +20,7 @@ Block DAG, 顾名思义就是账本的每一个节点是区块. 用账本的节�
 
 ### Total ordering and fast confirmation trade-off
 HLC public chain reduces the delay of the block, and improve its throughput. But the high throughput leads to the high fork rate. The Nakamoto consensus is no longer applicable, so we chose the consensus of SPECTRE to support fast confirmation, based on which we introduced PHANTOM protocol to solve the weak liveness of SPECTRE protocol.
- ## Methodology
- ### Vision
- HLC's vision is always simple, we just want to build a practical and usable public chain based on our traditional value of blockchain - decentrailzed, secure and scalable. 
+
 
 ### Birief Introduction
 ![An example of the voting procedure in the DAG for blocks x,y.](https://cdn-images-1.medium.com/max/1600/1*q82YuxF11M7LnxWWEkQzUw.png)
@@ -34,7 +32,7 @@ TODO: 5 rules
 
 TODO: Total ordering to solve fair reward mechanism
 
-## HLC improvement
+## HLC Innovation
 ### Both liveness and fast confirmation
 ### Consenus algorithms efficiency
 ### Storage efficiency
