@@ -133,8 +133,8 @@ OUTPUTS:
 
 
 
-### warrant a license
-The individul conpanies and Oraganizations must be warranted a license to issue assets. The companies can request license from any committee member. Once the license is granted and approved, it would receive a special token transfer from the commitee member and the token is the license.
+### Warrant a license
+The individual and corporate entities/companies must be warranted a license to issue assets. These companies can request license from any committee member. Once the license is granted and approved, it would receive a special token transfer from the commitee member and the token is the license.
 
 ```YAML
 INPUTS:
@@ -155,8 +155,8 @@ OUTPUTS:
 		VALUE: 0
 ```
 
-### Issue assets
-Once warranted a license, organizations are able to issue assets. Assets cannot be built from the air, they required equal amount smallest unit (sand) of HLC to be converted. We also call the process as token mint. Just like to mint a gold coin requires the same weight of gold sands, tokens need same amount HLC sands. The advantage is not only that the token has a value support by underlying currency but also that all tokens and HLC are invovled in the same ecosytem, which would improve the liquidity and make whole network healthier.
+### Issuance of assets
+Once warranted a license, organizations are able to issue assets. Assets cannot be built from the air, they required equal amount smallest unit (sand) of HLC to be converted. This process is called as "token mint". it is like to mint a gold coin requires the same weight of gold sands, tokens need same amount of HLC sands. The advantage is not only that the token has a value support by underlying currency but also that all tokens and HLC are invovled in the same ecosytem, which would improve the liquidity and make whole network healthier.
 
 ```YAML
 INPUTS:
@@ -183,7 +183,7 @@ OUTPUTS:
 ```
 
 
-### Transfer
+### Transfer of the Assets
 Assets can be transfered between parties. Moreover, we could transfer mulitple assets within one transaction. The transaction needs to ensure the  input sum of each asset equals the output sum of each asset. 
 ```YAML
 INPUTS:
@@ -206,10 +206,10 @@ OUTPUTS:
 		VALUE: 100
 ```
 
-### Unmint
-In addition to mint token, we can unmint token. Like we cannot build token from nothing, we cannot destroy tokens into ashes, instead, we melt  tokens into HLC. Also, tokens can be melt into the same amount of HLC sands. So, tokens have minimum value sustain. 
+### Unmint Token
+In addition to mint token, the Token can unmint. as the Token  we cannot build from nothing, we cannot destroy tokens into ashes, instead, we melt  tokens into HLC. Also, tokens can be melt into the same amount of HLC sands. So, tokens have minimum value sustain. 
 
-HLC encourages token holders to increase their token values rather than unminting them. But there are some scenarios to make unminting practical, such as stable coins. So, HLC only allow the token issuer to umint tokens.
+However, HLC encourages token holders to increase their token values rather than unminting them. But there are some scenarios to make unminting practical, such as stable coins. So, HLC only allow the token issuer to umint tokens.
 
 ```YAML
 INPUTS:
