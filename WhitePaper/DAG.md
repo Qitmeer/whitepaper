@@ -7,10 +7,31 @@ TODO: 用英文组织下这段话
 "
 Block DAG, 顾名思义就是账本的每一个节点是区块. 用账本的节点是区块还是交易本身并不严谨, 因为交易也可以看作是交易数为一的区块. 所以Block DAG代表的是一种完全不同的DAG模型, 也是一种狭义的定义. Block DAG要解决的其实是区块链的孤块率的问题, 即让区块淘汰并丢弃的区块也能贡献吞吐量. 比特币扩容, 最直观的思路就是提高出块率或者增加区块大小. 中本聪当然也会想到但是却没有这么做, 是因为这两者都会增加分叉率, 在比特币的最长链的竞争模型下, 高分叉率代表推翻最长分叉所需算力可能远不需要50%, 所以比特币是处于安全的考虑而通过牺牲扩容能力. 而Block DAG就是为了解决如何在不牺牲安全性的前提下提高扩容能力. 由于Block DAG是在经典的比特币的基础上进行的最简单和直观的扩容方案, 几乎没有改变比特币的任何设定, 即全节点通过算力自由参与而实现的完全去中心化, 50%安全性保证而区别于分片分层等其他扩容方案, 我们称之经典区块链设定. 而这种满足经典区块链设定的DAG协议统称为Block DAG协议"
 
-Block DAG, as the name implies, each node of the ledger is a block. It is not rigorous whether the node of the ledger is a block or the transaction, because the transaction can also be seen as a block with one transaction. Therefore, Block DAG represents a completely different DAG model, which is also a narrow definition. Actually, what Block DAG wants to solve is the problem of the orphan block rate in blockchain, that is, the blocks eliminated and discarded can also contribute to the throughput. Bitcoin scaling, the most intuitive idea is to increase the block rate or increase the block size. Certainly, Nakamoto will think of it but he doesn't do it, because both of them will increase the fork rate. Under the longest chain competition model of Bitcoin, the high fork rate represents the power required to overturn the longest fork may not be far less 50%. So Bitcoin is for the sake of safety and sacrifice the scalability. Block DAG is to solve the problem of how to increase the scalability without sacrificing security. Since Block DAG is the simplest and most intuitive solution of scalability based on the classic bitcoin, there is almost no change to any setting of Bitcoin, namely, the whole node through the computing power of free participation realizes the complete decentralization, 50% security guarantee，which is different from other scalability schemes such as sharding and layering. We call it the classic blockchain setting. And this DAG protocol that satisfies the classic blockchain setting is collectively called the "Block DAG protocol".
+Block DAG, as the name implies, each node of the ledger is a block. It is not rigorous whether the node of the ledger is a block or the transaction, because the transaction can also be seen as a block with one transaction. Therefore, Block DAG represents a completely different DAG model, which is also a narrow definition. Actually, what Block DAG wants to solve is the problem of the orphan block rate in blockchain, that is, the blocks eliminated and discarded can also contribute to the throughput. Bitcoin scaling, the most intuitive idea is to increase the block rate or increase the block size. Certainly, Nakamoto will think of it but he doesn't do it, because both of them will increase the fork rate. Under the longest chain competition model of Bitcoin, the high fork rate represents the power required to overturn the longest fork may not be far less 50%. So Bitcoin is for the sake of safety and sacrifice the scalability. Block DAG is to solve the problem of how to increase the scalability without sacrificing security. Since Block DAG is the simplest and most intuitive solution of scalability based on the classic bitcoin, there is almost no change to any setting of Bitcoin, namely, the whole node through the computing power of free participation realizes the complete decentralization, 50% security guarantee，which is different from other scalability schemes such as sharding and layering. We call it the classic blockchain setting. And this DAG protocol that satisfies the classic blockchain setting is collectively called the "Block DAG protocol".  
+
 ## Consensus
-## SPECTRE
-### Advantage
+## SPECTRE  
+### Birief Introduction
+![An example of the voting procedure in the DAG for blocks x,y.](https://cdn-images-1.medium.com/max/1600/1*q82YuxF11M7LnxWWEkQzUw.png)
+
+TODO: 5 rules
+### Advantage  
+
+比特币是一种由中本聪发明和部署的新型加密货币系统和协议。不幸的是，中本聪共识有严重的可扩展性限制：通过创建更大或更频繁的块来支持高交易吞吐量，需要对底层网络进行更强的假设，因此会导致更小的安全系数。  
+
+Bitcoin is a novel cryptocurrency system, and an accompanying protocol, invented and deployed by Satoshi Nakamoto. Unfortunately, Nakamoto Consensus has serious scalability limitations: creating larger or more frequent blocks to support a high transaction throughput, and requiring stronger assumptions on the underlying network, hence smaller safety margins.   
+
+而SPECTRE协议是一个即使在高吞吐量和快速确认时间下仍保持安全的加密货币的共识核心的新协议。在任何吞吐量情况下，SPECTRE具有达到对计算能力占比高达50%的攻击者的可恢复性（达到网络拥塞和带宽限制所定义的极限）。SPECTRE可以以任意高的区块创建速率运行，这意味着其交易仅在几秒钟内（主要受限于网络中的往返时间）确认。因此该协议不必像中本聪共识那样在安全性和可扩展性之间进行取舍。  
+
+SPECTRE, a new protocol for the consensus core of cryptocurrencies that remains secure even under high throughput and fast conﬁrmation times. At any throughput, SPECTRE is resilient to attackers with up to 50% of the computational power (reaching the limit deﬁned by network congestion and bandwidth constraints). SPECTRE can operate at arbitrarily high block creation rates, which implies that its transactions conﬁrm in mere seconds (limited mostly by the round-trip-time in the network). 
+
+SPECTRE相比于其他传统共识的优势在于它只需满足比传统共识所要求的更弱的属性。在传统模型中，任何两个交易之间的顺序必须由所有非损坏节点决定并同意。相反，SPECTRE只需满足诚实用户进行的交易。在作为货币的场景下，同时发布的两个冲突的支付只能由非诚实的用户创建，因此用户可以承担延迟接受这种交易而不影响系统的使用性。  
+
+The strength of SPECTRE is the fact that it satisﬁes weaker properties than classic consensus requires. In the conventional paradigm, the order between any two transactions must be decided and agreed upon by all non-corrupt nodes. In contrast, SPECTRE only satisﬁes this with respect to transactions performed by honest users. In the context of money, two conﬂicting payments that are published concurrently could only have been created by a dishonest user, hence users can afford to delay the acceptance of such transactions without harming the usability of the system.   
+
+接下来，将从以下几个方面进行阐述：  
+Next, it will be explained from the following aspects:  
+
 #### Fast comformation
 #### High througput
 #### Fully decentrialized
@@ -19,12 +40,6 @@ Block DAG, as the name implies, each node of the ledger is a block. It is not ri
 
 ### Total ordering and fast confirmation trade-off
 HLC public chain reduces the delay of the block, and improve its throughput. But the high throughput leads to the high fork rate. The Nakamoto consensus is no longer applicable, so we chose the consensus of SPECTRE to support fast confirmation, based on which we introduced PHANTOM protocol to solve the weak liveness of SPECTRE protocol.
-
-
-### Birief Introduction
-![An example of the voting procedure in the DAG for blocks x,y.](https://cdn-images-1.medium.com/max/1600/1*q82YuxF11M7LnxWWEkQzUw.png)
-
-TODO: 5 rules
 
 ## PHANTOM
 ![PHANTOM](https://cdn-images-1.medium.com/max/1200/1*bjxmg-HgBF7I_0YmkEpoHg.png)
