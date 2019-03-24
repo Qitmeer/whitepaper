@@ -11,10 +11,6 @@ Block DAG, as the name implies, each node of the ledger is a block. It is not ri
 
 ## Consensus
 ## SPECTRE  
-### Birief Introduction
-![An example of the voting procedure in the DAG for blocks x,y.](https://cdn-images-1.medium.com/max/1600/1*q82YuxF11M7LnxWWEkQzUw.png)
-
-TODO: 5 rules
 ### Advantage  
 
 比特币是一种由中本聪发明和部署的新型加密货币系统和协议。不幸的是，中本聪共识有严重的可扩展性限制：通过创建更大或更频繁的块来支持高交易吞吐量，需要对底层网络进行更强的假设，因此会导致更小的安全系数。  
@@ -36,7 +32,63 @@ Next, it will be explained from the following aspects:
 #### High througput
 #### Fully decentrialized
 #### High extensibility
-#### High security
+#### High security  
+
+### Birief Introduction  
+
+SPECTRE协议包含三部分：区块 DAG 的产生，挖矿协议，TxO协议。我们主要介绍一下其中的TxO协议。TxO协议为我们必须提供一种让节点解释DAG并从中提取一组已接受的交易的方法。  
+
+我们描述TxO协议如何完成的之前，我们需要明确一些符号代表的意义及一些概念：
+
+$x$,$y$,$z$ :块  
+
+$G$ : 一个包含交易的（抽象的）公共数据结构，挖矿协议的结果，即账本。通常表示为$G = (C, E)$。这里，$C$表示块，$E$表示散列引用。我们将经常写成$z \in G$而不是$z \in C$。
+
+$past(z, G) \subset C$ : 可从z到达的块的子集.这可以证明是在z之前创建的块。  
+ 
+$future(z, G) \subset C$ : 可到达z的块的子集.这可以证明是在z之后创建的块。
+
+$\prec $ : SPECTRE将这个关系扩展为G块中的完整关系。同时，这个顺序可以直接解释成G中的交易顺序，即块的顺序决定了块内包含的交易的顺序。
+注：虽然我们有时可能会提到$\prec $好像它可以给所有区块排序，但是我们要强调$\prec $不一定是传递关系。 因为可能会存在一系列的区块是循环前置关系。
+
+$virtual(G)$ : 一个假设的区块，可以被认为是代表节点尝试创建的下一个块，该节点当前观察到的DAG是G.  
+
+区块的成对排序
+
+SPECTRE的基础层涉及确定块DAG上的成对块之间顺序。 指定两个块$x, y \in G$. 为了确定是$x \prec y$还是$y \prec x$，我们将DAG的结构理解为一个抽象的投票。 每个块$z \in G$被认为是对区块对 (x, y)进行投票的投票者，并且它的一票是从DAG的结构中推断出来的。 我们用{−1, 0, +1}中的一个数字来表示一票，并且我们用$vote(z, G)$表示z对所有区块对的投票信息。 $vote_{x,y}(z, G) = -1$代表x在y之前$(x \prec y)$，$vote_{x,y}(z, G) = +1$代表y在x之前，$vote_{x,y}(z, G) = 0$代表是平票的即$vote_{y,x}(z, G) = -vote_{x,y}(z, G)$。
+
+为了简化演示，我们也让$virtual(G)$参与投票。 回想一下，$G$的虚拟块是一个满足$past(virtual(G)) = G$的假设块。 $virtual(G)$的投票本质上表示整个块DAG的聚合投票。 对于任何$z \in G \cup {virtual(G)}$，z的投票基本规则如下：
+
+1. 如果$z \in G$在$future(x)$但不在$future(y)$中，则它将投票给x（即，$x \prec y$）。
+
+2. 如果 $z \in G$在$future(x) \cap future(y)$中，那么z的投票则简化为根据其过去集来递归确定，即将z的过去集视为当前DAG，z本身当作一个虚拟块，结果为$virtual (past(z))$的投票。如果这次投票的结果是平票，z可以用任意规则打破。（任意规则就是自定义的规则，比如说用区块的散列值，因为这个规则所有节点都是一样的，所以可能会造成误判，但是可以保证一致性）  
+
+3. 如果$z \in G$不在任何一个块的未来集中，那么它将以与其未来集大多数块的投票相同。
+
+4. 如果z是G的虚拟块，那么它将以与G中大多数块的投票相同。
+
+5. 最后，（对于z等于x或y的情况），z投票自己在$past(z)$中的任何块之后，并且在任何$past(z)$之外的块之前。     
+
+![An example of the voting procedure in the DAG for blocks x,y.](https://cdn-images-1.medium.com/max/1600/1*q82YuxF11M7LnxWWEkQzUw.png)  
+
+> 一个简单的DAG上投票流程的例子。   
+![An example of the voting procedure in the DAG for blocks x,y.](https://cdn-images-1.medium.com/max/1600/1*q82YuxF11M7LnxWWEkQzUw.png)
+
+> 规则1： 块x和块6-8投票$x \prec y$, 因为6-8在x的将来集。 同样，块y和块9-11投票$y \prec x$, 因为9-11在y的将来集。 块12的投票根据在不包含块10,11,12的DAG上的递归调用得到。  
+
+> 规则2: 块12既属于x的将来集也属于y的将来集，块10，11，12并不属于块12的过去集，所以块12的投票根据在不包含块10,11,12的DAG上的递归调用得到，即$virtual(past(block12))$  
+
+> 规则4: 统计块12的过去集中各个节点的票数，发现投 $x \prec y$的有块x,6,7,8,投$y \prec x$的有块y,9。4比2，所以$y≺x$   
+
+> 规则3: 块1-5均不在x或y的未来集里，则他们看各自将来集中的投票情况，块2会投块x，因为其未来集块x，6，7，8，12都是投块x；块5会投块x，因为其未来集投块x的有块7，8，12，投块y的有块9，11，3比2；3块会投块x因为其未来集投块x的有块x，6，7，8，12，投块y的有块y，9，10，11，5比4；块4的未来集投块x的有块x，5，6，7，8，12，投块y的有块y，9，10，11，6比4；块1显然投x。所以块1-5均投票$x≺y$  
+
+
+直观的理解就是，第一条规则规定，一个诚实节点发布的区块的投票会获得高于对被暗中扣留的区块，因为诚实的节点不断为其未来集合添加新的区块。 
+第二和第四条规则共同保证了会放大大多数人的投票，因为新的区块投票给了符合先前决定的区块，从而增强了该区块。 
+第三条规则是最微妙的; 
+基本上，它允许$past(x)$ 的区块（加上$future(x)$的之外的区块）投票反对y，以防y被长时间扣留。 
+请注意，所有投票都遵守DAG的拓扑结构的规则：如果可从y到达x，那么所有块都一致投票$x \prec y$。
+
 
 ### Total ordering and fast confirmation trade-off
 HLC public chain reduces the delay of the block, and improve its throughput. But the high throughput leads to the high fork rate. The Nakamoto consensus is no longer applicable, so we chose the consensus of SPECTRE to support fast confirmation, based on which we introduced PHANTOM protocol to solve the weak liveness of SPECTRE protocol.
