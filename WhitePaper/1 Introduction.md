@@ -9,7 +9,7 @@ Today, the world has experienced half a decade of mainstream Blockchain applicab
 
 HalalChain is the first public blockchain company that focuses on serving Muslim countries and regions. By implementing blockchain technology into the Halal supply chain and Islamic financial industry they will help to increase transparency and traceability in Islamic financial products and services, traceability of halal and healthy products, Zakat donations, heritage and property registration, cultural communication etc.
 
-HalalChain is built on the new distributed ledger Directed Acyclic Graph (DAG). This underlying technology, guarantees security and decentralization by achieving “High Throughput”. By combining the advanced DAG technology with unique application scenarios we are able to build across the multi-layer payment system within the Islamic economy ecosystem.
+HalalChain is built on the new distributed ledger Directed Acyclic Graph (DAG). This underlying technology achieves High Throughput with high security and fully decentralized guarantee. By combining the advanced DAG technology with unique application scenarios, it will able to build across the multi-layer payment system within the Islamic economy ecosystem.
 
 HLC foundation Limited is a public company limited by guarantee specialized in Blockchain Technologies.  HLC foundation has issued the Tokens and completed the ICOs in the jurisdiction of Singapore.
 
