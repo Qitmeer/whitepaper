@@ -30,11 +30,12 @@ HLC public chain could set up a new trading platform (or move across an existing
 ### Fast confirmation time
 Confirmation time is the waiting time when user has high confidence that a transaction being confirmed permanently, which means it can not be overun by malicious users. Confirmation time is the most important  factor in terms of user expirence, people don't have patience to bear long time confirmation. Comparing to bitcoin, HLC needs to wait for 6 blocks i.e. 1 hour to reach secure confirmation. HLC is leveraging the fast confirmation feature in SPECTRE protocol and would be able to achive promising confirmation in order of seconds, meaning less than 1 minute, even less than 10 seconds when there is no active attack.
 
-### High security
-#### Fully decentrialized
-Decetrialization is the soul of a public blockchain because this is what the trust comes from for an fully autonomous system. Numbers of projects sacrifice their dectrialization to gain better throughput because of less consensus workload. This is a risky trade-off becuase less nodes to participate in consensus would bring higher possiblility to be targeted by attackers and prone to make collusion. HLC's consensus protocol SPECTRE is fully decentrailized, so all nodes have full ledger and there are no super nodes.
+### High security 
+the high security is classify into important types which 
+#### Fully decentralized
+Decentralization is the soul of a public blockchain because this is what the trust comes from for an fully autonomous system. Numbers of projects sacrifice their dectrialization to gain better throughput because of less consensus workload. This is a risky trade-off becuase less nodes to participate in consensus would bring higher possiblility to be targeted by attackers and prone to make collusion. HLC's consensus protocol SPECTRE is fully decentrailized, so all nodes have full ledger and there are no super nodes.
 
-#### Faulty tolerance threshold
+#### High Faulty tolerance threshold
 Faulty tolerance is refering the percentage of incapable nodes: including malicious nodes and non-operational nodes. For an autonomous network, it obeys the marjority law, so fifty percent (50%) would be the highest standard. HLC has the same 50% faulty tolerance threshold with bitcoin, so HLC can provides as much security as bitcoin.
 
 ### High throughput
