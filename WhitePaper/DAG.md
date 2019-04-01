@@ -39,9 +39,17 @@ An example on how a new block, number 12, votes:
 Now all the blocks in block 12' past have votes, 10 votes on x over 2 votes on y, so block 12 follows the majority and votes $x \prec y$ as well.
 
 ## PHANTOM
-As we just explained, SPECTRE's weak liveness won't affect honest users.  
+Though SPECTRE's weak liveness won't affect honest users, it is more robust to make a strong liveness, that is every transaction, including the honest and the malicious,  can be accepted within definite time. SPECTRE can only guarantees parital ordering, to be more specific, pairwised ordering, PHANTOM is able to guarantee total ordering of all  blocks therefore we may produce a linear order. 
 
-## PHANTOM
+HLC is based on a transaction model so partial ordering of transaction is suffient; however, PHANTOM's total ordering not only provides the strong liveness gurantee , also it serves for the reward mechanism. 
+
+### Introduction
+The high concurrency of DAG produces forks. A network's physical metrics are definite, say, propagation time that a block takes to travel around super majority network nodes, minimum bandwith of super majority nodes, also there are some parameters, such as block creation rate, faulty nodes percentage assumption. All lot these metrics and parameters determines the expected max fork number and then affects the throughput.
+
+ It is intuitive that if  nodes behave honestly, they will form a sub graph wherein each block has at most a specific number of forks, this number can be caculated from propagation time and block creation rate, denoted as $k$. This sub graph is denoted as k-cluter.  The biggest k-cluster is called  blue set and the rest blocks compose red set.
+
+If one block x can travel to another block y, then they have partial order and the destination is prior to the origion. For example in figure, block J can travel to A through B, then they have partial order and A is prior to J. Note not all blocks have partial orders with other blocks, like B, C, D don't have partial order with each other. Inside a k-cluster, there are at most k blocks without partial order for each block. 
+ 
 ![PHANTOM](https://cdn-images-1.medium.com/max/1200/1*bjxmg-HgBF7I_0YmkEpoHg.png)
 
 TODO: Total ordering to solve fair reward mechanism
