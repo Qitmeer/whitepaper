@@ -1,22 +1,22 @@
 
 # Section 3 DAG Technology
-### Block DAG 
+### Introduction of DAG Technology
+
 Block DAG, as the name implies, each node of the ledger is a block. It is not rigorous whether the node of the ledger is a block or the transaction, because the transaction can also be seen as a block with one transaction. Therefore, Block DAG represents a completely different DAG model, which is also a narrow definition. Actually, what Block DAG wants to solve is the problem of the orphan block rate in blockchain, that is, the blocks eliminated and discarded can also contribute to the throughput. To scale Bitcoin, the most intuitive idea is to increase the block rate or increase the block size. Certainly, Nakamoto will think of it but he doesn't do it, because both of them will increase the fork rate. Under the longest chain competition model of Bitcoin, the high fork rate represents the power required to overturn the longest fork may not be far less 50%. So Bitcoin is for the sake of safety and sacrifices the scalability. Block DAG is to solve the problem of how to increase the scalability without sacrificing security. Since Block DAG is the simplest and most intuitive solution of scalability based on the classic bitcoin, there is almost no change to any setting of Bitcoin, namely, the whole node through the computing power of free participation realizes the complete decentralization, 50% security guarantee，which is different from other scalability schemes such as sharding and layering. We call it the classic blockchain setting. And this DAG protocol that satisfies the classic blockchain setting is collectively called the "Block DAG protocol".  
 
 ![](https://cdn-images-1.medium.com/max/1600/1*AIn97mEZKvgcrZn8SmXRzw.png)
 
-From the diagram, we can see every block confirms all the unconfirmed blocks, i.e. tips, and all the blocks that can be reached from one block are deemed prior to this block.
+From the diagram, it can be seen that every block confirms all the unconfirmed blocks, i.e. tips, and all the blocks that can be reached from one block are deemed prior to this block.
 
 ## Consensus
-HLC adopts Hybrid consensus that combines SPECTRE and GHOSTDAG in order to achieve fast confirmation and  high throughput. 
+HLC adopts Hybrid consensus that combines SPECTRE and GHOSTDAG (Phantom) in order to achieve fast confirmation and  high throughput. 
 
 ## SPECTRE  
-### Introduction  
+
 SPECTRE is a block-DAG based protocol  that achieves fast comfirmation and high throughput with 50% attack resilience.  SPECTRE guarantees safety, which means  a transaction is unlikely to be reverse once it is accepted. Also, SPECTRE guarantees fast confirmations for honest users rather than all users, so it is deemed as weak liveness.
 
 There is a trade off between liveness and fast confirmation, SPECTRE prioritize the latter since weak liveness only affects maclicious users. SPECTRE is built for payment model,  double spend can only be initiated by malicious users therefore it is only  likely to make their transactions delayed indefinitely.
 
-### Consensus
 SPECTRE is built for stateless transaction model, so there is no need to gain a linear order from all the blocks, it is only need to  apply a pairwise ordering on two conflicting blocks. 
 
 SPECTRE employs a voting algorithm to decide which block wins, suppose block x has a conflicting transaction with another transaction in block y and block z is voting on them with following rules:
@@ -39,14 +39,10 @@ An example on how a new block, number 12, votes:
 Now all the blocks in block 12' past have votes, 10 votes on x over 2 votes on y, so block 12 follows the majority and votes $x \prec y$ as well.
 
 ## PHANTOM
-Though SPECTRE's weak liveness won't affect honest users, it is more robust to make a strong liveness, that is every transaction, including the honest and the malicious,  can be accepted within definite time. SPECTRE can only guarantees parital ordering, to be more specific, pairwised ordering, PHANTOM is able to guarantee total ordering of all  blocks therefore we may produce a linear order. 
 
-HLC is based on a transaction model so partial ordering of transaction is suffient; however, PHANTOM's total ordering not only provides the strong liveness gurantee , also it serves for the reward mechanism. 
+The high concurrency of DAG produces forks. A network's physical metrics are definite, say, propagation time that a block takes to travel around super majority network nodes, minimum bandwith of super majority nodes, also there are some parameters, such as block creation rate, faulty nodes percentage assumption. All lot these metrics and parameters determines the expected max fork number and then affects the throughput. HLC technology is based on a transaction model so partial ordering of transaction is suffient; however, PHANTOM's total ordering not only provides the strong liveness gurantee , also it serves for the reward mechanism. 
 
-### Introduction
-The high concurrency of DAG produces forks. A network's physical metrics are definite, say, propagation time that a block takes to travel around super majority network nodes, minimum bandwith of super majority nodes, also there are some parameters, such as block creation rate, faulty nodes percentage assumption. All lot these metrics and parameters determines the expected max fork number and then affects the throughput.
-
- It is intuitive that if  nodes behave honestly, they will form a sub graph wherein each block has at most a specific number of forks, this number can be caculated from propagation time and block creation rate, denoted as $k$. This sub graph is denoted as k-cluter.  The biggest k-cluster is called  blue set and the rest blocks compose red set.
+Though SPECTRE's weak liveness won't affect honest users, it is more robust to make a strong liveness, that is every transaction, including the honest and the malicious,  can be accepted within definite time. SPECTRE can only guarantees parital ordering, to be more specific, pairwised ordering, PHANTOM is able to guarantee total ordering of all  blocks therefore we may produce a linear order. It is intuitive that if  nodes behave honestly, they will form a sub graph wherein each block has at most a specific number of forks, this number can be caculated from propagation time and block creation rate, denoted as $k$. This sub graph is denoted as k-cluter.  The biggest k-cluster is called  blue set and the rest blocks compose red set.
 
 If one block x can travel to another block y, then they have partial order and the destination is prior to the origion. For example in figure, block J can travel to A through B, then they have partial order and A is prior to J. Note not all blocks have partial orders with other blocks, like B, C, D don't have partial order with each other. Inside a k-cluster, there are at most k blocks without partial order for each block. 
  
@@ -64,6 +60,7 @@ TODO: Total ordering to solve fair reward mechanism
 ### CoinBase
 ### Transaction Fee
 TODO: To English
+
 DAG 奖励机制
 矿工都是逐利的, 会倾向于打包手续费较高的交易. 这样会造成区块的重复率很高. 而重复的交易不会贡献吞吐量. 所以我们需要设计一种激励机制, 引导矿工尽量不要打包重复的交易. Inclusive [https://www.cs.huji.ac.il/~yoni_sompo/pubs/15/inclusive_full.pdf] 推出了一种平分交易费的机制, 这样如果矿工都去打包高手续费的交易, 最终可能导致矿工如果只打包交易费高的交易, 收益反而会降低, 最后通过博弈, 大家会从内存池随机选择交易, 达到纳什均衡. 根据论文的数据, 重复率可以控制在30%左右.  
 
