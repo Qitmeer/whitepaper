@@ -19,7 +19,7 @@ There is a trade off between liveness and fast confirmation, SPECTRE prioritize 
 
 SPECTRE is built for stateless transaction model, so there is no need to gain a linear order from all the blocks. Only when there're two blocks conflicting that a pairwise ordering is needed. 
 
-SPECTRE employs a voting algorithm to decide which block wins, suppose block x has a conflicting transaction with another transaction in block y and block z is voting on them with following rules:
+SPECTRE employs a voting algorithm to decide which block wins, suppose block x has a conflicting transaction with another transaction in block y, and also suppose that block z is voting on them with following rules:
 
 1. if z is only in x's future, z votes x in favor of y, denoted as x<y, vice versa.
 2. if both x and y are in the past of z, then z follows the majority votes in its past.
