@@ -17,7 +17,7 @@ SPECTRE is a block-DAG based protocol  that achieves fast comfirmation and high 
 
 There is a trade off between liveness and fast confirmation, SPECTRE prioritize the latter since weak liveness only affects malicious users. SPECTRE is built for payment model,  double spend can only be initiated by malicious users therefore it is only  likely to make their transactions delayed indefinitely.
 
-SPECTRE is built for stateless transaction model, so there is no need to gain a linear order from all the blocks, it is only need to  apply a pairwise ordering on two conflicting blocks. 
+SPECTRE is built for stateless transaction model, so there is no need to gain a linear order from all the blocks. Only when there're two blocks conflicting that a pairwise ordering is needed. 
 
 SPECTRE employs a voting algorithm to decide which block wins, suppose block x has a conflicting transaction with another transaction in block y and block z is voting on them with following rules:
 
