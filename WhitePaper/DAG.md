@@ -15,7 +15,7 @@ HLC adopts Hybrid consensus that combines SPECTRE and GHOSTDAG (Phantom) in orde
 
 SPECTRE is a block-DAG based protocol  that achieves fast comfirmation and high throughput with 50% attack resilience.  SPECTRE guarantees safety, which means  a transaction is unlikely to be reverse once it is accepted. Also, SPECTRE guarantees fast confirmations for honest users rather than all users, so it is deemed as weak liveness.
 
-There is a trade off between liveness and fast confirmation, SPECTRE prioritize the latter since weak liveness only affects maclicious users. SPECTRE is built for payment model,  double spend can only be initiated by malicious users therefore it is only  likely to make their transactions delayed indefinitely.
+There is a trade off between liveness and fast confirmation, SPECTRE prioritize the latter since weak liveness only affects malicious users. SPECTRE is built for payment model,  double spend can only be initiated by malicious users therefore it is only  likely to make their transactions delayed indefinitely.
 
 SPECTRE is built for stateless transaction model, so there is no need to gain a linear order from all the blocks, it is only need to  apply a pairwise ordering on two conflicting blocks. 
 
