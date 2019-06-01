@@ -171,7 +171,15 @@ Qitmeer network could set up a new trading platform (or move across an existing 
 
 \subsubsection{Fast confirmation time}
 
-Confirmation time is the waiting time when a user has high confidence that a transaction being confirmed permanently, which means it cannot be overrun by malicious users. Confirmation time is the most important factor in terms of user experience, as people don't have the patience to bear long time confirmation. Compared to Qitmeer, bitcoin needs to wait for 6 blocks i.e. 1 hour to reach secure confirmation. Qitmeer is leveraging the fast confirmation feature in SPECTRE protocol and would be able to achieve promising confirmation in order of seconds, meaning less than 1 minute, even less than 10 seconds when there is no active attack.
+Confirmation time is the waiting time when a user has high confidence that a
+transaction being confirmed permanently, which means it cannot be overrun by
+malicious users. Confirmation time is the most important factor in terms of user
+experience, as people don't have the patience to bear long time confirmation.
+Compared with Qitmeer, bitcoin needs to wait for 6 blocks i.e. 1 hour to reach
+secure confirmation. Qitmeer is leveraging the fast confirmation feature in
+SPECTRE protocol and would be able to achieve promising confirmation in order of
+seconds, meaning less than 1 minute, even less than 10 seconds when there is no
+active attack.
 
 \subsubsection{High security}
 the high security is classified into important types which are:
@@ -660,14 +668,32 @@ OUTPUTS:
 
 \subsection{Introduction of DAG Technology}
 
-Block DAG, as the name implies, each node of the ledger is a block. It is not rigorous whether the node of the ledger is a block or the transaction, because the transaction can also be seen as a block with one transaction. Therefore, Block DAG represents a completely different DAG model, which is also a narrow definition.
+Block DAG, as the name implies, is a DAG paradigm of ledger in which each node
+is a block. In fact, each node in the ledger can either be a block or a
+transaction, because a transaction can also be regarded as a block which
+contains only one transaction.
 
-Actually, what Block DAG wants to solve is the problem of the orphan block rate in blockchain, that is, the blocks eliminated and discarded can also contribute to the throughput. To scale Bitcoin, the most intuitive idea is to increase the block rate or increase the block size. Certainly, Nakamoto will think of it but he doesn't do it, because both of them will increase the fork rate. 
+Block DAG tries to solve the scalability problem of blockchain on protocol
+level. Although scalability limits can be broken through in many ways, such as
+raising up processing speeds, disk I/O and so on, a major barrier lies in
+blockchain paradigm itself: the orphan rate. Orphans are blocks that are created
+outside the longest chain due to unavoidable network propagation delays. In
+blockchain paradigm, orphan blocks waste network bandwidth and do not contribute
+to throughput. What's worse, the two intuitive ways to improve scalability, which
+are to increase the block rate and the block size, both increase the orphan
+rate. The higher the orphan rate is, the less secure the chain
+is\cite{Yonatan-high-rate-bitcoin}\cite{bitcoin-backbone}\cite{https://eprint.iacr.org/2016/454.pdf}.
 
-Under the longest chain competition model of Bitcoin, the high fork rate represents the power required to overturn the longest fork may not be far less 50\%. 
+In other words, Bitcoin sacrifices scalability for security to achieve low
+orphan rate as possible.
 
-So Bitcoin is for the sake of safety and sacrifices the scalability. Block DAG is to solve the problem of how to increase the scalability without sacrificing security. Since Block DAG is the simplest and most intuitive solution of scalability based on the classic bitcoin, there is almost no change to any setting of Bitcoin, namely, the whole node through the computing power of free participation realizes the complete decentralization, 50\% security guarantee, which is different from other scalability schemes such as sharding and layering. 
-
+Block DAG tries to solve the tradeoff by allowing blocks to reference multiple
+predecessors instead of a single parent. Compared with other schemes such as
+sharding and layering which also try to solve the scalability problem, the Block
+DAG way is simple and intuitive. It's just a structural alternative to
+blockchain. The other aspects can be the same as Bitcoin. Nodes can still
+participate freely to realize complete decentralization.  Security can still be
+guaranteed as long as more than 50\% of the computing power are honest.
 
 \begin{figure}[hbt]
 	\centerline{%
@@ -675,6 +701,10 @@ So Bitcoin is for the sake of safety and sacrifices the scalability. Block DAG i
 	}
 \caption{DAG}
 \end{figure}
+
+Of course, a DAG ledger may contain conflicting transactions since different
+chains are incorporated. Therefore, new consensus protocols are necessary to
+provide high scalability without losing security.
 
 \subsection{Consensus}
 HLC adopts Hybrid consensus that combines SPECTRE and GHOSTDAG (Phantom) in order to achieve fast confirmation and high throughput.
