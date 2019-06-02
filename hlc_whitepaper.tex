@@ -682,7 +682,7 @@ blockchain paradigm, orphan blocks waste network bandwidth and do not contribute
 to throughput. What's worse, the two intuitive ways to improve scalability, which
 are to increase the block rate and the block size, both increase the orphan
 rate. The higher the orphan rate is, the less secure the chain
-is\cite{Yonatan-high-rate-bitcoin}\cite{bitcoin-backbone}\cite{https://eprint.iacr.org/2016/454.pdf}.
+is\cite{Yonatan-high-rate-bitcoin}\cite{bitcoin-backbone}\cite{asynchronous}.
 
 In other words, Bitcoin sacrifices scalability for security to achieve low
 orphan rate as possible.
@@ -713,35 +713,59 @@ HLC adopts Hybrid consensus that combines SPECTRE and GHOSTDAG (Phantom) in orde
 \subsubsection*{SPECTRE}
 SPECTRE is a block-DAG based protocol that achieves fast comfirmation and high throughput with 50\% attack resilience. SPECTRE guarantees safety, which means a transaction is unlikely to be reverse once it is accepted. Also, SPECTRE guarantees fast confirmations for honest users rather than all users, so it is deemed as weak liveness.
 
-There is a trade off between liveness and fast confirmation, SPECTRE prioritize the latter since weak liveness only affects malicious users. SPECTRE is built for payment model, double spend can only be initiated by malicious users therefore it is only likely to make their transactions delayed indefinitely.
+There is a trade off between liveness and fast confirmation, SPECTRE prioritize
+the latter since weak liveness only affects malicious users. SPECTRE is built
+for payment model. Only malicious users launch douple spends, so only their
+transactions are likely to be delayed indefinitely.
 
-SPECTRE is built for stateless transaction model, so there is no need to gain a linear order from all the blocks. Only when there're two blocks conflicting that a pairwise ordering is needed.
+SPECTRE is built for stateless transaction model, so there is no need to gain a
+total ordering over all the blocks. Only when there're two blocks conflicting
+that a pairwise ordering is needed.
 
-SPECTRE employs a voting algorithm to decide which block wins, suppose block x has a conflicting transaction with another transaction in block y, and also suppose that block z is voting on them with following rules:
+SPECTRE employs a voting algorithm to decide which block wins when two blocks
+conflict. Suppose block $x$ has a conflicting transaction with another
+transaction in block $y$, and also suppose that block $z$ is voting on them with
+the following rules:
 
 
 \begin{enumerate}
-	\item if z is only in x's future, z votes x in favor of y, denoted as $x \prec y$, vice versa.
-	\item if both x and y are in the past of z, then z follows the majority votes in its past.
-	\item If neither x nor y is in the past of z, then z votes according to the majority votes in its future.
-	\item Both x and y vote for themselves unless one is in the past of another.
+	\item If $z$ is in $x$'s future but not in $y$'s future, $z$ votes for
+		$x$ in favor of $y$, denoted as $x \prec y$, and vice versa.
+	\item If both $x$ and $y$ are in the past of $z$, then $z$ follows the majority votes in its past.
+	\item If neither $x$ nor $y$ is in the past of $z$, then $z$ follows the majority votes in its future.
+	\item Both $x$ and $y$ vote for themselves unless one is in the past of
+		the other.
 \end{enumerate}
 
 
-An example on how a new block, number 12, votes: An example of the voting procedure in the DAG for blocks x,y.
-
-\clearpage
+Here's an example of how a new block (number 12 in the figure below) votes:
 
 \begin{figure}[h]
 	\centerline{%
 	   \resizebox{0.8\textwidth}{!}{\includegraphics{figures/SPECTRE}}%
 	}
-\caption{SPECTRE}
+\caption{An example of the voting procedure in the DAG for blocks $x$ and $y$ in SPECTRE}
 \end{figure}
 
-according to rule 4 and 1 x, 6, 7, 8 vote $x \prec y$, y, 9, 10, 11 vote $y \prec x$ according to rule 2 rule 2, 12 votes according to its past, since not all blocks of its past have voted, we change global view to block 12's local view, which means block 10 and 11 are excluded according to rule 3, block 5 votes $x \prec y$, since the majority votes of its future vote in favor x over y, that is 7, 8 over 9. Note that current view is block'12 local view and block 11 is exculded so we cannot take its vote. block 1~4 vote $x \prec y$ according to rule 3.
+According to rule 4, block $x$ votes for $x \prec y$, block $y$ votes for $y
+\prec x$.
 
-Now all the blocks in block 12's past have votes, 10 votes on x over 2 votes on y, so block 12 follows the majority and votes $x \prec y$ as well.
+According to rule 1, blocks 6, 7 and 8 vote for $x \prec y$, blocks 9, 10 and 11
+vote for $y \prec x$.
+
+According to rule 2, block 12 votes according to its past. Since not all blocks
+of its past have voted, we change global view to block 12's local view, which
+means block 10 and 11 are excluded.
+
+According to rule 3, block 5 votes for $x \prec y$, since the majority of its
+future vote in favor of $x$ over $y$ (blocks 7, 8 versus block 9). Note that the
+current view is block 12's local view and block 11 is exculded, so we cannot
+take its vote.
+
+Also according to rule 3, blocks 1\textasciitilde4 vote for $x \prec y$.
+
+Now all the blocks in block 12's past have voted. Block $x$ gets 10 votes. Block
+$y$ gets 2 votes. Block 12 follows the majority and votes for $x \prec y$ thus.
 
 
 \subsubsection*{PHANTOM}
