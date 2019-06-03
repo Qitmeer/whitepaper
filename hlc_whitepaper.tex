@@ -160,7 +160,7 @@ The Qitmeer network is a blockchain infrastructure designed specifically for ...
 
 Qitmeer network (Halalchain, HLC) is a public blockchain based on DAG\cite{DAG} technology to serve the global Islamic economy and serve as an open, distributed ledger that can record transactions between two parties efficiently and in a verifiable and permanent way. Subject to design, HalalChain is inherently resistant to modification of the data and connects the other consortium blockchain in various jurisdictions through cross-chain protocol. 
 
-In Halal industry it focuses on building alliance chains of traceability of halal products; And in the Islamic finance industry, it mainly concentrates on developing Islamic financial products and stable cryptocurrency; All above is striving to establish an ecosystem combined with the development of the underlying technologies and practical applications.
+In Halal industry it focuses on building consortium chains of traceability of halal products; and in the Islamic finance industry, it mainly concentrates on developing Islamic financial products and stable cryptocurrency; all above is striving to establish an ecosystem combined with the development of the underlying technologies and practical applications.
 
 Qitmeer is building advanced blockchain based platform for Islamic economy ecosystem that will allow users and investors to easily engage in the trading their ecosystem tokens using various payment methods. Qitmeer Foundation’s goal is to provide and promote the mass adoption of Blockchain technologies by becoming a globally trusted service provider. In various segment of the Islamic economy ecosystem. To this end, Qitmeer has created a unique solution with relevant regulatory compliances built into the products and services to be offered in Islamic economy ecosystem.
 
@@ -186,7 +186,7 @@ the high security is classified into important types which are:
 
 \section*{Fully decentralized}
 
-Decentralization is the soul of a public blockchain because this is what the trust comes from for a fully autonomous system. Numbers of projects sacrifice their decentralization to gain better throughput because of less consensus workload. This is a risky trade-off because fewer nodes to participate in consensus would bring a higher possibility to be targeted by attackers and prone to make collusion. Qitmeer's consensus protocol SPECTRE is fully decentralized, so all nodes have full ledger and there are no super nodes.
+Decentralization is the soul of a public blockchain because this is what the trust comes from for a fully autonomous system. Numbers of projects sacrifice their decentralization to gain better throughput because of less consensus workload. This is a risky trade-off because fewer nodes to participate in consensus would bring a higher possibility to be targeted by attackers and be prone to make collusion. Qitmeer's consensus protocol SPECTRE is fully decentralized, so all nodes have full ledger and there are no super nodes.
 
 \section*{High Faulty tolerance threshold}
 
@@ -194,23 +194,22 @@ Faulty tolerance is refering the percentage of incapable nodes: including malici
 
 \subsubsection{High throughput}
 
-Throughput is a representative metric of scalability, also it is a strong factor affecting practical scenarios. Bitcoin and ethereum don't scale, which have only 7 TPS and 15 TPS in theory. As a global value transfer network, such low throughput limits the various applications. Qitmeer is using Block DAG as our ledger underlying data structure and it could provide a conservative estimation of at least one thousand transactions per second throughput to meet most applications on blockchain so far.
+Throughput is a representative metric of scalability, also it is a strong factor affecting practical scenarios. Bitcoin and ethereum don't scale, which have only 7 TPS and 15 TPS in theory. As a global value transfer network, such low throughput limits the variety of applications. Qitmeer is using Block DAG as our ledger underlying data structure and it could provide a conservative estimation of at least one thousand transactions per second throughput to meet most applications on blockchain so far.
 
 \subsection{Methodology}
 
-Blockchain has a big picture and Qitmeer thinks that it requires an architecture to undertake. The ideology of Blockchain technology is value transfer, so this paper firstly focuses on this point and make it better than all public chains so far, then on top of that, we will extend it with much functionalities like virtual machines for smart contracts.
+Qitmeer has a big picture on blockchain based Islamic Finance. The scale of which is huge, thus it brings a tensive challenge to the design of technology architect. That is why the design phylosophy is critical to the project:
 
 \subsubsection{Respect classic}
 
-Bitcoin has various challenges so far, like scalability,  centralization due to monopolistic mining pools. However, most of its mechanisms are long proved robust and promising. So Qitmeer adopted most of its classical designs, like UTXO,  Proof of work.
+Bitcoin has various challenges so far, like limited scalability,  high centralization due to monopolistic mining pools. However, most of its mechanisms are long time proved robust and promising. So Qitmeer inherits most of its classical designs, like UTXO,  Proof of work.
 
 \subsubsection{Embrace innovation}
 
-Qitmeer acknowledges that there is no perfect technology, thus Bitcoin is not perfect, as just mentioned, scalability and centralization problems. In addition, long confirmation time is suffering people in real transactions. So Qitmeer is facing these challenges and solve them with the new Block DAG protocols, PHANTOM and SPECTRE.
+Although there are an enormous number of solutions to clam to have solved current challenges, such as high centralization, low scalability, long confirmation, etc., few of them really have solved all, mostly just a small set of those problems. Qitmeer proposes a stringent blockchain metrics called Classical Blockchain Setting, to reach this metrics, Qitmeer would like to take risks in adoption of new technologies, even they are not verifiable enough by the market. So, Qitmeer leadingly implemented SPECTRE and PHANTOM protocols,  which are still in academic stage.
 
 \subsubsection{Simple and extensible}
-
-The scenarios in blockchain are complicated and we won't solve all of them in a single complex system, which is probably unmaintainable. Instead, we design an extensible architect, each layer of which is simple enough to solve only a core problem. Moreover, communications go through flexible interfaces between layers. For instance, the public chain is a strong fundamental value transfer network and we will make off-chain smart contracts solution on top of it. Another case is we are using Block DAG to gain sufficient scalability for current application scenarios since it is a leger tech, it naturally could combine Sharding and Off-Chain scalability solutions to provide further scalability.
+The Islamic financial scenarios is diverse, so it will become extremely unmaintainable to devise a single complicated system to cover them all. Qitmeer's architecture is a mulitple layered stack, each layer is as simple as possible to focus on  just a core problem. For instance, the public chain is merely a simple UTXO based value transfer network and there only are off-chain smart contracts. Another case is Qitmeer using Block DAG to gain sufficient scalability, Block DAG, working in ledger layer,  is able to perfectly extended with Sharding and off-Chain to support further scalability because they work on different layers.
 
 This white paper proposes an alternative to traditional applications and Blockchain solutions for Islamic Economy ecosystem and Global Islamic Financial Institutions. Currently, Qitmeer public chain shall support the issuance of Islamic securities (Smart Sukuk) in the Islamic capital markets industry. Instead of physical certificates/notes, Sukuk can be represented digitally in a  permissionless ledger using Blockchain in Qitmeer Smart Sukuk platform as well as other use cases for Islamic Financial Institutions.
 
@@ -390,7 +389,7 @@ The global financial crisis has failed to have more impact on Islamic banking as
 
 \section{Smart Takaful on Qitmeer network}
 
-As a niche section of the insurance sector, the takaful segment is significantly impacted by the disruptions occurring within the insurance sector. The global insurance market had a reasonable growth rate, with global real premium growth rates of 2.9% in the advanced economies and 7.4% in the emerging and developing countries in 2014, an improvement over the 2012 and 2013 rates (IFSB, 2016). Likewise, the growth rate of gross contributions in the takaful sector demonstrated a recovery in 2014 from 2013, when the growth rate of premiums was by far the lowest historically.
+As a niche section of the insurance sector, the takaful segment is significantly impacted by the disruptions occurring within the insurance sector. The global insurance market had a reasonable growth rate, with global real premium growth rates of 2.9\% in the advanced economies and 7.4\% in the emerging and developing countries in 2014, an improvement over the 2012 and 2013 rates (IFSB, 2016). Likewise, the growth rate of gross contributions in the takaful sector demonstrated a recovery in 2014 from 2013, when the growth rate of premiums was by far the lowest historically.
 Takaful is a system of Islamic insurance based on the principle of mutual cooperation and donation (Tabarru), where the risk is shared collectively and voluntarily among the participants. Takaful claims, is a distributed process that involves many parties, participant, Takaful Operator and beneficiary, often with insufficient transparency to the participants. 
 
 Smart contracts deployed through the blockchain will provide customers and takaful (insurance) Operators a system to manage claims in a transparent, quick, and indisputable manner. Takaful policies, along with its terms and conditions, and potential claims can be recorded onto the blockchain and validated by the network, ensuring valid claims are dispensed and false claims are rejected.  For example, the blockchain will reject multiple claims for one accident because the network would know that a claim has already been made. Smart contracts would also process claims efficiently by triggering payments automatically when certain conditions are met and validated. To more effectively detect identity fraud, falsified injury or damage reports, etc., blockchain can be used as a cross- Islamic Financial Institutions (Islamic Finance industry).
@@ -782,13 +781,20 @@ If one block x can travel to another block y, then they have partial order and t
 \caption{PHANTOM}
 \end{figure}
 
-\section{HLC Innovation}
+\section{HLC implementation}
+HLC's protocol mainly references SPECTRE and PHANTOM, thanks for the two protocols providing HLC the foundamental frameworks. In addition, HLC's implementation has some extension and optimization.
+
 \subsection{Both liveness and fast confirmation} 
-\subsection{Consenus algorithms efficiency} 
+SPECTRE is quite a fast comfirmation protocol for payment, with just one slight weakness - weak liveness. It affects only misfunctioning transactions and even would make them unconfirmed indefinitely. Although it won't affect honest nodes, it is more robust for all nodes to have strong liveness.
+
+\subsection{Consensus algorithms efficiency} 
+
 \subsection{Storage efficiency} 
+
 \subsection{Transaction replication} 
 
 \section{Award}
+
 \subsection{CoinBase}
 
 \section{Award}
