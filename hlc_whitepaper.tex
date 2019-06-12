@@ -175,27 +175,74 @@ However, with the arrival of 10-years birth of bitcoin, the blockchain infrastru
 Bitcoin needs reform to return its original intention. Countless solutions arise and claim themselves having solved all these problems. However, few achieved indeed, just trading off one metric with another, e.g. sacrifice decentralization, which is a core source of security, for scalability. So, what the original intention of bitcoin truly is, Qitmeer has its definition and names it as Classical Blockchain Setting, it is also the design philosophy of Quitmeer.
 
 \subsection{Classical Blockchain Setting}
+Too many blockchain mutants and each has its definition of blockchain. Quitmeer respects bitcoin's vision, Qitmeer deems it is composed of 4 components and names it as Classical Blockchain Setting.
+
 \subsubsection{Open}
+Openness is the critical difference between permissioned and permissionless blockchain, so every node should join and leave the network freely. 
+
+\subsubsection*{Predefined special roles}
+An open network allows different role, in the bitcoin network, nodes could choose to be an SPV node, full node or miner with freedom, so from the protocol's aspect, bitcoin is open. Whereas, in Delegated Proof-of-Work, the block producers are voted outside of the chain and predefined as configuration, apparently not open enough.
+
+\subsubsection*{Practically close}
+Though bitcoin is open according to the protocol, it is close in practical. Miners are no longer independent and have to join mining pools, and this trend is getting worse. 
+
+
 \subsubsection{Fair}
+Fairness means that the rewards should be consistent with the contribution; in other words, Incentive-Compatible.
+
+\subsubsection*{Opportunity Cost}
+The expectation of rewards between standalone mining and pool mining is equal in terms of probability. The point is, their opportunity cost is considerably high - either mine a block to get a dramatically high reward or wait a long time without any return. So, they have to turn to the mining pool to have a stable incentive. 
+
+\subsubsection*{Cost Efficiency}
+It is mainly referring to mining cost. Mining cost mainly includes the electricity price and mining efficiency, and the latter is much more critical due to ASIC. ASIC is customized to direct a specific mining algorithm, so the mining efficiency per unit of cost is much higher than generalized computers. For instance, the hash rate per dollar for AntMiner S9 is about 20000 times greater than for GTX570; it is nearly impossible for a personal computer to win the hash rate competition.
+
 \subsubsection{Secure}
+The security is how robust the network is to sustain the attack, mainly referring to overrun a confirmed transaction.
+
+\subsubsection*{Decentralization}
+Decentralization is the most significant difference for bitcoin to be compared with traditional payment network. Decentralization could avoid single point failure; also, it is almost impossible to collude with the majority of all nodes in a fully decentralized network.
+\subsubsection*{Fault Tolerance}
+The network should be resilient to a certain proportion of misfunctioning resources, and  Tolerance is the upper bound of the percentage. In a decentralized network, 50\% fault tolerance is the ideal case according to the majority law.
+
 \subsubsection{Scalable}
+A network that can offer relatively stable services with its scale increasing is considered scalable. Blockchain network includes the following services:
+\subsubsection*{Throughput}
+How many transactions per second when network is scaling. Bitcoin's throughput is upper bound to 7 TPS, no matter how many nodes are there in the network.
+\subsubsection*{Confirmation}
+How long does the recipient to wait until his transaction is believed unlikely to be overrun? The waiting time should not increase with networking scaling.
+\subsubsection*{Cost}
+The main component of cost is transaction fee, and it should be reasonable, it would make payment impractical if too high, whereas be subject to sybli attack if too low. With the mining difficulty increasing, Bitcoin transacation fee is getting higher and higher, and it won't be suitable to serve as a global payment network as it aimed to, up to the time this paper finished, the average price of bitcoin is rough 2\$ . [https://bitcoinfees.info/]
 
 \subsection{Specification}
-
+Qitmeer's specification is designed to abide by Classical Blockchain Setting
 \subsubsection{Openess}
+Qitmeer is an open network; it uses proof-of-work to join the network freely and use BlockDAG protocol to avoid the risk of mining pools centralization.
 \subsubsection*{Proof of Work}
-\subsubsection*{No Super Nodes}
+Proof-of-Work is the openest way so far to join a blockchain network because the only resource required to contribute to is electricity, which every node has owned. Besides, this resource is physical; in other words, it is non-duplicatable. 
+\subsubsection*{No Predefined Nodes}
+ Quitmeer doesn't have predefined sepcial nodes , i.e. super nodes.
 \subsubsection{Fairness}
+BlockDAG is fair because it is a collaboration model other the competition model of blockchain.
 \subsubsection*{Mining Pool Resistance}
+Mining pools centralization is the consequence of high opportunity cost, which is the consequence of the competition model. Qitmeer's BlockDAG-based protocol SPECTRE is a collaboration model, the opportunity cost of standalone mining is equal to that of pool mining, so it will not be necessary to join a mining pool, which would lead to the risk of centralization.
 \subsubsection*{Anti-ASIC Mining Algorithm}
+Cuckoo Cycle is a graph-theoretic proof-of-work algorithm and prevails for ASIC resistance. Qitmeer employs this algorithm to guarantee that no one has too much mining efficiency advantage.
 \subsubsection{Security}
+Security is the first code in Quitmeer, and it is a fully decentralized and 50\% fault tolerant, which is the most stringent criteria; thus, there is no security sacrifice for other metrics. 
 \subsubsection*{Fully Decentralization}
+All the nodes in the Qitmeer's network are peer nodes and can participate in consensus.
 \subsubsection*{50\% Faulty Tolerance}
-\subsubsection{Scalability}
-\subsubsection*{Fast Confirmation}
-\subsubsection*{Low Cost}
-\subsubsection*{High Throughput}
+The malicious adversary has to posses 50\% hash power to control the network. Either in SPECTRE or GhostDAG, the fault tolerance is irrelevant with the throughput, whereas the security is inversely propagational to throughput in bitcoin.
 
+\subsubsection{Scalability}
+
+Qitmeer's hybrid BlockDAG protocols scales, fast confirmation, high throughput, low transaction fee, all these features ensure Qitmeer will be running stably in a considerable long time.
+\subsubsection*{Fast Confirmation}
+SPECTRE is a speedy confirmation BlcokDAG protocol, and Qitmeer uses as its consensus algorithm.
+\subsubsection*{High Throughput}
+SPECTRE is a BlcokDAG protocol, and the throughput could grow up to the network's physical metrics, such as network bandwidth or propagation delay.
+\subsubsection*{Low Cost}
+Strictly speaking, the cost is not scaling since the transaction fee is increasing slightly with the network growing. However, the average cost will keep relatively low and acceptable for a long time. So, from the reasonableness aspect, the cost scales.
 
 \section{Qitmeer Token Design}
 
