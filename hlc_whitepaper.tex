@@ -625,8 +625,6 @@ SPECTRE is quite a fast comfirmation protocol for payment, with just one slight 
 
 \subsection{CoinBase}
 
-\section{Award}
-\subsection{CoinBase}
 \subsection{Transaction Fee}
 
 Miners are profitable and tend to pack the transaction with higher fees. This will result in high repetition rates of blocks. Repeated transactions will not contribute to the throughput. So we need to design an incentive mechanism to guide the miners, which makes them try not to pack duplicate transactions. Inclusive introduced a mechanism to split the transaction fee. In this way, if all the miners go to package a high-fee transaction, it may eventually cause the miner to only package the transaction with high transaction fee, but the income will decrease. Finally, through the game, everyone will randomly select the transaction from the memory pool to reach the Nash equilibrium. According to the data of the paper, the repetition rate can be controlled at around 30\%.
@@ -637,9 +635,35 @@ Therefore, HLC's plan, firstly, is to randomly select the desired transaction ac
 
 In order to ensure the stability of the block order, the block reward needs to wait for 100 confirmed blocks to be spent.
 
+\subsection{Cuckoo Cycle}
+TODO[Jin, 1+ pages]: Introduction, 
 
+\subsection{Confirmation time}
+\subsubsection{Formal introduction}
+TODO[Xiang, 2+ pages]
+\subsubsection{Simulation Report}
+TODO[Jin, 1+ pages]
 
+\section{Ecosystem}
+TODO[forchain]: Overview
 
+\subsection{Mining Protocol}
+TODO[Eric, 1+ pages]: Protocol, Interface, Specification
+
+\subsection{Wallet Protocol}
+TODO[Logan, 1+ pages]: Protocol, Interface, Specification
+
+\subsection{Cross Chain}
+TODO[forchain 1 page]: Overview
+
+\subsubsection{UTXO interoperability}
+TODO[Yi, 1+ page]:  mechanism
+
+\subsubsection{Smartcontract interoperability}
+TODO[Yi, 1+ page]: mechanism
+
+\section{Future Work}
+Undetermined [forchain] 
 
 
 
