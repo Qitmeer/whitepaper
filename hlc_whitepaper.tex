@@ -711,7 +711,9 @@ HLC adopts Hybrid consensus that combines SPECTRE and GHOSTDAG (Phantom) in orde
 
 
 \subsubsection*{SPECTRE}
-SPECTRE is a block-DAG based protocol that achieves fast comfirmation and high throughput with 50\% attack resilience. SPECTRE guarantees safety, which means a transaction is unlikely to be reverse once it is accepted. Also, SPECTRE guarantees fast confirmations for honest users rather than all users, so it is deemed as weak liveness.
+SPECTRE is a block-DAG based protocol that achieves fast comfirmation and high
+throughput with 50\% attack resilience. SPECTRE guarantees safety, which means a
+transaction is unlikely to be reversed once it is accepted. Also, SPECTRE guarantees fast confirmations for honest users rather than all users, so it is deemed as weak liveness.
 
 There is a trade off between liveness and fast confirmation, SPECTRE prioritize
 the latter since weak liveness only affects malicious users. SPECTRE is built
@@ -767,13 +769,42 @@ Also according to rule 3, blocks 1\textasciitilde4 vote for $x \prec y$.
 Now all the blocks in block 12's past have voted. Block $x$ gets 10 votes. Block
 $y$ gets 2 votes. Block 12 follows the majority and votes for $x \prec y$ thus.
 
-
 \subsubsection*{PHANTOM}
-The high concurrency of DAG produces forks. A network's physical metrics are definite, say, propagation time that a block takes to travel around super majority network nodes, minimum bandwith of super majority nodes, also there are some parameters, such as block creation rate, faulty nodes percentage assumption. All lot these metrics and parameters determines the expected max fork number and then affects the throughput. HLC technology is based on a transaction model so partial ordering of transaction is suffient; however, PHANTOM's total ordering not only provides the strong liveness gurantee , also it serves for the reward mechanism.
 
-Though SPECTRE's weak liveness won't affect honest users, it is more robust to make a strong liveness, that is every transaction, including the honest and the malicious, can be accepted within definite time. SPECTRE can only guarantees parital ordering, to be more specific, pairwised ordering, PHANTOM is able to guarantee total ordering of all blocks therefore we may produce a linear order. It is intuitive that if nodes behave honestly, they will form a sub graph wherein each block has at most a specific number of forks, this number can be caculated from propagation time and block creation rate, denoted as $k$. This sub graph is denoted as k-cluter. The biggest k-cluster is called blue set and the rest blocks compose red set.
+Since HLC technology is based on transaction model, in most cases it is
+sufficient to provide only partial ordering or pairwise ordering for blocks in
+the ledger. However, sometimes we may still need to obtain a total (linear)
+ordering of all the blocks, especially when we want to reward blocks based on
+their ordering. 
 
-If one block x can travel to another block y, then they have partial order and the destination is prior to the origion. For example in figure, block J can travel to A through B, then they have partial order and A is prior to J. Note not all blocks have partial orders with other blocks, like B, C, D don't have partial order with each other. Inside a k-cluster, there are at most k blocks without partial order for each block.
+Obtaining total ordering for a DAG ledger is not so intuitive as it is for
+blockchains since a DAG ledger contains forks, which are caused by network
+propagation delay, concurrent block creations, faulty miners, and so on.
+Therefore, as a supplement to the consensus protocol of HLC, we use PHANTOM to
+obtain the total ordering to reward blocks which appears earlier in the
+ordering.
+
+In addition to total ordering, PHANTOM also provides strong liveness guarantee
+to make the consensus protocol more robust, which means both honest blocks and
+malicious blocks can be confirmed within definite time, though it may take a
+long time to confirm malicious blocks.
+
+Suppose that the maximal limits of network propagation delay and block creation
+rate are constant. It is intuitive that if nodes behave honestly, they will form
+a sub graph where each block has at most a constant number of forks. We denote
+this constant number as $k$. $k$ can be caculated from propagation time and
+block creation rate. The sub graph is denoted as a $k$-cluter. The biggest
+$k$-cluster is called a blue set. Those blocks outside the blue set are called
+red set.
+
+If we can traverse from block $x$ to block $y$ by following the parent
+references within each block, then we say that there's a partial order between
+$x$ and $y$, and $y$ is prior to $x$. For example in the following figure, we
+can traverse from block J to A through B, so there's a partial order between A
+and J, and A is prior to J. Note not all blocks have partial orders with other
+blocks. For example, there're no partial orders between B, C and D. We call the
+block set where no partial order exists an anticone. The size of any anticone in
+a $k$-cluster is at most $k$.
 
 \begin{figure}[h]
 	\centerline{%
@@ -781,6 +812,25 @@ If one block x can travel to another block y, then they have partial order and t
 	}
 \caption{PHANTOM}
 \end{figure}
+
+PHANTOM orders the DAG ledger in a way that favours blue blocks and penalizes
+red ones. We determine the order between blue blocks according to their partial
+orders and some topological sort. Then, for any blue block $B$, add to the order
+just before $B$ all of the red blocks in $past(B)$ that weren’t added to the
+order yet; these red blocks too should be added in a topological manner. Notice
+that for any blue block $B$, the order on blocks in $past(B)$ should remain the
+same if we remove from the DAG blocks in $future(B)$. This can be implemented,
+for instance, using a priority queue that pops out blocks according to the size
+of their past set.
+
+An example of the output order of the PHANTOM procedure on the small DAG ledger
+from the figure above is: $(A,D,C,G,B,F,I,E,J,H,K)$. Unfortunately, finding the
+maximum $k$-cluster is NP hard, so PHANTOM is therefore of less practical use
+for an ever-growing DAG ledger and may causes long confirmation times.
+Therefore, we use PHANTOM only to implement the reward mechanism of HLC, since
+it should be acceptable for a miner to wait for a while to get his or her mining
+reward. The confirmation time for a transaction to be accepted is still defined
+in the SPECTRE way.
 
 \section{HLC Innovation}
 \subsection{Both liveness and fast confirmation} 
