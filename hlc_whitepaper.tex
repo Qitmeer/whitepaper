@@ -781,7 +781,8 @@ Obtaining total ordering for a DAG ledger is not so intuitive as it is for
 blockchains since a DAG ledger contains forks, which are caused by network
 propagation delay, concurrent block creations, faulty miners, and so on.
 Therefore, as a supplement to the consensus protocol of HLC, we use PHANTOM to
-obtain the total ordering to reward blocks.
+obtain the total ordering to reward blocks which appears earlier in the
+ordering.
 
 In addition to total ordering, PHANTOM also provides strong liveness guarantee
 to make the consensus protocol more robust, which means both honest blocks and
@@ -812,7 +813,24 @@ a $k$-cluster is at most $k$.
 \caption{PHANTOM}
 \end{figure}
 
-To be continued...
+PHANTOM orders the DAG ledger in a way that favours blue blocks and penalizes
+red ones. We determine the order between blue blocks according to their partial
+orders and some topological sort. Then, for any blue block $B$, add to the order
+just before $B$ all of the red blocks in $past(B)$ that weren’t added to the
+order yet; these red blocks too should be added in a topological manner. Notice
+that for any blue block $B$, the order on blocks in $past(B)$ should remain the
+same if we remove from the DAG blocks in $future(B)$. This can be implemented,
+for instance, using a priority queue that pops out blocks according to the size
+of their past set.
+
+An example of the output order of the PHANTOM procedure on the small DAG ledger
+from the figure above is: $(A,D,C,G,B,F,I,E,J,H,K)$. Unfortunately, finding the
+maximum $k$-cluster is NP hard, so PHANTOM is therefore of less practical use
+for an ever-growing DAG ledger and may causes long confirmation times.
+Therefore, we use PHANTOM only to implement the reward mechanism of HLC, since
+it should be acceptable for a miner to wait for a while to get his or her mining
+reward. The confirmation time for a transaction to be accepted is still defined
+in the SPECTRE way.
 
 \section{HLC Innovation}
 \subsection{Both liveness and fast confirmation} 
