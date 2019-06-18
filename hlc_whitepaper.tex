@@ -697,7 +697,50 @@ TODO[Jin, 1+ pages]
 TODO[forchain]: Overview
 
 \subsection{Mining Protocol}
-TODO[Eric, 1+ pages]: Protocol, Interface, Specification
+\subsubsection{Proof-of-work Algorithm}
+
+We hope to resist the centralization of mining power, and hope miner can utilizes almost all parts of commodity hardware (GPUs, CPUs).
+Therefore, Qitmeer uses a Proof-Of-Work algorithm called Cuckoo Cycle\cite{cuckoocycle}, 
+a memory-hard algorithm.This algorithm is designed to find certain subgraphs in large pseudo-random graphs. 
+An introduction of Qitmeer proof-of-work can be found here.\cite{qitmeerpow} 
+
+\subsubsection{Miner Capability}
+
+At the moment, the fastest GPU miner implementation is HLC-Miner, which developed by the HLC developers. 
+However, the HLC-Miner is still in the early stage of development, It's not a deeply optimized version. We hope 
+that the community will finally create more optimised miners.
+
+The HLC-Miner support parallel GPU. You can run multiple Nvidia GPUs and AMD GPUs mining in parallel.
+
+Compatible GPU Hardware:
+
+\begin{itemize}
+\item Nvidia: GTX1060 GTX1070, GTX1070ti, GTX1080, GTX1080ti, GTX2070, GTX2080, GTX2080ti
+\item AMD: RX570, RX580, Vega56, Vega64
+\end{itemize}
+
+In principle, as long as the graphics memory is greater than 5GB, the GPU miner can run.
+
+The HLC-Miner support both solo mining and pool mining. 
+
+\subsubsection*{Solo}
+If you do decide to mine Qitmeer without joining a pool, these are the steps to achieve mining Qitmeer by yourself.
+
+\begin{itemize}
+\item You need to run a full node to validate transactions. First, install qitmeer\cite{qitmeer} with the complete blockchain downloaded. Qitmeer is a full node software program that fully validates transactions and blocks. 
+\item Download and install the Qitmeer miner software like HLC-Miner. For a solo miner, the mining software connects to the blockchain full node (Qitmeer). The main job of the miner software is to create valid Proofs-of-Work and deliver the block to the rest of the Qitmeer network.
+\item Finally, launch Qitmeer miner software and connect to Qitmeer network to start solo mining Qitmeer.
+\end{itemize}
+
+\subsubsection*{Pool}
+Most mining pools support stratum protocol, so your miner program should be config this protocol. 
+For example:
+
+\emph{miner.exe -o stratum+tcp://serverIp:3177 -m YourWalletAddress.YourMachineId}
+
+\subsubsection{Mining Pool Capability}
+The Proof-Of-Work algorithm implementation in Qitmeer is perfect for a mining pool.
+
 
 \subsection{Wallet Protocol}
 TODO[Logan, 1+ pages]: Protocol, Interface, Specification
