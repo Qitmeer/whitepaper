@@ -5,4 +5,5 @@
 *.bbl
 *.blg
 *.aux
+*.pyg
 *.synctex.gz

@@ -126,10 +126,53 @@
   numbers=left,
   stepnumber=1,
   numbersep=10pt,
-  tabsize=4,
+  tabsize=2,
   showspaces=false,
   showstringspaces=false
 }
+
+\usepackage[dvipsnames]{xcolor}
+\usepackage{listings}
+
+\newcommand\YAMLcolonstyle{\color{red}\mdseries}
+\newcommand\YAMLkeystyle{\color{black}\bfseries}
+\newcommand\YAMLvaluestyle{\color{blue}\mdseries}
+
+\makeatletter
+
+% here is a macro expanding to the name of the language
+% (handy if you decide to change it further down the road)
+\newcommand\language@yaml{yaml}
+
+\expandafter\expandafter\expandafter\lstdefinelanguage
+\expandafter{\language@yaml}
+{
+  keywords={true,false,null,y,n},
+  keywordstyle=\color{darkgray}\bfseries,
+  basicstyle=\YAMLkeystyle,                                 % assuming a key comes first
+  sensitive=false,
+  comment=[l]{\#},
+  morecomment=[s]{/*}{*/},
+  commentstyle=\color{purple}\ttfamily,
+  stringstyle=\YAMLvaluestyle\ttfamily,
+  moredelim=[l][\color{orange}]{\&},
+  moredelim=[l][\color{magenta}]{*},
+  moredelim=**[il][\YAMLcolonstyle{:}\YAMLvaluestyle]{:},   % switch to value style at :
+  morestring=[b]',
+  morestring=[b]",
+  literate =    {---}{{\ProcessThreeDashes}}3
+                {>}{{\textcolor{red}\textgreater}}1     
+                {|}{{\textcolor{red}\textbar}}1 
+                {\ -\ }{{\mdseries\ -\ }}3,
+}
+
+% switch to key style at EOL
+\lst@AddToHook{EveryLine}{\ifx\lst@language\language@yaml\YAMLkeystyle\fi}
+\makeatother
+
+\newcommand\ProcessThreeDashes{\llap{\color{cyan}\mdseries-{-}-}}
+
+
 
 %opening
 \title{\LARGE The Qitmeer White Paper:\\
@@ -246,18 +289,28 @@ SPECTRE is a BlcokDAG protocol, and the throughput could grow up to the network'
 Strictly speaking, the cost is not scaling since the transaction fee is increasing slightly with the network growing. However, the average cost will keep relatively low and acceptable for a long time. So, from the reasonableness aspect, the cost scales.
 
 \section{Qitmeer Token Design}
-
-The HLC public chain is a powerful innovative technology that has the potential to transform the global Islamic financial services industry. it is a distributed database of records or public ledger of all transactions or digital events that have been executed and shared by corporate entities. HLC technology is cryptographically authenticated. It is developed to provide an alternative secure approach to exchange value without the involvement of third party. The technology enables simplification and brings in greater security, scaleability, speed, and reliability. The results is reduced costs and improved efficiency. 
+The Islamic world needs a customized blockchain since the existing blockchains cannot be compliance with Ismalic Law. To build a real Islamic Blockchain, Qitmeer devises a new token issuance framework called OP\_TOKEN.
 
 \subsection{Overview}
+\subsubsection{Problem definition}
 
-The $\texttt{OP\_TOKEN}$ is inspired by Color coin idea, which represents and manages real world assets on top of the Bitcoin by using $\texttt{OP\_RETURN}$, and the OP\_GROUP, a referenced implementation of issuring assets designed by Andrew Stone.
+There are two concerns in Islamic finance that all the existing blockchains have ignored.
+
+\subsubsection*{Intrinsic Value}
+On existing token issuance platforms like Ethereum, individuals can issue a token of arbitrary amount without any backed assets. 
+
+\subsubsection*{Legitimate issurance}
+Existing blockchains have no authentication so that any individual can issue tokens against Ismalic Law.
+
+\subsubsection{Related works}
+
+The $\texttt{OP\_TOKEN}$ is inspired by Color coin idea, which represents and manages real-world assets on top of the Bitcoin by using $\texttt{OP\_RETURN}$, and the OP\_GROUP, a referenced implementation of issuing assets designed by Andrew Stone.
 
 The OP\_TOKEN fit various practical scenarios with unique features like asset compliable and value relevent. There are some related concepts in the details below:  
 
 \subsubsection{UTXO}
 
-UTXO represents Unspent Transaction Output. A transaction has multiple sources and destinations, which we call them inputs and outputs. There are no accounts in HLC. What users have and spend are a bunch of unspent transaction ouputs and we could get balance by summing up them. 
+UTXO represents Unspent Transaction Output. In other words, there are no accounts in Qitmeer. What users have and spend are a bunch of unspent transaction outputs, and we could come up with the balance by summing up them. 
 
 \begin{figure}[hbt]
 	\centerline{%
@@ -266,18 +319,17 @@ UTXO represents Unspent Transaction Output. A transaction has multiple sources a
 \caption{utxo model}
 \end{figure}
 
+The first transaction tx1 has three outputs with the first spent, so  tx1 has 2+3=5 coins balance. 
 
-The first transaction tx1 has 3 outputs and the first output of them is spent, so  tx1 has 2+3=5 coins balance. 
-
-The second transaction tx2 spends the 2 UTXOs of tx1 and pays to 3 addresses and creates 3 new UTXOs. 
+The second transaction, tx2 spends the 2 UTXOs of tx1 and pays to 3 addresses and creates three new UTXOs. 
 
 Note: now the old UTXOs (of tx1) are no longer UTXO so cannot be spent later.  
 
 \subsubsection{Script system}
 
-The mechanism behind how users spend their UTXOs is to execute a special script. The output stores a half of the script and we have to present the other half and combine both to verify if we could spend the money. The former half is called locking script, like a locked treasure box, and the latter is unlocking script, like the only key to the box.
+The mechanism behind how users spend their UTXOs is to execute a particular script. The output stores half of the script and we have to present the other half and combine both to verify if we could spend the money. The former half is called locking script, like a locked treasure box, and the latter is unlocking script, like the only key to the box.
 
-Let's take a look at the typical instance of  Pay-2-Public-Key-Hash(P2PKH)
+Let us take a look at the typical instance of  Pay-2-Public-Key-Hash(P2PKH)
 
 Locking Script in UTXO:
 
@@ -295,23 +347,23 @@ Combine unlocking script with locking script:
 
 This whole script consists two steps
 1. <PublicKey>  OP\_HASH160 <PUBLIC\_KEY> OP\_EQUALVERIFY
-	To very if the public key in the unlocking script matches that in the locking script.
+	To verify if the public key in the unlocking script matches that in the locking script.
 2.  <Signature><PublicKey> OP\_CHECKSIG
 	To check if the signature is valid.
 
 
 \subsubsection{Color coin and USDT}
 
-Color coin is a method to represent assets on top of the blockchain, so it can leverage the tamper-proof capibility of blockchain. It uses tx-script operation $\texttt{OP\_RETURN}$ to interupt script execution early, so we can add information of the assets after it without violating the script validation.
+Color Coin is a method to represent assets on top of the blockchain so that it can leverage the tamper-proof capability of blockchain. It uses tx-script operation $\texttt{OP\_RETURN}$ to interrupt script execution early, so we can add information on the assets after it without violating the script validation.
 
 Locking Script:
 \begin{lstlisting}
 OP_RETURN <DATA>
 \end{lstlisting}
 
-The stable coin Tether (USDT) also uses OP\_RETURN based omni layer protocol to define the asset on the bitcoin. 
+The stable coin Tether (USDT) also uses OP\_RETURN based OMNI Layer protocol to define the asset on the bitcoin. 
 
-Here is a typical USDT transacation and details of its protocol design
+Here are a typical USDT transaction and details of its protocol design
 
 
 \lstset{basicstyle=\tiny,style=myListStyle}
@@ -333,14 +385,14 @@ OP_RETURN 6f6d6e69000000000000001f00000015c9054900
 
 
 \subsubsection{OP\_GROUP}
-The OP\_RETURN scheme is more suitable to apply on mature blockchain since it doesn't change the underlying blockchain protocol and won't risk forking. However, the weakness  is that miners cannot verify its protocol so there would be some security risks.
+The OP\_RETURN scheme is more suitable to apply on mature blockchain since it does not change the underlying blockchain protocol and will not risk forking. However, the weakness is that miners cannot verify its protocol, so there would be some security risks.
 
-OP\_GROUP is a proposal of assets issuance  on Bitcoin Cash (BCH) from Bitcoin Unlimited (BU) and has been approved by BU. OP\_GROUP supports token issuance, tranfer, destroy, etc. Since OP\_GROUP is an extention to BCH script sytem,  it is part of BCH protocol and can be verified by miners, which is more reliable.
+OP\_GROUP is a proposal of assets issuance on Bitcoin Cash (BCH) from Bitcoin Unlimited (BU). OP\_GROUP supports token issuance, transfer, destroy, and so on forth. Since OP\_GROUP is an extension to the BCH script system,  it is part of the BCH protocol. Thus miners can do the verification, which is more reliable.
 
 The basic “colored” pay 2 public key hash script would be like: 
 
 \lstset{basicstyle=\tiny,style=myListStyle}
-\begin{lstlisting}
+\begin{lstlisting}[numbers=none]
 OP_DATA(group address)  
 OP_GROUP  
 OP_DROP  
@@ -351,7 +403,7 @@ OP_EQUALVERIFY
 OP_CHECKSIG
 \end{lstlisting}
 
-The main difference is simple, just adding a group address to distiguish different groups, and other operations, such as create and destroy assets, are similar.
+The main difference is simple, just adding a group address to distinguish different groups, and other operations, such as create and destroy assets, are similar.
 
 % [ref]https://medium.com/@g.andrew.stone/bitcoin-scripting-applications-representative-tokens-ece42de81285
 
@@ -359,135 +411,150 @@ The main difference is simple, just adding a group address to distiguish differe
 
 \subsubsection{Overview}
 
-There is a special token named LICENSE in OP\_TOKEN. Licenses are held by renowned expects or organizations with public credibility. Any entitity planing to issue a token needs to be warranted a license. Since license is also a token, it is able to be transfered between peers. However, license transfer can be tracked through transaction history, so the originator would be very cautious in case transfering to a wrong hand.
+There is a unique token named LICENSE in OP\_TOKEN. With public credibility, Renowned experts or organizations hold licenses. Any entity planning to issue a token needs to be warranted a license.  Peers can transfer licenses as they are also tokens. The transfer history is public and immutable, so the originator must be very cautious in case of transferring to a wrong hand.
 
 \subsubsection{Issuance of License}
 
-Licenses are all generated in genesis block and distribted to 100 preserved committe members. One smallest unit of HLC (SAND) represents a license,  one block has 100 HLC,  1 HLC= 10\^8 SAND , so we have 10 \^10 license in total, which is sufficient for asset issuance.
+Licenses are all generated in the genesis block and distributed to C preserved committee members. One smallest unit (SAND) can represent a license, one block has M coins, one coin= N SAND, so we have M*N license in total, which is sufficient for asset issuance.
 
-
-\lstset{basicstyle=\tiny,style=myListStyle}
-\begin{lstlisting}
+\begin{lstlisting}[language=yaml, numbers=none]
+# C = 100, M = 10, N = 10^8 (M*N = 10 billion), 
+# all examples are based on this setting
+# Ex1: Distribute licenses to the commitee, 
+# M*N/C = 100 million for each member.
+---	
 INPUTS:
 	INPUT:
 		PREVIOUS_OUTPUT: # (COINBASE of GENESIS)
-		SCRIPT: "DUP HASH160 [GENESIS_HASH] EQUALVERIFY CHECKSIG"
-		VALUE: 10000000000 (10 billion)
-		SCRIPT: "[SIG] [GENESIS_PK]"
+			S: "DUP HASH160 [GEN] EQUALVERIFY CHECKSIG"
+			V: 10000000000 
+		S: "[SIG] [GEN_PK]"
 OUTPUTS:
 	OUTPUT:
-		SCRIPT: "[LICENSE_HASH] TOKEN DROP DUP HASH160 [COMMITTEE_1_HASH] EQUALVERIFY CHECKSIG"
-		VALUE: 100000000 (100 million)
-	# ... ... (COMMITTEE 2~99)
+		S: "[LIC] TOKEN DROP DUP HASH160 [COMM1] EQUALVERIFY CHECKSIG"
+		V: 100000000 
+	# ... ... (COMMITTEE MEMBER 2~99)
 	OUTPUT:
-		SCRIPT: "[LICENSE_HASH] TOKEN DROP DUP HASH160 [COMMITTEE_100_HASH] EQUALVERIFY CHECKSIG"
-		VALUE:100000000#(100 million)
+		S: "[LIC] TOKEN DROP DUP HASH160 [COMM100] EQUALVERIFY CHECKSIG"
+		V:100000000
 	OUTPUT:
-		SCRIPT: "RETURN [DATA]" 
-		VALUE: 0
+		S: "RETURN [DATA]" 
+		V: 0
 \end{lstlisting}
+
 
 
 \subsubsection{Warrant a license}
 
-The individual and corporate entities/companies must be warranted a license to issue assets. These companies can request license from any committee member. Once the license is granted and approved, it would receive a special token transfer from the commitee member and the token is the license.
+Organizations must be warranted a license to issue assets. They can request a license from any committee member (C.M.). Once the license is granted and approved, they will receive a particular token transfer from the C.M. and the token is the license.
 
 \lstset{basicstyle=\tiny,style=myListStyle}
-\begin{lstlisting}
+\begin{lstlisting}[language=yaml, numbers=none]
+# Ex2: C.M. warrant a license to the issuer (ISS), 
+# note the license change will go back to the C.M.
+---	
 INPUTS:
 	- INPUT:
 		PREVIOUS_OUTPUT:
-			SCRIPT: "[LICENSE_HASH] TOKEN DROP DUP HASH160 [COMMITTE_HASH] EQUALVERIFY CHECKSIG"
-			VALUE: 100000000
-		SCRIPT: "[SIG] [COMMITTE_PK]"
+			S: "[LIC] TOKEN DROP DUP HASH160 [COMM] EQUALVERIFY CHECKSIG"
+			V: 100000000
+		S: "[SIG] [COMM_PK]"
 OUTPUTS:
 	- OUTPUT:
-		SCRIPT: "[LICENSE_HASH] TOKEN DROP DUP HASH160 [ISSUER_HASH] EQUALVERIFY CHECKSIG"
-		VALUE: 1
+		S: "[LIC] TOKEN DROP DUP HASH160 [ISS] EQUALVERIFY CHECKSIG"
+		V: 1
+	- OUTPUT: # License change
+		S: "[LIC] TOKEN DROP DUP HASH160 [COMM] EQUALVERIFY CHECKSIG"
+		V: 99999999
 	- OUTPUT:
-		SCRIPT: "[LICENSE_HASH] TOKEN DROP DUP HASH160 [COMMITTE_HASH] EQUALVERIFY CHECKSIG"
-		VALUE: 99999999
-	- OUTPUT:
-		SCRIPT: "RETURN [DATA]" 
-		VALUE: 0
+		S: "RETURN [DATA]" 
+		V: 0
 \end{lstlisting}
 
 \subsubsection{Issuance of assets}
-Once warranted a license, organizations are able to issue assets. Assets cannot be built from the air, they required equal amount smallest unit (sand) of HLC to be converted. This process is called as "token mint". it is like to mint a gold coin requires the same weight of gold sands, tokens need same amount of HLC sands. The advantage is not only that the token has a value support by underlying currency but also that all tokens and HLC are invovled in the same ecosytem, which would improve the liquidity and make whole network healthier.
+Once warranted a license, organizations can issue assets; however, they cannot set the token amount arbitrarily. Instead, to issue a certain amount of assets requires converting the same amount of  SANDs. Qitmeer calls this process as  "token mint". Just like the case in reality,  to mint a gold coin requires the same weight of gold sands, tokens need the same amount of SANDs. 
+
+The first benefit of this issuance system is to guarantee tokens' elementary intrinsic value; thus, it would significantly mitigate the price fluctuation. Another advantage is that tokens and native currency are no longer isolated islands of value; they are running is the same ecosystem, which would improve the liquidity and make the whole network healthier.
 
 \lstset{basicstyle=\tiny,style=myListStyle}
-\begin{lstlisting}
+\begin{lstlisting}[language=yaml, numbers=none]
+# Ex3: Convert 100000000 native SANDs, i.e. 1 Coin, 
+# to 100000000 sands of the new token, 
+# note the license will go back to the issuer for future issurance.
 INPUTS:
 	- INPUT:
 		PREVIOUS_OUTPUT: #(1 LICENSE)
-			SCRIPT: "[LICENSE_HASH] TOKEN DROP DUP HASH160 [ISSUER_HASH] EQUALVERIFY CHECKSIG"
-			VALUE: 1
-		SCRIPT: "[SIG] [LICENSE_PK]"
+			S: "[LIC] TOKEN DROP DUP HASH160 [ISS] EQUALVERIFY CHECKSIG"
+			V: 1
+		S: "[SIG] [LIC_PK]"
 	- INPUT:
-		PREVIOUS_OUTPUT: #(1 HLC)
-			SCRIPT "DUP HASH160 [COIN_HASH] EQUALVERIFY CHECKSIG"
-			VALUE: 100000000
-		SCRIPT "[SIG] [COIN_PK]"
+		PREVIOUS_OUTPUT: #(1 Qitmeer Coin)
+			S "DUP HASH160 [COIN] EQUALVERIFY CHECKSIG"
+			V: 100000000
+		S "[SIG] [COIN_PK]"
 OUTPUTS:
+	- OUTPUT: # License returns to the issuer
+		S: "[LIC] TOKEN DROP DUP HASH160 [ISS] EQUALVERIFY CHECKSIG"
+		V: 1
 	- OUTPUT:
-		SCRIPT: "[LICENSE_HASH] TOKEN DROP DUP HASH160 [ISSUER_HASH] EQUALVERIFY CHECKSIG"
-		VALUE: 1
+		S: "[TOK] TOKEN DROP DUP HASH160 [PK] EQUALVERIFY CHECKSIG"
+		V: 100000000
 	- OUTPUT:
-		SCRIPT: "[TOKEN_HASH] TOKEN DROP DUP HASH160 [PK_HASH] EQUALVERIFY CHECKSIG"
-		VALUE: 100000000
-	- OUTPUT:
-		SCRIPT: "RETURN [DATA]"
-		VALUE: 0
+		S: "RETURN [DATA]"
+		V: 0
 \end{lstlisting}
 
 \subsubsection{Transfer of the Assets}
 
-Assets can be transfered between parties. Moreover, we could transfer mulitple assets within one transaction. The transaction needs to ensure the  input sum of each asset equals the output sum of each asset. 
+Parties can transfer assets to each other. Moreover, we could transfer multiple assets within one transaction. The transaction needs to ensure the input sum of each asset equals the output sum of each asset.
 
 \lstset{basicstyle=\tiny,style=myListStyle}
-\begin{lstlisting}
+\begin{lstlisting}[language=yaml, numbers=none]
+# Ex4: Alice exchanges her 100 RMB token with Bob's 20 USD token.
 INPUTS:
 	- INPUT:
 		PREVIOUS_OUTPUT:
-			SCRIPT: "[RMB] TOKEN DROP DUP HASH160 [ACLICE_PKHASH] EQUALVERIFY CHECKSIG"
-			VALUE: 100
-		SCRIPT: "[ALICE_SIG] 0X83 [ACLIE_PUBKEY]"
+			S: "[RMB] TOKEN DROP DUP HASH160 [A_PKH] EQUALVERIFY CHECKSIG"
+			V: 100
+		SCRIPT: "[A_SIG] 0X83 [A_PK]"
 	- INPUT:
 		PREVIOUS_OUTPUT:
-			SCRIPT: "[USD] TOKEN DROP DUP HASH160 [BOB_PKHASH] EQUALVERIFY CHECKSIG"
-			VALUE: 20
-		SCRIPT: "[BOB_SIG] 0X83 [BOB_PUBKEY]"
+			S: "[USD] TOKEN DROP DUP HASH160 [B_PKH] EQUALVERIFY CHECKSIG"
+			V: 20
+		SCRIPT: "[B_SIG] 0X83 [B_PK]"
 OUTPUTS:
 	- OUTPUT:
-		SCRIPT: "[USD] TOKEN DROP DUP HASH160 [ALICE_PKHASH] CHECKSIG"
-		VALUE: 20
+		S: "[USD] TOKEN DROP DUP HASH160 [A_PKH] CHECKSIG"
+		V: 20
 	- OUTPUT:
-		SCRIPT: "[RMB] TOKEN DROP DUP HASH160 [BOB_PKHASH] CHECKIG"
-		VALUE: 100
+		S: "[RMB] TOKEN DROP DUP HASH160 [B_PKH] CHECKIG"
+		V: 100
 \end{lstlisting}
 
 
-\subsubsection{Unmint Token}
+\subsubsection{Melt Token}
 
-In addition to mint token, the Token can unmint. as the Token  we cannot build from nothing, we cannot destroy tokens into ashes, instead, we melt  tokens into HLC. Also, tokens can be melt into the same amount of HLC sands. So, tokens have minimum value sustain. 
+Melt is the reversed process of mint, i.e., conversion from tokens to native currency. The total amount of sands is constant, either in the form of Native Sand or Token Sand. So it is forbidden to destroy a token and only allowed to convert tokens. Issuers can melt their coins to reduce the liquidity in order to keep the price stable, which is practical to implement stable coins.
 
-However, HLC encourages token holders to increase their token values rather than unminting them. But there are some scenarios to make unminting practical, such as stable coins. So, HLC only allow the token issuer to umint tokens.
+
+Melt guarantees the tokens fundamental value, just like the minimum value of a gold coin is the same weight of gold. 
 
 \lstset{basicstyle=\tiny,style=myListStyle}
-\begin{lstlisting}
+\begin{lstlisting}[language=yaml, numbers=none]
+# Ex5: Melt 100 token sands into 100 native sands
 INPUTS:
 	- INPUT:
 		PREVIOUS_OUTPUT:
-			SCRIPT: "[TOKENHASH] TOKEN DROP DUP HASH160 [ISSUER_HASH] EQUALVERIFY CHECKSIG"
-			VALUE: 100
-		SCRIPT: "[SIG] [ISSUER_PUBKEY]"
+			S: "[TOK] TOKEN DROP DUP HASH160 [ISS] EQUALVERIFY CHECKSIG"
+			V: 100
+		S: "[SIG] [ISS_PK]"
 OUTPUTS:
 	- OUTPUT:
-		SCRIPT: "DUP HASH160 [COIN_HASH] EQUALVERIFY CHECKSIG"
-		VALUE: 100
+		S: "DUP HASH160 [COIN] EQUALVERIFY CHECKSIG"
+		V: 100
 	- OUTPUT:
-		SCRIPT: "RETURN [DATA]"
-		VALUE: 0
+		S: "RETURN [DATA]"
+		V: 0
 \end{lstlisting}
 
 
