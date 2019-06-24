@@ -910,7 +910,36 @@ The Proof-Of-Work algorithm implementation in Qitmeer is perfect for a mining po
 
 
 \subsection{Wallet Protocol}
-TODO[Logan, 1+ pages]: Protocol, Interface, Specification
+Abstract
+   The blockchain wallet itself does not store any digital currency, and is primarily a computer program for creating digital currency transactions, tracking balances, and making it easy for users to manage addresses and private keys. Wallet software is the foundation of the whole block chain ecological development, any industry service can be realized through a block chain wallet value, block chain technology itself will reconstruct the traditional Internet business model in its own way. After the release of Qitmeer on Testnet and Mainnet, the authorities will release the wallet application for different users at the same time. For example, in the professional-oriented command line wallet, users only need to input corresponding commands according to relevant instructions to complete address generation, send transactions and other operations; Mobile terminal wallet for ordinary users. Users can easily and quickly complete relevant operations on their mobile phones just like other apps.
+Openness
+   An excellent blockchain public chain project should be more inclusive and open. Therefore, in addition to its own official wallet, Qitmeer has designed all interfaces and SDK for third-party wallet development at the beginning of development. Third party wallet institutions can use these interfaces to develop a variety of wallet programs that support Qitmeer Token transactions. Including: HD wallet, SPV wallet, browser wallet to meet a variety of user needs.
+How to create a wallet
+   The following is a simple wallet creation and transaction steps:
+    1. Generate seeder.
+    2. Derive private key.
+    3. Derive public key.
+    4. Derive address.
+    5. Monitor for outputs.
+    6. Create unsigned Txes.
+    7. Sign Txes.
+    8. Broadcast Txes.
+   
+   To complete the above operations, we need to rely on qitmeer's nx SDK and RPC interface.
+   The NX SDK is a collection of tools that integrates various encryption, decryption, and signature functions. We can use the nx SDK to develop the following functions：
+    - Generate seeder.
+    - Derive private key.
+    - Derive public key.
+    - Derive address.
+    - Create unsigned Txes.
+    - Sign Txes.
+   RPC is an http-based network interface, it’s easy to interaction with qitmeer network. We can use the nx SDK to develop the following functions：
+    - Get block count from block dag or block chain.
+    - Get block data with block height.
+    - Gettransaction data with txid.
+    - Gets all transaction data waiting for confirmation.
+    - Monitor for outputs.
+    - Broadcast Txes.
 
 \subsection{Cross Chain}
 TODO[forchain 1 page]: Overview
