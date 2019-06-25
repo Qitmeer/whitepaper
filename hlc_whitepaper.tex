@@ -561,34 +561,18 @@ OUTPUTS:
 \section{Consensus Protocol}
 
 
-\subsection{Introduction of DAG Technology}
+\subsection{From BlockChain To BlockDAG}
+BlockChain represented by Bitcoin does not scale due to protocol restrain. On Nakamoto Consensus, i.e., longest-chain rule, 1 MB block size and 10 minutes block rate confine bitcoin to reach only 7 TPS  theoretical throughput regardless of the bandwidth and propagation delay. 
 
-Block DAG, as the name implies, is a DAG paradigm of ledger in which each node
-is a block. In fact, each node in the ledger can either be a block or a
-transaction, because a transaction can also be regarded as a block which
-contains only one transaction.
+The most intuitive way to increase scalability is to shorten block time or enlarge block size. The reason why Satoshi did not adopt is that it brings forks, and they distract the hash power from the main chain, thus causing security vulnerability.  
 
-Block DAG tries to solve the scalability problem of blockchain on protocol
-level. Although scalability limits can be broken through in many ways, such as
-raising up processing speeds, disk I/O and so on, a major barrier lies in
-blockchain paradigm itself: the orphan rate. Orphans are blocks that are created
-outside the longest chain due to unavoidable network propagation delays. In
-blockchain paradigm, orphan blocks waste network bandwidth and do not contribute
-to throughput. What's worse, the two intuitive ways to improve scalability, which
-are to increase the block rate and the block size, both increase the orphan
-rate. The higher the orphan rate is, the less secure the chain
+GHOST protocol introduces heaviest-tree consensus to keep forks without sacrificing security. Note that here BlockChain has transformed into a BlockTree. Since the largest subtree has concentrated the majority hash power, the security is as high as bitcoin. The main chain is the path,  i.e. a blockchain from the genesis to leaf, with the highest number of descendants, other blocks are off-chain blocks. Only main chain blocks contribute throughput, off-chain blocks help strengthen the security.
+
+BlockTree has dramatically increased the throughput because of the higher Block Rate or Size. However, there is still a waste of the transactions of off-chain blocks, which should contribute to the throughput as well. Inclusive protocol proposes a new data structure of ledger, where every block confirms every unconfirmed block. This improvement upgrades a BlockTree to a BlockDAG. 
+
+Through the history from BlockChain to BlockDAG, we may infer that BlockChain is just the particular case on low throughput of BlockDAG, they are, in essence, the same. So, it is the scaling approach whose paradigm is closest to bitcoin. The apparent benefit is that it would be robust since it can inherit all the long-time-proved stable features of bitcoin. Besides, this approach is scalable infinitely in terms of protocol, only limited by physical limits, like bandwidth. A robust public chain itself is the optimal basis for incorporating further scaling solutions, such as sharding and state-channels, so BlockDAG is the preferred scaling solution of Qitmeer.
+
 is\cite{Yonatan-high-rate-bitcoin}\cite{bitcoin-backbone}\cite{asynchronous}.
-
-In other words, Bitcoin sacrifices scalability for security to achieve low
-orphan rate as possible.
-
-Block DAG tries to solve the tradeoff by allowing blocks to reference multiple
-predecessors instead of a single parent. Compared with other schemes such as
-sharding and layering which also try to solve the scalability problem, the Block
-DAG way is simple and intuitive. It's just a structural alternative to
-blockchain. The other aspects can be the same as Bitcoin. Nodes can still
-participate freely to realize complete decentralization.  Security can still be
-guaranteed as long as more than 50\% of the computing power are honest.
 
 \begin{figure}[hbt]
 	\centerline{%
@@ -597,33 +581,28 @@ guaranteed as long as more than 50\% of the computing power are honest.
 \caption{DAG}
 \end{figure}
 
-Of course, a DAG ledger may contain conflicting transactions since different
-chains are incorporated. Therefore, new consensus protocols are necessary to
-provide high scalability without losing security.
-
 \subsection{Consensus}
-HLC adopts Hybrid consensus that combines SPECTRE and GHOSTDAG (Phantom) in order to achieve fast confirmation and high throughput.
-
+HLC adopts a hybrid consensus that combines SPECTRE and GHOSTDAG (Phantom) in order to achieve fast confirmation and high throughput.
 
 \subsubsection{SPECTRE}
-SPECTRE is a block-DAG based protocol that achieves fast comfirmation and high
-throughput with 50\% attack resilience. SPECTRE guarantees safety, which means a
-transaction is unlikely to be reversed once it is accepted. Also, SPECTRE guarantees fast confirmations for honest users rather than all users, so it is deemed as weak liveness.
+HLC adopts Hybrid consensus that combines SPECTRE and GHOSTDAG (Phantom) to achieve fast confirmation and high throughput.
 
-There is a trade off between liveness and fast confirmation, SPECTRE prioritize
-the latter since weak liveness only affects malicious users. SPECTRE is built
-for payment model. Only malicious users launch douple spends, so only their
+SPECTRE is a block-DAG based protocol that achieves fast confirmation and high
+throughput with 50\% attack resilience. SPECTRE guarantees safety, which means a
+transaction is unlikely to be reversed once it is accepted. Also, SPECTRE guarantees fast confirmations for honest users rather than all users; in other words, weak liveness.
+
+There is a trade-off between liveness and fast confirmation; SPECTRE prioritizes
+the latter since weak liveness only affects malicious users. SPECTRE is appropriate for payment model. Only malicious users launch double spends, so only their
 transactions are likely to be delayed indefinitely.
 
-SPECTRE is built for stateless transaction model, so there is no need to gain a
-total ordering over all the blocks. Only when there're two blocks conflicting
+SPECTRE is a stateless transaction model, so there is no need to gain a
+total ordering over all the blocks. Only when two blocks conflicting
 that a pairwise ordering is needed.
 
 SPECTRE employs a voting algorithm to decide which block wins when two blocks
 conflict. Suppose block $x$ has a conflicting transaction with another
 transaction in block $y$, and also suppose that block $z$ is voting on them with
 the following rules:
-
 
 \begin{enumerate}
 	\item If $z$ is in $x$'s future but not in $y$'s future, $z$ votes for
@@ -784,29 +763,29 @@ With the converted formula we are able to calculate $risk\_hidden$ in numerical 
 \subsubsection{PHANTOM}
 
 
-Since HLC technology is based on transaction model, in most cases it is
+Since Qitmeer works for payment, in most cases it is
 sufficient to provide only partial ordering or pairwise ordering for blocks in
 the ledger. However, sometimes we may still need to obtain a total (linear)
 ordering of all the blocks, especially when we want to reward blocks based on
 their ordering. 
 
 Obtaining total ordering for a DAG ledger is not so intuitive as it is for
-blockchains since a DAG ledger contains forks, which are caused by network
-propagation delay, concurrent block creations, faulty miners, and so on.
-Therefore, as a supplement to the consensus protocol of HLC, we use PHANTOM to
+blockchains since a DAG ledger contains forks, which are caused by various reasons, such as, network
+propagation delay, concurrent block creations, faulty miners.
+Therefore, as a supplement to the consensus protocol of Qitmeer, we use GHOSTDAG to
 obtain the total ordering to reward blocks which appears earlier in the
 ordering.
 
-In addition to total ordering, PHANTOM also provides strong liveness guarantee
+In addition to total ordering, GHOSTDAG also provides Strong Liveness guarantee
 to make the consensus protocol more robust, which means both honest blocks and
-malicious blocks can be confirmed within definite time, though it may take a
+malicious blocks can be confirmed within a definite time, though it may take a
 long time to confirm malicious blocks.
 
 Suppose that the maximal limits of network propagation delay and block creation
-rate are constant. It is intuitive that if nodes behave honestly, they will form
-a sub graph where each block has at most a constant number of forks. We denote
-this constant number as $k$. $k$ can be caculated from propagation time and
-block creation rate. The sub graph is denoted as a $k$-cluter. The biggest
+rate are constant. It is intuitive that if nodes behave honestly, they form
+a subgraph where each block has at most a constant number of forks. We denote
+this constant number as $k$. $k$ can be calculated from propagation time and
+block creation rate. The subgraph is denoted as a $k$-cluter. The biggest
 $k$-cluster is called a blue set. Those blocks outside the blue set are called
 red set.
 
@@ -827,27 +806,30 @@ a $k$-cluster is at most $k$.
 \end{figure}
 
 
-PHANTOM orders the DAG ledger in a way that favours blue blocks and penalizes
+GHOSTDAG orders the DAG ledger in a way that favours blue blocks and penalizes
 red ones. We determine the order between blue blocks according to their partial
 orders and some topological sort. Then, for any blue block $B$, add to the order
 just before $B$ all of the red blocks in $past(B)$ that weren’t added to the
-order yet; these red blocks too should be added in a topological manner. Notice
+order yet; these red blocks too should be added topologically. Notice
 that for any blue block $B$, the order on blocks in $past(B)$ should remain the
-same if we remove from the DAG blocks in $future(B)$. This can be implemented,
-for instance, using a priority queue that pops out blocks according to the size
-of their past set.
+same if we remove from the DAG blocks in $future(B)$. 
 
-An example of the output order of the PHANTOM procedure on the small DAG ledger
+An example of the output order of the GHOSTDAG procedure on the small DAG ledger
 from the figure above is: $(A,D,C,G,B,F,I,E,J,H,K)$. Unfortunately, finding the
-maximum $k$-cluster is NP hard, so PHANTOM is therefore of less practical use
-for an ever-growing DAG ledger and may causes long confirmation times.
-Therefore, we use PHANTOM only to implement the reward mechanism of HLC, since
+maximum $k$-cluster is NP-hard, so GHOSTDAG is therefore of less practical use
+for an ever-growing DAG ledger and may cause long confirmation times.
+Therefore, we use GHOSTDAG only to implement the reward mechanism of Qitmeer, since
 it should be acceptable for a miner to wait for a while to get his or her mining
 reward. The confirmation time for a transaction to be accepted is still defined
 in the SPECTRE way.
 
-\subsubsection{Cuckoo-Cycle-PoW}
+\subsection{Mining Algorithm}
+\subsubsection{BlockDAG and Mining}
+BlockDAG's collaboration model provides much more fairness than the competition model of BlockChain on the protocol aspect. Every node gets rewards according to its contribution, regardless of how much hash power they possess. Qitmeer considers the fairness benefit even more important than the scalability increase because it represents the spirit of BlockChain. The intention of Nakamoto Consensus is fair - every node votes with electricity; however, only a small bunch of the mining pools have the odds to participate in consensus. Standalone miners suffer huge opportunity cost since they have to wait uncertain time, quite long in most cases, to mine a block to cover their cost; thus finally they have to turn to the mining pools. BlockDAG incorporates every miner's block, so the miners have a strong expectation of their return and then don't have too much willing to join a mining pool.
 
+Apart from the protocol, the mining algorithm is another factor of fairness, so the protocol fairness is of no use without mining fairness. Mining fairness refers to a certain amount of mining cost, i.e. electricity in POW, should derive the relatively equivalent amount of hash power. Practically, the ASIC mining rigs have much more mining efficiency than their prices.
+
+\subsubsection{Cuckoo-Cycle-PoW}
 Proof-of-Work(PoW) is used to confirm transactions and produces new blocks, therefore it is a very important engine in PoW cryptocurrencies. PoW must not enable a participant to have a significant advantage over another participant. That is why Satoshi said: "Proof-of-work is essentially one-CPU-one-vote."
 
 However, most widely used proof-of-work algorithms, such as SHA-256, Blake2b, Scrypt, are more efficient on ASIC devices when compared to CPUs and GPUs. This can lead to ASIC owners posses a much larger voting power than CPU and GPU owners. It violates the “one-CPU-one-vote” principle.
@@ -975,29 +957,29 @@ The figure is probability trend of finding a cycle of length 42.
 Thus in the actual use, it also adds a hash difficulty control similar to Bitcoin. The digest of the cycle nonces is obtained by a hash function,
 and then compared with the target difficulty.
 
-\section{HLC Innovation}
-\subsection{Both liveness and fast confirmation} 
-SPECTRE is quite a fast comfirmation protocol for payment, with just one slight weakness - weak liveness. It affects only misfunctioning transactions and even would make them unconfirmed indefinitely. Although it won't affect honest nodes, it is more robust for all nodes to have strong liveness.
+\subsection{Rewards}
+\subsection{Transaction Collision}
+Due to asynchronous block submmission, BlockDAG protocols inevitably incorporate repeating transactions, called transaction collisons. 
+Miners tend to pack the transaction with higher fees to maximize their profit. This will result in high repetition rates of blocks. Repeated transactions will not contribute to the throughput, what is more, low fee transactions would wait indefinite time to get confirmed. In a fully decentralized network, nodes cannot coordinate each other to avoid collision, leaving the only option to deivse a sophiscated incentive mechanism to penalize the selfish mining behaviors. 
 
-\subsection{Consensus algorithms efficiency} 
+The intuitive way to solve this problem is to share the transacation fee, and this method will make all the miners reach a Nash equilibrium that all the miners will choose transactions randomly from their memory pools. This approach will considerably reduce transactions collision; however, users can no longer pay higher fees to boost their transaction confirmation. 
 
-\subsection{Storage efficiency} 
+Qitmeer introduces an optimal incentive mechanism introduced in Inclusive protocol. It varies different transaction with different probability of being selected from memory pools, those with higher fee get higher probability. So, urgent transactions could increase their transaction fee to get better mining services, and low-fee transacations still get opportunity to confirm.
 
-\subsection{Transaction replication} 
+\subsection{First Come First Get}
+To encourage miners to submit blocks immediately on creation. The transaction fee should belong to the first miner who incorporates it. So this reward machanism requires transactions has a global order, which has been offered by GHOSTDAG protocol. 
 
-\section{Award}
+Inclusive protocol states that this machanism has some security concerns because it won't penalize those malicious parites who mine blocks in private. Inclusive protocol fixes this problem by only giving rewards to blocks not deviating main chain too much. Qitmeer appreciates Inclusive protocol work and adopts it.
 
-\subsection{CoinBase}
 
-\subsection{Transaction Fee}
+\subsection{Confirmation}
+Confirmation time is a critical metric for a value transfer network as Qitmeer is. SPECTRE is a super fast confirmation protocol. For most ordinary transacation, SPECTRE can reach robust confirmation in orders of seconds, which can even complete with centralized payment network.
 
-Miners are profitable and tend to pack the transaction with higher fees. This will result in high repetition rates of blocks. Repeated transactions will not contribute to the throughput. So we need to design an incentive mechanism to guide the miners, which makes them try not to pack duplicate transactions. Inclusive introduced a mechanism to split the transaction fee. In this way, if all the miners go to package a high-fee transaction, it may eventually cause the miner to only package the transaction with high transaction fee, but the income will decrease. Finally, through the game, everyone will randomly select the transaction from the memory pool to reach the Nash equilibrium. According to the data of the paper, the repetition rate can be controlled at around 30\%.
+\subsubsection{Calculation}
+TODO[Jin, 1+ pages]: Introduction, 
 
-The trasaction halving scheme of Inclusive is complicated to implement, because the block confirmed number is not fixed. The block may be confirmed by the newly generated block at any time, so it is supposed to add a lot of control logic to implement this. Secondly, this design, in fact, it does not motivate users to quickly release blocks. Because whether it is released early or later, it can be divided into fees. In addition, it is unfair to simply randomly select transactions. If the probability how much the fees is random, the transaction will choose a low fee or even send a junk transaction, nor will it meet the need to quickly be confirmed by increasing the fee.
-
-Therefore, HLC's plan, firstly, is to randomly select the desired transaction according to the weight of each transaction, so as to ensure that the user is willing to use the higher handling fee to attract the miners to pack the transaction, and the comprehensive income of the miner is also improved and they are more willing to mine. Secondly, the transaction fee can only be owned by the miners who originally packed the transaction. The order of the blocks in the transaction is determined by the PHANTOM protocol. This encourages the user to publish the block as early as possible.
-
-In order to ensure the stability of the block order, the block reward needs to wait for 100 confirmed blocks to be spent.
+\subsubsection{Simulation}
+TODO[Jin, 1+ pages]: Introduction, 
 
 \subsection{Cuckoo Cycle}
 TODO[Jin, 1+ pages]: Introduction, 
