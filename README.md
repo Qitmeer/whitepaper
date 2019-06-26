@@ -21,6 +21,7 @@ sudo tlmgr install framed
 sudo tlmgr install blindtext
 sudo tlmgr install mweights
 sudo tlmgr install fontaxes
+sudo tlmgr install clrscode 
 
 make
 ```

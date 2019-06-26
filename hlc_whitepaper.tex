@@ -583,10 +583,9 @@ is\cite{Yonatan-high-rate-bitcoin}\cite{bitcoin-backbone}\cite{asynchronous}.
 \end{figure}
 
 \subsection{Consensus}
-HLC adopts a hybrid consensus that combines SPECTRE and GHOSTDAG (Phantom) in order to achieve fast confirmation and high throughput.
+HLC adopts a hybrid consensus that combines SPECTRE and GHOSTDAG  in order to achieve fast confirmation and high throughput.
 
 \subsubsection{SPECTRE}
-HLC adopts Hybrid consensus that combines SPECTRE and GHOSTDAG (Phantom) to achieve fast confirmation and high throughput.
 
 SPECTRE is a block-DAG based protocol that achieves fast confirmation and high
 throughput with 50\% attack resilience. SPECTRE guarantees safety, which means a
@@ -617,7 +616,7 @@ the following rules:
 
 Here's an example of how a new block (number 12 in the figure below) votes:
 
-\begin{figure}[h]
+\begin{figure}[ht]
 	\centerline{%
 	   \resizebox{0.8\textwidth}{!}{\includegraphics{figures/SPECTRE}}%
 	}
@@ -761,7 +760,7 @@ risk\_hidden(T,g)
 With the converted formula we are able to calculate $risk\_hidden$ in numerical way.
 
 
-\subsubsection{PHANTOM}
+\subsubsection{GHOSTDAG}
 
 
 Since Qitmeer works for payment, in most cases it is
@@ -799,11 +798,11 @@ blocks. For example, there're no partial orders between B, C and D. We call the
 block set where no partial order exists an anticone. The size of any anticone in
 a $k$-cluster is at most $k$.
 
-\begin{figure}[h]
+\begin{figure}[ht]
 	\centerline{%
-	   \resizebox{0.8\textwidth}{!}{\includegraphics{figures/PHANTOM}}%
+	   \resizebox{0.8\textwidth}{!}{\includegraphics{figures/GHOSTDAG}}%
 	}
-\caption{PHANTOM}
+\caption{GHOSTDAG}
 \end{figure}
 
 
@@ -904,7 +903,7 @@ where,
 
 To throw 32 edges into a graph, randomly:
 
-\begin{figure}[h]
+\begin{figure}[ht]
 	\centerline{%
 		 \resizebox{0.8\textwidth}{!}{\includegraphics{figures/edge_generation}}%
 	}
@@ -919,7 +918,7 @@ Leaf edges have a feature, the nodes it connects must have at least one node wit
 By eliminating leaf edges in the bipartite graph, we can greatly reduce the complexity of the graph,
 thus speeding up finding cycle from the bipartite graph.
 
-\begin{figure}[h]
+\begin{figure}[ht]
 	\centerline{%
 		 \resizebox{0.8\textwidth}{!}{\includegraphics{figures/edge_trimming}}%
 	}
@@ -948,7 +947,7 @@ For crypto currencies, difficulty control must be scale in precisely controlled 
 that the ratio of M/N remain fixed, such as M/N = 1/2.
 The figure is probability trend of finding a cycle of length 42.
 
-\begin{figure}[h]
+\begin{figure}[ht]
 	\centerline{%
 		\resizebox{0.8\textwidth}{!}{\includegraphics{figures/probability}}%
 	}
@@ -971,12 +970,6 @@ Qitmeer introduces an optimal incentive mechanism introduced in Inclusive protoc
 To encourage miners to submit blocks immediately on creation. The transaction fee should belong to the first miner who incorporates it. So this reward machanism requires transactions has a global order, which has been offered by GHOSTDAG protocol. 
 
 Inclusive protocol states that this machanism has some security concerns because it won't penalize those malicious parites who mine blocks in private. Inclusive protocol fixes this problem by only giving rewards to blocks not deviating main chain too much. Qitmeer appreciates Inclusive protocol work and adopts it.
-
-\subsection{Confirmation time}
-\subsubsection{Formal introduction}
-TODO[Xiang, 2+ pages]
-\subsubsection{Simulation Report}
-TODO[Jin, 1+ pages]
 
 \section{Protocols and extensibilty}
 BlockChain is the infrastructure for  decentralized finance. There will be an ecosystem when the blockchain becomes mature. This chapter introduces the typical applications on top of Qitmeer and the protocols for them to interact with Qitmeer. 
