@@ -1,5 +1,6 @@
 \documentclass[a4paper,11pt]{article}
 
+\DeclareUnicodeCharacter{00A0}{ }
 
 \usepackage{geometry}
 \geometry{
@@ -889,27 +890,14 @@ To encourage miners to submit blocks immediately on creation. The transaction fe
 
 Inclusive protocol states that this machanism has some security concerns because it won't penalize those malicious parites who mine blocks in private. Inclusive protocol fixes this problem by only giving rewards to blocks not deviating main chain too much. Qitmeer appreciates Inclusive protocol work and adopts it.
 
-
-\subsection{Confirmation}
-Confirmation time is a critical metric for a value transfer network as Qitmeer is. SPECTRE is a super fast confirmation protocol. For most ordinary transacation, SPECTRE can reach robust confirmation in orders of seconds, which can even complete with centralized payment network.
-
-\subsubsection{Calculation}
-TODO[Jin, 1+ pages]: Introduction, 
-
-\subsubsection{Simulation}
-TODO[Jin, 1+ pages]: Introduction, 
-
-\subsection{Cuckoo Cycle}
-TODO[Jin, 1+ pages]: Introduction, 
-
 \subsection{Confirmation time}
 \subsubsection{Formal introduction}
 TODO[Xiang, 2+ pages]
 \subsubsection{Simulation Report}
 TODO[Jin, 1+ pages]
 
-\section{Ecosystem}
-TODO[forchain]: Overview
+\section{Protocols and extensibilty}
+BlockChain is the infrastructure for  decentralized finance. There will be an ecosystem when the blockchain becomes mature. This chapter introduces the typical applications on top of Qitmeer and the protocols for them to interact with Qitmeer. 
 
 \subsection{Mining Protocol}
 \subsubsection{Proof-of-work Algorithm}
@@ -958,19 +946,119 @@ The Proof-Of-Work algorithm implementation in Qitmeer is perfect for a mining po
 
 
 \subsection{Wallet Protocol}
-TODO[Logan, 1+ pages]: Protocol, Interface, Specification
+\subsubsection{Overview}
+   The blockchain wallet itself does not store any digital currency, and is primarily a computer program for creating digital currency transactions, tracking balances, and making it easy for users to manage addresses and private keys. Wallet software is the foundation of the whole block chain ecological development, any industry service can be realized through a block chain wallet value, block chain technology itself will reconstruct the traditional Internet business model in its own way. After the release of Qitmeer on Testnet and Mainnet, the authorities will release the wallet application for different users at the same time. For example, in the professional-oriented command line wallet, users only need to input corresponding commands according to relevant instructions to complete address generation, send transactions and other operations; Mobile terminal wallet for ordinary users. Users can easily and quickly complete relevant operations on their mobile phones just like other apps.
+\subsection*{Openness}
+   An excellent blockchain public chain project should be more inclusive and open. Therefore, in addition to its own official wallet, Qitmeer has designed all interfaces and SDK for third-party wallet development at the beginning of development. Third party wallet institutions can use these interfaces to develop a variety of wallet programs that support Qitmeer Token transactions. Including: HD wallet, SPV wallet, browser wallet to meet a variety of user needs.
+\subsection*{How to create a wallet}
+   The following is a simple wallet creation and transaction steps:
+\begin{enumerate}
+	\item  Generate seeder.
+    \item  Derive private key.
+    \item  Derive public key.
+    \item  Derive address.
+    \item  Monitor for outputs.
+    \item  Create unsigned Txes.
+    \item  Sign Txes.
+    \item  Broadcast Txes.
+\end{enumerate}
+
+   To complete the above operations, we need to rely on qitmeer's nx SDK and RPC interface.
+   The NX SDK is a collection of tools that integrates various encryption, decryption, and signature functions. We can use the nx SDK to develop the following functions:
+   \begin{enumerate}
+     \item Generate seeder.
+     \item Derive private key.
+     \item Derive public key.
+     \item Derive address.
+     \item Create unsigned Txes.
+	 \item Sign Txes.
+   \end{enumerate}
+
+   RPC is an http-based network interface, it’s easy to interaction with qitmeer network. We can use the nx SDK to develop the following functions:
+
+   \begin{enumerate}
+    \item  Get block count from block dag or block chain.
+    \item Get block data with block height.
+    \item  Gettransaction data with txid.
+    \item  Gets all transaction data waiting for confirmation.
+    \item  Monitor for outputs.
+    \item  Broadcast Txes.
+   \end{enumerate}
+
 
 \subsection{Cross Chain}
-TODO[forchain 1 page]: Overview
+Qitmeer is dedicated tp undertake the liquidity of whole Ismalic decentralized finance. So the design goal of Qitmeer is to build a simple and strong UTXO-based value transfer network, that is why Qitmeer itself doesn't provide an on chain smart contract for the simplicity; instead, it prefers interoperability solutions to integrate various blockchains and applications. Finally, they will be parts of Qitmeer's ecosystem and can interact with each other. 
 
 \subsubsection{UTXO interoperability}
-TODO[Yi, 1+ page]:  mechanism
+
+Across the chain technology is mainly to solve different main chain (such as: ` HLC ` and ` BTC `) problem of data exchange between the most direct cross chain technology application is "DEX :distributed exchange", No third party participation will purse ` BTC ` into ` HLC `,Complete wallet-to-wallet transactions.
+
+Currently, HLC has supported P2SH script contracts and cross-chain functions through hash-locking.
+
+\subsubsection*{Principle}
+
+The implementation process of hash locking across the chain is:
+
+\begin{enumerate}
+\item  Alice and Bob generate their respective addresses on 'HLC' and 'BTC' chains respectively;
+
+\item Alice generates her own Secret Key and Secret Key hash;
+
+\item Alice locks her 'HLC' token into the hash lock contract in the main chain of 'HLC'. The unlock condition is that Bob holds the Secret Key or returns it to Alice after exceeding the specified time;
+
+\item Bob checks the contract of Alice's main chain in 'HLC' and USES to generate the corresponding contract in 'BTC'. The unlock condition is that Alice holds the Secret Key or returns it to Bob after the specified time;
+
+\item Alice USES to remove Bob's lock 'BTC' in the hash lock contract;
+
+\item After obtaining , Bob locks Alice 'HLC' in the hash lock contract, and completes the transaction;
+	
+\end{enumerate}
+
+\begin{figure}[hbt]
+	\centerline{%
+	   \resizebox{0.8\textwidth}{!}{\includegraphics{figures/UTXOAtomicSwap.jpg}}%
+	}
+\caption{UTXO}
+\end{figure}
+
+
 
 \subsubsection{Smartcontract interoperability}
-TODO[Yi, 1+ page]: mechanism
 
-\section{Future Work}
-Undetermined [forchain] 
+Based on the cross-chain solution of intelligent contract type, HLC completes the cross-chain transaction of the block chain assets of HLC to other account models through hash lock Smartcontract.
+
+The following will take EHT as an example to illustrate how to complete the cross-chain operation of Smartcontract.
+
+\subsubsection*{Smartcontract interoperability Principle} 
+
+\begin{enumerate}
+\item  Alice and Bob generate their respective addresses on 'HLC' and 'ETH' chains respectively;
+
+\item   Alice generates her own Secret Key and Secret Key hash;
+
+ \item  Alice locks her 'HLC' token into the hash lock contract in the main chain of 'HLC'. The unlock condition is that Bob holds the Secret Key or returns it to Alice after exceeding the specified time;
+
+ \item  Bob checks the contract of Alice in the main chain of 'HLC' and generates the corresponding contract on 'ETH' using a . The unlock condition is that Alice holds the Secret Key or returns it to Bob after exceeding the specified time.
+
+ \item  Alice USES to call Smartcontract to remove 'ETH';
+
+ \item  After obtaining , Bob locks Alice 'HLC' in the hash lock contract, and completes the transaction;
+	
+\end{enumerate}
+
+\subsubsection*{Contract interface}
+
+The contract shall fulfill three functions: pledge, redemption and refund.
+
+Pledge: create the contract and lock the ETH into the contract, and set the redemption conditions and refund conditions at the time of creation;
+
+Redemption: 'ETH' can be removed through the Secret Key;
+
+Refund: the contract will return 'ETH' to the creator after the expiration of the period;
+
+
+The atom exchange between Smartcontract and UTXO can be realized by using HashLock contract.
+
 
 
 
