@@ -1,6 +1,6 @@
 \documentclass[a4paper,11pt]{article}
 
-
+\usepackage{clrscode}
 \usepackage{geometry}
 \geometry{
  a4paper,
@@ -30,6 +30,7 @@
 \usepackage{listings}
 %for math
 \usepackage{amsmath}
+\usepackage{breqn}
 \usepackage{pdfpages}
 \linespread{1.1}
 \setlength{\emergencystretch}{3em}
@@ -595,6 +596,121 @@ Also according to rule 3, blocks 1\textasciitilde4 vote for $x \prec y$.
 
 Now all the blocks in block 12's past have voted. Block $x$ gets 10 votes. Block
 $y$ gets 2 votes. Block 12 follows the majority and votes for $x \prec y$ thus.
+
+\subsubsection{Confirmation Time}
+
+The SPECTRE paper provides two ways of accepting (confirming) a block, i.e. the
+offline way and the online way. The online way is more straightforward. The
+simulation results of the paper also adopted the online way. HLC adopts the same
+way.
+
+When a node $v$ receives a block $x$, it loops to calculate the online risk of
+the block. It accepts the block when the risk is smaller than a given threshold
+$\epsilon$. The online confirmation time of block $x$ in node $v$ is the time
+since $x$ is received by $v$ until $x$ is accpeted by $v$.
+
+The following algorithm below calculates the online risk of block $x$ in
+$G_t^v$, where $G_t^v$ is the block DAG that $v$ observes at time $t$.
+
+\begin{codebox}
+\Procname{\proc{Risk}$(G_t^v, x)$}
+\li \If $time\_now < publication(x)$
+\li   \Then
+        \Return 1
+      \End
+\li $T \gets time\_now - received^v(x)$
+\li $G_x \gets G_{received^v(x) + 2 \cdot d} \cup future(x, G_t^v)$
+\li $g \gets \min_{x' \in \overline{ainticone}(x,G_x)} |future(x',G_x)|$
+\li \Return $risk\_hidden(T,g)$
+\end{codebox}
+
+The formula $risk\_hidden(T,g)$ is defined as:
+
+$$
+risk\_hidden(T,g) := \sum_{l=0}^{\infty} \pi(l) \sum_{m=0}^{\infty} Poiss((T + 2
+\cdot d) \cdot \alpha \cdot \lambda, m) \cdot \left(\frac{\alpha}{1 -
+\alpha}\right)^{(g - l - m)^+},
+$$
+
+where
+
+\begin{itemize}
+	\item $d$ is the upper bound on the recent delay diameter in the network,
+	\item $\alpha$ is the attacker’s relative computational power,
+	\item $\lambda$ is the block creation rate,
+	\item $Poiss(a, b)$ is defined as $e^{-a} \cdot \frac{a^b}{b!}$,
+	\item $x^+$ is defined as $\max\{0, x\}$,
+	\item and $\pi$ is the stationary distribution which we will explain below.
+\end{itemize}
+
+$risk\_hidden(T,g)$ upper bounds the probability that block $x$ is preceded by
+some attacker’s block $y$ in pairwise order, where $y$ is published later than
+$x$. 
+
+$\pi$ is actually a vector. Informally, it is the statistical distribution of
+how much more blocks attacker nodes have created than honest nodes have created
+since block $x$ is published, which is called gap in the SPECTRE paper. $\pi(l)$
+is the probability that the value of gap is $l$.
+
+The value of gap changes as time goes on, forming a random walk which induces an
+ergodic Markov chain. Theorietically, it could be any integer ranging from
+negative infinity to positive infinity. In the worst case, it is always
+non-negative. Only when the gap is non-negative is there a risk for block $x$ to
+be received less or equal votes than some attacker’s block $y$ which is
+published later than $x$, so that $y$ precedes $x$ in pairwise order. This is
+why in the formula of $risk\_hidden$ the index $l$, i.e. the value of gap,
+starts out equal to 0 instead of negative infinity.
+
+Since the random walk of $l$ induces an ergodic Markov chain, $l$ has a unique
+stationary distribution, which is $\pi$. In order to calculate $\pi$, we need to
+calculate the transition probability matrix of the random walk.
+
+Suppose that the value of $l$ ranges from 0 to $N$, where $N$ is infinity in the
+above definition. We define the transition probability matrix as an $N$ by $N$
+matrix $T$. We also denote by $\delta := \alpha \cdot \lambda \cdot d$. For all
+$1 \leq l < N - 1$, $T_{l-1,l} = 1 - \alpha, T_{l+1,l} = \alpha$, and for $l = N
+- 1$: $T_{l-1,l} = 1 - \alpha, T_{l,l} = \alpha$. The first column of the matrix
+is defined by: $T_{0,0} := (1 - \alpha) \cdot e^{-\delta}, T_{1,0} = e^{-\delta}
+\cdot \alpha + e^{-\delta} \cdot \delta$, for $1 < l < N - 1$: $T_{l,0} =
+e^{-\delta} \cdot \frac{\delta^l}{l!}$, and $T_{N-1,0} = 1 - e^{-\delta} \cdot
+\left[\frac{\delta^0}{0!} + \frac{\delta^1}{1!} + \cdots +
+\frac{\delta^{N-2}}{(N-2)!}\right]$.  $\pi$ is the eigenvector of $T$
+corresponding to the eigenvalue 1, where $\pi(l) \geq 0$ and the sum of $\pi$ is
+1.
+
+In practice, $\pi(l)$ is very close to zero when $l$ is very large, so we can
+just pick some $N \gg 1$ instead of infinity. Therefore, the formula of
+$risk\_hidden$ becomes
+
+$$
+risk\_hidden(T,g) = \sum_{l=0}^{N} \pi(l) \sum_{m=0}^{\infty} Poiss((T + 2 \cdot
+d) \cdot \alpha \cdot \lambda, m) \cdot \left(\frac{\alpha}{1-\alpha}\right)^{(g
+- l - m)^+}.
+$$
+
+It is recommended to calculate $\pi$ with some well-tested Markov chain library such
+as the markovchain package in R.
+
+The sum of series with index $m$ seems to be a sum of infinite series. However,
+for $m > g - l$ we have $(g - l - m)^+ = 0$ and
+$\left(\frac{\alpha}{1-\alpha}\right)^{(g - l - m)^+} = 1$.
+
+Therefore, the formula of $risk\_hidden$ can be further converted as below,
+where $Poiss_{cdf}$ is the cumulative distribution function (CDF) of Poisson
+distribution.
+
+\begin{align*}
+risk\_hidden(T,g)
+=& \sum_{l=0}^{N}\pi(l)\sum_{m=0}^{\infty}Poiss((T+2 \cdot d) \cdot \alpha \cdot \lambda, m) \cdot (\frac{\alpha}{1-\alpha})^{(g-l-m)^+} \\
+=& \sum_{l=0}^{N}\pi(l) (\sum_{m=0}^{g-l}Poiss((T+2 \cdot d) \cdot \alpha
+	\cdot \lambda, m) \cdot (\frac{\alpha}{1-\alpha})^{(g-l-m)} + \\
+& \sum_{m=(g-l+1)^+}^{\infty}Poiss((T+2 \cdot d) \cdot \alpha \cdot \lambda, m)) \\
+=& \sum_{l=0}^{N}\pi(l) ( \sum_{m=0}^{g-l}Poiss((T+2 \cdot d) \cdot
+	\alpha \cdot \lambda, m) \cdot (\frac{\alpha}{1-\alpha})^{(g-l-m)} + \\
+& (1 - Poiss_{cdf} ((T+2 \cdot d) \cdot \alpha \cdot \lambda, (g-l)^+))).
+\end{align*}
+
+With the converted formula we are able to calculate $risk\_hidden$ in numerical way.
 
 @article{\subsubsection{PHANTOM},
 	author = {author},
