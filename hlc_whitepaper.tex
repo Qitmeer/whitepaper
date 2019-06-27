@@ -196,15 +196,15 @@
 
 \begin{abstract}
 
-	Bitcoin was born with revolution, and it opened a new world that currency issuance becomes open and fair by a cryptography-based decentralized payment network. Further on, the underlying ledger mechanism of Bitcoin, i.e. blockchain, was found capable of playing a significant role in the financial field due to its temper-resistance. Islamic finance, as an essential part of world finance, also needing reshaping by blockchain. 
+    Bitcoin was born with revolution, and it opened a new world that currency issuance becomes open and fair by a cryptography-based decentralized payment network. Further on, the underlying ledger mechanism of Bitcoin, i.e. blockchain, was found capable of playing a significant role in the financial field due to its tamper resistance. Islamic finance also needs reshaping by blockchain as a component of world finance. 
 
-	With the arrival of 10-years birth of bitcoin, the blockchain infrastructure is 	facing various challenges from technical aspects. HLC considers openness, 	fairness, fault tolerance, scalability are the core metrics to asset a promising 	blockchain paradigm, and a blockchain system achieved a right balance among these metrics is deemed to satisfy Classical Blockchain Setting. 
+    With the arrival of 10-years birth of bitcoin, the blockchain infrastructure is facing various challenges from technical aspects. Qitmeer regards openness,     fairness, fault tolerance, scalability as the core metrics to assess a promising blockchain paradigm, and a blockchain system achieved an excellent balance among these metrics is regarded as Classical Blockchain Setting. 
 
-	HLC develops a hybrid consensus that incorporates two BlockDAG protocols SPECTRE and GhostDAG. SPECTRE is extremely fast in confirmation, which is critical in a payment network. GhostDAG could provide transactional linearly ordering, which is the building block of reward mechanism. Both protocols are compliance with Classical Blockchain Setting - they could enter and leave network freely by Proof-of-Work, and the collaboration model of DAG ledger guarantees that miners gain rewards consistent with their devotion, 50\% faulty tolerance as secure as bitcoin, robust scalability that is only subject to physical network limit. The mining algorithm is also a vital source of fairness other than consensus algorithm per se. Cuckoo Ring is a graph theory based proof-of-work mining algorithm and is practically ASIC resistant due to memory hard calculation.
-	
-	HLC empowers UTXO model to achieve high available value storage and transfer network dedicated to Islamic finance. HLC's specific token issuance framework has considerably solved two main problems in terms of  Islamic finance being blockchain reshaped.  First, fundamental value support of issued tokens; second, Islamic Law Compliance.
-	
-	HLC devises a system of specifications and protocols to embrace the whole Isamlic financial ecosystem. Any third party could implement their own wallet, miner and mining pools by following this system. HLC integrates a robust cross-chain framework to interact with various cryptocurrencies; also, the reliable interoperability could offer off-chain smart contract support.
+    Qitmeer Consensus picks SPECTRE as its fundamental protocol. SPECTRE is a fast confirmation and high throughput BlockDAG protocol, which works excellent in payment networks as Qitmeer. Additionally, Qitmeer introduces GhostDAG, a high throughput BlockDAG protocol supporting transactions linearly-ordered, to circumvent SPECTRE's weak liveness and provide ordering service for the reward system. Qitmeer Consensus is compliance with Classical Blockchain Setting - it could enter and leave network freely by Proof-of-Work, and the collaboration model of DAG ledger guarantees that miners gain rewards consistent with their devotion, 50\% faulty tolerance as secure as bitcoin, robust scalability that is only subject to physical network limit. The mining algorithm is also a vital source of fairness other than consensus algorithm per se. Cuckoo Ring is a graph theory based proof-of-work mining algorithm and is practically ASIC resistant due to memory-hard calculation.
+    
+    Qitmeer utilizes UTXO model to achieve high available value storage and transfer network dedicated to Islamic finance. Qitmeer's unique token issuance framework has effectively solved two main problems in the process of Islamic assets tokenization: intrinsic value assurance and Islamic Law Compliance.
+    
+    Qitmeer devises a family of specifications and protocols to embrace the whole Isamlic financial ecosystem, such as wallet and miners. As for interoperability, Qitmeer calls for utilizing cross-chain protocols to integrate various cryptocurrencies and offer reliable off-chain smart contract services.
 
 \end{abstract}
 
@@ -583,8 +583,9 @@ is\cite{Yonatan-high-rate-bitcoin}\cite{bitcoin-backbone}\cite{asynchronous}.
 
 \subsection{Consensus}
 
-HLC adopts a hybrid consensus that combines SPECTRE and GHOSTDAG  in order to achieve fast confirmation and high throughput.
+Qitmeer adopts a hybrid consensus that combines SPECTRE and GHOSTDAG  in order to achieve fast confirmation and high throughput.
 
+\subsubsection{SPECTRE}
 SPECTRE is a block-DAG based protocol that achieves fast confirmation and high
 throughput with 50\% attack resilience. SPECTRE guarantees safety, which means a
 transaction is unlikely to be reversed once it is accepted. Also, SPECTRE guarantees fast confirmations for honest users rather than all users; in other words, weak liveness.
@@ -642,11 +643,11 @@ Now all the blocks in block 12's past have voted. Block $x$ gets 10 votes. Block
 $y$ gets 2 votes. Block 12 follows the majority and votes for $x \prec y$ thus.
 
 
-\subsubsection{Confirmation Time}
+\subsubsection*{Confirmation Time}
 
 The SPECTRE paper provides two ways of accepting (confirming) a block, i.e. the
 offline way and the online way. The online way is more straightforward. The
-simulation results of the paper also adopted the online way. HLC adopts the same
+simulation results of the paper also adopted the online way. Qitmeer adopts the same
 way.
 
 When a node $v$ receives a block $x$, it loops to calculate the online risk of
@@ -956,7 +957,7 @@ Thus in the actual use, it also adds a hash difficulty control similar to Bitcoi
 and then compared with the target difficulty.
 
 \subsection{Rewards}
-\subsection{Transaction Collision}
+\subsubsection{Transaction Collision}
 Due to asynchronous block submmission, BlockDAG protocols inevitably incorporate repeating transactions, called transaction collisons. 
 Miners tend to pack the transaction with higher fees to maximize their profit. This will result in high repetition rates of blocks. Repeated transactions will not contribute to the throughput, what is more, low fee transactions would wait indefinite time to get confirmed. In a fully decentralized network, nodes cannot coordinate each other to avoid collision, leaving the only option to deivse a sophiscated incentive mechanism to penalize the selfish mining behaviors. 
 
@@ -964,12 +965,12 @@ The intuitive way to solve this problem is to share the transacation fee, and th
 
 Qitmeer introduces an optimal incentive mechanism introduced in Inclusive protocol. It varies different transaction with different probability of being selected from memory pools, those with higher fee get higher probability. So, urgent transactions could increase their transaction fee to get better mining services, and low-fee transacations still get opportunity to confirm.
 
-\subsection{First Come First Get}
+\subsubsection{First Come First Get}
 To encourage miners to submit blocks immediately on creation. The transaction fee should belong to the first miner who incorporates it. So this reward machanism requires transactions has a global order, which has been offered by GHOSTDAG protocol. 
 
 Inclusive protocol states that this machanism has some security concerns because it won't penalize those malicious parites who mine blocks in private. Inclusive protocol fixes this problem by only giving rewards to blocks not deviating main chain too much. Qitmeer appreciates Inclusive protocol work and adopts it.
 
-\section{Protocols and extensibilty}
+\section{Protocols and Interoperability}
 BlockChain is the infrastructure for  decentralized finance. There will be an ecosystem when the blockchain becomes mature. This chapter introduces the typical applications on top of Qitmeer and the protocols for them to interact with Qitmeer. 
 
 \subsection{Mining Protocol}
@@ -982,11 +983,11 @@ An introduction of Qitmeer proof-of-work can be found here.\cite{qitmeerpow}
 
 \subsubsection{Miner Capability}
 
-At the moment, the fastest GPU miner implementation is HLC-Miner, which developed by the HLC developers. 
-However, the HLC-Miner is still in the early stage of development, It's not a deeply optimized version. We hope 
+At the moment, the fastest GPU miner implementation is Qitmeer-Miner, which developed by the Qitmeer developers. 
+However, the Qitmeer-Miner is still in the early stage of development, It's not a deeply optimized version. We hope 
 that the community will finally create more optimised miners.
 
-The HLC-Miner support parallel GPU. You can run multiple Nvidia GPUs and AMD GPUs mining in parallel.
+The Qitmeer-Miner support parallel GPU. You can run multiple Nvidia GPUs and AMD GPUs mining in parallel.
 
 Compatible GPU Hardware:
 
@@ -997,14 +998,14 @@ Compatible GPU Hardware:
 
 In principle, as long as the graphics memory is greater than 5GB, the GPU miner can run.
 
-The HLC-Miner support both solo mining and pool mining. 
+The Qitmeer-Miner support both solo mining and pool mining. 
 
 \subsubsection*{Solo}
 If you do decide to mine Qitmeer without joining a pool, these are the steps to achieve mining Qitmeer by yourself.
 
 \begin{itemize}
 \item You need to run a full node to validate transactions. First, install qitmeer\cite{qitmeer} with the complete blockchain downloaded. Qitmeer is a full node software program that fully validates transactions and blocks. 
-\item Download and install the Qitmeer miner software like HLC-Miner. For a solo miner, the mining software connects to the blockchain full node (Qitmeer). The main job of the miner software is to create valid Proofs-of-Work and deliver the block to the rest of the Qitmeer network.
+\item Download and install the Qitmeer miner software like Qitmeer-Miner. For a solo miner, the mining software connects to the blockchain full node (Qitmeer). The main job of the miner software is to create valid Proofs-of-Work and deliver the block to the rest of the Qitmeer network.
 \item Finally, launch Qitmeer miner software and connect to Qitmeer network to start solo mining Qitmeer.
 \end{itemize}
 
@@ -1066,7 +1067,7 @@ Qitmeer is dedicated tp undertake the liquidity of whole Ismalic decentralized f
 
 Across the chain technology is mainly to solve different main chain (such as: ` HLC ` and ` BTC `) problem of data exchange between the most direct cross chain technology application is "DEX :distributed exchange", No third party participation will purse ` BTC ` into ` HLC `,Complete wallet-to-wallet transactions.
 
-Currently, HLC has supported P2SH script contracts and cross-chain functions through hash-locking.
+Currently, Qitmeer has supported P2SH script contracts and cross-chain functions through hash-locking.
 
 \subsubsection*{Principle}
 
@@ -1098,7 +1099,7 @@ The implementation process of hash locking across the chain is:
 
 \subsubsection{Smartcontract interoperability}
 
-Based on the cross-chain solution of intelligent contract type, HLC completes the cross-chain transaction of the block chain assets of HLC to other account models through hash lock Smartcontract.
+Based on the cross-chain solution of intelligent contract type, Qitmeer completes the cross-chain transaction of the block chain assets of Qitmeer to other account models through hash lock Smartcontract.
 
 The following will take EHT as an example to illustrate how to complete the cross-chain operation of Smartcontract.
 
