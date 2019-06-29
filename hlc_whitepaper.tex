@@ -135,9 +135,9 @@
 \usepackage[dvipsnames]{xcolor}
 \usepackage{listings}
 
-\newcommand\YAMLcolonstyle{\color{red}\mdseries}
+\newcommand\YAMLcolonstyle{\color{darkgray}\mdseries}
 \newcommand\YAMLkeystyle{\color{black}\bfseries}
-\newcommand\YAMLvaluestyle{\color{blue}\mdseries}
+\newcommand\YAMLvaluestyle{\color{gray}\mdseries}
 
 \makeatletter
 
@@ -154,7 +154,7 @@
   sensitive=false,
   comment=[l]{\#},
   morecomment=[s]{/*}{*/},
-  commentstyle=\color{purple}\ttfamily,
+  commentstyle=\color{black}\ttfamily,
   stringstyle=\YAMLvaluestyle\ttfamily,
   moredelim=[l][\color{orange}]{\&},
   moredelim=[l][\color{magenta}]{*},
@@ -417,7 +417,8 @@ There is a unique token named LICENSE in OP\_TOKEN. With public credibility, Ren
 
 Licenses are all generated in the genesis block and distributed to C preserved committee members. One smallest unit (SAND) can represent a license, one block has M coins, one coin= N SAND, so we have M*N license in total, which is sufficient for asset issuance.
 
-\begin{lstlisting}[language=yaml, numbers=none]
+
+\begin{lstlisting}[language=yaml, numbers=none,basicstyle=\footnotesize]
 # C = 100, M = 10, N = 10^8 (M*N = 10 billion), 
 # all examples are based on this setting
 # Ex1: Distribute licenses to the commitee, 
@@ -449,7 +450,7 @@ OUTPUTS:
 Organizations must be warranted a license to issue assets. They can request a license from any committee member (C.M.). Once the license is granted and approved, they will receive a particular token transfer from the C.M. and the token is the license.
 
 \lstset{basicstyle=\tiny,style=myListStyle}
-\begin{lstlisting}[language=yaml, numbers=none]
+\begin{lstlisting}[language=yaml, numbers=none,basicstyle=\footnotesize]
 # Ex2: C.M. warrant a license to the issuer (ISS), 
 # note the license change will go back to the C.M.
 ---	
@@ -477,7 +478,7 @@ Once warranted a license, organizations can issue assets; however, they cannot s
 The first benefit of this issuance system is to guarantee tokens' elementary intrinsic value; thus, it would significantly mitigate the price fluctuation. Another advantage is that tokens and native currency are no longer isolated islands of value; they are running is the same ecosystem, which would improve the liquidity and make the whole network healthier.
 
 \lstset{basicstyle=\tiny,style=myListStyle}
-\begin{lstlisting}[language=yaml, numbers=none]
+\begin{lstlisting}[language=yaml, numbers=none,basicstyle=\footnotesize]
 # Ex3: Convert 100000000 native SANDs, i.e. 1 Coin, 
 # to 100000000 sands of the new token, 
 # note the license will go back to the issuer for future issurance.
@@ -509,7 +510,7 @@ OUTPUTS:
 Parties can transfer assets to each other. Moreover, we could transfer multiple assets within one transaction. The transaction needs to ensure the input sum of each asset equals the output sum of each asset.
 
 \lstset{basicstyle=\tiny,style=myListStyle}
-\begin{lstlisting}[language=yaml, numbers=none]
+\begin{lstlisting}[language=yaml, numbers=none,basicstyle=\footnotesize]
 # Ex4: Alice exchanges her 100 RMB token with Bob's 20 USD token.
 INPUTS:
 	- INPUT:
@@ -540,7 +541,7 @@ Melt is the reversed process of mint, i.e., conversion from tokens to native cur
 Melt guarantees the tokens fundamental value, just like the minimum value of a gold coin is the same weight of gold. 
 
 \lstset{basicstyle=\tiny,style=myListStyle}
-\begin{lstlisting}[language=yaml, numbers=none]
+\begin{lstlisting}[language=yaml, numbers=none,basicstyle=\footnotesize]
 # Ex5: Melt 100 token sands into 100 native sands
 INPUTS:
 	- INPUT:
