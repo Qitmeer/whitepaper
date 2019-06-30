@@ -7,7 +7,11 @@ The HalalChain White Paper
 
 #### download and install
 
-http://www.tug.org/mactex/mactex-download.html
+go to [http://www.tug.org/mactex/mactex-download.html](http://www.tug.org/mactex/mactex-download.html) download and install the latest `MacTeX.pkg` file
+
+```
+http://tug.org/cgi-bin/mactex-download/MacTeX.pkg
+```
 
 #### run 
 
