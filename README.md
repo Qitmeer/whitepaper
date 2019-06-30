@@ -7,22 +7,11 @@ The HalalChain White Paper
 
 #### download and install
 
-```
-http://ftp.math.utah.edu/pub/tex/historic/systems/mactex/2018/BasicTeX.pkg
-```
+http://www.tug.org/mactex/mactex-download.html
 
 #### run 
 
 ```
-export PATH=$PATH:/usr/local/texlive/2018basic/bin/x86_64-darwin
-sudo tlmgr update --self
-sudo tlmgr install appendix
-sudo tlmgr install framed
-sudo tlmgr install blindtext
-sudo tlmgr install mweights
-sudo tlmgr install fontaxes
-sudo tlmgr install clrscode 
-
 make
 ```
 
