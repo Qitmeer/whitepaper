@@ -6,4 +6,5 @@
 *.blg
 *.aux
 *.pyg
+.idea
 *.synctex.gz
