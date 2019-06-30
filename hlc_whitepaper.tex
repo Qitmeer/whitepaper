@@ -195,11 +195,11 @@
 %\watermark{60}{10}{qitmeer.io}
 
 \begin{abstract}
-Bitcoin was born with revolution, and it opened a new world that currency issuance becomes open and fair by a cryptography-based decentralized payment network. Further on, the underlying ledger mechanism of Bitcoin, i.e. blockchain, was found capable of playing a significant role in the financial field due to its tamper resistance. Islamic finance, as a significant member of world finance, is also experiencing blockchain reshaping. 
+Bitcoin\cite{bitcoin} was born with revolution, and it opened a new world that currency issuance becomes open and fair by a cryptography-based decentralized payment network. Further on, the underlying ledger mechanism of Bitcoin, i.e. blockchain, was found capable of playing a significant role in the financial field due to its tamper resistance. Islamic finance, as a significant member of world finance, is also experiencing blockchain reshaping. 
 
 With the arrival of 10-years birth of bitcoin, the blockchain infrastructure is facing various challenges from technical aspects. Qitmeer regards openness,     fairness, fault tolerance, scalability as the core metrics to assess a promising blockchain paradigm, and a blockchain system achieved a desirable balance among these metrics is regarded as Classical Blockchain Setting. 
 
-Qitmeer Consensus picks SPECTRE as its fundamental protocol. SPECTRE is a fast\-confirmation and high\-throughput BlockDAG protocol, which guarantees high performance in a payment network. Additionally, Qitmeer introduces another high\-throughput BlockDAG protocol GhostDAG, which is highlighted on unprecedentedly supporting transactions linearly ordering, to circumvent SPECTRE's weak liveness and provide ordering service for the fair scheme of the reward system. Qitmeer Consensus is compliant with Classical Blockchain Setting - it could enter and leave network freely by Proof-of-Work, and the collaboration model of DAG ledger guarantees that miners gain rewards consistent with their devotion, 50\% faulty tolerance as secure as bitcoin, robust scalability that is only subject to physical network limit. The mining algorithm is also a vital source of fairness other than consensus algorithm per se. Cuckoo Ring is a graph theory based proof-of-work mining algorithm and is practically ASIC resistant due to memory-hard calculation.
+Qitmeer Consensus picks SPECTRE\cite{SPECTRE} as its fundamental protocol. SPECTRE is a fast\-confirmation and high\-throughput BlockDAG protocol, which guarantees high performance in a payment network. Additionally, Qitmeer introduces another high\-throughput BlockDAG protocol GhostDAG\cite{GhostTDAG}, which is highlighted on unprecedentedly supporting transactions linearly ordering, to circumvent SPECTRE's weak liveness and provide ordering service for the fair scheme of the reward system. Qitmeer Consensus is compliant with Classical Blockchain Setting - it could enter and leave network freely by Proof-of-Work, and the collaboration model of DAG ledger guarantees that miners gain rewards consistent with their devotion, 50\% faulty tolerance as secure as bitcoin, robust scalability that is only subject to physical network limit. The mining algorithm is also a vital source of fairness other than consensus algorithm per se. Cuckoo Ring is a graph theory based proof-of-work mining algorithm and is practically ASIC resistant due to memory-hard calculation.
     
 To be Sharia-Compliant, Qitmeer originates a UTXO-based unique token insurance scheme, which has effectively answered two main concerns: Intrinsic Value and Assets Authentication. Issuing a certain amount of assets must consume a certain amount of the native currency; moreover, entities must be warranted a license to issue assets.
     
@@ -211,7 +211,7 @@ Qitmeer devises a family of specifications and protocols to embrace the whole Is
 \section{Introduction}
 
 \subsection{Background}
-Trust is the cornerstone of finance. In traditional approaches, multiple unacquainted parties require a trustable third party to guarantee the security of transactions. However, this third party is centralized and subject to single point failure and unlikely to guarantee its honesty. 
+Trust is the cornerstone of finance. In traditional approaches, multiple unacquainted parties require a trustworthy third party to guarantee the security of transactions. However, this third party is centralized and subject to single point failure and unlikely to guarantee its honesty. 
 
 Bitcoin is an open P2P network, that is to say, no centralized server exists, and each node can join or leave the network freely. The calculation-heavy but validation-easy Proof-of-Work consensus is designed to ensure nodes gain rewards relative to their contribution to the network's running and security, which is supposed to be fair — Bitcoin's disruption to drives tons of researches on its working mechanism. Bitcoin has a hash-list-like ledger to guarantee tamper resistance, further on the concept 'BlockChain' is introduced to represent this mechanism and commonly accepted. Owing to trustlessness and tamper resistance, more and more applications of blockchain occur in the financial field. Blockchain is reshaping finance.
 
@@ -298,7 +298,7 @@ The existing blockchains are not able to be essentially Sharia-Compliant because
 Blockchains are ought to respect two main concerns to comply Sharia:
 
 \subsubsection*{Intrinsic Value}
-Assets must have underlying value and cannot be created out of thin air. On existing token issuance platforms like Ethereum, individuals can issue a token of arbitrary amount without any foundation. 
+Assets must have underlying value and cannot be created out of thin air. On existing token issuance platforms like Ethereum\cite{Ethereum}, individuals can issue a token of arbitrary amount without any foundation. 
 
 \subsubsection*{Assets Authentication}
 Should not allow issuarance of illegitimate assets. Existing blockchains are too unrestricted to have necessary assets authentication.
@@ -314,7 +314,7 @@ UTXO represents Unspent Transaction Output. In other words, there are no account
 
 \begin{figure}[hbt]
 	\centerline{%
-	   \resizebox{0.8\textwidth}{!}{\includegraphics{figures/utxo-1.jpg}}%
+	   \resizebox{0.8\textwidth}{!}{\includegraphics{figures/UTXO}}%
 	}
 \caption{utxo model}
 \end{figure}
@@ -329,7 +329,7 @@ Note: now the old UTXOs (of tx1) are no longer UTXO so cannot be spent later.
 
 The mechanism behind how users spend their UTXOs is to execute a particular script. The output stores half of the script and we have to present the other half and combine both to verify if we could spend the money. The former half is called locking script, like a locked treasure box, and the latter is unlocking script, like the only key to the box.
 
-Let us take a look at the typical instance of  Pay-2-Public-Key-Hash(P2PKH)
+Let us take a look at the typical instance of  Pay-2-Public-Key-Hash(P2PKH)\cite{P2PKH}
 
 Locking Script in UTXO:
 
@@ -352,16 +352,16 @@ This whole script consists two steps
 	To check if the signature is valid.
 
 
-\subsubsection{Color coin and USDT}
+\subsubsection{Colored coins and Tether}
 
-Color Coin is a method to represent assets on top of the blockchain so that it can leverage the tamper-proof capability of blockchain. It uses tx-script operation $\texttt{OP\_RETURN}$ to interrupt script execution early, so we can add information on the assets after it without violating the script validation.
+Colored Coins\cite{ColoredCoins} is a method to represent assets on top of the blockchain so that it can leverage the tamper-proof capability of blockchain. It uses tx-script operation $\texttt{OP\_RETURN}$ to interrupt script execution early, so we can add information on the assets after it without violating the script validation.
 
 Locking Script:
 \begin{lstlisting}
 OP_RETURN <DATA>
 \end{lstlisting}
 
-The stable coin Tether (USDT) also uses OP\_RETURN based OMNI Layer protocol to define the asset on the bitcoin. 
+The stable coin Tether\cite{Tether} (USDT) also uses OP\_RETURN based OMNI Layer protocol to define the asset on the bitcoin. 
 
 Here are a typical USDT transaction and details of its protocol design
 
@@ -374,9 +374,9 @@ OP_RETURN 6f6d6e69000000000000001f00000015c9054900
 
 \begin{figure}[hbt]
 	\centerline{%
-	   \resizebox{0.8\textwidth}{!}{\includegraphics{figures/usdt.jpg}}%
+	   \resizebox{0.8\textwidth}{!}{\includegraphics{figures/USDT}}%
 	}
-\caption{usdt}
+\caption{USDT}
 \end{figure}
 
 
@@ -387,7 +387,7 @@ OP_RETURN 6f6d6e69000000000000001f00000015c9054900
 \subsubsection{OP\_GROUP}
 The OP\_RETURN scheme is more suitable to apply on mature blockchain since it does not change the underlying blockchain protocol and will not risk forking. However, the weakness is that miners cannot verify its protocol, so there would be some security risks.
 
-OP\_GROUP is a proposal of assets issuance on Bitcoin Cash (BCH) from Bitcoin Unlimited (BU). OP\_GROUP supports token issuance, transfer, destroy, and so on forth. Since OP\_GROUP is an extension to the BCH script system,  it is part of the BCH protocol. Thus miners can do the verification, which is more reliable.
+OP\_GROUP\cite{OP_GROUP} is a proposal of assets issuance on Bitcoin Cash (BCH)\cite{BCH} from Bitcoin Unlimited (BU). OP\_GROUP supports token issuance, transfer, destroy, and so on forth. Since OP\_GROUP is an extension to the BCH script system,  it is part of the BCH protocol. Thus miners can do the verification, which is more reliable.
 
 The basic “colored” pay 2 public key hash script would be like: 
 
@@ -456,20 +456,20 @@ Organizations must be warranted a license to issue assets. They can request a li
 ---	
 INPUTS:
 	- INPUT:
-		PREVIOUS_OUTPUT:
-			S: "[LIC] TOKEN DROP DUP HASH160 [COMM] EQUALVERIFY CHECKSIG"
-			V: 100000000
-		S: "[SIG] [COMM_PK]"
+			PREVIOUS_OUTPUT:
+				S: "[LIC] TOKEN DROP DUP HASH160 [COMM] EQUALVERIFY CHECKSIG"
+				V: 100000000
+			S: "[SIG] [COMM_PK]"
 OUTPUTS:
 	- OUTPUT:
-		S: "[LIC] TOKEN DROP DUP HASH160 [ISS] EQUALVERIFY CHECKSIG"
-		V: 1
+			S: "[LIC] TOKEN DROP DUP HASH160 [ISS] EQUALVERIFY CHECKSIG"
+			V: 1
 	- OUTPUT: # License change
-		S: "[LIC] TOKEN DROP DUP HASH160 [COMM] EQUALVERIFY CHECKSIG"
-		V: 99999999
+			S: "[LIC] TOKEN DROP DUP HASH160 [COMM] EQUALVERIFY CHECKSIG"
+			V: 99999999
 	- OUTPUT:
-		S: "RETURN [DATA]" 
-		V: 0
+			S: "RETURN [DATA]" 
+			V: 0
 \end{lstlisting}
 
 \subsubsection{Issuance of assets}
@@ -484,25 +484,25 @@ The first benefit of this issuance system is to guarantee tokens' elementary int
 # note the license will go back to the issuer for future issurance.
 INPUTS:
 	- INPUT:
-		PREVIOUS_OUTPUT: #(1 LICENSE)
-			S: "[LIC] TOKEN DROP DUP HASH160 [ISS] EQUALVERIFY CHECKSIG"
-			V: 1
-		S: "[SIG] [LIC_PK]"
+			PREVIOUS_OUTPUT: #(1 LICENSE)
+				S: "[LIC] TOKEN DROP DUP HASH160 [ISS] EQUALVERIFY CHECKSIG"
+				V: 1
+			S: "[SIG] [LIC_PK]"
 	- INPUT:
-		PREVIOUS_OUTPUT: #(1 Qitmeer Coin)
-			S "DUP HASH160 [COIN] EQUALVERIFY CHECKSIG"
-			V: 100000000
-		S "[SIG] [COIN_PK]"
+			PREVIOUS_OUTPUT: #(1 Qitmeer Coin)
+				S "DUP HASH160 [COIN] EQUALVERIFY CHECKSIG"
+				V: 100000000
+			S: "[SIG] [COIN_PK]"
 OUTPUTS:
 	- OUTPUT: # License returns to the issuer
-		S: "[LIC] TOKEN DROP DUP HASH160 [ISS] EQUALVERIFY CHECKSIG"
-		V: 1
+			S: "[LIC] TOKEN DROP DUP HASH160 [ISS] EQUALVERIFY CHECKSIG"
+			V: 1
 	- OUTPUT:
-		S: "[TOK] TOKEN DROP DUP HASH160 [PK] EQUALVERIFY CHECKSIG"
-		V: 100000000
+			S: "[TOK] TOKEN DROP DUP HASH160 [PK] EQUALVERIFY CHECKSIG"
+			V: 100000000
 	- OUTPUT:
-		S: "RETURN [DATA]"
-		V: 0
+			S: "RETURN [DATA]"
+			V: 0
 \end{lstlisting}
 
 \subsubsection{Transfer of the Assets}
@@ -514,22 +514,22 @@ Parties can transfer assets to each other. Moreover, we could transfer multiple 
 # Ex4: Alice exchanges her 100 RMB token with Bob's 20 USD token.
 INPUTS:
 	- INPUT:
-		PREVIOUS_OUTPUT:
-			S: "[RMB] TOKEN DROP DUP HASH160 [A_PKH] EQUALVERIFY CHECKSIG"
-			V: 100
-		SCRIPT: "[A_SIG] 0X83 [A_PK]"
+			PREVIOUS_OUTPUT:
+				S: "[RMB] TOKEN DROP DUP HASH160 [A_PKH] EQUALVERIFY CHECKSIG"
+				V: 100
+			S: "[A_SIG] 0X83 [A_PK]"
 	- INPUT:
-		PREVIOUS_OUTPUT:
-			S: "[USD] TOKEN DROP DUP HASH160 [B_PKH] EQUALVERIFY CHECKSIG"
-			V: 20
-		SCRIPT: "[B_SIG] 0X83 [B_PK]"
+			PREVIOUS_OUTPUT:
+				S: "[USD] TOKEN DROP DUP HASH160 [B_PKH] EQUALVERIFY CHECKSIG"
+				V: 20
+			S: "[B_SIG] 0X83 [B_PK]"
 OUTPUTS:
 	- OUTPUT:
-		S: "[USD] TOKEN DROP DUP HASH160 [A_PKH] CHECKSIG"
-		V: 20
+			S: "[USD] TOKEN DROP DUP HASH160 [A_PKH] CHECKSIG"
+			V: 20
 	- OUTPUT:
-		S: "[RMB] TOKEN DROP DUP HASH160 [B_PKH] CHECKIG"
-		V: 100
+			S: "[RMB] TOKEN DROP DUP HASH160 [B_PKH] CHECKIG"
+			V: 100
 \end{lstlisting}
 
 
@@ -545,16 +545,16 @@ Melt guarantees the tokens fundamental value, just like the minimum value of a g
 # Ex5: Melt 100 token sands into 100 native sands
 INPUTS:
 	- INPUT:
-		PREVIOUS_OUTPUT:
-			S: "[TOK] TOKEN DROP DUP HASH160 [ISS] EQUALVERIFY CHECKSIG"
-			V: 100
-		S: "[SIG] [ISS_PK]"
+			PREVIOUS_OUTPUT:
+				S: "[TOK] TOKEN DROP DUP HASH160 [ISS] EQUALVERIFY CHECKSIG"
+				V: 100
+			S: "[SIG] [ISS_PK]"
 OUTPUTS:
 	- OUTPUT:
-		S: "DUP HASH160 [COIN] EQUALVERIFY CHECKSIG"
-		V: 100
+			S: "DUP HASH160 [COIN] EQUALVERIFY CHECKSIG"
+			V: 100
 	- OUTPUT:
-		S: "RETURN [DATA]"
+			S: "RETURN [DATA]"
 		V: 0
 \end{lstlisting}
 
@@ -573,7 +573,6 @@ BlockTree has dramatically increased the throughput because of the higher Block 
 
 Through the history from BlockChain to BlockDAG, we may infer that BlockChain is just the particular case on low throughput of BlockDAG, they are, in essence, the same. So, it is the scaling approach whose paradigm is closest to bitcoin. The apparent benefit is that it would be robust since it can inherit all the long-time-proved stable features of bitcoin. Besides, this approach is scalable infinitely in terms of protocol, only limited by physical limits, like bandwidth. A robust public chain itself is the optimal basis for incorporating further scaling solutions, such as sharding and state-channels, so BlockDAG is the preferred scaling solution of Qitmeer.
 
-is\cite{Yonatan-high-rate-bitcoin}\cite{bitcoin-backbone}\cite{asynchronous}.
 
 \begin{figure}[hbt]
 	\centerline{%
@@ -587,7 +586,7 @@ is\cite{Yonatan-high-rate-bitcoin}\cite{bitcoin-backbone}\cite{asynchronous}.
 Qitmeer adopts a hybrid consensus that combines SPECTRE and GHOSTDAG  in order to achieve fast confirmation and high throughput.
 
 \subsubsection{SPECTRE}
-SPECTRE is a block-DAG based protocol that achieves fast confirmation and high
+SPECTRE\cite{SPECTRE} is a block-DAG based protocol that achieves fast confirmation and high
 throughput with 50\% attack resilience. SPECTRE guarantees safety, which means a
 transaction is unlikely to be reversed once it is accepted. Also, SPECTRE guarantees fast confirmations for honest users rather than all users; in other words, weak liveness.
 
@@ -945,14 +944,6 @@ The difficulty of finding a cycle in the graph is proportional to M/N. Here M st
 N stands for nodes of the graph. However, the difficulty of finding a cycle in the graph change is not smooth.
 For crypto currencies, difficulty control must be scale in precisely controlled manner. The usual practice is
 that the ratio of M/N remain fixed, such as M/N = 1/2.
-The figure is probability trend of finding a cycle of length 42.
-
-\begin{figure}[ht]
-	\centerline{%
-		\resizebox{0.8\textwidth}{!}{\includegraphics{figures/probability}}%
-	}
-	\caption{Probability trend.}
-\end{figure}
 
 Thus in the actual use, it also adds a hash difficulty control similar to Bitcoin. The digest of the cycle nonces is obtained by a hash function,
 and then compared with the target difficulty.
@@ -964,7 +955,7 @@ Miners tend to pack the transaction with higher fees to maximize their profit. T
 
 The intuitive way to solve this problem is to share the transacation fee, and this method will make all the miners reach a Nash equilibrium that all the miners will choose transactions randomly from their memory pools. This approach will considerably reduce transactions collision; however, users can no longer pay higher fees to boost their transaction confirmation. 
 
-Qitmeer introduces an optimal incentive mechanism introduced in Inclusive protocol. It varies different transaction with different probability of being selected from memory pools, those with higher fee get higher probability. So, urgent transactions could increase their transaction fee to get better mining services, and low-fee transacations still get opportunity to confirm.
+Qitmeer introduces an optimal incentive mechanism introduced in Inclusive\cite{Inclusive} protocol. It varies different transaction with different probability of being selected from memory pools, those with higher fee get higher probability. So, urgent transactions could increase their transaction fee to get better mining services, and low-fee transacations still get opportunity to confirm.
 
 \subsubsection{First Come First Get}
 To encourage miners to submit blocks immediately on creation. The transaction fee should belong to the first miner who incorporates it. So this reward machanism requires transactions has a global order, which has been offered by GHOSTDAG protocol. 
@@ -1120,21 +1111,6 @@ The following will take EHT as an example to illustrate how to complete the cros
  \item  After obtaining , Bob locks Alice 'HLC' in the hash lock contract, and completes the transaction;
 	
 \end{enumerate}
-
-\subsubsection*{Contract interface}
-
-The contract shall fulfill three functions: pledge, redemption and refund.
-
-Pledge: create the contract and lock the ETH into the contract, and set the redemption conditions and refund conditions at the time of creation;
-
-Redemption: 'ETH' can be removed through the Secret Key;
-
-Refund: the contract will return 'ETH' to the creator after the expiration of the period;
-
-
-The atom exchange between Smartcontract and UTXO can be realized by using HashLock contract.
-
-
 
 
 \clearpage
