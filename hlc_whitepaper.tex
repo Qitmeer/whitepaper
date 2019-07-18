@@ -177,7 +177,7 @@
 
 %opening
 \title{\LARGE The Qitmeer White Paper:\\
-	\Large The guardian of trust. The core network of the Halalchain}
+	\Large The guardian of trust.}
 \author{
 	Qitmeer team\\
 		\small\href{mailto:paper@qitmeer.io}
@@ -195,122 +195,127 @@
 %\watermark{60}{10}{qitmeer.io}
 
 \begin{abstract}
-Bitcoin\cite{bitcoin} was born with revolution, and it opened a new world that currency issuance becomes open and fair by a cryptography-based decentralized payment network. Further on, the underlying ledger mechanism of Bitcoin, i.e. blockchain, was found capable of playing a significant role in the financial field due to its tamper resistance. Islamic finance, as a significant member of world finance, is also experiencing blockchain reshaping.
+Bitcoin\cite{bitcoin} was born with revolution which opened a new horizon of currency issuance that becomes open and fair by a cryptography-based decentralized payment network. The underlying ledger mechanism of Bitcoin (blockchain), is capable of playing a significant role in the financial system due to its tamper resistance. The Blockchain technology will reshape Interest-free finance, as a significant alternative system of global financial system.
 
-With the arrival of 10-years birth of bitcoin, the blockchain infrastructure is facing various challenges from technical aspects. Qitmeer regards openness,     fairness, fault tolerance, scalability as the core metrics to assess a promising blockchain paradigm, and a blockchain system achieved a desirable balance among these metrics is regarded as Classical Blockchain Setting.
+With the arrival of 10-years birth of bitcoin, the blockchain infrastructure is facing various challenges from technical perspective. Moreover, Qitmeer considers openness, fairness, fault tolerance, scalability as the core metrics to assess a promising blockchain paradigm, and a blockchain system achieved a desirable balance among these metrics is regarded as Classical Blockchain Setting.
 
-Qitmeer Consensus picks SPECTRE\cite{SPECTRE} as its fundamental protocol. SPECTRE is a fast\-confirmation and high\-throughput BlockDAG protocol, which guarantees high performance in a payment network. Additionally, Qitmeer introduces another high\-throughput BlockDAG protocol GhostDAG\cite{GHOSTDAG}, which is highlighted on unprecedentedly supporting transactions linearly ordering, to circumvent SPECTRE's weak liveness and provide ordering service for the fair scheme of the reward system. Qitmeer Consensus is compliant with Classical Blockchain Setting - it could enter and leave network freely by Proof-of-Work, and the collaboration model of DAG ledger guarantees that miners gain rewards consistent with their devotion, 50\% faulty tolerance as secure as bitcoin, robust scalability that is only subject to physical network limit. The mining algorithm is also a vital source of fairness other than consensus algorithm per se. Cuckoo Ring is a graph theory based proof-of-work mining algorithm and is practically ASIC resistant due to memory-hard calculation.
+Qitmeer Consensus adopts the SPECTRE\cite{SPECTRE}  as its fundamental protocol. SPECTRE is a fast confirmation and high throughput BlockDAG protocol, which guarantees high performance in a payment network. Additionally, Qitmeer incorporates  another high throughput BlockDAG protocol   GhostDAG\cite{GhostDAG}, which is highlighted on unprecedentedly supporting transactions linearly ordering, to circumvent SPECTRE’s weak liveness and provide ordering service for the fair scheme of the reward system. The Qitmeer Consensus is in line with Classical Blockchain Setting which could join and leave the network freely by Proof-of-Work, with the collaboration model of DAG ledger guarantees that miners gain rewards corresponding to their contribution respectively, the  50\% fault tolerance as secure as bitcoin, robust scalability that is subjected to physical network limit. The mining algorithm is also a vital source of fairness other than consensus algorithm per se. Cuckoo Ring is a graph theory based proof-of-work mining algorithm and is practically ASIC resistant due to memory-hard calculation. 
 
-To be Sharia-Compliant, Qitmeer originates a UTXO-based unique token insurance scheme, which has effectively answered two main concerns: Intrinsic Value and Assets Authentication. Issuing a certain amount of assets must consume a certain amount of the native currency; moreover, entities must be warranted a license to issue assets.
+According to Shariah requirements, Qitmeer designs a UTXO-based unique token issuance scheme, which has effectively solved two main challenges: Intrinsic Value and Assets Authentication. Issuing a certain amount of assets must consume a certain amount of the native currency. Moreover, the entity must be warranted a license to issue assets. 
 
-Qitmeer devises a family of specifications and protocols to embrace the whole Isamlic financial ecosystem, such as wallet and miners. As for interoperability, Qitmeer calls for utilizing cross-chain protocols to integrate various cryptocurrencies and offer reliable off-chain smart contract services.
-
+Qitmeer devises a set of specifications and protocols to be adopted in the Global Islamic economy ecosystem, such as wallets and miners. As for interoperability, Qitmeer recognises the utilizing of cross-chain protocols to integrate various cryptocurrencies and offer reliable off- chain smart contract services.
 
 \end{abstract}
 
 \section{Introduction}
 
 \subsection{Background}
-Trust is the cornerstone of finance. In traditional approaches, multiple unacquainted parties require a trustworthy third party to guarantee the security of transactions. However, this third party is centralized and subject to single point failure and unlikely to guarantee its honesty.
+Trust is the cornerstone of financial system, while in traditional approach, multiple unacquainted parties require a trustworthy third party to guarantee the security of transactions. However, the third party is centralized and subject to single point failure, unlikely to guarantee its honesty.
 
-Bitcoin is an open P2P network, that is to say, no centralized server exists, and each node can join or leave the network freely. The calculation-heavy but validation-easy Proof-of-Work consensus is designed to ensure nodes gain rewards relative to their contribution to the network's running and security, which is supposed to be fair — Bitcoin's disruption to drives tons of researches on its working mechanism. Bitcoin has a hash-list-like ledger to guarantee tamper resistance, further on the concept 'BlockChain' is introduced to represent this mechanism and commonly accepted. Owing to trustlessness and tamper resistance, more and more applications of blockchain occur in the financial field. Blockchain is reshaping finance.
+Bitcoin is an open P2P network, meaning that there does not exist a centralized server, each node can join or leave the network freely. The calculation-heavy but validation-easy Proof-of-Work consensus is designed to ensure nodes gain rewards relevant to their contribution to the network’s running security, which is supposed to be fair. Bitcoin has a hash-list-like ledger to guarantee tamper resistance, this disruption has been driving tons of researches on its working mechanism. The concept of ’BlockChain’ is introduced to represent this mechanism and commonly accepted. Owing to trustlessness and tamper resistance, an increasing number of applications of blockchain occur in the financial system which acts as the new driving force to re-shape the financial system.
 
-However, with the arrival of 10-years birth of bitcoin, the blockchain infrastructure is facing various challenges from technical aspects and has been deviating its original intention. Bitcoin is no longer decentralized, the top 5 mining pool has controlled majority hash power and would be easy to carry on an attack if they found a reason to. Miners have to join mining pools since the opportunity cost is much higher than their contribution; in other words, Bitcoin is not fair any more. Bitcoin does not scale, seven transactions per second throughput, one hour confirmation time, high cost of the transaction fee, far from promising as a global payment network.
+With the innovation of Bitcoin ten years ago, the blockchain infrastructure is facing various challenges from technical perspective and has been deviating from its essence philosophy. Bitcoin is no longer decentralized, the top five mining pool has controlled majority hash power and would be easy to carry on an attack if there is any reason. Miners have to join mining pools since the opportunity cost is much higher than their contribution. In other word, Bitcoin is not fair any more, because Bitcoin does not scale, seven transactions per second throughput, one hour confirmation time, high cost of the transaction fee, far from promising as a global payment network.
 
-Bitcoin needs reform to return its original intention. Countless solutions arise and claim themselves having solved all these problems. However, few achieved indeed, just trading off one metric with another, e.g. sacrifice decentralization, which is a core source of security, for scalability. So, what the original intention of bitcoin truly is, Qitmeer has its definition and names it as Classical Blockchain Setting, it is also the design philosophy of Quitmeer.
+Bitcoin needs to be reformed to reflect its essence philosophy. There are Countless solutions claim themselves to have been solved all these challenges. However, few achieved indeed, just trading off one metric with another, like sacrifice decentralization, which is the core source of security for scalability. So, what is the essence philosophy of bitcoin? Qitmeer has defined it as Classical Blockchain Setting, which has deeply innovated design philosophy of Qitmeer network.
 
 \subsection{Classical Blockchain Setting}
-Too many blockchain mutants and each has its definition of blockchain. Quitmeer respects bitcoin's vision, Qitmeer deems it is composed of 4 components and names it as Classical Blockchain Setting.
+There are many blockchain evolves and each has its own definition of blockchain technology. However, Qitmeer network acknowledged  bitcoin’s objectives, Qitmeer holds the view that the following four metrics as Classical Blockchain Setting.
 
-\subsubsection{Open}
-Openness is the critical difference between permissioned and permissionless blockchain, so every node should join and leave the network freely.
+\subsubsection{Openness}
+Openness is an essential feature to distinguish permissioned and permissionless blockchain, which means every node should join and leave the network freely.
+
 
 \subsubsection*{Predefined special roles}
-An open network allows different role, in the bitcoin network, nodes could choose to be an SPV node, full node or miner with freedom, so from the protocol's aspect, bitcoin is open. Whereas, in Delegated Proof-of-Work, the block producers are voted outside of the chain and predefined as configuration, apparently not open enough.
+An open network allows different roles, in the bitcoin network, nodes could choose to be an SPV(Simplified Payment Verfication( node, full node or miner with freedom, so from the protocol’s aspect, bitcoin is open. Whereas, in Delegated Proof-of-Work, the block producers are voted off the chain with predefined  configurations,which demonstrates limited openness in the network.
 
-\subsubsection*{Practically close}
-Though bitcoin is open according to the protocol, it is close in practical. Miners are no longer independent and have to join mining pools, and this trend is getting worse.
+\subsubsection*{Practically closed}
+Bitcoin is defined as open source according to the protocol, it is actually closed in practice. Miners have to join mining pools to minimize the risk of opportunity costs, at the expense to lose their free will. The situation is getting deteriorating in a speedy manner as described above. 
 
 
-\subsubsection{Fair}
-Fairness means that the rewards should be consistent with the contribution; in other words, Incentive-Compatible.
+\subsubsection{Fairness}
+Fairness means that the rewards should be consistent with the contribution in the network which is Incentive-Compatibility.
 
 \subsubsection*{Opportunity Cost}
-The expectation of rewards between standalone mining and pool mining is equal in terms of probability. The point is, their opportunity cost is considerably high - either mine a block to get a dramatically high reward or wait a long time without any return. So, they have to turn to the mining pool to have a stable incentive.
+The expectation of rewards between solo mining and pool mining is equal in terms of probability. The point is, their opportunity cost is considerably high - either mine a block to get a dramatically high reward or wait a long time without any return. Therefore, miners have to turn to the mining pool to have a stable incentive.
 
 \subsubsection*{Cost Efficiency}
-It is mainly referring to mining cost. Mining cost mainly includes the electricity price and mining efficiency, and the latter is much more critical due to ASIC. ASIC is customized to direct a specific mining algorithm, so the mining efficiency per unit of cost is much higher than generalized computers. For instance, the hash rate per dollar for AntMiner S9 is about 20000 times greater than for GTX570; it is nearly impossible for a personal computer to win the hash rate competition.
+Cost Efficiency is referring to mining cost. Mining cost mainly includes the electricity price and mining efficiency, and the latter is much more critical due to ASIC. ASIC is customized to direct a specific mining algorithm, so the mining efficiency per unit of cost is much higher than gener- alized computers. For instance, the hash rate per dollar for AntMiner S9 is about 20000 times greater than for GTX570; it is nearly impossible for a personal computer to win the hash rate competition.
 
 \subsubsection{Secure}
 The security is how robust the network is to sustain the attack, mainly referring to overrun a confirmed transaction.
 
 \subsubsection*{Decentralization}
-Decentralization is the most significant difference for bitcoin to be compared with traditional payment network. Decentralization could avoid single point failure; also, it is almost impossible to collude with the majority of all nodes in a fully decentralized network.
+Decentralization is the most significant feature of bitcoin to be compared with traditional payment network. Decentralization could avoid single point failure on account of the fact that it is almost impossible to collude with the majority of all nodes in a fully decentralized network.
 \subsubsection*{Fault Tolerance}
-The network should be resilient to a certain proportion of misfunctioning resources, and  Tolerance is the upper bound of the percentage. In a decentralized network, 50\% fault tolerance is the ideal case according to the majority law.
+Fault Tolerance refers that the network should be resilient to a certain proportion of malfunctioning resources, and fault tolerance is the upper bound of the percentage. In a decentralized network, 50\% fault tolerance is the desirable case according to the majority law.
 
 \subsubsection{Scalable}
 A network that can offer relatively stable services with its scale increasing is considered scalable. Blockchain network includes the following services:
 \subsubsection*{Throughput}
-How many transactions per second when network is scaling. Bitcoin's throughput is upper bound to 7 TPS, no matter how many nodes are there in the network.
+The throughput is the number of transactions per second (TPS) and its performance is of essential importance when network is scaling, while up to present, Bitcoin’s throughput is upper bound to 7 TPS despite of  how many nodes are available there in the network, which limits itself to act as the global payment network.
 \subsubsection*{Confirmation}
-How long does the recipient to wait until his transaction is believed unlikely to be overrun? The waiting time should not increase with networking scaling.
+The confirmation is the time that the recipient to wait until the transaction is unlikely to be reversed, which should not be increased with networking scaling. In bitcoin network, the confirmation time is six blocks or one hour.  Confirmation affects user experience significantly, especially in a payment network, users won’t stand to wait too long to accept their transactions.
 \subsubsection*{Cost}
-The main component of cost is transaction fee, and it should be reasonable, it would make payment impractical if too high, whereas be subject to sybli attack if too low. With the mining difficulty increasing, Bitcoin transacation fee is getting higher and higher, and it won't be suitable to serve as a global payment network as it aimed to, up to the time this paper finished, the average price of bitcoin is rough 2\$ . [https://bitcoinfees.info/]
+The main component of cost is transaction fee which should be maintained in a  reasonable range, since it would make payment impractical if too high, or it would be subject to sybil-attack if it is too low. With the mining difficulty increasing, Bitcoin transaction fee is getting higher and higher, and it won’t be suitable to serve as a global payment network as it aims to be, up to present, the average price of bitcoin is roughly 2\$. 
 
 \subsection{Specification}
-Qitmeer's specification is designed to abide by Classical Blockchain Setting
+The Qitmeer network specification is designed to follow Classical Blockchain Setting. The four metrics have some intrinsic contradiction among each other, Qitmeer cannot achieve best in each simultaneously, but find an optimized balance, i.e., seek for high scalability based on an open, fair and secure network.
 \subsubsection{Openess}
-Qitmeer is an open network; it uses proof-of-work to join the network freely and use BlockDAG protocol to avoid the risk of mining pools centralization.
+Proof-of-Work is the openest way to join a blockchain network due to the only resource required is electricity, which is physical and owned by each of the nodes.  
 \subsubsection*{Proof of Work}
-Proof-of-Work is the openest way so far to join a blockchain network because the only resource required to contribute to is electricity, which every node has owned. Besides, this resource is physical; in other words, it is non-duplicatable.
+Proof-of-Work is the openest way to join a blockchain network due to the only resource required is electricity, which is physical and owned by each of the nodes.  
+
+Proof-of-Work is the openest way to join a blockchain network due to the only resource required is electricity, which is physical and owned by each of the nodes.  
+
 \subsubsection*{No Predefined Nodes}
- Quitmeer doesn't have predefined sepcial nodes , i.e. super nodes.
+Predefined Nodes refer to special nodes defined in the protocol. Note: though there are mining pools in bitcoin,  they are unexpected in bitcoin protocol. Thus,  bitcoin still has no predefined nodes, so does Qitmeer because it is in line with bitcoin’s paradigm.
 \subsubsection{Fairness}
-BlockDAG is fair because it is a collaboration model other the competition model of blockchain.
+BlockDAG is fair due to its adoption of a collaboration model instead of competition model of blockchain.
 \subsubsection*{Mining Pool Resistance}
-Mining pools centralization is the consequence of high opportunity cost, which is the consequence of the competition model. Qitmeer's BlockDAG-based protocol SPECTRE is a collaboration model, the opportunity cost of standalone mining is equal to that of pool mining, so it will not be necessary to join a mining pool, which would lead to the risk of centralization.
+Mining pools centralization is the consequence of high opportunity cost, which is the conse- quence of the competition model. Qitmeer’s BlockDAG-based protocol SPECTRE is a collabo- ration model, the opportunity cost of solo mining is equal to that of pool mining. As a miner either individually or collectively, it is not compulsory to join a mining pool, which would lead to the risk of centralization.
 \subsubsection*{Anti-ASIC Mining Algorithm}
-Cuckoo Cycle is a graph-theoretic proof-of-work algorithm and prevails for ASIC resistance. Qitmeer employs this algorithm to guarantee that no one has too much mining efficiency advantage.
+Cuckoo Cycle is a graph-theoretic proof-of-work algorithm which prevails for ASIC resistance. Qitmeer adopts this algorithm to guarantee that no one has too much mining efficiency advantage.
 \subsubsection{Security}
-Security is the first code in Quitmeer, and it is a fully decentralized and 50\% fault tolerant, which is the most stringent criteria; thus, there is no security sacrifice for other metrics.
+Security is the top consideration in the Qitmeer network. Qitmeer has achieved fully decentralized and 50\% fault tolerant. Thus, there is no compromise to trade-off security with other metrics.
 \subsubsection*{Fully Decentralization}
-All the nodes in the Qitmeer's network are peer nodes and can participate in consensus.
+All the nodes in the Qitmeer’s network are peer nodes and are entitled to participate in consensus.
 \subsubsection*{50\% Faulty Tolerance}
-The malicious adversary has to posses 50\% hash power to control the network. Either in SPECTRE or GhostDAG, the fault tolerance is irrelevant with the throughput, whereas the security is inversely propagational to throughput in bitcoin.
+The malicious adversary has to possess 50\% hash power to control the network. Either in SPECTRE or GhostDAG, the fault tolerance is irrelevant with the throughput, whereas the security is inversely proportional to throughput in bitcoin.
 
 \subsubsection{Scalability}
+There are features of Qitmeer network such as high scalability, fast confirmation, high throughput, and low transaction fees, that could ensure Qitmeer will be running stably in a considerable long time.
 
-Qitmeer's hybrid BlockDAG protocols scales, fast confirmation, high throughput, low transaction fee, all these features ensure Qitmeer will be running stably in a considerable long time.
 \subsubsection*{Fast Confirmation}
-SPECTRE is a speedy confirmation BlcokDAG protocol, and Qitmeer uses as its consensus algorithm.
+The Qitmeer adopts the SPECTRE as consensus algorithm which is a speedy confirmation BlockDAG protocol. 
 \subsubsection*{High Throughput}
-SPECTRE is a BlcokDAG protocol, and the throughput could grow up to the network's physical metrics, such as network bandwidth or propagation delay.
+SPECTRE is a BlockDAG protocol, and the throughput could employ full potential performance subject to the network’s physical metrics, such as network bandwidth or propagation delay.
 \subsubsection*{Low Cost}
-Strictly speaking, the cost is not scaling since the transaction fee is increasing slightly with the network growing. However, the average cost will keep relatively low and acceptable for a long time. So, from the reasonableness aspect, the cost scales.
+Technically, the cost is not scaling since the transaction fee is increasing slightly with the network growing. However, the average cost will keep relatively insignificant and reasonable for a long period.  
 
 \section{Qitmeer Token Design}
-The existing blockchains are not able to be essentially Sharia-Compliant because they don't take it into consideration when they initiate their design. Qitmeer takes Sharia-Compliance into account as the very beginning and has redesigned an effective solution, namely OP\_TOKEN.
+The existing blockchain networks have not taken into consideration the  Shariah compliance and ethical concern entirely, from its whole ecosystem when they initiate their design. However, Qitmeer has taken Shariah Compliance into consideration rooted from its underlying philosophy, and penetrated through the whole technical architecture , until the applications in the ecosystem, in which it has been designed an effective approach, namely OP_TOKEN.
 
-\subsection{Overview}
+\subsection{Background}
 \subsubsection{Problem definition}
 
-Blockchains are ought to respect two main concerns to comply Sharia:
+Blockchains are ought to consider two main points to be considered as Shariah compliance in the Blockchain industry:
 
 \subsubsection*{Intrinsic Value}
 Assets must have underlying value and cannot be created out of thin air. On existing token issuance platforms like Ethereum\cite{Ethereum}, individuals can issue a token of arbitrary amount without any foundation.
+ 
 
 \subsubsection*{Assets Authentication}
-Should not allow issuarance of illegitimate assets. Existing blockchains are too unrestricted to have necessary assets authentication.
+The blockchain should not allow any issuance of illegitimate assets and unethical business. Existing blockchains are too unrestricted in the event of assets authentication.
+
 \subsubsection{Related works}
 
 The $\texttt{OP\_TOKEN}$ is inspired by Color coin idea, which represents and manages real-world assets on top of the Bitcoin by using $\texttt{OP\_RETURN}$, and the OP\_GROUP, a referenced implementation of issuing assets designed by Andrew Stone.
 
 The OP\_TOKEN fit various practical scenarios with unique features like asset compliable and value relevent. There are some related concepts in the details below:
 
-\subsubsection{UTXO}
+\subsubsection*{UTXO}
 
-UTXO represents Unspent Transaction Output. In other words, there are no accounts in Qitmeer. What users have and spend are a bunch of unspent transaction outputs, and we could come up with the balance by summing up them.
+The Unspent Transaction Outputs (UTXO) are used whether the transaction is valid. there are no accounts required in Qitmeer network. What users have in the network and spend are a bunch of unspent transaction output. This could come up with the balance by summing up UTXO.
 
 \begin{figure}[hbt]
 	\centerline{%
@@ -321,17 +326,15 @@ UTXO represents Unspent Transaction Output. In other words, there are no account
 
 The first transaction tx1 has three outputs with the first spent, so  tx1 has 2+3=5 coins balance.
 
-The second transaction, tx2 spends the 2 UTXOs of tx1 and pays to 3 addresses and creates three new UTXOs.
+The second transaction tx2 spends the 2 UTXOs of tx1 and pays to 3 addresses and creates three new UTXOs.
 
 Note: now the old UTXOs (of tx1) are no longer UTXO so cannot be spent later.
 
-\subsubsection{Script system}
+\subsubsection*{Script system}
 
-The mechanism behind how users spend their UTXOs is to execute a particular script. The output stores half of the script and we have to present the other half and combine both to verify if we could spend the money. The former half is called locking script, like a locked treasure box, and the latter is unlocking script, like the only key to the box.
+The mechanism behind how users spend their UTXOs is to execute a particular script. The output stores half of the script and it has to present the other half and combine both in order to verify if the money is spent. The former half is called locking script, like a locked treasure box, and the latter is unlocking script, like the only key to the box.
 
-Let us take a look at the typical instance of  Pay-2-Public-Key-Hash(P2PKH)\cite{P2PKH}
-
-Locking Script in UTXO:
+For example, a typical instance of  Pay-2-Public-Key-Hash(P2PKH)\cite{P2PKH} Locking Script in UTXO:
 
 \begin{lstlisting}
 OP_DUP OP_HASH160 <PUBLIC_KEY> OP_EQUALVERIFY OP_CHECKSIG
@@ -352,16 +355,16 @@ This whole script consists two steps
 	To check if the signature is valid.
 
 
-\subsubsection{Colored coins and Tether}
+\subsubsection*{Colored coins and Tether}
 
-Colored Coins\cite{ColoredCoins} is a method to represent assets on top of the blockchain so that it can leverage the tamper-proof capability of blockchain. It uses tx-script operation $\texttt{OP\_RETURN}$ to interrupt script execution early, so we can add information on the assets after it without violating the script validation.
+Colored Coins\cite{ColoredCoins} is a method that represent assets on blockchain, it can leverage the tamper-proof capability of blockchain. However, It uses transaction script operation $\texttt{OP\_RETURN}$ to interrupt script execution early. Therefore, it can add information to the assets after OP\_RETURN without violating the script validation. 
 
 Locking Script:
 \begin{lstlisting}
 OP_RETURN <DATA>
 \end{lstlisting}
 
-The stable coin Tether\cite{Tether} (USDT) also uses OP\_RETURN based OMNI Layer protocol to define the asset on the bitcoin.
+Moreover, the stable coin Tether\cite{Tether} (USDT) also uses OP\_RETURN based OMNI Layer protocol to define the asset on the bitcoin.
 
 Here are a typical USDT transaction and details of its protocol design
 
@@ -384,10 +387,10 @@ OP_RETURN 6f6d6e69000000000000001f00000015c9054900
 
 
 
-\subsubsection{OP\_GROUP}
-The OP\_RETURN scheme is more suitable to apply on mature blockchain since it does not change the underlying blockchain protocol and will not risk forking. However, the weakness is that miners cannot verify its protocol, so there would be some security risks.
+\subsubsection*{OP\_GROUP}
+The OP\_RETURN  scheme is more suitable to apply on mature blockchain, since it does not change the underlying blockchain protocol and will not risk forking. However, the weakness is that miners cannot verify its protocol, so there would be some security risks.
 
-OP\_GROUP\cite{OP_GROUP} is a proposal of assets issuance on Bitcoin Cash (BCH)\cite{BCH} from Bitcoin Unlimited (BU). OP\_GROUP supports token issuance, transfer, destroy, and so on forth. Since OP\_GROUP is an extension to the BCH script system,  it is part of the BCH protocol. Thus miners can do the verification, which is more reliable.
+OP\_GROUP\cite{OP_GROUP}  is an improvement proposal of assets issuance on Bitcoin Cash (BCH)\cite{BCH} from Bitcoin Unlimited (BU). Thus, OP\_GROUP  supports transfer, destroy and insurance of Token. Since OP\_GROUP is an extension to the BCH script system,  it is part of the BCH protocol. Thus miners can do the verification, which is more reliable.
 
 The basic “colored” pay 2 public key hash script would be like:
 
@@ -411,7 +414,8 @@ The main difference is simple, just adding a group address to distinguish differ
 
 \subsubsection{Overview}
 
-There is a unique token named LICENSE in OP\_TOKEN. With public credibility, Renowned experts or organizations hold licenses. Any entity planning to issue a token needs to be warranted a license.  Peers can transfer licenses as they are also tokens. The transfer history is public and immutable, so the originator must be very cautious in case of transferring to a wrong hand.
+There is a unique token named LICENSE in OP\_TOKEN. The relevant regulatory bodies, shariah-governance entities, industry practitioners with public credibility within the ecosystem are invited to receive the licences to oversight the compliances issues that might occur along the course of mainstream adoption of the protocol. Any entity planning to issue a token needs to be warranted with a license. Peers can transfer licenses as they are also tokens in nature. However, the originator must be extra careful in event of transferring in order to avoid non-compliance risk due to the records is public and immutable.  
+ 
 
 \subsubsection{Issuance of License}
 
@@ -447,7 +451,7 @@ OUTPUTS:
 
 \subsubsection{Warrant a license}
 
-Organizations must be warranted a license to issue assets. They can request a license from any committee member (C.M.). Once the license is granted and approved, they will receive a particular token transfer from the C.M. and the token is the license.
+The relevant entities must be warranted a license to issue assets. The entity can request a license from any committee member (C.M.). Once the license is granted and approved. These entities will receive a particular token transfer from the C.M. and the Token is the licensed.
 
 \lstset{basicstyle=\tiny,style=myListStyle}
 \begin{lstlisting}[language=yaml, numbers=none,basicstyle=\footnotesize]
@@ -473,9 +477,9 @@ OUTPUTS:
 \end{lstlisting}
 
 \subsubsection{Issuance of assets}
-Once warranted a license, organizations can issue assets; however, they cannot set the token amount arbitrarily. Instead, to issue a certain amount of assets requires converting the same amount of  SANDs. Qitmeer calls this process as  "token mint". Just like the case in reality,  to mint a gold coin requires the same weight of gold sands, tokens need the same amount of SANDs.
+Once the license is warranted, entities can issue assets; however, they cannot set the token amount arbitrarily. Instead, to issue a certain amount of assets requires converting the same amount of SANDs. The Qitmeer network calls this process as "token mint". Just like the case in reality, to mint a gold coin requires the same weight of gold sands, tokens need the same amount of SANDs.
 
-The first benefit of this issuance system is to guarantee tokens' elementary intrinsic value; thus, it would significantly mitigate the price fluctuation. Another advantage is that tokens and native currency are no longer isolated islands of value; they are running is the same ecosystem, which would improve the liquidity and make the whole network healthier.
+The first advantage of issuance system is to guarantee tokens’ elementary intrinsic value; thus, it would significantly mitigate the price fluctuation. Another advantage is that tokens and native currency are no longer isolated islands of value; which are running in the same ecosystem and would improve the liquidity and make the whole network stable.
 
 \lstset{basicstyle=\tiny,style=myListStyle}
 \begin{lstlisting}[language=yaml, numbers=none,basicstyle=\footnotesize]
@@ -507,7 +511,7 @@ OUTPUTS:
 
 \subsubsection{Transfer of the Assets}
 
-Parties can transfer assets to each other. Moreover, we could transfer multiple assets within one transaction. The transaction needs to ensure the input sum of each asset equals the output sum of each asset.
+The entities can transfer assets to each other. Moreover, the entity could transfer multiple assets within one transaction. The transaction needs to ensure the input sum of each asset equals the output sum of each asset.
 
 \lstset{basicstyle=\tiny,style=myListStyle}
 \begin{lstlisting}[language=yaml, numbers=none,basicstyle=\footnotesize]
@@ -535,7 +539,7 @@ OUTPUTS:
 
 \subsubsection{Melt Token}
 
-Melt is the reversed process of mint, i.e., conversion from tokens to native currency. The total amount of sands is constant, either in the form of Native Sand or Token Sand. So it is forbidden to destroy a token and only allowed to convert tokens. Issuers can melt their coins to reduce the liquidity in order to keep the price stable, which is practical to implement stable coins.
+Melt is the reversed process of mint, i.e., conversion from tokens to native currency. The total amount of sand is constant, either in the form of Native Sand or Token Sand. However, it is allowed to transform a token and convert native currency. Issuers can melt their coins to reduce liquidity in order to keep the price stable, which is practical to implement stable coins. Melt guarantees the tokens fundamental value, just like the minimum value of a gold coin is the same weight of gold.   
 
 
 Melt guarantees the tokens fundamental value, just like the minimum value of a gold coin is the same weight of gold.
@@ -563,15 +567,15 @@ OUTPUTS:
 
 
 \subsection{From BlockChain To BlockDAG}
-BlockChain represented by Bitcoin does not scale due to protocol restrain. On Nakamoto Consensus, i.e., longest-chain rule, 1 MB block size and 10 minutes block rate confine bitcoin to reach only 7 TPS  theoretical throughput regardless of the bandwidth and propagation delay.
+Bitcoin does not scale due to protocol restrain. By Nakamoto Consensus, i.e., longest-chain rule, 1 MB block size and 10 minutes block rate confine bitcoin to reach only 7 TPS theoretical throughput regardless of the bandwidth and propagation delay.
 
-The most intuitive way to increase scalability is to shorten block time or enlarge block size. The reason why Satoshi did not adopt is that it brings forks, and they distract the hash power from the main chain, thus causing security vulnerability.
+The most intuitive way to increase scalability is to shorten block time or enlarge block size. The reason why Satoshi did not adopt is because that will bring forks, as well as distracting the hash power from the main chain, thus causing security vulnerability.
 
-GHOST protocol introduces heaviest-tree consensus to keep forks without sacrificing security. Note that here BlockChain has transformed into a BlockTree. Since the largest subtree has concentrated the majority hash power, the security is as high as bitcoin. The main chain is the path,  i.e. a blockchain from the genesis to leaf, with the highest number of descendants, other blocks are off-chain blocks. Only main chain blocks contribute throughput, off-chain blocks help strengthen the security.
+GHOST protocol introduces heaviest-tree consensus to keep forks without sacrificing security. Note that here BlockChain has transformed into a BlockTree. Since the largest subtree has concentrated the majority hash power, the security is as high as bitcoin. The main chain is the path, i.e. a blockchain from the genesis to leaf, with the highest number of descendants, other blocks are off-chain blocks. Only main chain blocks contribute throughput, off-chain blocks help strengthen the security. 
 
-BlockTree has dramatically increased the throughput because of the higher Block Rate or Size. However, there is still a waste of the transactions of off-chain blocks, which should contribute to the throughput as well. Inclusive protocol proposes a new data structure of ledger, where every block confirms every unconfirmed block. This improvement upgrades a BlockTree to a BlockDAG.
+BlockTree has dramatically increased throughput because of the higher Block Rate or Size. However, there is still a waste of the transactions of off-chain blocks, which should contribute to the throughput as well. Inclusive protocol proposes a new data structure of ledger, where every block confirms every unconfirmed block. This improvement upgrades a BlockTree to a BlockDAG.
 
-Through the history from BlockChain to BlockDAG, we may infer that BlockChain is just the particular case on low throughput of BlockDAG, they are, in essence, the same. So, it is the scaling approach whose paradigm is closest to bitcoin. The apparent benefit is that it would be robust since it can inherit all the long-time-proved stable features of bitcoin. Besides, this approach is scalable infinitely in terms of protocol, only limited by physical limits, like bandwidth. A robust public chain itself is the optimal basis for incorporating further scaling solutions, such as sharding and state-channels, so BlockDAG is the preferred scaling solution of Qitmeer.
+Through the development history from BlockChain to BlockDAG, it may indicate  that BlockChain is a particular case of BlockDAG in the event of low throughput, which means both are the same in essence. As a result,  it is the scaling approach whose paradigm is the closest to the bitcoin network. BlockDAG is robust since it inherits all the long-time-proved stable features of bitcoin,  as well as it could scale infinitely in terms of protocol, unless it is limited physically, such as, bandwidth. A robust public chain is the optimal basis for incorporating further scaling solutions, such as sharding and state-channels, thus BlockDAG is the preferred scaling solution of Qitmeer.
 
 
 \begin{figure}[hbt]
@@ -583,20 +587,14 @@ Through the history from BlockChain to BlockDAG, we may infer that BlockChain is
 
 \subsection{Consensus}
 
-Qitmeer adopts a hybrid consensus that combines SPECTRE and GHOSTDAG  in order to achieve fast confirmation and high throughput.
+Qitmeer adopts a hybrid consensus that combines SPECTRE and GHOSTDAG in order to achieve fast confirmation and high throughput.
 
 \subsubsection{SPECTRE}
-SPECTRE\cite{SPECTRE} is a block-DAG based protocol that achieves fast confirmation and high
-throughput with 50\% attack resilience. SPECTRE guarantees safety, which means a
-transaction is unlikely to be reversed once it is accepted. Also, SPECTRE guarantees fast confirmations for honest users rather than all users; in other words, weak liveness.
+SPECTRE\cite{SPECTRE} is a BlockDAG based protocol that achieves fast confirmation and high throughput with 50\% attack resilience. SPECTRE guarantees safety, which means the transaction is unlikely to be reversed once it is accepted. However, the SPECTRE guarantees fast confirmations for honest users rather than all users which is weak liveness.
 
-There is a trade-off between liveness and fast confirmation; SPECTRE prioritizes
-the latter since weak liveness only affects malicious users. SPECTRE is appropriate for payment model. Only malicious users launch double spends, so only their
-transactions are likely to be delayed indefinitely.
+There is a trade-off between liveness and fast confirmation, whereby SPECTRE prioritizes the latter due to weak liveness only affects malicious users, that enables SPECTRE to be a suitable protocol for payment model. In the event malicious users launch double spending attack, their transactions are likely to be delayed indefinitely.
 
-SPECTRE is a stateless transaction model, so there is no need to gain a
-total ordering over all the blocks. Only when two blocks conflicting
-that a pairwise ordering is needed.
+SPECTRE is a stateless transaction model, whereby there is no need to gain a total ordering over all the blocks. Only when two blocks conflicting that a pairwise ordering is needed. SPECTRE employs a voting algorithm to decide which block wins when there is a conflict between two blocks. Suppose block x has a conflicting transaction with another transaction in block y, and also suppose that block z is voting on them with the following rules:
 
 SPECTRE employs a voting algorithm to decide which block wins when two blocks
 conflict. Suppose block $x$ has a conflicting transaction with another
@@ -645,17 +643,12 @@ $y$ gets 2 votes. Block 12 follows the majority and votes for $x \prec y$ thus.
 
 \subsubsection*{Confirmation Time}
 
-The SPECTRE paper provides two ways of accepting (confirming) a block, i.e. the
-offline way and the online way. The online way is more straightforward. The
-simulation results of the paper also adopted the online way. Qitmeer adopts the same
-way.
-
-When a node $v$ receives a block $x$, it loops to calculate the online risk of
+When a node $v$ receives a block $x$, it loops to calculate the  risk of
 the block. It accepts the block when the risk is smaller than a given threshold
-$\epsilon$. The online confirmation time of block $x$ in node $v$ is the time
+$\epsilon$. The confirmation time of block $x$ in node $v$ is the time
 since $x$ is received by $v$ until $x$ is accpeted by $v$.
 
-The following algorithm below calculates the online risk of block $x$ in
+The following algorithm below calculates the  risk of block $x$ in
 $G_t^v$, where $G_t^v$ is the block DAG that $v$ observes at time $t$.
 
 \begin{codebox}
@@ -756,35 +749,28 @@ risk\_hidden(T,g)
 & (1 - Poiss_{cdf} ((T+2 \cdot d) \cdot \alpha \cdot \lambda, (g-l)^+))).
 \end{align*}
 
-With the converted formula we are able to calculate $risk\_hidden$ in numerical way.
+With the converted formula we are able to calculate $risk\_hidden$ in numerical way. Figure 5 simulates the confirmation time on different block rates, it show that SPECTRE could achieve 5 seconds confirmation time on block rates higher than 10 blocks per second and 10\% faulty percentage, which is considerably promising.
 
+\begin{figure}[ht]
+	\centerline{%
+	   \resizebox{0.8\textwidth}{!}{\includegraphics{figures/confirmation.jpeg}}%
+	}
+\caption{Confirmation Time}
+\end{figure}
 
 \subsubsection{GHOSTDAG}
 
 
-Since Qitmeer works for payment, in most cases it is
-sufficient to provide only partial ordering or pairwise ordering for blocks in
-the ledger. However, sometimes we may still need to obtain a total (linear)
-ordering of all the blocks, especially when we want to reward blocks based on
-their ordering.
+Qitmeer is designed for decentralized payment network. In most scenarios , it is sufficient to provide only partial ordering or pairwise ordering for blocks in the ledger. However, sometimes it may still need to obtain a total (linear) ordering of all the blocks, especially in the event of rewarding blocks based on their ordering. 
 
-Obtaining total ordering for a DAG ledger is not so intuitive as it is for
-blockchains since a DAG ledger contains forks, which are caused by various reasons, such as, network
-propagation delay, concurrent block creations, faulty miners.
-Therefore, as a supplement to the consensus protocol of Qitmeer, we use GHOSTDAG to
-obtain the total ordering to reward blocks which appears earlier in the
-ordering.
+Obtaining total ordering for a DAG ledger is not so intuitive as it is for blockchains due to a DAG ledger contains forks, which are caused by various factors, such as, network propagation delay, concurrent block creations, faulty miners. Therefore, as a supplement to the consensus protocol of Qitmeer, it uses GHOSTDAG to obtain the total ordering to reward blocks which appears earlier in the ordering.
 
-In addition to total ordering, GHOSTDAG also provides Strong Liveness guarantee
-to make the consensus protocol more robust, which means both honest blocks and
-malicious blocks can be confirmed within a definite time, though it may take a
-long time to confirm malicious blocks.
+In addition to total ordering, GHOSTDAG also provides Strong Liveness guarantee to make the consensus protocol more robust, which means both honest blocks and malicious blocks can be confirmed within a definite time, though it may take a long time to confirm malicious blocks.
 
 Suppose that the maximal limits of network propagation delay and block creation
-rate are constant. It is intuitive that if nodes behave honestly, they form
-a subgraph where each block has at most a constant number of forks. We denote
+rate are constant. It is intuitive that if nodes behave honestly, it forms a subgraph where each block has at most a constant number of forks. We denote
 this constant number as $k$. $k$ can be calculated from propagation time and
-block creation rate. The subgraph is denoted as a $k$-cluter. The biggest
+block creation rate. The subgraph is denoted as a $k$-cluster. The biggest
 $k$-cluster is called a blue set. Those blocks outside the blue set are called
 red set.
 
@@ -793,8 +779,7 @@ references within each block, then we say that there's a partial order between
 $x$ and $y$, and $y$ is prior to $x$. For example in the following figure, we
 can traverse from block J to A through B, so there's a partial order between A
 and J, and A is prior to J. Note not all blocks have partial orders with other
-blocks. For example, there're no partial orders between B, C and D. We call the
-block set where no partial order exists an anticone. The size of any anticone in
+blocks. For example, there are no partial orders between B, C and D.  The block set where no partial order exists is an anticone. The size of any anticone in
 a $k$-cluster is at most $k$.
 
 \begin{figure}[ht]
@@ -806,15 +791,14 @@ a $k$-cluster is at most $k$.
 
 
 GHOSTDAG orders the DAG ledger in a way that favours blue blocks and penalizes
-red ones. We determine the order between blue blocks according to their partial
-orders and some topological sort. Then, for any blue block $B$, add to the order
+red ones. It determines the order between blue blocks according to their partial orders and some topological sor. Then, for any blue block $B$, add to the order
 just before $B$ all of the red blocks in $past(B)$ that weren’t added to the
 order yet; these red blocks too should be added topologically. Notice
 that for any blue block $B$, the order on blocks in $past(B)$ should remain the
 same if we remove from the DAG blocks in $future(B)$.
 
 An example of the output order of the GHOSTDAG procedure on the small DAG ledger
-from the figure above is: $(A,D,C,G,B,F,I,E,J,H,K)$. Unfortunately, finding the
+from the figure above is: $(A,D,C,G,B,F,I,E,J,H,K)$. Nevertheless, finding the
 maximum $k$-cluster is NP-hard, so GHOSTDAG is therefore of less practical use
 for an ever-growing DAG ledger and may cause long confirmation times.
 Therefore, we use GHOSTDAG only to implement the reward mechanism of Qitmeer, since
@@ -824,64 +808,21 @@ in the SPECTRE way.
 
 \subsection{Mining Algorithm}
 \subsubsection{BlockDAG and Mining}
-BlockDAG's collaboration model provides much more fairness than the competition model of BlockChain on the protocol aspect. Every node gets rewards according to its contribution, regardless of how much hash power they possess. Qitmeer considers the fairness benefit even more important than the scalability increase because it represents the spirit of BlockChain. The intention of Nakamoto Consensus is fair - every node votes with electricity; however, only a small bunch of the mining pools have the odds to participate in consensus. Standalone miners suffer huge opportunity cost since they have to wait uncertain time, quite long in most cases, to mine a block to cover their cost; thus finally they have to turn to the mining pools. BlockDAG incorporates every miner's block, so the miners have a strong expectation of their return and then don't have too much willing to join a mining pool.
+BlockDAG’s collaboration model provides much more fairness than the competition model of BlockChain on the protocol perspective. Every node gets rewards according to its contribution, re gardless of how much hash power it possess. Qitmeer favors fairness over the scalability owing to the former is more in line with true spirit of blockchain. The intention of Nakamoto Consensus is fair - every node votes with electricity; however, only a small bunch of the mining pools have the odds to participate in consensus. solo miners suffer huge opportunity cost since they have to wait for an uncertain time, quite long in most cases, to mine a block to cover their cost; thus finally it will have to turn to the mining pools. BlockDAG incorporates every miner’s block, the miners have a strong expectation of their return and then discourage to join a mining pool.
 
-Apart from the protocol, the mining algorithm is another factor of fairness, so the protocol fairness is of no use without mining fairness. Mining fairness refers to a certain amount of mining cost, i.e. electricity in POW, should derive the relatively equivalent amount of hash power. Practically, the ASIC mining rigs have much more mining efficiency than their prices.
+
+In addition, the mining algorithm is  another factor of fairness. Mining fairness refers to a certain amount of mining cost, such as electricity in POW, should derive the relatively equivalent amount of hash power. Practically, the ASIC mining rigs have much more mining efficiency than their prices.
 
 \subsubsection{Cuckoo-Cycle-PoW}
-Proof-of-Work(PoW) is used to confirm transactions and produces new blocks, therefore it is a very important engine in PoW cryptocurrencies. PoW must not enable a participant to have a significant advantage over another participant. That is why Satoshi said: "Proof-of-work is essentially one-CPU-one-vote."
+Proof-of-Work(PoW) is used to confirm transactions and produces new blocks, and acts as the driving force in PoW based cryptocurrencies. PoW must not enable a participant to have a significant advantage over another participant. That is why Satoshi said: "Proof-of-work is essentially one-CPU-one-vote."
 
-However, most widely used proof-of-work algorithms, such as SHA-256, Blake2b, Scrypt, are more efficient on ASIC devices when compared to CPUs and GPUs. This can lead to ASIC owners posses a much larger voting power than CPU and GPU owners. It violates the “one-CPU-one-vote” principle.
+However, most widely used proof-of-work algorithms, such as SHA-256, Blake2b, Scrypt, are more efficient on ASIC devices when compared to CPUs and GPUs. This can lead to ASIC owners posses a much larger voting power than CPU and GPU owners, which violates the “one-CPU-one-vote” principle.
 
-We introduce Cuckoo-Cycle-PoW ,a graph-theoretic proof-of-work algorithm. It is ASIC resistant.
+Cuckoo-Cycle-PoW, a graph-theoretic proof-of-work algorithm/ASIC-Resistant, is designed to find certain subgraphs in large pseudo-random graphs. This algorithm is ASIC resistant which  utilizes almost all parts of consumer-grade hardware in the  (GPUs, Graphic Processing Unit),
 
-Cuckoo-Cycle-PoW is designed to find certain subgraphs in large pseudo-random graphs. This algorithm that we hope turns out to be ASIC resistant. It utilizes almost all parts of commodity hardware (GPUs).
-
-The Cuckoo Cycle POW is the work of John Tromp, it is designed to find certain subgraphs in large pseudo-random graphs. In particular, Search for cycles of specified length L in a bipartite graph with M edges of N nodes. If a cycle is found and the hash difficulty is less than the target difficulty, the cuckoo cycle PoW is completed.
+The Cuckoo Cycle POW is designed to find certain subgraphs in large pseudo-random graphs. In particular, Search for cycles of specified length L in a bipartite graph with M edges of N nodes. If a cycle is found and the hash difficulty is less than the target difficulty, the cuckoo cycle PoW is completed.
 
 
-\textbf{Overall flow}
-
-\begin{enumerate}
-
-\item Outer loop
-
-\begin{enumerate}
-	\item Build block Header with following values:
-
-		\begin{itemize}
-		\item Difficulty: Difficulty target for tx
-		\item TxRoot: The merkle root of the tx tree
-		\item Timestamp: A Unix time timestamp
-		\item Nonce: A 64-bit (8-byte) field whose value is adjusted by miners
-		\item ParentRoot: The merkle root of the previous parent blocks (the dag layer)
-		\end{itemize}
-
-	\item Set amount of the attempt time, currently configured at 60 seconds, for inner loop.
-	\item Set the deadline is equal to the attempt time add the current unix timestamp.
-	\item Inner loop
-
-		\begin{enumerate}
-			\item Check the header’s hash is the latest header’s hash and the current timestamp less than the deadline.
-			\item Initialize cuckoo graph with some consensus values, such as edgebits(the size of the graph),proofSize(the length of the cycle)
-			\item The Blake2b algorithm hashes the block header.
-			\item Through the SIPHASH function to build nodes of graph, the block header’s hash and the nonce of inner loop as input parameters.
-			\item Edge Trimming: It drastically reducing the number of edges our basic algorithm has to process.
-			\item The finding cycle algorithm tries to find a solution (i.e. a cycle of length 42) within the generated graph.
-			\item If the solution is found:
-
-			\begin{enumerate}
-				\item The Blake2b algorithm hashes the cycle nonces.
-				\item The cycle nonces’s hash is compared to the current target difficulty.
-			\end{enumerate}
-
-			\item If the cycle nonces’s hash difficulty is greater than or equal to the target difficulty, the block is sent to the transaction pool, propagated amongst peers for validation, and work begins on the next block.
-			\item If the cycle nonces’s hash difficulty is less than the target difficulty, the proof is thrown out and the inner loop continues.
-		\end{enumerate}
-
-\end{enumerate}
-
-\end{enumerate}
 
 
 \textbf{Edge(Node) generation}
@@ -912,10 +853,7 @@ To throw 32 edges into a graph, randomly:
 
 \textbf{Edge Trimming}
 
-There is a special edge in bipartite graph, which we call leaf edges. It can never be part of a cycle.
-Leaf edges have a feature, the nodes it connects must have at least one node with the degree of the nodes being one.
-By eliminating leaf edges in the bipartite graph, we can greatly reduce the complexity of the graph,
-thus speeding up finding cycle from the bipartite graph.
+There is a special edge in bipartite graph, which is leaf edge, and could never be part of a cycle. Leaf edge has a feature that the nodes it connects must have at least one node with the degree of the nodes being one. By eliminating leaf edge in the bipartite graph, it could greatly reduce the complexity of the graph, thus speeding up finding cycle from the bipartite graph.
 
 \begin{figure}[ht]
 	\centerline{%
@@ -953,67 +891,42 @@ and then compared with the target difficulty.
 Due to asynchronous block submmission, BlockDAG protocols inevitably incorporate repeating transactions, called transaction collisons.
 Miners tend to pack the transaction with higher fees to maximize their profit. This will result in high repetition rates of blocks. Repeated transactions will not contribute to the throughput, what is more, low fee transactions would wait indefinite time to get confirmed. In a fully decentralized network, nodes cannot coordinate each other to avoid collision, leaving the only option to deivse a sophiscated incentive mechanism to penalize the selfish mining behaviors.
 
-The intuitive way to solve this problem is to share the transacation fee, and this method will make all the miners reach a Nash equilibrium that all the miners will choose transactions randomly from their memory pools. This approach will considerably reduce transactions collision; however, users can no longer pay higher fees to boost their transaction confirmation.
+The intuitive way to solve this challenge is to share the transaction fee, and this method will make all the miners reach a Nash equilibrium that all the miners will choose transactions randomly from their memory pools. This approach will considerably reduce transactions collision; however, users can no longer pay higher fees to boost their transaction confirmation.
 
-Qitmeer introduces an optimal incentive mechanism introduced in Inclusive\cite{Inclusive} protocol. It varies different transaction with different probability of being selected from memory pools, those with higher fee get higher probability. So, urgent transactions could increase their transaction fee to get better mining services, and low-fee transacations still get opportunity to confirm.
+Qitmeer appreciates Inclusive protocol work and adopts which states that this mechanism has some security concerns due to the fact that  it would not penalize those malicious parties who mine blocks in private. Inclusive protocol fixes this problem by only giving rewards to blocks  which are not deviating from the main chain significantly. 
 
-\subsubsection{First Come First Get}
-To encourage miners to submit blocks immediately on creation. The transaction fee should belong to the first miner who incorporates it. So this reward machanism requires transactions has a global order, which has been offered by GHOSTDAG protocol.
+\subsubsection{First Come First Serve}
+The miners will encourage to submit blocks immediately upon the creation of the transaction. The transaction fee belongs to the first miner who initiated the transaction. However, this reward mechanism requires transactions has a global order, which has been offered by GHOSTDAG protocol.
 
 Inclusive protocol states that this machanism has some security concerns because it won't penalize those malicious parites who mine blocks in private. Inclusive protocol fixes this problem by only giving rewards to blocks not deviating main chain too much. Qitmeer appreciates Inclusive protocol work and adopts it.
 
 \section{Protocols and Interoperability}
-BlockChain is the infrastructure for  decentralized finance. There will be an ecosystem when the blockchain becomes mature. This chapter introduces the typical applications on top of Qitmeer and the protocols for them to interact with Qitmeer.
+BlockChain is the digital infrastructure for decentralized financial system, which would evolve into a complete ecosystem in the course of reaching maturity. This session analyses the typical applications available on  Qitmeer network and the protocols for interaction with Qitmeer. 
 
 \subsection{Mining Protocol}
 \subsubsection{Proof-of-work Algorithm}
 
-We hope to resist the centralization of mining power, and hope miner can utilizes almost all parts of commodity hardware (GPUs, CPUs).
+The mining protocol is resistant to the centralization of mining power, which enables miner utilize almost all parts of commodity hardware (GPUs, CPUs).
 Therefore, Qitmeer uses a Proof-Of-Work algorithm called Cuckoo Cycle\cite{cuckoocycle},
-a memory-hard algorithm.This algorithm is designed to find certain subgraphs in large pseudo-random graphs.
+a memory-hard algorithm. This algorithm is designed to find certain subgraphs in large pseudo-random graphs.
 An introduction of Qitmeer proof-of-work can be found here.\cite{qitmeerpow}
 
 \subsubsection{Miner Capability}
 
-At the moment, the fastest GPU miner implementation is Qitmeer-Miner, which developed by the Qitmeer developers.
-However, the Qitmeer-Miner is still in the early stage of development, It's not a deeply optimized version. We hope
-that the community will finally create more optimised miners.
-
-The Qitmeer-Miner support parallel GPU. You can run multiple Nvidia GPUs and AMD GPUs mining in parallel.
-
-Compatible GPU Hardware:
-
-\begin{itemize}
-\item Nvidia: GTX1060 GTX1070, GTX1070ti, GTX1080, GTX1080ti, GTX2070, GTX2080, GTX2080ti
-\item AMD: RX570, RX580, Vega56, Vega64
-\end{itemize}
-
-In principle, as long as the graphics memory is greater than 5GB, the GPU miner can run.
-
-The Qitmeer-Miner support both solo mining and pool mining.
+The Qitmeer-Miner supports both solo mining and pool mining.
 
 \subsubsection*{Solo}
-If you do decide to mine Qitmeer without joining a pool, these are the steps to achieve mining Qitmeer by yourself.
-
-\begin{itemize}
-\item You need to run a full node to validate transactions. First, install qitmeer\cite{qitmeer} with the complete blockchain downloaded. Qitmeer is a full node software program that fully validates transactions and blocks.
-\item Download and install the Qitmeer miner software like Qitmeer-Miner. For a solo miner, the mining software connects to the blockchain full node (Qitmeer). The main job of the miner software is to create valid Proofs-of-Work and deliver the block to the rest of the Qitmeer network.
-\item Finally, launch Qitmeer miner software and connect to Qitmeer network to start solo mining Qitmeer.
-\end{itemize}
+If the miner  decided to mine Qitmeer without joining a pool, he would launch Solo mining mode. Solo miner connects one full node, call RPC service to mine blocks. Solo miner is recommended GPU implementation to gain better efficiency.
 
 \subsubsection*{Pool}
-Most mining pools support stratum protocol, so your miner program should be config this protocol.
+Qitmeer mining pools support stratum mining protocol as most PoW mining pools do.
 For example:
 
 \emph{miner.exe -o stratum+tcp://serverIp:3177 -m YourWalletAddress.YourMachineId}
 
-\subsubsection{Mining Pool Capability}
-The Proof-Of-Work algorithm implementation in Qitmeer is perfect for a mining pool.
-
-
 \subsection{Wallet Protocol}
 \subsubsection{Overview}
-   The blockchain wallet itself does not store any digital currency, and is primarily a computer program for creating digital currency transactions, tracking balances, and making it easy for users to manage addresses and private keys. Wallet software is the foundation of the whole block chain ecological development, any industry service can be realized through a block chain wallet value, block chain technology itself will reconstruct the traditional Internet business model in its own way. After the release of Qitmeer on Testnet and Mainnet, the authorities will release the wallet application for different users at the same time. For example, in the professional-oriented command line wallet, users only need to input corresponding commands according to relevant instructions to complete address generation, send transactions and other operations; Mobile terminal wallet for ordinary users. Users can easily and quickly complete relevant operations on their mobile phones just like other apps.
+   The blockchain wallet itself does not store any digital currency, and is primarily a computer program for creating digital currency transactions, tracking balances, and making it easy for users to manage addresses and private keys. Wallet software is the foundation of the whole block chain ecological development, any industry service can be realized through a block chain wallet value, block chain technology itself will reconstruct the traditional Internet business model in its own way. 
 \subsection*{Openness}
    An excellent blockchain public chain project should be more inclusive and open. Therefore, in addition to its own official wallet, Qitmeer has designed all interfaces and SDK for third-party wallet development at the beginning of development. Third party wallet institutions can use these interfaces to develop a variety of wallet programs that support Qitmeer Token transactions. Including: HD wallet, SPV wallet, browser wallet to meet a variety of user needs.
 \subsection*{How to create a wallet}
@@ -1024,23 +937,24 @@ The Proof-Of-Work algorithm implementation in Qitmeer is perfect for a mining po
     \item  Derive public key.
     \item  Derive address.
     \item  Monitor for outputs.
-    \item  Create unsigned Txes.
-    \item  Sign Txes.
-    \item  Broadcast Txes.
+    \item  Create unsigned Transactions.
+    \item  Sign Transactions.
+    \item  Broadcast Transactions.
 \end{enumerate}
 
-   To complete the above operations, we need to rely on qitmeer's nx SDK and RPC interface.
-   The NX SDK is a collection of tools that integrates various encryption, decryption, and signature functions. We can use the nx SDK to develop the following functions:
+   To complete the above operations, we need to rely on qitmeer's Qitmeer SDK and RPC interface.
+   The Qitmeer SDK is a collection of tools that integrates various encryption, decryption, and signature functions. We can use the Qitmeer SDK to develop the following functions:
+
    \begin{enumerate}
      \item Generate seeder.
      \item Derive private key.
      \item Derive public key.
      \item Derive address.
-     \item Create unsigned Txes.
-	 \item Sign Txes.
+     \item Create unsigned Transactions.
+	 \item Sign Transactions.
    \end{enumerate}
 
-   RPC is an http-based network interface, it’s easy to interaction with qitmeer network. We can use the nx SDK to develop the following functions:
+   RPC is a http-based network interface, it’s easy to interact with qitmeer network. We can use the Qitmeer SDK to develop the following functions:
 
    \begin{enumerate}
     \item  Get block count from block dag or block chain.
@@ -1053,30 +967,27 @@ The Proof-Of-Work algorithm implementation in Qitmeer is perfect for a mining po
 
 
 \subsection{Cross Chain}
-Qitmeer is dedicated tp undertake the liquidity of whole Ismalic decentralized finance. So the design goal of Qitmeer is to build a simple and strong UTXO-based value transfer network, that is why Qitmeer itself doesn't provide an on chain smart contract for the simplicity; instead, it prefers interoperability solutions to integrate various blockchains and applications. Finally, they will be parts of Qitmeer's ecosystem and can interact with each other.
+Qitmeer is dedicated to undertake the tokenized liquidity and host applications of global ecosystem of Islamic finance. Consequently the design goal of Qitmeer is to build up a simple and robust UTXO-based value transfer network, which prefers interoperability solutions to integrate various blockchains and applications, such as smart contract. Eventually, they will be part of Qitmeer’s ecosystem and can interact with each other.
 
 \subsubsection{UTXO interoperability}
-
-Across the chain technology is mainly to solve different main chain (such as: ` HLC ` and ` BTC `) problem of data exchange between the most direct cross chain technology application is "DEX :distributed exchange", No third party participation will purse ` BTC ` into ` HLC `,Complete wallet-to-wallet transactions.
-
 Currently, Qitmeer has supported P2SH script contracts and cross-chain functions through hash-locking.
 
-\subsubsection*{Principle}
+\subsubsection*{Process (BTC to MEER)}
 
 The implementation process of hash locking across the chain is:
 
 \begin{enumerate}
-\item  Alice and Bob generate their respective addresses on 'HLC' and 'BTC' chains respectively;
+\item  Alice and Bob generate their addresses on 'MEER' and 'BTC' chains respectively;
 
 \item Alice generates her own Secret Key and Secret Key hash;
 
-\item Alice locks her 'HLC' token into the hash lock contract in the main chain of 'HLC'. The unlock condition is that Bob holds the Secret Key or returns it to Alice after exceeding the specified time;
+\item Alice locks her 'MEER' token into the hash lock contract in the main chain of 'MEER'. The unlock condition is that Bob holds the Secret Key or returns it to Alice after exceeding the specified time;
 
-\item Bob checks the contract of Alice's main chain in 'HLC' and USES to generate the corresponding contract in 'BTC'. The unlock condition is that Alice holds the Secret Key or returns it to Bob after the specified time;
+\item Bob checks the contract of Alice's main chain in 'MEER' and USES to generate the corresponding contract in 'BTC'. The unlock condition is that Alice holds the Secret Key or returns it to Bob after the specified time;
 
 \item Alice USES to remove Bob's lock 'BTC' in the hash lock contract;
 
-\item After obtaining , Bob locks Alice 'HLC' in the hash lock contract, and completes the transaction;
+\item After obtaining , Bob locks Alice 'MEER' in the hash lock contract, and completes the transaction;
 
 \end{enumerate}
 
@@ -1089,26 +1000,24 @@ The implementation process of hash locking across the chain is:
 
 
 
-\subsubsection{Smartcontract interoperability}
+\subsubsection{Smart Contract Interoperability}
 
-Based on the cross-chain solution of intelligent contract type, Qitmeer completes the cross-chain transaction of the block chain assets of Qitmeer to other account models through hash lock Smartcontract.
+Qitmeer completes the cross- chain transaction between the block chain assets of Qitmeer and  other account models through hash lock Smart contract.
 
-The following will take EHT as an example to illustrate how to complete the cross-chain operation of Smartcontract.
-
-\subsubsection*{Smartcontract interoperability Principle}
+\subsubsection*{Smart Contract Interoperability Process (ETH to MEER)}
 
 \begin{enumerate}
-\item  Alice and Bob generate their respective addresses on 'HLC' and 'ETH' chains respectively;
+\item  Alice and Bob generate their addresses on 'MEER' and 'ETH' chains respectively;
 
 \item   Alice generates her own Secret Key and Secret Key hash;
 
- \item  Alice locks her 'HLC' token into the hash lock contract in the main chain of 'HLC'. The unlock condition is that Bob holds the Secret Key or returns it to Alice after exceeding the specified time;
+ \item  Alice locks her 'MEER' token into the hash lock contract in the main chain of 'MEER'. The unlock condition is that Bob holds the Secret Key or returns it to Alice after exceeding the specified time;
 
- \item  Bob checks the contract of Alice in the main chain of 'HLC' and generates the corresponding contract on 'ETH' using a . The unlock condition is that Alice holds the Secret Key or returns it to Bob after exceeding the specified time.
+ \item  Bob checks the contract of Alice in the main chain of 'MEER' and generates the corresponding contract on 'ETH'. The unlock condition is that Alice holds the Secret Key or returns it to Bob after exceeding the specified time.
 
  \item  Alice USES to call Smartcontract to remove 'ETH';
 
- \item  After obtaining , Bob locks Alice 'HLC' in the hash lock contract, and completes the transaction;
+ \item  After obtaining , Bob locks Alice 'MEER' in the hash lock contract, and completes the transaction;
 
 \end{enumerate}
 
