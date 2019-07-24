@@ -183,7 +183,7 @@
 		\small\href{mailto:paper@qitmeer.io}
 			{\nolinkurl{paper@qitmeer.io}}
 	}
-\date{\today\\\small Version 0.4.1}
+\date{\today\\\small Version 0.5.2}
 \begin{document}
 
 %% Cover end
@@ -808,7 +808,7 @@ in the SPECTRE way.
 
 \subsection{Mining Algorithm}
 \subsubsection{BlockDAG and Mining}
-BlockDAG’s collaboration model provides much more fairness than the competition model of BlockChain on the protocol perspective. Every node gets rewards according to its contribution, re gardless of how much hash power it possess. Qitmeer favors fairness over the scalability owing to the former is more in line with true spirit of blockchain. The intention of Nakamoto Consensus is fair - every node votes with electricity; however, only a small bunch of the mining pools have the odds to participate in consensus. solo miners suffer huge opportunity cost since they have to wait for an uncertain time, quite long in most cases, to mine a block to cover their cost; thus finally it will have to turn to the mining pools. BlockDAG incorporates every miner’s block, the miners have a strong expectation of their return and then discourage to join a mining pool.
+BlockDAG’s collaboration model provides much more fairness than the competition model of BlockChain on the protocol perspective. Every node gets rewards according to its contribution, regardless of how much hash power it possess. Qitmeer favors fairness over the scalability owing to the former is more in line with true spirit of blockchain. The intention of Nakamoto Consensus is fair - every node votes with electricity; however, only a small bunch of the mining pools have the odds to participate in consensus. solo miners suffer huge opportunity cost since they have to wait for an uncertain time, quite long in most cases, to mine a block to cover their cost; thus finally it will have to turn to the mining pools. BlockDAG incorporates every miner’s block, the miners have a strong expectation of their return and then discourage to join a mining pool.
 
 
 In addition, the mining algorithm is  another factor of fairness. Mining fairness refers to a certain amount of mining cost, such as electricity in POW, should derive the relatively equivalent amount of hash power. Practically, the ASIC mining rigs have much more mining efficiency than their prices.
@@ -979,15 +979,15 @@ The implementation process of hash locking across the chain is:
 \begin{enumerate}
 \item  Alice and Bob generate their addresses on 'MEER' and 'BTC' chains respectively;
 
-\item Alice generates her own Secret Key and Secret Key hash;
+\item Alice generates her own \textit{Secret Key} and \textit{Secret Key hash};
 
-\item Alice locks her 'MEER' token into the hash lock contract in the main chain of 'MEER'. The unlock condition is that Bob holds the Secret Key or returns it to Alice after exceeding the specified time;
+\item Alice locks her 'MEER' token into the hash-lock contract in the main chain of 'MEER'. The unlocking condition is that Bob holds the \textit{Secret Key} or returns it to Alice after exceeding the specified time;
 
-\item Bob checks the contract of Alice's main chain in 'MEER' and USES to generate the corresponding contract in 'BTC'. The unlock condition is that Alice holds the Secret Key or returns it to Bob after the specified time;
+\item Bob checks the contract of Alice's main chain in 'MEER' and uses \textit{Secret Key hash}   to generate the corresponding contract in 'BTC'. The unlocking condition is that Alice holds the \textit{Secret Key} or returns it to Bob after the specified time;
 
-\item Alice USES to remove Bob's lock 'BTC' in the hash lock contract;
+\item Alice uses \textit{Secret Key}  to take  'BTC' locked by Bob from the hash-lock contract;
 
-\item After obtaining , Bob locks Alice 'MEER' in the hash lock contract, and completes the transaction;
+\item After obtaining \textit{Secret Key}, Bob  takes 'MEER' locked by Alice from the hash-lock contract and completes the transaction;
 
 \end{enumerate}
 
@@ -1009,15 +1009,15 @@ Qitmeer completes the cross- chain transaction between the block chain assets of
 \begin{enumerate}
 \item  Alice and Bob generate their addresses on 'MEER' and 'ETH' chains respectively;
 
-\item   Alice generates her own Secret Key and Secret Key hash;
+\item   Alice generates her own \textit{Secret Key} and \textit{Secret Key hash};
 
- \item  Alice locks her 'MEER' token into the hash lock contract in the main chain of 'MEER'. The unlock condition is that Bob holds the Secret Key or returns it to Alice after exceeding the specified time;
+ \item  Alice locks her 'MEER' token into the hash-lock contract in the main chain of 'MEER'. The unlocking condition is that Bob holds the \textit{Secret Key} or returns it to Alice after exceeding the specified time;
 
- \item  Bob checks the contract of Alice in the main chain of 'MEER' and generates the corresponding contract on 'ETH'. The unlock condition is that Alice holds the Secret Key or returns it to Bob after exceeding the specified time.
+ \item  Bob checks the contract of Alice in the main chain of 'MEER' and generates the corresponding contract on 'ETH' using \textit{Secret Key hash}. The unlocking condition is that Alice holds the \textit{Secret Key } or returns it to Bob after exceeding the specified time.
 
- \item  Alice USES to call Smartcontract to remove 'ETH';
+ \item  Alice uses \textit{Secret Key} to call Smart Contract to take 'ETH';
 
- \item  After obtaining , Bob locks Alice 'MEER' in the hash lock contract, and completes the transaction;
+ \item  After obtaining \textit{Secret Key}, Bob takes 'MEER' locked by Alice in the hash-lock contract and completes the transaction;
 
 \end{enumerate}
 
