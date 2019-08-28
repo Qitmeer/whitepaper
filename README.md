@@ -1,5 +1,5 @@
 # whitepaper
-The HalalChain White Paper
+The Qitmeer White Paper
 
 # How To Build
 
@@ -30,14 +30,14 @@ http://ctan.sharelatex.com/tex-archive/systems/win32/miktex/setup/basic-miktex-2
 ```
 A windows installation tutorial:  [https://miktex.org/howto/install-miktex](https://miktex.org/howto/install-miktex)
 
-Makesure to install cygwin on windows (the `GNU make` installed) before execute `make`.
+Make sure to install cygwin on windows (the `GNU make` installed) before execute `make`.
 
 #### run 
 ```
 make
 ```
 Notice: 
-1. You might need to install some additional packages when you at the first-run. (the popup windows of MikTex package manager might ask you to confrim to download and install additioanal packages.)
+1. You might need to install some additional packages when you at the first-run. (the popup windows of MikTex package manager might ask you to confirm to download and install additional packages.)
 2. Test ok on the window7 64bit vmbox environment.
 
 
