@@ -1,5 +1,5 @@
-SOURCE=hlc_whitepaper
-CN_SOURCE=hlc_whitepaper_cn
+SOURCE=qitmeer_whitepaper
+CN_SOURCE=qitmeer_whitepaper_cn
 
 all: en cn
 

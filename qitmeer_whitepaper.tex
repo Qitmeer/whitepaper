@@ -183,7 +183,7 @@
 		\small\href{mailto:paper@qitmeer.io}
 			{\nolinkurl{paper@qitmeer.io}}
 	}
-\date{\today\\\small Version 0.5.2}
+\date{\today\\\small Version 0.5.3}
 \begin{document}
 
 %% Cover end
@@ -203,7 +203,7 @@ Qitmeer Consensus adopts the SPECTRE\cite{SPECTRE}  as its fundamental protocol.
 
 According to Shariah requirements, Qitmeer designs a UTXO-based unique token issuance scheme, which has effectively solved two main challenges: Intrinsic Value and Assets Authentication. Issuing a certain amount of assets must consume a certain amount of the native currency. Moreover, the entity must be warranted a license to issue assets. 
 
-Qitmeer devises a set of specifications and protocols to be adopted in the Global Islamic economy ecosystem, such as wallets and miners. As for interoperability, Qitmeer recognises the utilizing of cross-chain protocols to integrate various cryptocurrencies and offer reliable off- chain smart contract services.
+Qitmeer devises a set of specifications and protocols to be adopted in the Global Islamic economy ecosystem, such as wallets and miners. As for interoperability, Qitmeer recognizes the utilizing of cross-chain protocols to integrate various cryptocurrencies and offer reliable off- chain smart contract services.
 
 \end{abstract}
 
@@ -226,7 +226,7 @@ Openness is an essential feature to distinguish permissioned and permissionless 
 
 
 \subsubsection*{Predefined special roles}
-An open network allows different roles, in the bitcoin network, nodes could choose to be an SPV(Simplified Payment Verfication( node, full node or miner with freedom, so from the protocol’s aspect, bitcoin is open. Whereas, in Delegated Proof-of-Work, the block producers are voted off the chain with predefined  configurations,which demonstrates limited openness in the network.
+An open network allows different roles, in the bitcoin network, nodes could choose to be an SPV(Simplified Payment Verification) node, full node or miner with freedom, so from the protocol’s aspect, bitcoin is open. Whereas, in Delegated Proof-of-Work, the block producers are voted off the chain with predefined  configurations,which demonstrates limited openness in the network.
 
 \subsubsection*{Practically closed}
 Bitcoin is defined as open source according to the protocol, it is actually closed in practice. Miners have to join mining pools to minimize the risk of opportunity costs, at the expense to lose their free will. The situation is getting deteriorating in a speedy manner as described above. 
@@ -239,7 +239,7 @@ Fairness means that the rewards should be consistent with the contribution in th
 The expectation of rewards between solo mining and pool mining is equal in terms of probability. The point is, their opportunity cost is considerably high - either mine a block to get a dramatically high reward or wait a long time without any return. Therefore, miners have to turn to the mining pool to have a stable incentive.
 
 \subsubsection*{Cost Efficiency}
-Cost Efficiency is referring to mining cost. Mining cost mainly includes the electricity price and mining efficiency, and the latter is much more critical due to ASIC. ASIC is customized to direct a specific mining algorithm, so the mining efficiency per unit of cost is much higher than gener- alized computers. For instance, the hash rate per dollar for AntMiner S9 is about 20000 times greater than for GTX570; it is nearly impossible for a personal computer to win the hash rate competition.
+Cost Efficiency is referring to mining cost. Mining cost mainly includes the electricity price and mining efficiency, and the latter is much more critical due to ASIC. ASIC is customized to direct a specific mining algorithm, so the mining efficiency per unit of cost is much higher than generalized computers. For instance, the hash rate per dollar for AntMiner S9 is about 20000 times greater than for GTX570; it is nearly impossible for a personal computer to win the hash rate competition.
 
 \subsubsection{Secure}
 The security is how robust the network is to sustain the attack, mainly referring to overrun a confirmed transaction.
@@ -264,15 +264,12 @@ The Qitmeer network specification is designed to follow Classical Blockchain Set
 Proof-of-Work is the openest way to join a blockchain network due to the only resource required is electricity, which is physical and owned by each of the nodes.  
 \subsubsection*{Proof of Work}
 Proof-of-Work is the openest way to join a blockchain network due to the only resource required is electricity, which is physical and owned by each of the nodes.  
-
-Proof-of-Work is the openest way to join a blockchain network due to the only resource required is electricity, which is physical and owned by each of the nodes.  
-
 \subsubsection*{No Predefined Nodes}
 Predefined Nodes refer to special nodes defined in the protocol. Note: though there are mining pools in bitcoin,  they are unexpected in bitcoin protocol. Thus,  bitcoin still has no predefined nodes, so does Qitmeer because it is in line with bitcoin’s paradigm.
 \subsubsection{Fairness}
 BlockDAG is fair due to its adoption of a collaboration model instead of competition model of blockchain.
 \subsubsection*{Mining Pool Resistance}
-Mining pools centralization is the consequence of high opportunity cost, which is the conse- quence of the competition model. Qitmeer’s BlockDAG-based protocol SPECTRE is a collabo- ration model, the opportunity cost of solo mining is equal to that of pool mining. As a miner either individually or collectively, it is not compulsory to join a mining pool, which would lead to the risk of centralization.
+Mining pools centralization is the consequence of high opportunity cost, which is the consequence of the competition model. Qitmeer’s BlockDAG-based protocol SPECTRE is a collaboration model, the opportunity cost of solo mining is equal to that of pool mining. As a miner either individually or collectively, it is not compulsory to join a mining pool, which would lead to the risk of centralization.
 \subsubsection*{Anti-ASIC Mining Algorithm}
 Cuckoo Cycle is a graph-theoretic proof-of-work algorithm which prevails for ASIC resistance. Qitmeer adopts this algorithm to guarantee that no one has too much mining efficiency advantage.
 \subsubsection{Security}
@@ -311,7 +308,7 @@ The blockchain should not allow any issuance of illegitimate assets and unethica
 
 The $\texttt{OP\_TOKEN}$ is inspired by Color coin idea, which represents and manages real-world assets on top of the Bitcoin by using $\texttt{OP\_RETURN}$, and the OP\_GROUP, a referenced implementation of issuing assets designed by Andrew Stone.
 
-The OP\_TOKEN fit various practical scenarios with unique features like asset compliable and value relevent. There are some related concepts in the details below:
+The OP\_TOKEN fit various practical scenarios with unique features like asset compilable and value relevant. There are some related concepts in the details below:
 
 \subsubsection*{UTXO}
 
@@ -414,18 +411,18 @@ The main difference is simple, just adding a group address to distinguish differ
 
 \subsubsection{Overview}
 
-There is a unique token named LICENSE in OP\_TOKEN. The relevant regulatory bodies, shariah-governance entities, industry practitioners with public credibility within the ecosystem are invited to receive the licences to oversight the compliances issues that might occur along the course of mainstream adoption of the protocol. Any entity planning to issue a token needs to be warranted with a license. Peers can transfer licenses as they are also tokens in nature. However, the originator must be extra careful in event of transferring in order to avoid non-compliance risk due to the records is public and immutable.  
+There is a unique token named LICENSE in OP\_TOKEN. The relevant regulatory bodies, shariah-governance entities, industry practitioners with public credibility within the ecosystem are invited to receive the licenses to oversight the compliances issues that might occur along the course of mainstream adoption of the protocol. Any entity planning to issue a token needs to be warranted with a license. Peers can transfer licenses as they are also tokens in nature. However, the originator must be extra careful in event of transferring in order to avoid non-compliance risk due to the records is public and immutable.  
  
 
 \subsubsection{Issuance of License}
 
-Licenses are all generated in the genesis block and distributed to C preserved committee members. One smallest unit (SAND) can represent a license, one block has M coins, one coin= N SAND, so we have M*N license in total, which is sufficient for asset issuance.
+Licenses are all generated in the genesis block and distributed to C preserved committee members. One smallest unit (QIT) can represent a license, one block has M coins, one coin= N QIT, so we have M*N license in total, which is sufficient for asset issuance.
 
 
 \begin{lstlisting}[language=yaml, numbers=none,basicstyle=\footnotesize]
 # C = 100, M = 10, N = 10^8 (M*N = 10 billion),
 # all examples are based on this setting
-# Ex1: Distribute licenses to the commitee,
+# Ex1: Distribute licenses to the committee,
 # M*N/C = 100 million for each member.
 ---
 INPUTS:
@@ -477,15 +474,15 @@ OUTPUTS:
 \end{lstlisting}
 
 \subsubsection{Issuance of assets}
-Once the license is warranted, entities can issue assets; however, they cannot set the token amount arbitrarily. Instead, to issue a certain amount of assets requires converting the same amount of SANDs. The Qitmeer network calls this process as "token mint". Just like the case in reality, to mint a gold coin requires the same weight of gold sands, tokens need the same amount of SANDs.
+Once the license is warranted, entities can issue assets; however, they cannot set the token amount arbitrarily. Instead, to issue a certain amount of assets requires converting the same amount of QITs. The Qitmeer network calls this process as "token mint". Just like the case in reality, to mint a gold coin requires the same weight of gold qits, tokens need the same amount of QITs.
 
 The first advantage of issuance system is to guarantee tokens’ elementary intrinsic value; thus, it would significantly mitigate the price fluctuation. Another advantage is that tokens and native currency are no longer isolated islands of value; which are running in the same ecosystem and would improve the liquidity and make the whole network stable.
 
 \lstset{basicstyle=\tiny,style=myListStyle}
 \begin{lstlisting}[language=yaml, numbers=none,basicstyle=\footnotesize]
-# Ex3: Convert 100000000 native SANDs, i.e. 1 Coin,
-# to 100000000 sands of the new token,
-# note the license will go back to the issuer for future issurance.
+# Ex3: Convert 100000000 native QITs, i.e. 1 Coin,
+# to 100000000 qits of the new token,
+# note the license will go back to the issuer for future issuance.
 INPUTS:
 	- INPUT:
 			PREVIOUS_OUTPUT: #(1 LICENSE)
@@ -539,14 +536,14 @@ OUTPUTS:
 
 \subsubsection{Melt Token}
 
-Melt is the reversed process of mint, i.e., conversion from tokens to native currency. The total amount of sand is constant, either in the form of Native Sand or Token Sand. However, it is allowed to transform a token and convert native currency. Issuers can melt their coins to reduce liquidity in order to keep the price stable, which is practical to implement stable coins. Melt guarantees the tokens fundamental value, just like the minimum value of a gold coin is the same weight of gold.   
+Melt is the reversed process of mint, i.e., conversion from tokens to native currency. The total amount of qit is constant, either in the form of Native QIT or Token QIT. However, it is allowed to transform a token and convert native currency. Issuers can melt their coins to reduce liquidity in order to keep the price stable, which is practical to implement stable coins. Melt guarantees the tokens fundamental value, just like the minimum value of a gold coin is the same weight of gold.   
 
 
 Melt guarantees the tokens fundamental value, just like the minimum value of a gold coin is the same weight of gold.
 
 \lstset{basicstyle=\tiny,style=myListStyle}
 \begin{lstlisting}[language=yaml, numbers=none,basicstyle=\footnotesize]
-# Ex5: Melt 100 token sands into 100 native sands
+# Ex5: Melt 100 token qits into 100 native qits
 INPUTS:
 	- INPUT:
 			PREVIOUS_OUTPUT:
@@ -632,7 +629,7 @@ means block 10 and 11 are excluded.
 
 According to rule 3, block 5 votes for $x \prec y$, since the majority of its
 future vote in favor of $x$ over $y$ (blocks 7, 8 versus block 9). Note that the
-current view is block 12's local view and block 11 is exculded, so we cannot
+current view is block 12's local view and block 11 is excluded, so we cannot
 take its vote.
 
 Also according to rule 3, blocks 1\textasciitilde4 vote for $x \prec y$.
@@ -646,7 +643,7 @@ $y$ gets 2 votes. Block 12 follows the majority and votes for $x \prec y$ thus.
 When a node $v$ receives a block $x$, it loops to calculate the  risk of
 the block. It accepts the block when the risk is smaller than a given threshold
 $\epsilon$. The confirmation time of block $x$ in node $v$ is the time
-since $x$ is received by $v$ until $x$ is accpeted by $v$.
+since $x$ is received by $v$ until $x$ is accepted by $v$.
 
 The following algorithm below calculates the  risk of block $x$ in
 $G_t^v$, where $G_t^v$ is the block DAG that $v$ observes at time $t$.
@@ -692,7 +689,7 @@ since block $x$ is published, which is called gap in the SPECTRE paper. $\pi(l)$
 is the probability that the value of gap is $l$.
 
 The value of gap changes as time goes on, forming a random walk which induces an
-ergodic Markov chain. Theorietically, it could be any integer ranging from
+ergodic Markov chain. Theoretically, it could be any integer ranging from
 negative infinity to positive infinity. In the worst case, it is always
 non-negative. Only when the gap is non-negative is there a risk for block $x$ to
 be received less or equal votes than some attacker’s block $y$ which is
@@ -888,8 +885,8 @@ and then compared with the target difficulty.
 
 \subsection{Rewards}
 \subsubsection{Transaction Collision}
-Due to asynchronous block submmission, BlockDAG protocols inevitably incorporate repeating transactions, called transaction collisons.
-Miners tend to pack the transaction with higher fees to maximize their profit. This will result in high repetition rates of blocks. Repeated transactions will not contribute to the throughput, what is more, low fee transactions would wait indefinite time to get confirmed. In a fully decentralized network, nodes cannot coordinate each other to avoid collision, leaving the only option to deivse a sophiscated incentive mechanism to penalize the selfish mining behaviors.
+Due to asynchronous block submission, BlockDAG protocols inevitably incorporate repeating transactions, called transaction collisions.
+Miners tend to pack the transaction with higher fees to maximize their profit. This will result in high repetition rates of blocks. Repeated transactions will not contribute to the throughput, what is more, low fee transactions would wait indefinite time to get confirmed. In a fully decentralized network, nodes cannot coordinate each other to avoid collision, leaving the only option to deivse a sophisticated incentive mechanism to penalize the selfish mining behaviors.
 
 The intuitive way to solve this challenge is to share the transaction fee, and this method will make all the miners reach a Nash equilibrium that all the miners will choose transactions randomly from their memory pools. This approach will considerably reduce transactions collision; however, users can no longer pay higher fees to boost their transaction confirmation.
 
@@ -898,7 +895,7 @@ Qitmeer appreciates Inclusive protocol work and adopts which states that this me
 \subsubsection{First Come First Serve}
 The miners will encourage to submit blocks immediately upon the creation of the transaction. The transaction fee belongs to the first miner who initiated the transaction. However, this reward mechanism requires transactions has a global order, which has been offered by GHOSTDAG protocol.
 
-Inclusive protocol states that this machanism has some security concerns because it won't penalize those malicious parites who mine blocks in private. Inclusive protocol fixes this problem by only giving rewards to blocks not deviating main chain too much. Qitmeer appreciates Inclusive protocol work and adopts it.
+Inclusive protocol states that this mechanism has some security concerns because it won't penalize those malicious parities who mine blocks in private. Inclusive protocol fixes this problem by only giving rewards to blocks not deviating main chain too much. Qitmeer appreciates Inclusive protocol work and adopts it.
 
 \section{Protocols and Interoperability}
 BlockChain is the digital infrastructure for decentralized financial system, which would evolve into a complete ecosystem in the course of reaching maturity. This session analyses the typical applications available on  Qitmeer network and the protocols for interaction with Qitmeer. 
