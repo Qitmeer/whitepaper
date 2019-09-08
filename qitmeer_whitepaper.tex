@@ -908,6 +908,84 @@ Therefore, Qitmeer uses a Proof-Of-Work algorithm called Cuckoo Cycle\cite{cucko
 a memory-hard algorithm. This algorithm is designed to find certain subgraphs in large pseudo-random graphs.
 An introduction of Qitmeer proof-of-work can be found here.\cite{qitmeerpow}
 
+\subsubsection{Mining Protocol}
+
+\begin{figure}[ht]
+	\centerline{%
+		\resizebox{0.8\textwidth}{!}{\includegraphics{figures/mining_process}}%
+	}
+	\caption{Mining process.}
+\end{figure}
+
+Qitmeer supports getblocktemplate mining protocol. It make the miner to decide which transactions are put in the block. The miner send a request to the Qitmeer full node by getblocktemplate RPC.
+\begin{lstlisting}
+{
+	"jsonrpc": "2.0",
+	"method": "getBlockTemplate",
+	"params": [
+				[
+					"'$capabilities'"
+				]
+			],
+	"id": 1
+}
+\end{lstlisting}
+getblocktemplate return a JSON Object.
+\begin{lstlisting}
+{
+	"jsonrpc": "2.0",
+	"id": 1,
+	"result": {
+		"bits": "207fffff",
+		"stateroot": "0000000000000000000000000000000000000000000000000000000000000000",
+		"curtime": 1567323822,
+		"height": 6,
+		"previousblockhash": "50474e0a6f88f2f1aee7a0134a7be4b6e5ab6a7c9ba440b6c11c54494ca89d32",
+		"sigoplimit": 80000,
+		"sizelimit": 1310720,
+		"weightlimit": 4000000,
+		"parents": [
+		{
+		"data": "329da84c49541cc1b640a49b7c6aabe5b6e47b4a13a0e7aef1f2886f0a4e4750",
+		"hash": "50474e0a6f88f2f1aee7a0134a7be4b6e5ab6a7c9ba440b6c11c54494ca89d32"
+		}
+		],
+		"transactions": [],
+		"version": 4,
+		"coinbaseaux": {
+		"flags": "092f7169746d6565722f"
+		},
+		"coinbasevalue": 45000000000,
+		"longpollid": "50474e0a6f88f2f1aee7a0134a7be4b6e5ab6a7c9ba440b6c11c54494ca89d32-1567323822",
+		"target": "7fffff0000000000000000000000000000000000000000000000000000000000",
+		"maxtime": 1567331022,
+		"mintime": 1567323743,
+		"mutable": [
+		"time",
+		"transactions/add",
+		"prevblock",
+		"coinbase/append"
+		],
+		"noncerange": "00000000ffffffff",
+		"capabilities": [
+		"proposal"
+		]
+	}
+}
+\end{lstlisting}
+
+Then the miner start PoW using the data from getblocktemplate RPC. If it get the right 'answer', submiting the potential block by submitblock RPC.
+\begin{lstlisting}
+{
+	"jsonrpc": "2.0",
+	"id": 1,
+	"method": "submitBlock",
+	"params": [
+	"data"
+	]
+}
+\end{lstlisting}
+
 \subsubsection{Miner Capability}
 
 The Qitmeer-Miner supports both solo mining and pool mining.
