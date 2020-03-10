@@ -183,7 +183,7 @@
 		\small\href{mailto:paper@qitmeer.io}
 			{\nolinkurl{paper@qitmeer.io}}
 	}
-\date{\today\\\small Version 0.5.3}
+\date{\today\\\small Version 0.5.4}
 \begin{document}
 
 %% Cover end
@@ -197,13 +197,15 @@
 \begin{abstract}
 Bitcoin\cite{bitcoin} was born with revolution which opened a new horizon of currency issuance that becomes open and fair by a cryptography-based decentralized payment network. The underlying ledger mechanism of Bitcoin (blockchain), is capable of playing a significant role in the financial system due to its tamper resistance. The Blockchain technology will reshape Interest-free finance, as a significant alternative system of global financial system.
 
-With the arrival of 10-years birth of bitcoin, the blockchain infrastructure is facing various challenges from technical perspective. Moreover, Qitmeer considers openness, fairness, fault tolerance, scalability as the core metrics to assess a promising blockchain paradigm, and a blockchain system achieved a desirable balance among these metrics is regarded as Classical Blockchain Setting.
+ Bitcoin was born 10 years before, since then the blockchain infrastructure has been facing various challenges from technical perspective. Moreover, Qitmeer considers openness, fairness, fault tolerance, scalability as the core metrics to assess a promising blockchain paradigm, and a blockchain system achieved a desirable balance among these metrics is regarded as Classical Blockchain Setting.
 
-Qitmeer Consensus adopts the SPECTRE\cite{SPECTRE}  as its fundamental protocol. SPECTRE is a fast confirmation and high throughput BlockDAG protocol, which guarantees high performance in a payment network. Additionally, Qitmeer incorporates  another high throughput BlockDAG protocol   GhostDAG\cite{GhostDAG}, which is highlighted on unprecedentedly supporting transactions linearly ordering, to circumvent SPECTRE’s weak liveness and provide ordering service for the fair scheme of the reward system. The Qitmeer Consensus is in line with Classical Blockchain Setting which could join and leave the network freely by Proof-of-Work, with the collaboration model of DAG ledger guarantees that miners gain rewards corresponding to their contribution respectively, the  50\% fault tolerance as secure as bitcoin, robust scalability that is subjected to physical network limit. The mining algorithm is also a vital source of fairness other than consensus algorithm per se. Cuckoo Ring is a graph theory based proof-of-work mining algorithm and is practically ASIC resistant due to memory-hard calculation. 
+BlockDAG is a high throughput framework, highlighted in fully decentralized and high security.
+Qitmeer Consensus adopts GHOSTDAG, the first BlockDAG protocol with block total ordering support, as its fundamental protocol, also guaranteed fast confirmation by another BlockDAG protocol SPECTRE.
+The Qitmeer Consensus is in line with Classical Blockchain Setting that one could join and leave the network freely by Proof-of-Work, and that miners gain rewards corresponding to their contribution respectively with the support of collaboration model of DAG ledger, the 50\% fault tolerance as secure as bitcoin, robust scalability that is subjected to physical network limit. The mining algorithm is also a vital source of fairness other than consensus algorithm per se. Cuckoo Ring is a graph theory based proof-of-work mining algorithm and is practically ASIC resistant due to memory-hard calculation. 
 
-According to Shariah requirements, Qitmeer designs a UTXO-based unique token issuance scheme, which has effectively solved two main challenges: Intrinsic Value and Assets Authentication. Issuing a certain amount of assets must consume a certain amount of the native currency. Moreover, the entity must be warranted a license to issue assets. 
+Per regulation requirements, Qitmeer designs a UTXO-based unique token issuance scheme, which has effectively solved two main challenges: Intrinsic Value and Assets Authentication. Issuing a certain amount of assets must consume a certain amount of the native currency. Moreover, the entity must be warranted a license to issue assets. 
 
-Qitmeer devises a set of specifications and protocols to be adopted in the Global Islamic economy ecosystem, such as wallets and miners. As for interoperability, Qitmeer recognizes the utilizing of cross-chain protocols to integrate various cryptocurrencies and offer reliable off- chain smart contract services.
+Qitmeer devises a set of specifications and protocols to be adopted in the Global Inclusive and Ethical economy ecosystem, such as wallets and miners. As for interoperability, Qitmeer recognizes the utilizing of cross-chain protocols to integrate various cryptocurrencies and offer reliable off- chain smart contract services.
 
 \end{abstract}
 
@@ -290,12 +292,12 @@ SPECTRE is a BlockDAG protocol, and the throughput could employ full potential p
 Technically, the cost is not scaling since the transaction fee is increasing slightly with the network growing. However, the average cost will keep relatively insignificant and reasonable for a long period.  
 
 \section{Qitmeer Token Design}
-The existing blockchain networks have not taken into consideration the  Shariah compliance and ethical concern entirely, from its whole ecosystem when they initiate their design. However, Qitmeer has taken Shariah Compliance into consideration rooted from its underlying philosophy, and penetrated through the whole technical architecture , until the applications in the ecosystem, in which it has been designed an effective approach, namely OP_TOKEN.
+The existing blockchain networks have not taken into consideration the  regulation compliance and ethical concern entirely, from its whole ecosystem when they initiate their design. However, Qitmeer has taken Regulation Compliance into consideration rooted from its underlying philosophy, and penetrated through the whole technical architecture , until the applications in the ecosystem, in which it has been designed an effective approach, namely OP_TOKEN.
 
 \subsection{Background}
 \subsubsection{Problem definition}
 
-Blockchains are ought to consider two main points to be considered as Shariah compliance in the Blockchain industry:
+Blockchains are ought to consider two main points to be considered as Regulation compliance in the Blockchain industry:
 
 \subsubsection*{Intrinsic Value}
 Assets must have underlying value and cannot be created out of thin air. On existing token issuance platforms like Ethereum\cite{Ethereum}, individuals can issue a token of arbitrary amount without any foundation.
@@ -562,6 +564,9 @@ OUTPUTS:
 
 \section{Consensus Protocol}
 
+BlockDAG is a high throughput framework ,highlighted in fully decentralized and high security. Futhermore, it is a natural extension to classical bitcoin paradigm, meaning it would inherit most  long time verified qualities of bitcoin and is expected stronger stability.
+
+Qitmeer introduces GHOSTDAG as fundamental protocol to achieve high throughput linearly ordering service with fast confirmation guaranteed by SPECTRE protocol.
 
 \subsection{From BlockChain To BlockDAG}
 Bitcoin does not scale due to protocol restrain. By Nakamoto Consensus, i.e., longest-chain rule, 1 MB block size and 10 minutes block rate confine bitcoin to reach only 7 TPS theoretical throughput regardless of the bandwidth and propagation delay.
@@ -570,7 +575,7 @@ The most intuitive way to increase scalability is to shorten block time or enlar
 
 GHOST protocol introduces heaviest-tree consensus to keep forks without sacrificing security. Note that here BlockChain has transformed into a BlockTree. Since the largest subtree has concentrated the majority hash power, the security is as high as bitcoin. The main chain is the path, i.e. a blockchain from the genesis to leaf, with the highest number of descendants, other blocks are off-chain blocks. Only main chain blocks contribute throughput, off-chain blocks help strengthen the security. 
 
-BlockTree has dramatically increased throughput because of the higher Block Rate or Size. However, there is still a waste of the transactions of off-chain blocks, which should contribute to the throughput as well. Inclusive protocol proposes a new data structure of ledger, where every block confirms every unconfirmed block. This improvement upgrades a BlockTree to a BlockDAG.
+BlockTree has dramatically increased throughput because of the higher Block Rate or Size. However, there is still a waste of the transactions of off-chain blocks, which should contribute to the throughput as well. Inclusive\cite{Inclusive} protocol proposes a new data structure of ledger, where every block confirms every unconfirmed block. This improvement upgrades a BlockTree to a BlockDAG.
 
 Through the development history from BlockChain to BlockDAG, it may indicate  that BlockChain is a particular case of BlockDAG in the event of low throughput, which means both are the same in essence. As a result,  it is the scaling approach whose paradigm is the closest to the bitcoin network. BlockDAG is robust since it inherits all the long-time-proved stable features of bitcoin,  as well as it could scale infinitely in terms of protocol, unless it is limited physically, such as, bandwidth. A robust public chain is the optimal basis for incorporating further scaling solutions, such as sharding and state-channels, thus BlockDAG is the preferred scaling solution of Qitmeer.
 
@@ -582,11 +587,63 @@ Through the development history from BlockChain to BlockDAG, it may indicate  th
 \caption{DAG}
 \end{figure}
 
-\subsection{Consensus}
+\subsection{GHOSTDAG}
 
-Qitmeer adopts a hybrid consensus that combines SPECTRE and GHOSTDAG in order to achieve fast confirmation and high throughput.
+GHOSTDAG, formerly Phantom, is the first BlockDAG protocol with block total ordering support. What is more, comparing to SPECTRE, it guarantees strong liveness to make the consensus protocol more robust. That is to say, both honest blocks and malicious blocks can be confirmed within a definite time, though it may take longer time to confirm malicious blocks.
 
-\subsubsection{SPECTRE}
+
+\subsubsection{Intuition}
+
+Here is the idea behind GHOSTDAG. Suppose that the maximal limits of network propagation delay and block creation
+rate are constant. It is intuitive that if nodes behave honestly, it forms a subgraph where each block has at most a constant number of forks. We denote
+this constant number as $k$. $k$ can be calculated from propagation time and
+block creation rate. The subgraph is denoted as a $k$-cluster. The biggest
+$k$-cluster is called a blue set. Those blocks outside the blue set are called
+red set.
+
+If we can traverse from block $x$ to block $y$ by following the parent
+references within each block, then we say that there's a partial order between
+$x$ and $y$, and $y$ is prior to $x$. For example in the following figure, we
+can traverse from block J to A through B, so there's a partial order between A
+and J, and A is prior to J. Note not all blocks have partial orders with other
+blocks. For example, there are no partial orders between B, C and D.  The block set where no partial order exists is an anticone. The size of any anticone in
+a $k$-cluster is at most $k$.
+
+\begin{figure}[ht]
+	\centerline{%
+	   \resizebox{0.8\textwidth}{!}{\includegraphics{figures/GHOSTDAG}}%
+	}
+\caption{GHOSTDAG}
+\end{figure}
+
+
+\subsubsection{Ordering}
+
+GHOSTDAG orders the DAG ledger in a way that favours blue blocks and penalizes
+red ones. So, if two blocks X and Y have no partial order from the graph, the one in blue set is prior to the one in the red set.
+
+The coloring algorithm is based on a block's past set, also known as ancestors, since the past set gets fixed after a block generated, the blue set will get fixed as well. Therefore, each block could choose the parent with maximal blue set as its main parent. Then, repeat the process of finding main parent from the tip blocks extending to the genesis block, finally we could figure out a unique block chain that is under agreement by the majority of the network, we name this block chain as main chain. Once main chain is identified, all the blocks could form a linearly order in reference to it. 
+
+
+\begin{figure}[ht]
+	\centerline{%
+	   \resizebox{0.8\textwidth}{!}{\includegraphics{figures/Ordering}}%
+	}
+\caption{GhostDAG Ordering}
+\end{figure}
+
+For example in figure 5, this is a 3-cluster DAG. 
+
+\begin{enumerate}
+	\item Add genesis block G in blue set
+	\item Add B,C,D,E to blue set, since none of them has an anticone greater than 3
+	\item Since the blue set of H is greater than that of F and I, so add H in blue set. Add I to blue set because its anticone size is only 2; Add mark B and F in red set for anticone size greater than 3
+	\item J,K,L arrived. Both past set size and blue set size of J and K are the same, so currently there are two possible main chain, G-C-H-J and G-C-H-K 
+	\item M arrived, since M's blue set is greater than that of J and L, M is added to blue set, so there is only one main chain left, G-C-H-K-M. Add J to blue set due to small anticone size then add F, L to red set due to big anticone size, now red set and blue set as well as main chain are identified
+	\item the order is G-C-D-E-H-I-B-K-F-j-M-L
+\end{enumerate}
+
+\subsection{SPECTRE}
 SPECTRE\cite{SPECTRE} is a BlockDAG based protocol that achieves fast confirmation and high throughput with 50\% attack resilience. SPECTRE guarantees safety, which means the transaction is unlikely to be reversed once it is accepted. However, the SPECTRE guarantees fast confirmations for honest users rather than all users which is weak liveness.
 
 There is a trade-off between liveness and fast confirmation, whereby SPECTRE prioritizes the latter due to weak liveness only affects malicious users, that enables SPECTRE to be a suitable protocol for payment model. In the event malicious users launch double spending attack, their transactions are likely to be delayed indefinitely.
@@ -755,56 +812,8 @@ With the converted formula we are able to calculate $risk\_hidden$ in numerical 
 \caption{Confirmation Time}
 \end{figure}
 
-\subsubsection{GHOSTDAG}
-
-
-Qitmeer is designed for decentralized payment network. In most scenarios , it is sufficient to provide only partial ordering or pairwise ordering for blocks in the ledger. However, sometimes it may still need to obtain a total (linear) ordering of all the blocks, especially in the event of rewarding blocks based on their ordering. 
-
-Obtaining total ordering for a DAG ledger is not so intuitive as it is for blockchains due to a DAG ledger contains forks, which are caused by various factors, such as, network propagation delay, concurrent block creations, faulty miners. Therefore, as a supplement to the consensus protocol of Qitmeer, it uses GHOSTDAG to obtain the total ordering to reward blocks which appears earlier in the ordering.
-
-In addition to total ordering, GHOSTDAG also provides Strong Liveness guarantee to make the consensus protocol more robust, which means both honest blocks and malicious blocks can be confirmed within a definite time, though it may take a long time to confirm malicious blocks.
-
-Suppose that the maximal limits of network propagation delay and block creation
-rate are constant. It is intuitive that if nodes behave honestly, it forms a subgraph where each block has at most a constant number of forks. We denote
-this constant number as $k$. $k$ can be calculated from propagation time and
-block creation rate. The subgraph is denoted as a $k$-cluster. The biggest
-$k$-cluster is called a blue set. Those blocks outside the blue set are called
-red set.
-
-If we can traverse from block $x$ to block $y$ by following the parent
-references within each block, then we say that there's a partial order between
-$x$ and $y$, and $y$ is prior to $x$. For example in the following figure, we
-can traverse from block J to A through B, so there's a partial order between A
-and J, and A is prior to J. Note not all blocks have partial orders with other
-blocks. For example, there are no partial orders between B, C and D.  The block set where no partial order exists is an anticone. The size of any anticone in
-a $k$-cluster is at most $k$.
-
-\begin{figure}[ht]
-	\centerline{%
-	   \resizebox{0.8\textwidth}{!}{\includegraphics{figures/GHOSTDAG}}%
-	}
-\caption{GHOSTDAG}
-\end{figure}
-
-
-GHOSTDAG orders the DAG ledger in a way that favours blue blocks and penalizes
-red ones. It determines the order between blue blocks according to their partial orders and some topological sor. Then, for any blue block $B$, add to the order
-just before $B$ all of the red blocks in $past(B)$ that weren’t added to the
-order yet; these red blocks too should be added topologically. Notice
-that for any blue block $B$, the order on blocks in $past(B)$ should remain the
-same if we remove from the DAG blocks in $future(B)$.
-
-An example of the output order of the GHOSTDAG procedure on the small DAG ledger
-from the figure above is: $(A,D,C,G,B,F,I,E,J,H,K)$. Nevertheless, finding the
-maximum $k$-cluster is NP-hard, so GHOSTDAG is therefore of less practical use
-for an ever-growing DAG ledger and may cause long confirmation times.
-Therefore, we use GHOSTDAG only to implement the reward mechanism of Qitmeer, since
-it should be acceptable for a miner to wait for a while to get his or her mining
-reward. The confirmation time for a transaction to be accepted is still defined
-in the SPECTRE way.
 
 \subsection{Mining Algorithm}
-\subsubsection{BlockDAG and Mining}
 BlockDAG’s collaboration model provides much more fairness than the competition model of BlockChain on the protocol perspective. Every node gets rewards according to its contribution, regardless of how much hash power it possess. Qitmeer favors fairness over the scalability owing to the former is more in line with true spirit of blockchain. The intention of Nakamoto Consensus is fair - every node votes with electricity; however, only a small bunch of the mining pools have the odds to participate in consensus. solo miners suffer huge opportunity cost since they have to wait for an uncertain time, quite long in most cases, to mine a block to cover their cost; thus finally it will have to turn to the mining pools. BlockDAG incorporates every miner’s block, the miners have a strong expectation of their return and then discourage to join a mining pool.
 
 
@@ -883,19 +892,68 @@ that the ratio of M/N remain fixed, such as M/N = 1/2.
 Thus in the actual use, it also adds a hash difficulty control similar to Bitcoin. The digest of the cycle nonces is obtained by a hash function,
 and then compared with the target difficulty.
 
-\subsection{Rewards}
-\subsubsection{Transaction Collision}
+\subsubsection{Difficulty Adjustment}
+To keep block creation, a.k.a block rate, stable, Qitmeer adjust mining difficulty periodically. 
+The adjustment rule is deviated from BlockChain due to forks of BlockDAG
+
+\subsubsection*{Blue Set Based}
+Rather than based on all the blocks, Qitmeer adjustment different merely on Blue blocks. 
+
+\subsubsection*{Dynamic adjustment interval}
+It is complicated to adjust the difficulty every fixed number of blue blocks, because different block has different blue set, leading difficult to make a agreement on which block to be the adjustment point.
+
+Qitmeer exploits main chain to overcome this problem. The rule is:
+
+\begin{enumerate}
+	\item  Wait until 144 blocks newer than last adjustment point in main chain.
+    \item  Calculate the actual time, which is the time span from last adjustment point to now.
+    \item  Calculate new blue blocks created.
+    \item  Calculate the expected time of those blue blocks by multiply the number with block time.
+    \item  Adjust the difficulty by comparing expected time and actual time.
+\end{enumerate}
+
+
+
+\section{Incentive system}
+The economic drive for the miners to work for a blockchain network is a reasonable incentive system. Qitmeer distributes rewards in a fully decentralized way - mining. Qitmeer concerns fairness among all the nodes, regardless how much power one owns. For miners with strong hash power, they may strive for the block reward, which is abundant, though more competition intensive ; for those with less power, they still got the chance to share transaction fee, first come first serve.
+
+\subsection{Block Reward}
+Miners create a block, including all the unconfirmed transactions, and add a transaction funding to themselves with a commonly admitted amount, then find the cryptic solution and broadcast it to the network. That's simply how mining works, and  this self transfer is called coinbase reward or block reward. 
+
+Block reward is considerable and incentives miners to compete intensively to obtain.  BlockDAG paradigm is a collaboration model, therefore the threshold could be lower and the distribution  fairer, however, block reward is essentially a scare resource that requires miners with considerable hash power to take part in this game.
+
+\subsection*{Blue Set Only}
+As clarified in Consensus Protocol section, GhostDAG protocol colors the honest blocks with blue and the dishonest with red. Qitmeer gives block rewards only to those blocks colored as blue.
+Qitmeer identifies merely block rewards of blue blocks as valid, the reasons as below.
+
+\subsubsection*{Encourage miners working actively}
+The network is rely on miners working hard to consolidate security. Competition in BlockDAG paradigm is not be as intensive as that in BlockChain, therefore we need to encourage miners working positively to better secure the network. Since working passively has higher probability to be identified as red block, miners will work hard to avoid such situation.
+
+\subsubsection*{Resilient to potential attack}
+The instinct of BlockDAG to incorporate forks makes it more inclusive than BlockChain. However, it would reduce the cost to perform an attack because even the failing blocks will be included in the ledger. Since the failing blocks are probably identified as red blocks and paid nothing, it increases the investment of attack dramatically and attacker would not carry on attacks abruptly.
+
+\subsection{Transaction Fee}
+Blue Set policy would consolidate the security considerably, nonetheless it brings discrimination to those miners with less hash power or worse network traffic condition. Perhaps they are honest miners as well but still are identified as "dishonest" due to consensus protocol's limitation. Therefore, we could utilize transaction fee to compensate those less powerful honest miners. 
+
+\subsubsection{Every block gets paid transaction fee}
+The block reward aims at security while the transaction fee is targeting more on underlying service - value transfer. So the reward policy for transaction fee cares more about fairness, if you devoted to the network, the network would pay you accordingly regardless how much hash power you have.
+
+Other than block reward is orientated merely from  blue blocks, transaction fee is transferred on every blocks, even marked as red. So, miners get paid as long as they work hard. E.g., due to locality, the miners prioritizes to incorporate transactions geographically around them. So, even if their blocks broadcast slower due to poor network traffic and eventually marked as red, they still could receive those transaction fee.
+
+\subsubsection{Weighted transaction fee}
 Due to asynchronous block submission, BlockDAG protocols inevitably incorporate repeating transactions, called transaction collisions.
-Miners tend to pack the transaction with higher fees to maximize their profit. This will result in high repetition rates of blocks. Repeated transactions will not contribute to the throughput, what is more, low fee transactions would wait indefinite time to get confirmed. In a fully decentralized network, nodes cannot coordinate each other to avoid collision, leaving the only option to deivse a sophisticated incentive mechanism to penalize the selfish mining behaviors.
+Miners tend to pack the transaction with higher fees to maximize their profit. This will result in high repetition rates of blocks. Repeated transactions will not contribute to the throughput, what is more, low fee transactions would wait indefinite time to get confirmed. In a fully decentralized network, nodes cannot coordinate each other to avoid collision, leaving the only option to devise a sophisticated incentive mechanism to penalize the selfish mining behaviors.
 
-The intuitive way to solve this challenge is to share the transaction fee, and this method will make all the miners reach a Nash equilibrium that all the miners will choose transactions randomly from their memory pools. This approach will considerably reduce transactions collision; however, users can no longer pay higher fees to boost their transaction confirmation.
+The intuitive way to solve this challenge is to share the transaction fee, and this method will make all the miners reach a Nash equilibrium that all the miners will choose transactions randomly from their memory pools. This approach will considerably reduce transactions collision; however, users would no longer pay higher fees to boost their transaction confirmation, so this policy would break the functionality of transaction fee.
 
-Qitmeer appreciates Inclusive protocol work and adopts which states that this mechanism has some security concerns due to the fact that  it would not penalize those malicious parties who mine blocks in private. Inclusive protocol fixes this problem by only giving rewards to blocks  which are not deviating from the main chain significantly. 
+Inspired by inclusive protocol, Qitmeer takes on a simpler Weighted Transaction Fee policy to balance the functionality and collision. The policy is really simple, higher transaction has accordingly higher probability to be included. E.g., if one transaction fee is 2 times higher than another, it is two times more likely to be picked from the mempool.
 
 \subsubsection{First Come First Serve}
-The miners will encourage to submit blocks immediately upon the creation of the transaction. The transaction fee belongs to the first miner who initiated the transaction. However, this reward mechanism requires transactions has a global order, which has been offered by GHOSTDAG protocol.
+Inspired by Inclusive protocol as well, Qitmeer takes on First Come First Serve policy for transaction fee. The idea is straightforward, whoever is the first one to include the transaction wins the transaction fee.
 
-Inclusive protocol states that this mechanism has some security concerns because it won't penalize those malicious parities who mine blocks in private. Inclusive protocol fixes this problem by only giving rewards to blocks not deviating main chain too much. Qitmeer appreciates Inclusive protocol work and adopts it.
+However, the implementation of this idea is not as easy as expected and is not covered in Inclusive paper. By bitcoin's diagram, miners collect transactions fee in coinbase as well, at this phrase, its order is undetermined. Simply put, the miner has no idea which transaction will be the first included than the rest of the network, the only way is to assume all the the transactions will be the first and collect all the fee, but actually some of them would be identified invalid.
+
+Qitmeer's solution to this problem is to balance this coinbase transaction when the miners tried to spend it. For instance, if a miner creates a block with 3 transactions with 0.1 meer fee each, finally identified 2 out of 3 are first included, the rest is not. When the miner creates a transaction to spend this block reward, he has to add an output pointing to a special address with amount 0.1 to burn the redundant fee.
 
 \section{Protocols and Interoperability}
 BlockChain is the digital infrastructure for decentralized financial system, which would evolve into a complete ecosystem in the course of reaching maturity. This session analyses the typical applications available on  Qitmeer network and the protocols for interaction with Qitmeer. 
@@ -1042,7 +1100,7 @@ For example:
 
 
 \subsection{Cross Chain}
-Qitmeer is dedicated to undertake the tokenized liquidity and host applications of global ecosystem of Islamic finance. Consequently the design goal of Qitmeer is to build up a simple and robust UTXO-based value transfer network, which prefers interoperability solutions to integrate various blockchains and applications, such as smart contract. Eventually, they will be part of Qitmeer’s ecosystem and can interact with each other.
+Qitmeer is dedicated to undertake the tokenized liquidity and host applications of global ecosystem of Inclusive and Ethical finance. Consequently the design goal of Qitmeer is to build up a simple and robust UTXO-based value transfer network, which prefers interoperability solutions to integrate various blockchains and applications, such as smart contract. Eventually, they will be part of Qitmeer’s ecosystem and can interact with each other.
 
 \subsubsection{UTXO interoperability}
 Currently, Qitmeer has supported P2SH script contracts and cross-chain functions through hash-locking.
