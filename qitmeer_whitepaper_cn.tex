@@ -1,4 +1,7 @@
+% !TEX program = xelatex
+
 \documentclass[a4paper,11pt]{article}
+\usepackage{xeCJK}
 
 \usepackage{clrscode}
 
@@ -72,7 +75,7 @@
 \ifxetexorluatex%
   \usepackage{fontspec}
   \usepackage{libertine} % or use \setmainfont to choose any font on your system
-  \newfontfamily\quotefont[Ligatures=TeX]{Linux Libertine O} % selects Libertine as the quote font
+  \newfontfamily\quotefont[Ligatures=TeX]{STSong} % selects Libertine as the quote font
 \else
   \usepackage[utf8]{inputenc}
   \usepackage[T1]{fontenc}
@@ -176,10 +179,10 @@
 
 
 %opening
-\title{\LARGE The Qitmeer White Paper:\\
-	\Large The guardian of trust.}
+\title{\LARGE Qitmeer 白皮书\\
+	\Large 信任守护者}
 \author{
-	Qitmeer team\\
+	Qitmeer 团队\\
 		\small\href{mailto:paper@qitmeer.io}
 			{\nolinkurl{paper@qitmeer.io}}
 	}
@@ -195,102 +198,112 @@
 %\watermark{60}{10}{qitmeer.io}
 
 \begin{abstract}
-Bitcoin\cite{bitcoin} was born with revolution which opened a new horizon of currency issuance that becomes open and fair by a cryptography-based decentralized payment network. The underlying ledger mechanism of Bitcoin (blockchain), is capable of playing a significant role in the financial system due to its tamper resistance. The Blockchain technology will reshape Inclusive and ethical finance, as a significant alternative system of global financial system.
+比特币\cite{bitcoin}与生俱来就带着革命的血液, 开创了以加密学为基础的更开放、更公平去中心化的新一代支付网络. 区块链作为比特币底层账本技术, 因其放篡改的特性, 能够在金融领域发挥关键的作用. 区块链将重塑普惠和伦理金融, 成为全球金融系统里面至关重要的一部分.
 
-Bitcoin was born 10 years ago, since then the blockchain infrastructure has been facing various challenges from technical perspective. Qitmeer insists on taking openness, fairness, fault tolerance, scalability as the core metrics to assess a promising blockchain paradigm, and a blockchain system achieved a desirable balance among these metrics is regarded as Classical Blockchain Setting.
+比特币诞生的十年以来, 区块链的基础设施正面临许多技术上的挑战. Qitmeer 坚持将开放性, 公平性, 容错性, 可伸缩性作为优质区块链的核心指标, 我们认为满足以上指标为经典区块链设定.
 
-BlockDAG is a high throughput framework, highlighted in fully decentralized and high security.
-Qitmeer Consensus adopts GHOSTDAG, the first BlockDAG protocol with block total ordering support, as its fundamental protocol, also guaranteed fast confirmation by another BlockDAG protocol SPECTRE.
-The Qitmeer Consensus is in line with Classical Blockchain Setting that one could join and leave the network freely by Proof-of-Work, and that miners gain rewards corresponding to their contribution respectively with the support of collaboration model of DAG ledger, the 50\% fault tolerance as secure as bitcoin, robust scalability that is subjected to physical network limit. The mining algorithm is also a vital source of fairness other than consensus algorithm per se. Cuckoo Ring is a graph theory based proof-of-work mining algorithm and is practically ASIC resistant due to memory-hard calculation. 
+BlockDAG (区块图) 是一种高吞吐的框架, 以完全去中心化以及高安全性闻名. Qitmeer共识采用最先支持交易全排序的 BlockDAG 协议GhostDAG作为基础协议, 同时集成了SPECTRE保证交易的快速确认. Qitmeer 共识遵循经典区块链设定: 节点通过工作量证明可以自由进入和退出网络, 基于DAG账本的合作模型矿工可以根据自己的贡献公平地获得相应的回报, 于比特币相当的50\%算力安全性, 只受网络物理特性限制的强健的可伸缩性. 作为共识算法之外的重要公平性来源, Qitmeer 采用的布谷鸟环是一种基于图理论的工作量证明的挖矿算法因强内存依赖能有效地抗ASIC. 
 
-Per regulation requirements, Qitmeer designs a UTXO-based unique token issuance scheme, which has effectively solved two main challenges: Intrinsic Value and Assets Authentication. Issuing a certain amount of assets must consume a certain amount of the native currency. Moreover, the entity must be warranted a license to issue assets. 
+出于合规的考虑, Qitmeer 设计了基于UTXO的独特的发币极致, 可以有效地应对两大挑战: 固有价值以及资产认证. 发布一定量的资产必须消耗等量的本币, 此外, 发布方必须被授予牌照.
 
-Qitmeer devises a set of specifications and protocols to be adopted in the Global Inclusive and Ethical economy ecosystem, such as wallets and miners. As for interoperability, Qitmeer recognizes the utilizing of cross-chain protocols to integrate various cryptocurrencies and offer reliable off- chain smart contract services.
+Qitmeer 设计一系列规范与协议以融入全球普惠和伦理金融生态, 例如钱包以及矿工. Qitmeer 利用跨链协议以集成多种加密货币并提供可靠的智能合约服务.
 
 \end{abstract}
 
-\section{Introduction}
+\section{介绍}
 
-\subsection{Background}
-Trust is the cornerstone of financial system, while in traditional approach, multiple unacquainted parties require a trustworthy third party to guarantee the security of transactions. However, the third party is centralized and subject to single point failure, unlikely to guarantee its honesty.
+\subsection{背景}
 
-Bitcoin is an open P2P network, meaning that there does not exist a centralized server, each node can join or leave the network freely. The calculation-heavy but validation-easy Proof-of-Work consensus is designed to ensure nodes gain rewards relevant to their contribution to the network’s running security, which is supposed to be fair. Bitcoin has a hash-list-like ledger to guarantee tamper resistance, this disruption has been driving tons of researches on its working mechanism. The concept of ’BlockChain’ is introduced to represent this mechanism and commonly accepted. Owing to trustlessness and tamper resistance, an increasing number of applications of blockchain surge in the financial system which acts as the new driving force to re-shape the financial system.
-
-Since bitcoin's innovation ten years ago, the blockchain infrastructure has been facing various challenges from technical perspective and  deviating from its essence of philosophy. Bitcoin is no longer decentralized, the top five mining pool has controlled majority hash power and would be easy to carry on an attack if there is any reason. Miners have to join mining pools since the risk is less with the equivalent interest expectation. In other words, Bitcoin is not fair any more. Besides, Bitcoin does not scale, seven transactions per second throughput, one hour confirmation time, high cost of the transaction fee, far from promising as a global payment network. 
-
-Bitcoin needs to innovate to reflect its essence of philosophy. There are Countless solutions claim themselves to have been solved all these challenges. However, few achieved indeed, just trading off one metric with another, like sacrifice decentralization, which is the core source of security for scalability. So, what is the essence philosophy of bitcoin? Qitmeer has defined it as Classical Blockchain Setting, which has deeply inspired design philosophy of Qitmeer network.
-
-\subsection{Classical Blockchain Setting}
-There are many blockchain mutants and each has its own definition of blockchain technology. Qitmeer network approves  bitcoin’s objectives and holds the view that the following four metrics as Classical Blockchain Setting.
-
-\subsubsection{Openness}
-Openness is an essential feature to distinguish permissioned and permissionless blockchain, which means every node should join and leave the network freely.
+信任是金融系统的基石, 在传统途径中, 多个互不熟知的个体需要一个可信的第三方来保证交易的安全. 然和, 这个第三方是中心化的, 存在单点故障风险, 很难保证他的诚实.
 
 
-\subsubsection*{Predefined special roles}
-An open network allows different roles, in the bitcoin network, nodes could choose to be an SPV(Simplified Payment Verification) node, full node or miner with freedom, so from the protocol’s aspect, bitcoin is open. Whereas in some consensus, e.g., Delegated Proof-of-Work, the block producers are elected off the chain with predefined  configurations,which demonstrates limited openness in the network.
+比特币是一个开放的点对点网络, 意味着不存在一个中心化的服务器, 每个节点可以自由地加入或者退出网络. 计算复杂, 验证简单的工作量证明共识被设计成保证节点能获得与其贡献相应的回报, 本应是一种公平的机制. 比特币采用类似散列表结构的账本以保证防篡改, 这种颠覆式的设计驱动着大量对于其机制的研究. “区块链”的概念就是后被引入来表示这种机制并被广泛接受. 由于免信任以及防篡改的特性, 越来越多的区块链应用涌现在金融领域并成为驱动金融系统重塑的全新动力.
 
-\subsubsection*{Practically closed}
-Bitcoin is defined as open source according to the protocol, it is actually closed in practice. Miners have to join mining pools to minimize the risk , at the expense to lose their free will. The situation is getting deteriorating in a speedy manner as described above. 
+比特币的十年前的创新以来, 区块链的基础设施一直面临着众多技术上的挑战并偏离其哲学的本质. 比特币不再去中心化, 前五大矿池已经控制了大多数的算力使得他们在有必要的情况下可以轻松地攻击网络. 矿工必须加入矿池因为在同等收益期望的情况下可以降低风险. 换言之, 比特币不在公平了. 此外, 比特币不可伸缩, 7笔每秒的吞吐量, 一小时的确认时间, 高昂的交易费, 作为全球支付网络来说很难说是一个令人满意.
+
+比特币需要革新以反映其哲学的本质. 无数种方案声称已经解决了这些挑战. 然而真正做到的并不多, 一般都是牺牲某一种特性而换取另一种特性, 如牺牲去中心化, 安全性的核心来源来换取可伸缩性. 因此, 比特币的哲学本质是什么? Qitmeer 定义其为经典区块链设定, 并深刻启发着Qitmeer网络的设计哲学. 
 
 
-\subsubsection{Fairness}
-Fairness means that the rewards should be consistent with the contribution in the network which is Incentive-Compatibility.
+\subsection{经典区块链设定}
+有许多区块链的变种, 各自有各自对区块链的定义.  Qitmeer 网络认可比特币的, 认为如下四种指标为经典区块链设定.
 
-\subsubsection*{Mining Risk}
-The expectation of rewards between solo mining and pool mining is equal in terms of probability. The point is, their risk is considerably high - either mine a block to get a dramatically high reward or wait a long time without any return. Therefore, miners have to turn to the mining pool to have a stable incentive.
+\subsubsection{开放性}
+开放性是区分许可链和非许可链的本质特性, 意味着每个节点应该能自由地加入和退出网络.
 
-\subsubsection*{Mining Efficiency}
-Mining cost mainly includes the electricity price and mining efficiency, and the latter is much more critical due to ASIC. ASIC is customized to direct a specific mining algorithm, so the mining efficiency per unit of cost is much higher than generalized computers. For instance, the hash rate per dollar for AntMiner S9 is about 20000 times greater than for GTX570; it is nearly impossible for a personal computer to win the hash rate competition.
+一个开放的网络应该允许不同的角色, 在比特币网络中, 节点可以自由选择成为SPV (简化支付验证) 节点, 全节点或者矿工, 所以从协议的角度来讲比特币是开放的. 而其他某些共识, 例如, 在代理权益证明中, 区块生产者是根据预定的配置, e.g., 21 个生产者, 在链外被选举产生, 因而限制了网络的开放性.
 
-\subsubsection{Security}
-The security is how robust the network is to sustain the attack, basically referring to overrun a confirmed transaction.
+\subsubsection{公平性}
+公平性意味着在一个激励相融的系统中, 回报应该和贡献匹配
 
-\subsubsection*{Decentralization}
-Decentralization is the most significant feature of bitcoin to be compared with traditional payment network. Decentralization could avoid single point failure on account of the fact that it is almost impossible to collude with the majority of all nodes in a fully decentralized network.
-\subsubsection*{Fault Tolerance}
-Fault Tolerance is the upper bound of the percentage that the network should be resilient to a certain proportion of malfunctioning nodes, and fault tolerance . In a decentralized network, 50\% fault tolerance is the desirable case according to the majority law.
+\subsubsection*{挖矿风险}
+从概率的角度而言, 独立挖矿与加入矿池挖矿的期望收益是相同的, 但是独立挖矿的风险是相当高的, 即要么获得巨额的奖励要么就是长时间得不到任何回报. 因此, 矿工不得不加入矿池以获得稳定的激励. 
 
-\subsubsection{Scalable}
-A network that can offer relatively stable growth of services with its scale increasing is considered scalable. Blockchain network includes the following services:
-\subsubsection*{Throughput}
-The throughput refers to the number of transactions per second (TPS) and its performance is of essential importance when network is scaling, while up to present, Bitcoin’s throughput is upper bound to 7 TPS despite of  how many nodes are available there in the network, which limits itself to act as the global payment network.
-\subsubsection*{Confirmation}
-The confirmation is the time that the recipient to wait until the transaction is unlikely to be reversed, which should not be increased with networking scaling. Confirmation affects user experience significantly in a payment network, e.g., the confirmation time reaches the length of six blocks or one hour in bitcoin network,  that is painful for users to stand.
-\subsubsection*{Cost}
-The main component of cost is transaction fee which should be maintained in a  reasonable range, since it would make payment impractical if too high, or it would be subject to sybil-attack if it is too low. With the mining difficulty increasing, Bitcoin transaction fee is getting higher and higher, and it won’t be suitable to serve as a global payment network as it aims to be, up to present, the average price of bitcoin transaction fee is roughly as much as 2\$. 
+\subsubsection*{挖矿效率}
+挖矿成本主要包含电力价格以及挖矿效率, 而后者因为ASIC矿机更加关键. ASIC 被定制用于执行特定挖矿算法, 所以单位成本挖矿效率要远高于通用计算机. 例如, 蚂蚁矿机S9 的效率要高出GTX570 两万倍; 个人计算想要参与挖矿竞赛几乎是不可能的. 
 
-\subsection{Specification}
-The Qitmeer network specification is designed to follow Classical Blockchain Setting. The four metrics have some intrinsic contradiction among each other, Qitmeer cannot achieve best in each simultaneously, instead, it finds an optimized balance, i.e., seek for high scalability based on an open, fair and secure network.
-\subsubsection{Openess}
-\subsubsection*{Proof of Work}
-Proof-of-Work is the most open approach to join a blockchain network since the only resource required is electricity, which is physical and owned by each of the nodes.  
-\subsubsection*{No Predefined Nodes}
-Predefined Nodes refer to special nodes defined in the protocol. Note: though there are mining pools in bitcoin,  they are unexpected in bitcoin protocol. Thus,  bitcoin still has no predefined nodes, so does Qitmeer because it is in line with bitcoin’s paradigm.
-\subsubsection{Fairness}
-BlockDAG is fair due to its adoption of a collaboration model instead of competition model of blockchain.
-\subsubsection*{Mining Pool Decentralization}
-Competition brings in mining risk of variant rewards and makes miners have to join mining pool to reduce the risk, leading to centralization. Qitmeer's BlockDAG based consensus is a collaboration model, the risk of solo mining would be in as low level as pool mining, so mining pools would be more decentralized.
+\subsubsection{安全性}
+安全性是指网络在遭受攻击时的健壮程度. 一般是指推翻一笔确认了的交易
 
-\subsubsection*{Anti-ASIC Mining Algorithm}
 
-Cuckoo Cycle is a graph theory-based proof-of-work algorithm which prevails for ASIC resistance. Qitmeer adopts this algorithm to guarantee that no one has too much mining efficiency advantage.
-\subsubsection{Security}
+\subsubsection*{去中心化}
+去中心化相对于传统支付网络来说是最关键的特性. 去中心化可以规避单点故障, 因为要串通一个去中心化网络中的大部分节点几乎是不可能的.
+
+\subsubsection*{容错性}
+容错指网络应该可以承受失效节点的最大比例. 在去中心化网络中, 根据少数服从多数的原则, 50\%的算力容错性是最理想的比例.
+
+\subsubsection{可伸缩性}
+随着规模的增长, 网络如果仍能够提供相对稳定增长的服务则可以被认为是可伸缩的. 这些服务包括:
+\subsubsection*{吞吐量}
+吞吐量是指每秒的交易数, 当网络在扩张时其性能至关重要. 而迄今为止, 比特币当吞吐量仍然限定在七笔每秒, 无论网络有多少节点. 因而限制其成为全球支付网络.
+
+\subsubsection*{确认时间}
+
+确认时间是指接收方需要等待交易不容易被推翻所需的时间, 该时间不应该随着网络规模的增大而增加.  在比特币网络, 确认时间长达六个区块或者一个小时. 确认时间非常影响支付的体验, 例如, 比特币的确认时间是六个区块或一个小时, 一般用户很难接受.
+
+\subsubsection*{成本}
+
+交易费是成本的主要部分, 应该要维持在一个相对合理的范围, 因为如果交易费过高, 支付就不再实用, 而如果过低则容易遭受女巫攻击. 比特币的交易费变得越来越高, 已经不再适合作为原本想成为的全球支付网络. 至目前为止, 比特币的平均交易费大概有两美元之多.
+
+\subsection{设计规范}
+Qitmeer 的设计规范遵循经典区块链设定. 这四个指标彼此之间存在内在的矛盾, Qitmeer 不可能同时让每个指标都达到最优, 而是找到一个最佳都平衡, 即在满足公平性和安全性都情况下, 尽可能高地提高可伸缩性.
+
+\subsubsection{开放性}
+
+\subsubsection*{工作量证明}
+工作量证明是最开放的加入区块链网络的途径, 因为只需要电力就可以加入, 而电力是一人人都拥有的物理资源. 
+\subsubsection*{无预定节点}
+预定节点是指协议定义的特殊节点. 注意, 尽管存在矿池这样特殊的节点, 但是它们属于协议之外的产物. 因而, 比特币也是无预定节点的, Qitmeer 在这方面是遵循比特币的规范的, 所以也不存在预定的特殊节点.
+\subsubsection{公平性}
+BlockDAG 是公平的因其引入的合作模型替代区块链的竞争模型.
+
+\subsubsection*{矿池去中心}
+竞争模型会导致收益波动的挖矿风险, 进而导致矿池的中心化. Qitmeer 共识协议基于合作模型的BlockDAG框架, 独立可以和矿池挖矿一样处于低风险水平, 所以矿池也会更去中心化.
+
+\subsubsection*{抗ASIC的挖矿算法}
+布谷鸟环是一个基于图理论的工作量证明算法, 因其抗ASIC的特性而流行. Qitmeer 采用这个算法以保证没有哪个矿工可以有过高的挖矿效率.
+\subsubsection{安全性}
 Security is the top consideration in the Qitmeer network. Qitmeer has achieved fully decentralized and 50\% fault tolerant. Thus, there is no compromise to trade-off security with other metrics.
-\subsubsection*{Fully Decentralization}
+安全性是Qitmeer网络最重要的考虑因素. Qitmeer已经达到了完全的去中心化以及50\%的算力容错性. 因此, Qitmeer并没有牺牲安全性来获得其他指标的性能.
+\subsubsection*{完全去中心化}
 All the nodes in the Qitmeer’s network are peer nodes and are entitled to participate in consensus.
-\subsubsection*{50\% Faulty Tolerance}
-The malicious adversary has to possess 50\% hash power to control the network. In Qitmeer Consensus, the fault tolerance is irrelevant with the throughput, it holds no matter how high the throughput is , whereas the faulty tolerance is negatively correlated to throughput in bitcoin.
+Qitmeer网络的所有节点都是对等节点并有资格参与共识.
 
-\subsubsection{Scalability}
-Qitmeer has promising performance in various aspects of scalability, such as high scalability, fast confirmation, high throughput and low transaction fee, making it running stably in a considerable long time.
+\subsubsection*{50\% 容错性}
+恶意节点必须拥有50\%的算力才能控制整个网络. Qitmeer 共识的容错性与吞吐量无关, 无论吞吐量多高依然保持相同的容错性, 而比特币的容错性跟吞吐量是负相关的.
 
-\subsubsection*{Fast Confirmation}
-Qitmeer integrates SPECTRE, a speedy confirmation BlockDAG protocol, to guarantee fast secure transaction confirmation. 
-\subsubsection*{High Throughput}
-GhostDAG is BlockDAG protocol supporting high throughput, which could fully exploit potential scalability, merely subject to the network’s physical metrics, such as network bandwidth or propagation delay.
-\subsubsection*{Low Cost}
+\subsubsection{可伸缩性}
+Qitmeer 在各种可伸缩性的方便都有理想的表现, 使得它能长时间稳定运行.
+
+\subsubsection*{快速确认}
+The Qitmeer adopts the SPECTRE as consensus algorithm which is a speedy confirmation BlockDAG protocol. 
+Qitmeer 集成SPECTRE, 一个高速确认的BlockDAG协议, 来保证交易的快速安全确认.
+\subsubsection*{高吞吐量}
+GhostDAG 是一个支持高吞吐量的BlockDAG协议, 能充分发掘潜在的伸缩性, 只受网络物理参数的限制, 例如网络带宽或传播时间.
+
+\subsubsection*{低成本}
 Technically, the cost is not scaling since the transaction fee is increasing slightly with the network growing. However, the average cost will keep relatively insignificant, reasonable for a long period.  
+技术上讲, 成本不能扩张因为交易费会随着网络的增长缓慢地增长.不过平均每笔交易的成本还是相对不是太显著, 长远看还是合理的.
+
 
 \section{Qitmeer Token Design}
 The existing blockchain networks have not taken into consideration the  regulation compliance and ethical concern entirely, from its whole ecosystem when they initiate their design. However, Qitmeer has taken Regulation Compliance into consideration rooted from its underlying philosophy, and penetrated through the whole technical architecture , until the applications in the ecosystem, in which it has been designed an effective approach, namely OP_TOKEN.
@@ -815,7 +828,7 @@ With the converted formula we are able to calculate $risk\_hidden$ in numerical 
 
 
 \subsection{Mining Algorithm}
-BlockDAG’s collaboration model provides much more fairness than the competition model of BlockChain on the protocol perspective. Every node gets rewards according to its contribution, regardless of how much hash power it possess. Qitmeer favors fairness over the scalability owing to the former is more in line with true spirit of blockchain. The intention of Nakamoto Consensus is fair - every node votes with electricity; however, only a small bunch of the mining pools have the odds to participate in consensus. solo miners suffer huge risk since they have to wait for an uncertain time, quite long in most cases, to mine a block to cover their cost; thus finally it will have to turn to the mining pools. BlockDAG incorporates every miner’s block, the miners have a strong expectation of their return and then discourage to join a mining pool.
+BlockDAG’s collaboration model provides much more fairness than the competition model of BlockChain on the protocol perspective. Every node gets rewards according to its contribution, regardless of how much hash power it possess. Qitmeer favors fairness over the scalability owing to the former is more in line with true spirit of blockchain. The intention of Nakamoto Consensus is fair - every node votes with electricity; however, only a small bunch of the mining pools have the odds to participate in consensus. solo miners suffer huge opportunity cost since they have to wait for an uncertain time, quite long in most cases, to mine a block to cover their cost; thus finally it will have to turn to the mining pools. BlockDAG incorporates every miner’s block, the miners have a strong expectation of their return and then discourage to join a mining pool.
 
 
 In addition, the mining algorithm is  another factor of fairness. Mining fairness refers to a certain amount of mining cost, such as electricity in POW, should derive the relatively equivalent amount of hash power. Practically, the ASIC mining rigs have much more mining efficiency than their prices.
@@ -1169,7 +1182,7 @@ Qitmeer completes the cross- chain transaction between the block chain assets of
 %\bibliographystyle{plainnat}
 %\bibliographystyle{unsrt,acm}
 \bibliographystyle{unsrt}
-\bibliography{qitmeer_whitepaper}
+\bibliography{qitmeer_whitepaper_cn}
 
 \end{document}
 
