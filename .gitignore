@@ -9,4 +9,6 @@
 .idea
 *.synctex.gz
 *.fls
+Thumbs.db
+*temp.tex
 *.fdb_latexmk

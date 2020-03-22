@@ -293,15 +293,15 @@ GhostDAG is BlockDAG protocol supporting high throughput, which could fully expl
 Technically, the cost is not scaling since the transaction fee is increasing slightly with the network growing. However, the average cost will keep relatively insignificant, reasonable for a long period.  
 
 \section{Qitmeer Token Design}
-The existing blockchain networks have not taken into consideration the  regulation compliance and ethical concern entirely, from its whole ecosystem when they initiate their design. However, Qitmeer has taken Regulation Compliance into consideration rooted from its underlying philosophy, and penetrated through the whole technical architecture , until the applications in the ecosystem, in which it has been designed an effective approach, namely OP_TOKEN.
+The existing blockchain networks have not taken into consideration the  regulation compliance and ethical concern entirely, from its whole ecosystem when they initiate their design. In comparison, Qitmeer has taken Regulation Compliance into consideration rooted from its underlying philosophy, and penetrated through the whole technical architecture , until the applications in the ecosystem; in the course,  it has been designed an effective approach, namely OP_TOKEN.
 
 \subsection{Background}
 \subsubsection{Problem definition}
 
-Blockchains are ought to consider two main points to be considered as Regulation compliance in the Blockchain industry:
+Blockchains are ought to consider two main points as Regulation compliance in the Blockchain industry:
 
 \subsubsection*{Intrinsic Value}
-Assets must have underlying value and cannot be created out of thin air. On existing token issuance platforms like Ethereum\cite{Ethereum}, individuals can issue a token of arbitrary amount without any foundation.
+Assets must have underlying value and cannot be created out of thin air. On existing token issuance platforms like Ethereum\cite{Ethereum}, individuals can issue arbitrary amount of token without any collateral.
  
 
 \subsubsection*{Assets Authentication}
@@ -309,22 +309,20 @@ The blockchain should not allow any issuance of illegitimate assets and unethica
 
 \subsubsection{Related works}
 
-The $\texttt{OP\_TOKEN}$ is inspired by Color coin idea, which represents and manages real-world assets on top of the Bitcoin by using $\texttt{OP\_RETURN}$, and the OP\_GROUP, a referenced implementation of issuing assets designed by Andrew Stone.
-
-The OP\_TOKEN fit various practical scenarios with unique features like asset compilable and value relevant. There are some related concepts in the details below:
+The $\texttt{OP\_TOKEN}$ is inspired by Color coin idea, which represents and manages real-world assets on top of the Bitcoin by using $\texttt{OP\_RETURN}$, and the OP\_GROUP which is a referenced implementation of issuing assets designed by Andrew Stone.
 
 \subsubsection*{UTXO}
 
-The Unspent Transaction Outputs (UTXO) are used whether the transaction is valid. there are no accounts required in Qitmeer network. What users have in the network and spend are a bunch of unspent transaction output. This could come up with the balance by summing up UTXO.
+The Unspent Transaction Outputs (UTXO) are used to tell whether the transaction is valid. there are no accounts required in Qitmeer network. What users have in the network and spend are a bunch of unspent transaction output. This could come up with the balance by summing up UTXO.
 
 \begin{figure}[hbt]
 	\centerline{%
 	   \resizebox{0.8\textwidth}{!}{\includegraphics{figures/UTXO}}%
 	}
-\caption{utxo model}
+\caption{UTXO model}
 \end{figure}
 
-The first transaction tx1 has three outputs with the first spent, so  tx1 has 2+3=5 coins balance.
+The first transaction tx1 has two UTXO (green), so tx1 has 2+3=5 coins balance.
 
 The second transaction tx2 spends the 2 UTXOs of tx1 and pays to 3 addresses and creates three new UTXOs.
 
@@ -332,7 +330,7 @@ Note: now the old UTXOs (of tx1) are no longer UTXO so cannot be spent later.
 
 \subsubsection*{Script system}
 
-The mechanism behind how users spend their UTXOs is to execute a particular script. The output stores half of the script and it has to present the other half and combine both in order to verify if the money is spent. The former half is called locking script, like a locked treasure box, and the latter is unlocking script, like the only key to the box.
+The mechanism of spending UTXOs is to execute a particular script. The output stores half of the script and it has to provide the other half and combine both in order to verify if the money could be spent. The former half is called locking script, like a locked treasure box, and the latter is unlocking script, like the only key to the box.
 
 For example, a typical instance of  Pay-2-Public-Key-Hash(P2PKH)\cite{P2PKH} Locking Script in UTXO:
 
@@ -357,7 +355,7 @@ This whole script consists two steps
 
 \subsubsection*{Colored coins and Tether}
 
-Colored Coins\cite{ColoredCoins} is a method that represent assets on blockchain, it can leverage the tamper-proof capability of blockchain. However, It uses transaction script operation $\texttt{OP\_RETURN}$ to interrupt script execution early. Therefore, it can add information to the assets after OP\_RETURN without violating the script validation. 
+Colored Coins\cite{ColoredCoins} is a method that represent assets on blockchain, it can leverage the tamper-proof capability of blockchain.  It uses transaction script operation $\texttt{OP\_RETURN}$ to interrupt script execution, therefore, it can add protocol content to the assets after OP\_RETURN without violating the script validation. 
 
 Locking Script:
 \begin{lstlisting}
@@ -414,10 +412,10 @@ The main difference is simple, just adding a group address to distinguish differ
 
 \subsubsection{Overview}
 
-There is a unique token named LICENSE in OP\_TOKEN. The relevant regulatory bodies, shariah-governance entities, industry practitioners with public credibility within the ecosystem are invited to receive the licenses to oversight the compliances issues that might occur along the course of mainstream adoption of the protocol. Any entity planning to issue a token needs to be warranted with a license. Peers can transfer licenses as they are also tokens in nature. However, the originator must be extra careful in event of transferring in order to avoid non-compliance risk due to the records is public and immutable.  
+There is a unique token named LICENSE in OP\_TOKEN. The relevant regulatory entities, industry practitioners with public credibility within the ecosystem are invited to receive the licenses to oversight the compliances issues that might occur along the course of mainstream adoption of the protocol. Any entity planning to issue a token needs to be warranted with a license. Peers can transfer licenses as they are also tokens in nature. The originator must be extra careful in event of transferring in order to avoid non-compliance risk of transferring to a wrong person since the records is public and immutable.  
  
 
-\subsubsection{Issuance of License}
+\subsubsection{License Creation}
 
 Licenses are all generated in the genesis block and distributed to C preserved committee members. One smallest unit (QIT) can represent a license, one block has M coins, one coin= N QIT, so we have M*N license in total, which is sufficient for asset issuance.
 
@@ -449,9 +447,9 @@ OUTPUTS:
 
 
 
-\subsubsection{Warrant a license}
+\subsubsection{Issue a License}
 
-The relevant entities must be warranted a license to issue assets. The entity can request a license from any committee member (C.M.). Once the license is granted and approved. These entities will receive a particular token transfer from the C.M. and the Token is the licensed.
+The relevant entities must be warranted a license to issue assets. The entity can request a license from any committee member (C.M.). Once the license is granted and approved. These entities will receive a particular token from the C.M. and the Token is the licensed.
 
 \lstset{basicstyle=\tiny,style=myListStyle}
 \begin{lstlisting}[language=yaml, numbers=none,basicstyle=\footnotesize]
@@ -479,12 +477,12 @@ OUTPUTS:
 \subsubsection{Issuance of assets}
 Once the license is warranted, entities can issue assets; however, they cannot set the token amount arbitrarily. Instead, to issue a certain amount of assets requires converting the same amount of QITs. The Qitmeer network calls this process as "token mint". Just like the case in reality, to mint a gold coin requires the same weight of gold qits, tokens need the same amount of QITs.
 
-The first advantage of issuance system is to guarantee tokens’ elementary intrinsic value; thus, it would significantly mitigate the price fluctuation. Another advantage is that tokens and native currency are no longer isolated islands of value; which are running in the same ecosystem and would improve the liquidity and make the whole network stable.
+The first advantage of issuance system is to guarantee tokens’ elementary intrinsic value; thus, it would significantly mitigate the price fluctuation. Another advantage is that tokens and native currency are no longer isolated islands of value, which are running in the same ecosystem and would improve the liquidity and make the whole network stable.
 
 \lstset{basicstyle=\tiny,style=myListStyle}
 \begin{lstlisting}[language=yaml, numbers=none,basicstyle=\footnotesize]
-# Ex3: Convert 100000000 native QITs, i.e. 1 Coin,
-# to 100000000 qits of the new token,
+# Ex3: Convert 100000000 QIT, i.e. 1 MEER,
+# to 100000000 units of the new token,
 # note the license will go back to the issuer for future issuance.
 INPUTS:
 	- INPUT:
@@ -537,9 +535,9 @@ OUTPUTS:
 \end{lstlisting}
 
 
-\subsubsection{Melt Token}
+\subsubsection{Token Melt}
 
-Melt is the reversed process of mint, i.e., conversion from tokens to native currency. The total amount of qit is constant, either in the form of Native QIT or Token QIT. However, it is allowed to transform a token and convert native currency. Issuers can melt their coins to reduce liquidity in order to keep the price stable, which is practical to implement stable coins. Melt guarantees the tokens fundamental value, just like the minimum value of a gold coin is the same weight of gold.   
+Token Melt is the reversed process of Token Mint, i.e., conversion from tokens to native currency. The total amount of qit is constant, either in the form of Native QIT or Token QIT. However, it is allowed to transform a token and convert native currency. Issuers can melt their coins to reduce liquidity in order to keep the price stable, which is practical to implement stable coins. Token Melt guarantees the tokens fundamental value, just like the minimum value of a gold coin is the same weight of gold.   
 
 
 Melt guarantees the tokens fundamental value, just like the minimum value of a gold coin is the same weight of gold.
