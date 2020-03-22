@@ -198,7 +198,7 @@
 %\watermark{60}{10}{qitmeer.io}
 
 \begin{abstract}
-比特币\cite{bitcoin}与生俱来就带着革命的血液, 开创了以加密学为基础的更开放、更公平去中心化的新一代支付网络. 区块链作为比特币底层账本技术, 因其放篡改的特性, 能够在金融领域发挥关键的作用. 区块链将重塑普惠和伦理金融, 成为全球金融系统里面至关重要的一部分.
+比特币\cite{bitcoin}与生俱来就带着革命的血液, 开创了以加密学为基础的更开放、更公平去中心化的新一代支付网络. 区块链作为比特币底层账本技术, 因其防篡改的特性, 能够在金融领域发挥关键的作用. 区块链将重塑普惠和伦理金融, 成为全球金融系统里面至关重要的一部分.
 
 比特币诞生的十年以来, 区块链的基础设施正面临许多技术上的挑战. Qitmeer 坚持将开放性, 公平性, 容错性, 可伸缩性作为优质区块链的核心指标, 我们认为满足以上指标为经典区块链设定.
 
@@ -282,17 +282,15 @@ BlockDAG 是公平的因其引入的合作模型替代区块链的竞争模型.
 \subsubsection*{抗ASIC的挖矿算法}
 布谷鸟环是一个基于图理论的工作量证明算法, 因其抗ASIC的特性而流行. Qitmeer 采用这个算法以保证没有哪个矿工可以有过高的挖矿效率.
 \subsubsection{安全性}
-Security is the top consideration in the Qitmeer network. Qitmeer has achieved fully decentralized and 50\% fault tolerant. Thus, there is no compromise to trade-off security with other metrics.
 安全性是Qitmeer网络最重要的考虑因素. Qitmeer已经达到了完全的去中心化以及50\%的算力容错性. 因此, Qitmeer并没有牺牲安全性来获得其他指标的性能.
 \subsubsection*{完全去中心化}
-All the nodes in the Qitmeer’s network are peer nodes and are entitled to participate in consensus.
-Qitmeer网络的所有节点都是对等节点并有资格参与共识.
+Qitmeer网络的所有节点都是对等节点并有资格参与共识. 
 
 \subsubsection*{50\% 容错性}
 恶意节点必须拥有50\%的算力才能控制整个网络. Qitmeer 共识的容错性与吞吐量无关, 无论吞吐量多高依然保持相同的容错性, 而比特币的容错性跟吞吐量是负相关的.
 
 \subsubsection{可伸缩性}
-Qitmeer 在各种可伸缩性的方便都有理想的表现, 使得它能长时间稳定运行.
+Qitmeer 在各种可伸缩性的方面都有理想的表现, 使得它能长时间稳定运行.
 
 \subsubsection*{快速确认}
 The Qitmeer adopts the SPECTRE as consensus algorithm which is a speedy confirmation BlockDAG protocol. 
@@ -305,82 +303,83 @@ Technically, the cost is not scaling since the transaction fee is increasing sli
 技术上讲, 成本不能扩张因为交易费会随着网络的增长缓慢地增长.不过平均每笔交易的成本还是相对不是太显著, 长远看还是合理的.
 
 
-\section{Qitmeer Token Design}
-The existing blockchain networks have not taken into consideration the  regulation compliance and ethical concern entirely, from its whole ecosystem when they initiate their design. However, Qitmeer has taken Regulation Compliance into consideration rooted from its underlying philosophy, and penetrated through the whole technical architecture , until the applications in the ecosystem, in which it has been designed an effective approach, namely OP_TOKEN.
+\section{Qitmeer 通证设计}
 
-\subsection{Background}
-\subsubsection{Problem definition}
+当前的区块链网络, 在开始项目设计的时候, 完全没有考虑到合规性以及道德关切. 相较而言, Qitmeer 将合规性根植在从底层逻辑, 并贯穿在整个技术架构, 直至生态应用. 在此过程中, Qitmeer 设计了一套有效都方案, 称之为OP_TOKEN.
+
+\subsection{背景}
+\subsubsection{问题定义}
 
 Blockchains are ought to consider two main points to be considered as Regulation compliance in the Blockchain industry:
+区块链的合规性应该要考虑两点:
 
-\subsubsection*{Intrinsic Value}
-Assets must have underlying value and cannot be created out of thin air. On existing token issuance platforms like Ethereum\cite{Ethereum}, individuals can issue a token of arbitrary amount without any foundation.
+\subsubsection*{内在价值}
+Assets must have underlying value and cannot be created out of thin air. On existing token issuance platforms like Ethereum\cite{Ethereum}, individuals can issue arbitrary amount of token without any collateral.
+
+资产必须存在内在价值, 不能凭空产生. 在已有的通证发布平台例如以太\cite{Ethereum}, 个人可以在不需要抵押的情况下发布任意额度的资产
  
 
-\subsubsection*{Assets Authentication}
+\subsubsection*{资产认证}
 The blockchain should not allow any issuance of illegitimate assets and unethical business. Existing blockchains are too unrestricted in the event of assets authentication.
+区块链不应该允许非法资产的发行以及违反商业操守的行为, 已有的区块链在资产认证时没有任何限制. 
 
-\subsubsection{Related works}
+\subsubsection{相关工作}
 
-The $\texttt{OP\_TOKEN}$ is inspired by Color coin idea, which represents and manages real-world assets on top of the Bitcoin by using $\texttt{OP\_RETURN}$, and the OP\_GROUP, a referenced implementation of issuing assets designed by Andrew Stone.
-
-The OP\_TOKEN fit various practical scenarios with unique features like asset compilable and value relevant. There are some related concepts in the details below:
+$\texttt{OP\_TOKEN}$ 的设计灵感来源于染色币, 基于比特币的 $\texttt{OP\_RETURN}$ 和  OP\_GROUP  用于代表并管理现实生活中的资产, 其中 OP\_GROUP 是一个Andrew Stone实现的用于发行资产的参考实现, 
 
 \subsubsection*{UTXO}
 
-The Unspent Transaction Outputs (UTXO) are used whether the transaction is valid. there are no accounts required in Qitmeer network. What users have in the network and spend are a bunch of unspent transaction output. This could come up with the balance by summing up UTXO.
+UTXO 即未花费的交易输出, UTXO用于判断一笔交易是否是合法, 在Qitmeer 网络中并不存在账号. 用户花费的是一组UTXO. 通过求和UTXO可以得到总余额.
 
 \begin{figure}[hbt]
 	\centerline{%
 	   \resizebox{0.8\textwidth}{!}{\includegraphics{figures/UTXO}}%
 	}
-\caption{utxo model}
+\caption{UTXO 模型}
 \end{figure}
 
-The first transaction tx1 has three outputs with the first spent, so  tx1 has 2+3=5 coins balance.
+交易1 tx1 有两笔UTXO(绿色), 所以tx1有2+3=5 个币的余额.
 
-The second transaction tx2 spends the 2 UTXOs of tx1 and pays to 3 addresses and creates three new UTXOs.
+交易2 花费了 tx1的两笔UTXO, 并支付到了三个地址, 产生了三笔新的UTXO.
 
-Note: now the old UTXOs (of tx1) are no longer UTXO so cannot be spent later.
+注意: 现在就的UTXO (tx1的) 已经不在是UTXO了, 所以不能再被花费了.
 
-\subsubsection*{Script system}
+\subsubsection*{脚本系统}
 
-The mechanism behind how users spend their UTXOs is to execute a particular script. The output stores half of the script and it has to present the other half and combine both in order to verify if the money is spent. The former half is called locking script, like a locked treasure box, and the latter is unlocking script, like the only key to the box.
+花费UTXO的机制其实就是执行一段脚本. 输出存储了一半的脚本并必须出具另外一半脚本并合并两者以验证该笔金额是否可以被花费. 前一部分称为锁定脚本, 就像一个锁住的宝箱, 后半部分叫解锁脚本, 就像该箱子唯一的钥匙.
 
-For example, a typical instance of  Pay-2-Public-Key-Hash(P2PKH)\cite{P2PKH} Locking Script in UTXO:
+例如, UTXO 中一段典型的 "支付到公钥哈希" (Pay-2-Public-Key-Hash(P2PKH)\cite{P2PKH}) 锁定脚本:
 
 \begin{lstlisting}
 OP_DUP OP_HASH160 <PUBLIC_KEY> OP_EQUALVERIFY OP_CHECKSIG
 \end{lstlisting}
 
-Unlocking Script in a newly created transaction:
+一笔新建交易的解锁脚本
 
 <Signature><PublicKey>
 
-Combine unlocking script with locking script:
+将锁定脚本和解锁脚本合并
 
 <Signature><PublicKey> OP\_DUP OP\_HASH160 <PUBLIC\_KEY> OP\_EQUALVERIFY OP\_CHECKSIG
 
-This whole script consists two steps
+完整的脚本包含两个步骤:
 1. <PublicKey>  OP\_HASH160 <PUBLIC\_KEY> OP\_EQUALVERIFY
-	To verify if the public key in the unlocking script matches that in the locking script.
+	验证解锁脚本中的公钥是否匹配锁定脚本中的私钥
 2.  <Signature><PublicKey> OP\_CHECKSIG
-	To check if the signature is valid.
+	检查签名是否是合法的
 
+\subsubsection*{染色币 和 Tether}
 
-\subsubsection*{Colored coins and Tether}
+染色币\cite{ColoredCoins} 是一套在区块链上表示资产的方法, 它可以利用区块链防篡改的能力. 它使用${OP\_RETURN}$中断脚本的执行, 因此, 它可以在$\texttt{OP\_RETURN}$ 后面加协议内容而并不需要违反脚本的验证.
 
-Colored Coins\cite{ColoredCoins} is a method that represent assets on blockchain, it can leverage the tamper-proof capability of blockchain. However, It uses transaction script operation $\texttt{OP\_RETURN}$ to interrupt script execution early. Therefore, it can add information to the assets after OP\_RETURN without violating the script validation. 
-
-Locking Script:
+锁定脚本:
 \begin{lstlisting}
 OP_RETURN <DATA>
 \end{lstlisting}
 
-Moreover, the stable coin Tether\cite{Tether} (USDT) also uses OP\_RETURN based OMNI Layer protocol to define the asset on the bitcoin.
+此外, 稳定币 Tether\cite{Tether} (USDT) 也使用了基于 OP\_RETURN 的OMNI Layer 协议来定义比特币上的资产.
 
-Here are a typical USDT transaction and details of its protocol design
-
+典型的USDT交易以及协议设计的详细内容
 
 \lstset{basicstyle=\tiny,style=myListStyle}
 \begin{lstlisting}
@@ -399,13 +398,15 @@ OP_RETURN 6f6d6e69000000000000001f00000015c9054900
 %[ref][https://www.blockchain.com/btc/tx/efc50d9e1f23e687e304cfca4ef2c5412b67d5737888ff80a0cbb6853cd865c]
 
 
-
 \subsubsection*{OP\_GROUP}
-The OP\_RETURN  scheme is more suitable to apply on mature blockchain, since it does not change the underlying blockchain protocol and will not risk forking. However, the weakness is that miners cannot verify its protocol, so there would be some security risks.
+OP\_RETURN 的设计更适合在成熟的区块链上应用, 因为它不会改变底层区块链协议, 从而不会有分叉的风险. 不过缺点在于矿工是无法验证协议, 所以可能存在一定的安全风险.
 
 OP\_GROUP\cite{OP_GROUP}  is an improvement proposal of assets issuance on Bitcoin Cash (BCH)\cite{BCH} from Bitcoin Unlimited (BU). Thus, OP\_GROUP  supports transfer, destroy and insurance of Token. Since OP\_GROUP is an extension to the BCH script system,  it is part of the BCH protocol. Thus miners can do the verification, which is more reliable.
 
-The basic “colored” pay 2 public key hash script would be like:
+OP\_GROUP\cite{OP_GROUP} 是Bitcoin Unlimited (BU) 提出的针对比特现金\cite{BCH}的提案. 因此, OP\_GROUP 支持转账, 销毁以及发行通证. 因为OP\_GROUP是对BCH 脚本系统的扩展, 它是属于协议的一部分	 
+
+
+基本的“染色”支付到公钥散列脚本应该是:
 
 \lstset{basicstyle=\tiny,style=myListStyle}
 \begin{lstlisting}[numbers=none]
@@ -419,20 +420,27 @@ OP_EQUALVERIFY
 OP_CHECKSIG
 \end{lstlisting}
 
-The main difference is simple, just adding a group address to distinguish different groups, and other operations, such as create and destroy assets, are similar.
+主要的区别很简单，只是添加一个组地址来区分不同的组，而其他操作，例如创建和销毁资产，是类似的。
 
 % [ref]https://medium.com/@g.andrew.stone/bitcoin-scripting-applications-representative-tokens-ece42de81285
 
-\subsection{OP\_TOKEN Design}
+\subsection{OP\_TOKEN 设计}
 
-\subsubsection{Overview}
+\subsubsection{概述}
 
 There is a unique token named LICENSE in OP\_TOKEN. The relevant regulatory bodies, shariah-governance entities, industry practitioners with public credibility within the ecosystem are invited to receive the licenses to oversight the compliances issues that might occur along the course of mainstream adoption of the protocol. Any entity planning to issue a token needs to be warranted with a license. Peers can transfer licenses as they are also tokens in nature. However, the originator must be extra careful in event of transferring in order to avoid non-compliance risk due to the records is public and immutable.  
+
+在OP\_TOKEN中有一个名为牌照(LICENSE)的惟一通证。相关监管实体、在生态系统中具有公信力的行业从业人员将被邀请领取牌照，以监督在主流采用协议过程中可能出现的遵从性问题。任何计划发布令牌的实体都需要获得许可。对等点可以传输许可证，因为它们本身也是令牌。然而，发端人在转移时必须格外小心，以避免由于记录是公开和不可变的而造成的不遵从风险。
+
+在OP\_TOKEN中有一个名为牌照或者许可证(LICENSE)的惟一通证。在生态系统中具有公共信誉的相关监管实体和行业从业人员被邀请领取许可证，以管理可能发生的合规性问题。任何计划发布通证的实体都需要获得许可。对等节点之间可以传输许可证，因为它们本身也是通证。由于记录是公开的、不可变的，为了避免向错误的人转移的不合规风险，发起者在转移时必须格外小心。
  
 
-\subsubsection{Issuance of License}
+\subsubsection{许可证生成}
 
 Licenses are all generated in the genesis block and distributed to C preserved committee members. One smallest unit (QIT) can represent a license, one block has M coins, one coin= N QIT, so we have M*N license in total, which is sufficient for asset issuance.
+
+许可证都是在创世块中生成的，并分发给C名保护委员会成员。
+一个最小的单位(QIT)可以代表一个许可证，一个块有M个本币，1个本币= N个QIT，所以我们总共有M*N个许可证，这就足够发行资产了。
 
 
 \begin{lstlisting}[language=yaml, numbers=none,basicstyle=\footnotesize]
@@ -443,7 +451,7 @@ Licenses are all generated in the genesis block and distributed to C preserved c
 ---
 INPUTS:
 	INPUT:
-		PREVIOUS_OUTPUT: # (COINBASE of GENESIS)
+		PREVIOUS_OUTPUT: # (创世 COINBASE )
 			S: "DUP HASH160 [GEN] EQUALVERIFY CHECKSIG"
 			V: 10000000000
 		S: "[SIG] [GEN_PK]"
@@ -462,14 +470,19 @@ OUTPUTS:
 
 
 
-\subsubsection{Warrant a license}
+\subsubsection{颁发许可证}
 
 The relevant entities must be warranted a license to issue assets. The entity can request a license from any committee member (C.M.). Once the license is granted and approved. These entities will receive a particular token transfer from the C.M. and the Token is the licensed.
 
+相关实体必须获得授权才能发行资产。
+实体可以向任何委员会成员(C.M.)申请许可证。
+一旦许可被授予和批准。
+这些实体将从委员会成员接收一个特定的，该令牌是经过许可的。
+
 \lstset{basicstyle=\tiny,style=myListStyle}
 \begin{lstlisting}[language=yaml, numbers=none,basicstyle=\footnotesize]
-# Ex2: C.M. warrant a license to the issuer (ISS),
-# note the license change will go back to the C.M.
+# 例2:  委员会颁发证书给发行方 (ISS),
+# 注意许可证的余额会返还到委员会.
 ---
 INPUTS:
 	- INPUT:
@@ -489,16 +502,16 @@ OUTPUTS:
 			V: 0
 \end{lstlisting}
 
-\subsubsection{Issuance of assets}
-Once the license is warranted, entities can issue assets; however, they cannot set the token amount arbitrarily. Instead, to issue a certain amount of assets requires converting the same amount of QITs. The Qitmeer network calls this process as "token mint". Just like the case in reality, to mint a gold coin requires the same weight of gold qits, tokens need the same amount of QITs.
+\subsubsection{资产发行}
+一旦获得授权，实体就可以发行资产;但是，他们不能任意设置通证数量。相反，发行一定数量的资产需要转换相同数量的QIT。Qitmeer网络将这个过程称为“铸币”。就像现实中的情况一样，铸造一枚金币需要同样重量的金币，代币需要同样数量的金币。
 
-The first advantage of issuance system is to guarantee tokens’ elementary intrinsic value; thus, it would significantly mitigate the price fluctuation. Another advantage is that tokens and native currency are no longer isolated islands of value; which are running in the same ecosystem and would improve the liquidity and make the whole network stable.
+发行制度的首要优点是保证了代币的基本内在价值;因此，它将大大缓解价格波动。另一个好处是，代币和本币不再是价值孤岛，它们在同一个生态系统中运行，将提高流动性，使整个网络稳定
 
 \lstset{basicstyle=\tiny,style=myListStyle}
 \begin{lstlisting}[language=yaml, numbers=none,basicstyle=\footnotesize]
-# Ex3: Convert 100000000 native QITs, i.e. 1 Coin,
-# to 100000000 qits of the new token,
-# note the license will go back to the issuer for future issuance.
+# 例3: 转换 100000000 QIT, 即 1 MEER,
+# 到 100000000 单位的新通证,
+# 注意:许可证将返回给发行方以备将来发行
 INPUTS:
 	- INPUT:
 			PREVIOUS_OUTPUT: #(1 LICENSE)
@@ -522,13 +535,15 @@ OUTPUTS:
 			V: 0
 \end{lstlisting}
 
-\subsubsection{Transfer of the Assets}
+\subsubsection{资产转移}
 
-The entities can transfer assets to each other. Moreover, the entity could transfer multiple assets within one transaction. The transaction needs to ensure the input sum of each asset equals the output sum of each asset.
+实体之间可以相互转移资产。
+此外，实体可以在一个交易中转移多个资产。
+交易需要确保每个资产的输入和等于每个资产的输出和
 
 \lstset{basicstyle=\tiny,style=myListStyle}
 \begin{lstlisting}[language=yaml, numbers=none,basicstyle=\footnotesize]
-# Ex4: Alice exchanges her 100 RMB token with Bob's 20 USD token.
+# 例4: Alice 用 Bob 的20美元代币兑换她的100元人民币代币。
 INPUTS:
 	- INPUT:
 			PREVIOUS_OUTPUT:
@@ -550,16 +565,15 @@ OUTPUTS:
 \end{lstlisting}
 
 
-\subsubsection{Melt Token}
+\subsubsection{融币}
 
 Melt is the reversed process of mint, i.e., conversion from tokens to native currency. The total amount of qit is constant, either in the form of Native QIT or Token QIT. However, it is allowed to transform a token and convert native currency. Issuers can melt their coins to reduce liquidity in order to keep the price stable, which is practical to implement stable coins. Melt guarantees the tokens fundamental value, just like the minimum value of a gold coin is the same weight of gold.   
 
-
-Melt guarantees the tokens fundamental value, just like the minimum value of a gold coin is the same weight of gold.
+熔币是铸币的相反过程，即，从代币到本币的转换。无论是以本机qit还是令牌qit的形式，qit的总量都是常量。但是，它可以转换令牌和转换本地货币。发行方可以通过融币来降低流动性，以保持价格稳定，这对于稳定货币的实施是很现实的。令牌熔炼保证了令牌的基本价值，就像一枚金币的最小价值等于黄金的重量一样。
 
 \lstset{basicstyle=\tiny,style=myListStyle}
 \begin{lstlisting}[language=yaml, numbers=none,basicstyle=\footnotesize]
-# Ex5: Melt 100 token qits into 100 native qits
+# 例5: 熔化 100 QIT 代币  到 100 QIT 本币 
 INPUTS:
 	- INPUT:
 			PREVIOUS_OUTPUT:
