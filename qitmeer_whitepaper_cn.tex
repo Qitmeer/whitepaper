@@ -186,7 +186,7 @@
 		\small\href{mailto:paper@qitmeer.io}
 			{\nolinkurl{paper@qitmeer.io}}
 	}
-\date{\today\\\small Version 0.6.2}
+\date{\today\\\small Version 0.6.3}
 \begin{document}
 
 %% Cover end
@@ -428,7 +428,6 @@ OP_CHECKSIG
 
 \subsubsection{概述}
 
-There is a unique token named LICENSE in OP\_TOKEN. The relevant regulatory bodies, shariah-governance entities, industry practitioners with public credibility within the ecosystem are invited to receive the licenses to oversight the compliances issues that might occur along the course of mainstream adoption of the protocol. Any entity planning to issue a token needs to be warranted with a license. Peers can transfer licenses as they are also tokens in nature. However, the originator must be extra careful in event of transferring in order to avoid non-compliance risk due to the records is public and immutable.  
 
 在OP\_TOKEN中有一个名为牌照(LICENSE)的惟一通证。相关监管实体、在生态系统中具有公信力的行业从业人员将被邀请领取牌照，以监督在主流采用协议过程中可能出现的遵从性问题。任何计划发布令牌的实体都需要获得许可。对等点可以传输许可证，因为它们本身也是令牌。然而，发端人在转移时必须格外小心，以避免由于记录是公开和不可变的而造成的不遵从风险。
 
@@ -437,17 +436,16 @@ There is a unique token named LICENSE in OP\_TOKEN. The relevant regulatory bodi
 
 \subsubsection{许可证生成}
 
-Licenses are all generated in the genesis block and distributed to C preserved committee members. One smallest unit (QIT) can represent a license, one block has M coins, one coin= N QIT, so we have M*N license in total, which is sufficient for asset issuance.
 
 许可证都是在创世块中生成的，并分发给C名保护委员会成员。
 一个最小的单位(QIT)可以代表一个许可证，一个块有M个本币，1个本币= N个QIT，所以我们总共有M*N个许可证，这就足够发行资产了。
 
 
 \begin{lstlisting}[language=yaml, numbers=none,basicstyle=\footnotesize]
-# C = 100, M = 10, N = 10^8 (M*N = 10 billion),
-# all examples are based on this setting
-# Ex1: Distribute licenses to the committee,
-# M*N/C = 100 million for each member.
+# C = 100, M = 10, N = 10^8 (M*N = 100 亿),
+# 所以的示例都基于这组参数 
+# 例1: 分发牌照给委员会,
+# M*N/C = 100,000,000, 分配给每个委员一亿个牌照.
 ---
 INPUTS:
 	INPUT:
@@ -472,7 +470,6 @@ OUTPUTS:
 
 \subsubsection{颁发许可证}
 
-The relevant entities must be warranted a license to issue assets. The entity can request a license from any committee member (C.M.). Once the license is granted and approved. These entities will receive a particular token transfer from the C.M. and the Token is the licensed.
 
 相关实体必须获得授权才能发行资产。
 实体可以向任何委员会成员(C.M.)申请许可证。
@@ -567,8 +564,6 @@ OUTPUTS:
 
 \subsubsection{融币}
 
-Melt is the reversed process of mint, i.e., conversion from tokens to native currency. The total amount of qit is constant, either in the form of Native QIT or Token QIT. However, it is allowed to transform a token and convert native currency. Issuers can melt their coins to reduce liquidity in order to keep the price stable, which is practical to implement stable coins. Melt guarantees the tokens fundamental value, just like the minimum value of a gold coin is the same weight of gold.   
-
 熔币是铸币的相反过程，即，从代币到本币的转换。无论是以本机qit还是令牌qit的形式，qit的总量都是常量。但是，它可以转换令牌和转换本地货币。发行方可以通过融币来降低流动性，以保持价格稳定，这对于稳定货币的实施是很现实的。令牌熔炼保证了令牌的基本价值，就像一枚金币的最小价值等于黄金的重量一样。
 
 \lstset{basicstyle=\tiny,style=myListStyle}
@@ -590,22 +585,24 @@ OUTPUTS:
 \end{lstlisting}
 
 
-\section{Consensus Protocol}
+\section{共识协议}
 
-BlockDAG is a high throughput framework ,highlighted in fully decentralized and high security. Futhermore, it is a natural extension to classical bitcoin paradigm, meaning it would inherit most  long time verified qualities of bitcoin and is expected stronger stability.
+BlockDAG是一个高吞吐量的框架，亮点在于在完全去中心化和高安全性。
+此外，它是对经典比特币范式的自然延伸，这意味着它将继承比特币最长久以来被验证的特性，并有望具有更强的稳定性。
 
-Qitmeer introduces GHOSTDAG as fundamental protocol to achieve high throughput linearly ordering service with fast confirmation guaranteed by SPECTRE protocol.
+Qitmeer引入GHOSTDAG作为基础协议，实现高吞吐量的线性排序服务，并采用SPECTRE协议保证快速确认
 
-\subsection{From BlockChain To BlockDAG}
-Bitcoin does not scale due to protocol restrain. By Nakamoto Consensus, i.e., longest-chain rule, 1 MB block size and 10 minutes block rate confine bitcoin to reach only 7 TPS theoretical throughput regardless of the bandwidth and propagation delay.
+\subsection{从 区块链 到 区块图}
+由于协议约束，比特币不可伸缩。根据中本聪共识，即，最长链规则，1 MB块大小和10分钟块率限制比特币只能达到每秒7笔交易的理论吞吐量，无论多么大的带宽和多么快的传播延迟。
 
-The most intuitive way to increase scalability is to shorten block time or enlarge block size. The reason why Satoshi did not adopt is because that will bring forks, as well as distracting the hash power from the main chain, thus causing security vulnerability.
+提高可伸缩性最直观的方法是缩短块时间或增大块大小。中本聪没有采用的原因是这样会带来分叉，同时会分散主链的算力，从而造成安全漏洞。
 
-GHOST protocol introduces heaviest-tree consensus to keep forks without sacrificing security. Note that here BlockChain has transformed into a BlockTree. Since the largest subtree has concentrated the majority hash power, the security is as high as bitcoin. The main chain is the path, i.e. a blockchain from the genesis to leaf, with the highest number of descendants, other blocks are off-chain blocks. Only main chain blocks contribute throughput, off-chain blocks help strengthen the security. 
 
-BlockTree has dramatically increased throughput because of the higher Block Rate or Size. However, there is still a waste of the transactions of off-chain blocks, which should contribute to the throughput as well. Inclusive\cite{Inclusive} protocol proposes a new data structure of ledger, where every block confirms every unconfirmed block. This improvement upgrades a BlockTree to a BlockDAG.
+GHOST协议在不牺牲安全性的前提下，引入了最重树共识来保留分叉。注意，这里区块链已经转换为块树。由于最大的子树集中了大多数算力，安全性与比特币一样高。主链是指从起源到子代数量最多的叶子上的区块链，其他区块为链下区块。只有主链块贡献吞吐量，而链下区块有助于增强安全性。
 
-Through the development history from BlockChain to BlockDAG, it may indicate  that BlockChain is a particular case of BlockDAG in the event of low throughput, which means both are the same in essence. As a result,  it is the scaling approach whose paradigm is the closest to the bitcoin network. BlockDAG is robust since it inherits all the long-time-proved stable features of bitcoin,  as well as it could scale infinitely in terms of protocol, unless it is limited physically, such as, bandwidth. A robust public chain is the optimal basis for incorporating further scaling solutions, such as sharding and state-channels, thus BlockDAG is the preferred scaling solution of Qitmeer.
+由于更高的出块速率或区块大小，区块树极大地提高了吞吐量。但是，仍然存在对链下块中交易的浪费，而这些交易也应该有助于提高吞吐量。Inclusive\cite{Inclusive} 协议提出了一种新的账本数据结构，即每一个区块确认每一个未确认的区块。此改进将块树升级为区块图。
+
+从区块链到BlockDAG的发展历史可以看出，区块链是BlockDAG在低吞吐量情况下的一个特例，这意味着两者在本质上是相同的。因此，它是最接近比特币网络的可伸缩性解决方案。BlockDAG是健壮的，因为它继承了所有被长期证明是稳定的比特币的特点，并且它在协议层面可以无限地扩展，只有物理上的限制，如，带宽和传播延时。健壮的公共链是整合进一步扩展解决方案(如分片和状态通道)的最佳基础，因此BlockDAG是Qitmeer的首选扩展解决方案。
 
 
 \begin{figure}[hbt]
@@ -617,25 +614,21 @@ Through the development history from BlockChain to BlockDAG, it may indicate  th
 
 \subsection{GHOSTDAG}
 
-GHOSTDAG, formerly Phantom, is the first BlockDAG protocol with block total ordering support. What is more, comparing to SPECTRE, it guarantees strong liveness to make the consensus protocol more robust. That is to say, both honest blocks and malicious blocks can be confirmed within a definite time, though it may take longer time to confirm malicious blocks.
+GHOSTDAG，前身为Phantom，是第一个支持区块全序的BlockDAG协议。而且，与SPECTRE相比，它保证了强活性，即在一定时间内，诚实区块和恶意区块都可以被确认，这使得共识协议更加健壮。
+
+\subsubsection{设计思想}
+
+这是GHOSTDAG背后的想法。
+假设网络传播时延和块生成的最大极限率是常数。
+可以直观地看出，如果节点的行为是诚实的，那么它将形成一个子图，其中每个块最多拥有一个常数数量的分叉。
+我们表示这个常数是$k$。
+$k$可以从传播时间和出块率计算出来。
+子图表示为$k$-集群。
+最大的$k$-集群被称为蓝色集合。蓝色集合之外的那些块被称为红色集合.
 
 
-\subsubsection{Intuition}
+如果我们可以通过跟随父块在每个块内的引用, 从$x$块遍历到$y$块，那么我们说在它们之间有一个偏序$x$和$y$， $y$在$x$之前。例如在下面的图中，我们可以从J块到A再到B，所以在A之间有一个偏序. 注意，并不是所有的块都与其他块有偏序。例如，在B、C和D之间不存在偏序。不存在偏序的区块集叫反锥体。$k$-集群中反锥体的大小最多是$k$。
 
-Here is the idea behind GHOSTDAG. Suppose that the maximal limits of network propagation delay and block creation
-rate are constant. It is intuitive that if nodes behave honestly, it forms a subgraph where each block has at most a constant number of forks. We denote
-this constant number as $k$. $k$ can be calculated from propagation time and
-block creation rate. The subgraph is denoted as a $k$-cluster. The biggest
-$k$-cluster is called a blue set. Those blocks outside the blue set are called
-red set.
-
-If we can traverse from block $x$ to block $y$ by following the parent
-references within each block, then we say that there's a partial order between
-$x$ and $y$, and $y$ is prior to $x$. For example in the following figure, we
-can traverse from block J to A through B, so there's a partial order between A
-and J, and A is prior to J. Note not all blocks have partial orders with other
-blocks. For example, there are no partial orders between B, C and D.  The block set where no partial order exists is an anticone. The size of any anticone in
-a $k$-cluster is at most $k$.
 
 \begin{figure}[ht]
 	\centerline{%
@@ -645,30 +638,28 @@ a $k$-cluster is at most $k$.
 \end{figure}
 
 
-\subsubsection{Ordering}
+\subsubsection{排序}
 
-GHOSTDAG orders the DAG ledger in a way that favours blue blocks and penalizes
-red ones. So, if two blocks X and Y have no partial order from the graph, the one in blue set is prior to the one in the red set.
+GHOSTDAG以一种偏爱蓝色方块和惩罚红色块的方式来排序DAG账本。所以，如果两个方块X和Y在图上没有偏序，那么蓝色的那个在前面，红色的那个在前面。
 
-The coloring algorithm is based on a block's past set, also known as ancestors, since the past set gets fixed after a block generated, the blue set will get fixed as well. Therefore, each block could choose the parent with maximal blue set as its main parent. Then, repeat the process of finding main parent from the tip blocks extending to the genesis block, finally we could figure out a unique block chain that is under agreement by the majority of the network, we name this block chain as main chain. Once main chain is identified, all the blocks could form a linearly order in reference to it. 
-
+着色算法是基于一个块的过去集，也称为祖先，因为在生成一个块后，过去集就确定下来了，所以蓝色的集合也会确定下来。因此，每个块可以选择最大蓝色集作为其主父块。然后，重复从末端块到创世块寻找主父块的过程，最后我们可以找到一个唯一的被大多数网络同意的区块链，我们将这个区块链命名为主链。一旦主链被确定，所有的块可以形成一个线性的顺序参考它。
 
 \begin{figure}[ht]
 	\centerline{%
 	   \resizebox{0.8\textwidth}{!}{\includegraphics{figures/Ordering}}%
 	}
-\caption{GhostDAG Ordering}
+\caption{GhostDAG 排序}
 \end{figure}
 
-For example in figure 5, this is a 3-cluster DAG. 
+例如图 5, 一个 3-集群 DAG. 
 
 \begin{enumerate}
-	\item Add genesis block G in blue set
-	\item Add B,C,D,E to blue set, since none of them has an anticone greater than 3
-	\item Since the blue set of H is greater than that of F and I, so add H in blue set. Add I to blue set because its anticone size is only 2; Add mark B and F in red set for anticone size greater than 3
-	\item J,K,L arrived. Both past set size and blue set size of J and K are the same, so currently there are two possible main chain, G-C-H-J and G-C-H-K 
-	\item M arrived, since M's blue set is greater than that of J and L, M is added to blue set, so there is only one main chain left, G-C-H-K-M. Add J to blue set due to small anticone size then add F, L to red set due to big anticone size, now red set and blue set as well as main chain are identified
-	\item the order is G-C-D-E-H-I-B-K-F-j-M-L
+	\item 将 G 加入蓝色集合 
+	\item 将 B,C,D,E 加入蓝色集, 因为它们的反锥体大小都小于3 
+	\item 因为H的蓝色集合大于F和I的，所以在蓝色集合中加入H。在蓝色集合中加入I，因为它的反锥体大小只有2;如果反锥体尺寸大于3，则用红色标记B和F 
+	\item 轮到 J, K, L;	J和K过去集合大小和蓝色集合大小都是一样的，所以目前可能有两个主链, G-C-H-J和G-C-H-K 
+	\item 因为M的蓝色集合大于J和L，所以M被加入到蓝色集合中，所以只剩下一条主链，G-C-H-K-M。将因反锥体尺寸较小而产生的J加入到蓝色集合中，再将因反锥体尺寸较大而产生的F、L加入到红色集合中，现在识别出了红色集合和蓝色集合以及主链
+	\item 顺序是 G-C-D-E-H-I-B-K-F-j-M-L
 \end{enumerate}
 
 \subsection{SPECTRE}
