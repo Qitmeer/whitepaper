@@ -183,7 +183,7 @@
 		\small\href{mailto:paper@qitmeer.io}
 			{\nolinkurl{paper@qitmeer.io}}
 	}
-\date{\today\\\small Version 0.6.0}
+\date{\today\\\small Version 0.6.3}
 \begin{document}
 
 %% Cover end
@@ -563,20 +563,20 @@ OUTPUTS:
 
 \section{Consensus Protocol}
 
-BlockDAG is a high throughput framework ,highlighted in fully decentralized and high security. Futhermore, it is a natural extension to classical bitcoin paradigm, meaning it would inherit most  long time verified qualities of bitcoin and is expected stronger stability.
+BlockDAG is a high throughput framework with highlights in fully decentralized and high security. Futhermore, it is a natural extension to classical bitcoin paradigm, meaning it would inherit most  long time verified qualities of bitcoin and is expected stronger stability.
 
-Qitmeer introduces GHOSTDAG as fundamental protocol to achieve high throughput linearly ordering service with fast confirmation guaranteed by SPECTRE protocol.
+Qitmeer introduces GHOSTDAG as fundamental protocol to achieve high throughput linearly ordering service, with fast confirmation guaranteed by SPECTRE protocol.
 
 \subsection{From BlockChain To BlockDAG}
-Bitcoin does not scale due to protocol restrain. By Nakamoto Consensus, i.e., longest-chain rule, 1 MB block size and 10 minutes block rate confine bitcoin to reach only 7 TPS theoretical throughput regardless of the bandwidth and propagation delay.
+Bitcoin does not scale due to protocol restrain. According to Nakamoto Consensus, i.e., longest-chain rule, 1 MB block size and 10 minutes block rate confine bitcoin to reach only 7 TPS theoretical throughput, regardless how great the bandwidth and how fast propagation delay is.
 
-The most intuitive way to increase scalability is to shorten block time or enlarge block size. The reason why Satoshi did not adopt is because that will bring forks, as well as distracting the hash power from the main chain, thus causing security vulnerability.
+The most intuitive way to increase scalability is to shorten block time or enlarge block size. The reason why Nakamoto Satoshi did not adopt is because that will bring forks, as well as distracting the hash power from the main chain, thus causing security vulnerability.
 
-GHOST protocol introduces heaviest-tree consensus to keep forks without sacrificing security. Note that here BlockChain has transformed into a BlockTree. Since the largest subtree has concentrated the majority hash power, the security is as high as bitcoin. The main chain is the path, i.e. a blockchain from the genesis to leaf, with the highest number of descendants, other blocks are off-chain blocks. Only main chain blocks contribute throughput, off-chain blocks help strengthen the security. 
+GHOST protocol introduces heaviest-tree consensus to keep the forks without sacrificing security. Note that here BlockChain has transformed into a BlockTree. Since the largest subtree has concentrated the majority hash power, the security is as high as bitcoin. The main chain is the chain of blocks from the genesis to  a leaf with the greatest number of descendants, other blocks are off-chain blocks. Only main chain blocks contribute throughput, off-chain blocks help
 
-BlockTree has dramatically increased throughput because of the higher Block Rate or Size. However, there is still a waste of the transactions of off-chain blocks, which should contribute to the throughput as well. Inclusive\cite{Inclusive} protocol proposes a new data structure of ledger, where every block confirms every unconfirmed block. This improvement upgrades a BlockTree to a BlockDAG.
+BlockTree has dramatically increased throughput because of the higher Block Creation Rate or greater Block Size. However, there is still a waste of the transactions in off-chain blocks which should contribute to the throughput as well. Inclusive\cite{Inclusive} protocol proposes a new data structure of ledger, where every block confirms every unconfirmed block. This improvement upgrades a BlockTree to a BlockDAG.
 
-Through the development history from BlockChain to BlockDAG, it may indicate  that BlockChain is a particular case of BlockDAG in the event of low throughput, which means both are the same in essence. As a result,  it is the scaling approach whose paradigm is the closest to the bitcoin network. BlockDAG is robust since it inherits all the long-time-proved stable features of bitcoin,  as well as it could scale infinitely in terms of protocol, unless it is limited physically, such as, bandwidth. A robust public chain is the optimal basis for incorporating further scaling solutions, such as sharding and state-channels, thus BlockDAG is the preferred scaling solution of Qitmeer.
+Through the development history from BlockChain to BlockDAG, it may indicate  that BlockChain is a particular case of BlockDAG in the event of low throughput, which means both are the same in essence. As a result,  it is the scalability solution whose paradigm is the closest to the bitcoin network. BlockDAG is robust since it inherits all the long-time-proved stable features of bitcoin,  as well as it could scale infinitely at the protocol level, only limited physically, such as, bandwidth or propagation delay. A robust public chain is the optimal basis for incorporating further scaling solutions, such as sharding and state-channels, thus BlockDAG is the preferred scaling solution of Qitmeer.
 
 
 \begin{figure}[hbt]
@@ -587,8 +587,7 @@ Through the development history from BlockChain to BlockDAG, it may indicate  th
 \end{figure}
 
 \subsection{GHOSTDAG}
-
-GHOSTDAG, formerly Phantom, is the first BlockDAG protocol with block total ordering support. What is more, comparing to SPECTRE, it guarantees strong liveness to make the consensus protocol more robust. That is to say, both honest blocks and malicious blocks can be confirmed within a definite time, though it may take longer time to confirm malicious blocks.
+GHOSTDAG，前身为Phantom，是第一个支持块总排序的BlockDAG协议。而且，与SPECTRE相比，它保证了强大的活性，即在一定时间内，诚实的block和恶意的block都可以被确认，这使得consensus protocol更加健壮。
 
 
 \subsubsection{Intuition}
@@ -621,7 +620,7 @@ a $k$-cluster is at most $k$.
 GHOSTDAG orders the DAG ledger in a way that favours blue blocks and penalizes
 red ones. So, if two blocks X and Y have no partial order from the graph, the one in blue set is prior to the one in the red set.
 
-The coloring algorithm is based on a block's past set, also known as ancestors, since the past set gets fixed after a block generated, the blue set will get fixed as well. Therefore, each block could choose the parent with maximal blue set as its main parent. Then, repeat the process of finding main parent from the tip blocks extending to the genesis block, finally we could figure out a unique block chain that is under agreement by the majority of the network, we name this block chain as main chain. Once main chain is identified, all the blocks could form a linearly order in reference to it. 
+The coloring algorithm is based on a block's past set, also known as ancestors, since the past set gets fixed after a block generated, the blue set will get fixed as well. Therefore, each block could choose the parent with maximal blue set as its main parent. Then, repeat the process of finding main parent from the tip blocks extending to the genesis block, finally we could figure out a unique block chain that is under agreement by the majority of the network, we name this block chain as main chain. Once main chain is identified, all the blocks could form a linearly order by reference to it. 
 
 
 \begin{figure}[ht]
@@ -637,8 +636,8 @@ For example in figure 5, this is a 3-cluster DAG.
 	\item Add genesis block G in blue set
 	\item Add B,C,D,E to blue set, since none of them has an anticone greater than 3
 	\item Since the blue set of H is greater than that of F and I, so add H in blue set. Add I to blue set because its anticone size is only 2; Add mark B and F in red set for anticone size greater than 3
-	\item J,K,L arrived. Both past set size and blue set size of J and K are the same, so currently there are two possible main chain, G-C-H-J and G-C-H-K 
-	\item M arrived, since M's blue set is greater than that of J and L, M is added to blue set, so there is only one main chain left, G-C-H-K-M. Add J to blue set due to small anticone size then add F, L to red set due to big anticone size, now red set and blue set as well as main chain are identified
+	\item turn for J,K,L . Both past set size and blue set size of J and K are the same, so currently there are two possible main chain, G-C-H-J and G-C-H-K 
+	\item since M's blue set is greater than that of J and L, M is added to blue set, so there is only one main chain left, G-C-H-K-M. Add J to blue set due to small anticone size then add F, L to red set due to big anticone size, now red set and blue set as well as main chain are identified
 	\item the order is G-C-D-E-H-I-B-K-F-j-M-L
 \end{enumerate}
 
