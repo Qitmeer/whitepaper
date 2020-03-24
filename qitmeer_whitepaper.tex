@@ -183,7 +183,7 @@
 		\small\href{mailto:paper@qitmeer.io}
 			{\nolinkurl{paper@qitmeer.io}}
 	}
-\date{\today\\\small Version 0.6.3}
+\date{\today\\\small Version 0.6.4}
 \begin{document}
 
 %% Cover end
@@ -587,8 +587,7 @@ Through the development history from BlockChain to BlockDAG, it may indicate  th
 \end{figure}
 
 \subsection{GHOSTDAG}
-GHOSTDAG，前身为Phantom，是第一个支持块总排序的BlockDAG协议。而且，与SPECTRE相比，它保证了强大的活性，即在一定时间内，诚实的block和恶意的block都可以被确认，这使得consensus protocol更加健壮。
-
+GhostDAG, formerly Phantom, is the first BlockDAG protocol supporting block total ordering. Compared to SPECTRE, it guarantees Strong Liveness that all the blocks , including dishonest blocks, will get confirmed in a definite time, making consensus protocol more robust.
 
 \subsubsection{Intuition}
 
@@ -642,13 +641,11 @@ For example in figure 5, this is a 3-cluster DAG.
 \end{enumerate}
 
 \subsection{SPECTRE}
-SPECTRE\cite{SPECTRE} is a BlockDAG based protocol that achieves fast confirmation and high throughput with 50\% attack resilience. SPECTRE guarantees safety, which means the transaction is unlikely to be reversed once it is accepted. However, the SPECTRE guarantees fast confirmations for honest users rather than all users which is weak liveness.
+SPECTRE\cite{SPECTRE} is a BlockDAG based consensus protocol that achieves fast confirmation and high throughput with 50\% attack resilience. SPECTRE has weak liveness, it guarantees fast confirmations only for honest users rather than all users.
 
-There is a trade-off between liveness and fast confirmation, whereby SPECTRE prioritizes the latter due to weak liveness only affects malicious users, that enables SPECTRE to be a suitable protocol for payment model. In the event malicious users launch double spending attack, their transactions are likely to be delayed indefinitely.
+There is a trade-off between liveness and fast confirmation, whereby SPECTRE prioritizes the latter due to weak liveness only affects malicious users, that enables SPECTRE to be a suitable protocol for payment network. In the event malicious users launch double spending attack, their transactions are likely to be delayed indefinitely.
 
-SPECTRE is a stateless transaction model, whereby there is no need to gain a total ordering over all the blocks. Only when two blocks conflicting that a pairwise ordering is needed. SPECTRE employs a voting algorithm to decide which block wins when there is a conflict between two blocks. Suppose block x has a conflicting transaction with another transaction in block y, and also suppose that block z is voting on them with the following rules:
-
-SPECTRE employs a voting algorithm to decide which block wins when two blocks
+SPECTRE is a stateless transaction model, whereby there is no need to gain a total ordering over all the blocks. Only when two blocks conflicting that a pairwise ordering is needed. SPECTRE employs a voting algorithm to decide which block wins when two blocks
 conflict. Suppose block $x$ has a conflicting transaction with another
 transaction in block $y$, and also suppose that block $z$ is voting on them with
 the following rules:
@@ -812,22 +809,17 @@ With the converted formula we are able to calculate $risk\_hidden$ in numerical 
 
 
 \subsection{Mining Algorithm}
-BlockDAG’s collaboration model provides much more fairness than the competition model of BlockChain on the protocol perspective. Every node gets rewards according to its contribution, regardless of how much hash power it possess. Qitmeer favors fairness over the scalability owing to the former is more in line with true spirit of blockchain. The intention of Nakamoto Consensus is fair - every node votes with electricity; however, only a small bunch of the mining pools have the odds to participate in consensus. solo miners suffer huge risk since they have to wait for an uncertain time, quite long in most cases, to mine a block to cover their cost; thus finally it will have to turn to the mining pools. BlockDAG incorporates every miner’s block, the miners have a strong expectation of their return and then discourage to join a mining pool.
+BlockDAG’s collaboration model provides much more fairness than the competition model of BlockChain on the protocol perspective. Every node gets rewards according to its contribution, regardless of how much hash power it possess. Qitmeer favors fairness over the scalability owing to the former is more in line with true spirit of blockchain. The intention of Nakamoto Consensus is fair - every node votes with electricity; however, only a small bunch of the mining pools have the odds to participate in consensus. solo miners suffer huge risk since they have to wait for an uncertain time, quite long in most cases, to mine a block to cover their cost; thus finally it will have to turn to the mining pools. BlockDAG includes every miner’s block, the miners have a stable expectation on their rewards ,  therefore it is not too necessary for them to join a mining pool.
 
 
 In addition, the mining algorithm is  another factor of fairness. Mining fairness refers to a certain amount of mining cost, such as electricity in POW, should derive the relatively equivalent amount of hash power. Practically, the ASIC mining rigs have much more mining efficiency than their prices.
 
 \subsubsection{Cuckoo-Cycle-PoW}
-Proof-of-Work(PoW) is used to confirm transactions and produces new blocks, and acts as the driving force in PoW based cryptocurrencies. PoW must not enable a participant to have a significant advantage over another participant. That is why Satoshi said: "Proof-of-work is essentially one-CPU-one-vote."
+Proof-of-Work(PoW) is used to confirm transactions and produces new blocks, and acts as the driving force in PoW based cryptocurrencies. PoW must not enable a participant to have a significant advantage over another participant. That is what Satoshi proposed: "Proof-of-work is essentially one-CPU-one-vote."
 
 However, most widely used proof-of-work algorithms, such as SHA-256, Blake2b, Scrypt, are more efficient on ASIC devices when compared to CPUs and GPUs. This can lead to ASIC owners posses a much larger voting power than CPU and GPU owners, which violates the “one-CPU-one-vote” principle.
 
-Cuckoo-Cycle-PoW, a graph-theoretic proof-of-work algorithm/ASIC-Resistant, is designed to find certain subgraphs in large pseudo-random graphs. This algorithm is ASIC resistant which  utilizes almost all parts of consumer-grade hardware in the  (GPUs, Graphic Processing Unit),
-
-The Cuckoo Cycle POW is designed to find certain subgraphs in large pseudo-random graphs. In particular, Search for cycles of specified length L in a bipartite graph with M edges of N nodes. If a cycle is found and the hash difficulty is less than the target difficulty, the cuckoo cycle PoW is completed.
-
-
-
+Cuckoo-Cycle-PoW, a graph-theoretic proof-of-work ASIC-Resistant mining algorithm, it is designed to find certain subgraphs in large pseudo-random graphs. In particular, Search for cycles of specified length L in a bipartite graph with M edges of N nodes. If a cycle is found and the hash difficulty is less than the target difficulty, the cuckoo cycle PoW is completed.
 
 \textbf{Edge(Node) generation}
 
@@ -891,7 +883,7 @@ Thus in the actual use, it also adds a hash difficulty control similar to Bitcoi
 and then compared with the target difficulty.
 
 \subsubsection{Difficulty Adjustment}
-To keep block creation, a.k.a block rate, stable, Qitmeer adjust mining difficulty periodically. 
+To keep block creation rate stable, Qitmeer adjust mining difficulty periodically. 
 The adjustment rule is deviated from BlockChain due to forks of BlockDAG
 
 \subsubsection*{Blue Set Based}
@@ -905,7 +897,7 @@ Qitmeer exploits main chain to overcome this problem. The rule is:
 \begin{enumerate}
 	\item  Wait until 144 blocks newer than last adjustment point in main chain.
     \item  Calculate the actual time, which is the time span from last adjustment point to now.
-    \item  Calculate new blue blocks created.
+    \item  Calculate number of new blue blocks created.
     \item  Calculate the expected time of those blue blocks by multiply the number with block time.
     \item  Adjust the difficulty by comparing expected time and actual time.
 \end{enumerate}

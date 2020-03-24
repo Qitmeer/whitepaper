@@ -186,7 +186,7 @@
 		\small\href{mailto:paper@qitmeer.io}
 			{\nolinkurl{paper@qitmeer.io}}
 	}
-\date{\today\\\small Version 0.6.3}
+\date{\today\\\small Version 0.6.4}
 \begin{document}
 
 %% Cover end
@@ -293,13 +293,11 @@ Qitmeer网络的所有节点都是对等节点并有资格参与共识.
 Qitmeer 在各种可伸缩性的方面都有理想的表现, 使得它能长时间稳定运行.
 
 \subsubsection*{快速确认}
-The Qitmeer adopts the SPECTRE as consensus algorithm which is a speedy confirmation BlockDAG protocol. 
 Qitmeer 集成SPECTRE, 一个高速确认的BlockDAG协议, 来保证交易的快速安全确认.
 \subsubsection*{高吞吐量}
 GhostDAG 是一个支持高吞吐量的BlockDAG协议, 能充分发掘潜在的伸缩性, 只受网络物理参数的限制, 例如网络带宽或传播时间.
 
 \subsubsection*{低成本}
-Technically, the cost is not scaling since the transaction fee is increasing slightly with the network growing. However, the average cost will keep relatively insignificant, reasonable for a long period.  
 技术上讲, 成本不能扩张因为交易费会随着网络的增长缓慢地增长.不过平均每笔交易的成本还是相对不是太显著, 长远看还是合理的.
 
 
@@ -310,17 +308,14 @@ Technically, the cost is not scaling since the transaction fee is increasing sli
 \subsection{背景}
 \subsubsection{问题定义}
 
-Blockchains are ought to consider two main points to be considered as Regulation compliance in the Blockchain industry:
 区块链的合规性应该要考虑两点:
 
 \subsubsection*{内在价值}
-Assets must have underlying value and cannot be created out of thin air. On existing token issuance platforms like Ethereum\cite{Ethereum}, individuals can issue arbitrary amount of token without any collateral.
 
 资产必须存在内在价值, 不能凭空产生. 在已有的通证发布平台例如以太\cite{Ethereum}, 个人可以在不需要抵押的情况下发布任意额度的资产
  
 
 \subsubsection*{资产认证}
-The blockchain should not allow any issuance of illegitimate assets and unethical business. Existing blockchains are too unrestricted in the event of assets authentication.
 区块链不应该允许非法资产的发行以及违反商业操守的行为, 已有的区块链在资产认证时没有任何限制. 
 
 \subsubsection{相关工作}
@@ -400,8 +395,6 @@ OP_RETURN 6f6d6e69000000000000001f00000015c9054900
 
 \subsubsection*{OP\_GROUP}
 OP\_RETURN 的设计更适合在成熟的区块链上应用, 因为它不会改变底层区块链协议, 从而不会有分叉的风险. 不过缺点在于矿工是无法验证协议, 所以可能存在一定的安全风险.
-
-OP\_GROUP\cite{OP_GROUP}  is an improvement proposal of assets issuance on Bitcoin Cash (BCH)\cite{BCH} from Bitcoin Unlimited (BU). Thus, OP\_GROUP  supports transfer, destroy and insurance of Token. Since OP\_GROUP is an extension to the BCH script system,  it is part of the BCH protocol. Thus miners can do the verification, which is more reliable.
 
 OP\_GROUP\cite{OP_GROUP} 是Bitcoin Unlimited (BU) 提出的针对比特现金\cite{BCH}的提案. 因此, OP\_GROUP 支持转账, 销毁以及发行通证. 因为OP\_GROUP是对BCH 脚本系统的扩展, 它是属于协议的一部分	 
 
@@ -663,66 +656,55 @@ GHOSTDAG以一种偏爱蓝色方块和惩罚红色块的方式来排序DAG账本
 \end{enumerate}
 
 \subsection{SPECTRE}
-SPECTRE\cite{SPECTRE} is a BlockDAG based protocol that achieves fast confirmation and high throughput with 50\% attack resilience. SPECTRE guarantees safety, which means the transaction is unlikely to be reversed once it is accepted. However, the SPECTRE guarantees fast confirmations for honest users rather than all users which is weak liveness.
 
-There is a trade-off between liveness and fast confirmation, whereby SPECTRE prioritizes the latter due to weak liveness only affects malicious users, that enables SPECTRE to be a suitable protocol for payment model. In the event malicious users launch double spending attack, their transactions are likely to be delayed indefinitely.
+SPECTRE\cite{SPECTRE}是一种基于BlockDAG的共识协议，具有50\%的攻击承受力，实现快速确认和高吞吐量。SPECTRE只有弱活性，即只能保证对诚实的用户进行快速确认，不能保证对所有用户进行快速确认。
 
-SPECTRE is a stateless transaction model, whereby there is no need to gain a total ordering over all the blocks. Only when two blocks conflicting that a pairwise ordering is needed. SPECTRE employs a voting algorithm to decide which block wins when there is a conflict between two blocks. Suppose block x has a conflicting transaction with another transaction in block y, and also suppose that block z is voting on them with the following rules:
+在活性和快速确认之间存在权衡中，SPECTRE优先选择后者，因为弱活性，只影响恶意用户，这使得SPECTRE成为一个适合支付网络的协议。如果恶意用户发起双重支付攻击，他们的交易可能会被无限期延迟。
 
-SPECTRE employs a voting algorithm to decide which block wins when two blocks
-conflict. Suppose block $x$ has a conflicting transaction with another
-transaction in block $y$, and also suppose that block $z$ is voting on them with
-the following rules:
+SPECTRE是一个无状态的交易模型，因此不需要获得所有块的总排序。只有当两个块相互冲突时，才需要成对排序。SPECTRE使用投票算法来决定当两个块发生冲突时哪个块获胜。假设块 $x$有笔交易与块 $y$中的另一笔交易有冲突，并且假设块 $z$按照以下规则对它们进行投票:
 
 \begin{enumerate}
-	\item If $z$ is in $x$'s future but not in $y$'s future, $z$ votes for
-		$x$ in favor of $y$, denoted as $x \prec y$, and vice versa.
-	\item If both $x$ and $y$ are in the past of $z$, then $z$ follows the majority votes in its past.
-	\item If neither $x$ nor $y$ is in the past of $z$, then $z$ follows the majority votes in its future.
-	\item Both $x$ and $y$ vote for themselves unless one is in the past of
-		the other.
+	\item 如果$z$在$x$的未来集而不在$y$的未来集，则$z$投票支持$x$优先 $y$，表示为$x \prec y$，反之亦然。
+	\item 如果$x$和$y$都在$z$的过去集中，则$z$跟过去集的多数票一致。
+	\item 如果$x$和$y$都不是在$z$的过去，那么$z$跟其未来集多数投票一致
+	\item $x$和$y$都为自己投票，除非其中一个已经在另一个的过去集合中
 \end{enumerate}
 
 
-Here's an example of how a new block (number 12 in the figure below) votes:
+下面是一个新区块(下图中的12号)如何投票的例子:
 
 \begin{figure}[ht]
 	\centerline{%
 	   \resizebox{0.8\textwidth}{!}{\includegraphics{figures/SPECTRE}}%
 	}
-\caption{An example of the voting procedure in the DAG for blocks $x$ and $y$ in SPECTRE}
+\caption{DAG中对SPECTRE中的块$x$和$y$的投票过程}
 \end{figure}
 
-According to rule 4, block $x$ votes for $x \prec y$, block $y$ votes for $y
-\prec x$.
+根据规则4，区块$x$ 投票$x \prec y$，区块$y$ 投票 $y \prec x$。
 
-According to rule 1, blocks 6, 7 and 8 vote for $x \prec y$, blocks 9, 10 and 11
-vote for $y \prec x$.
+根据规则 1, 区块 6, 7 和 8 投票 $x \prec y$, 区块 9, 10 和 11 投票 $y \prec x$.
 
-According to rule 2, block 12 votes according to its past. Since not all blocks
-of its past have voted, we change global view to block 12's local view, which
-means block 10 and 11 are excluded.
 
-According to rule 3, block 5 votes for $x \prec y$, since the majority of its
-future vote in favor of $x$ over $y$ (blocks 7, 8 versus block 9). Note that the
-current view is block 12's local view and block 11 is excluded, so we cannot
-take its vote.
+根据规则2，区块12 根据它的过去集合投票。因为不是它的过去集合中的所有区块已经投票，我们改变全局视图到区块12本地视图，
+意味着第10块和第11块不包括在内
+
+
+根据规则3，第5块投票为$x \prec y$，因为它未来集合的大多数投票赞成$x$ / $y$(区块7、8对区块9)。请注意
+当前视图是块12的本地视图，块11被排除，所以我们不能参考它投票。
 
 Also according to rule 3, blocks 1\textasciitilde4 vote for $x \prec y$.
-
-Now all the blocks in block 12's past have voted. Block $x$ gets 10 votes. Block
-$y$ gets 2 votes. Block 12 follows the majority and votes for $x \prec y$ thus.
+同样根据规则3，块1\textasciitilde4 投票给$x \prec y$。
 
 
-\subsubsection*{Confirmation Time}
+现在，区块12过去集合的所有区块都投票了。块$x$获得10票。块$y$得到2票。块12跟大多数走，因此投票赞成$x \prec y$。
 
-When a node $v$ receives a block $x$, it loops to calculate the  risk of
-the block. It accepts the block when the risk is smaller than a given threshold
-$\epsilon$. The confirmation time of block $x$ in node $v$ is the time
-since $x$ is received by $v$ until $x$ is accepted by $v$.
 
-The following algorithm below calculates the  risk of block $x$ in
-$G_t^v$, where $G_t^v$ is the block DAG that $v$ observes at time $t$.
+\subsubsection*{确认时间}
+
+
+当一个节点$v$接收到一个块$x$时，它将循环计算该块的风险。当风险小于给定的阈值$\epsilon$时，它接受该块。节点$v$中的$x$块的确认时间为$v$收到$x$到$v$接受$x$为止的时间。
+
+下面的算法以$G_t^v$计算$x$块的风险，其中$G_t^v$是$v$在$t$时刻观察到的区块图
 
 \begin{codebox}
 \Procname{\proc{Risk}$(G_t^v, x)$}
@@ -747,52 +729,35 @@ $$
 where
 
 \begin{itemize}
-	\item $d$ is the upper bound on the recent delay diameter in the network,
-	\item $\alpha$ is the attacker’s relative computational power,
-	\item $\lambda$ is the block creation rate,
-	\item $Poiss(a, b)$ is defined as $e^{-a} \cdot \frac{a^b}{b!}$,
-	\item $x^+$ is defined as $\max\{0, x\}$,
-	\item and $\pi$ is the stationary distribution which we will explain below.
+	\item $d$是网络中最近的延迟的上界，
+	\item $\alpha$是攻击者的相对算力，
+	\item $\lambda$ 是出块率,
+	\item $Poiss(a, b)$ 被定义为 $e^{-a} \cdot \frac{a^b}{b!}$,
+	\item $x^+$ 被定义为 $\max\{0, x\}$,
+	\item  $\pi$ 是我们将在下面解释的平稳分布。.
 \end{itemize}
 
-$risk\_hidden(T,g)$ upper bounds the probability that block $x$ is preceded by
-some attacker’s block $y$ in pairwise order, where $y$ is published later than
-$x$.
+$risk\_hidden(T,g)$  限定了 区块$x$ 被有偏序关系的攻击区块 $y$ 反超的概率  ，其中$y$在$x$之后发布。
 
-$\pi$ is actually a vector. Informally, it is the statistical distribution of
-how much more blocks attacker nodes have created than honest nodes have created
-since block $x$ is published, which is called gap in the SPECTRE paper. $\pi(l)$
-is the probability that the value of gap is $l$.
 
-The value of gap changes as time goes on, forming a random walk which induces an
-ergodic Markov chain. Theoretically, it could be any integer ranging from
-negative infinity to positive infinity. In the worst case, it is always
-non-negative. Only when the gap is non-negative is there a risk for block $x$ to
-be received less or equal votes than some attacker’s block $y$ which is
-published later than $x$, so that $y$ precedes $x$ in pairwise order. This is
-why in the formula of $risk\_hidden$ the index $l$, i.e. the value of gap,
-starts out equal to 0 instead of negative infinity.
+$\pi$实际上是一个向量。非行式化地说，它是自区块 $x$发布以来，攻击者节点所创建的块数比诚实节点所创建的块数多多少的统计分布，在SPECTRE的论文中称为gap。$\pi(l)$是gap值为$l$的概率。
 
-Since the random walk of $l$ induces an ergodic Markov chain, $l$ has a unique
-stationary distribution, which is $\pi$. In order to calculate $\pi$, we need to
-calculate the transition probability matrix of the random walk.
+间隙值gap随着时间的推移而变化，随机游走从而形成遍历马尔可夫链。理论上，它可以是从负无穷到正无穷的任何整数。在最坏的情况下，它总是非负的。只有当差距是非负的时候，区块 $x$才有可能比某个在$x$之后发布攻击者的区块 $y$获得更少或相等的票数，导致$y$的成对排序在$x$之前。这就是为什么在$risk\_hidden$的公式中，索引$l$，即gap的值，一开始等于0，而不是负无穷。
 
-Suppose that the value of $l$ ranges from 0 to $N$, where $N$ is infinity in the
-above definition. We define the transition probability matrix as an $N$ by $N$
-matrix $T$. We also denote by $\delta := \alpha \cdot \lambda \cdot d$. For all
-$1 \leq l < N - 1$, $T_{l-1,l} = 1 - \alpha, T_{l+1,l} = \alpha$, and for $l = N
-- 1$: $T_{l-1,l} = 1 - \alpha, T_{l,l} = \alpha$. The first column of the matrix
-is defined by: $T_{0,0} := (1 - \alpha) \cdot e^{-\delta}, T_{1,0} = e^{-\delta}
-\cdot \alpha + e^{-\delta} \cdot \delta$, for $1 < l < N - 1$: $T_{l,0} =
-e^{-\delta} \cdot \frac{\delta^l}{l!}$, and $T_{N-1,0} = 1 - e^{-\delta} \cdot
-\left[\frac{\delta^0}{0!} + \frac{\delta^1}{1!} + \cdots +
-\frac{\delta^{N-2}}{(N-2)!}\right]$.  $\pi$ is the eigenvector of $T$
-corresponding to the eigenvalue 1, where $\pi(l) \geq 0$ and the sum of $\pi$ is
-1.
+由于$l$的随机游走引入了一个遍历马尔科夫链，$l$有一个唯一的平稳分布，即$\pi$。为了计算$\pi$，我们需要计算随机游走的转移概率矩阵。
 
-In practice, $\pi(l)$ is very close to zero when $l$ is very large, so we can
-just pick some $N \gg 1$ instead of infinity. Therefore, the formula of
-$risk\_hidden$ becomes
+假设$l$的值在0到$n$之间，其中$n$在上述定义中为无穷大。
+我们将转移概率矩阵定义为一个$N$×$N$矩阵$T$。
+用  $\delta := \alpha \cdot \lambda \cdot d$ 表示.
+对所有 $1 \leq l < N - 1$, $T_{l-1,l} = 1 - \alpha, T_{l+1,l} = \alpha$, $l = N
+- 1$: $T_{l-1,l} = 1 - \alpha, T_{l,l} = \alpha$
+矩阵的第一列被定义为:$T_{0,0} := (1 - \alpha) \cdot e^{-\delta}, T_{1,0} = e^{-\delta}
+\cdot \alpha + e^{-\delta} \cdot \delta$
+对 $1 < l < N - 1$: $T_{l,0} =e^{-\delta} \cdot \frac{\delta^l}{l!}$
+以及 $T_{N-1,0} = 1 - e^{-\delta} \cdot \left[\frac{\delta^0}{0!} + \frac{\delta^1}{1!} + \cdots + \frac{\delta^{N-2}}{(N-2)!}\right]$
+$\pi$是$T$对应于特征值1的特征向量，其中$\pi(l) \geq 0$， $\pi$的和为1。
+
+在实践中，当$l$非常大时，$\pi(l)$非常接近于0，所以我们可以选择$N \gg 1$而不是无穷大。因此，$risk\_hidden$的公式为
 
 $$
 risk\_hidden(T,g) = \sum_{l=0}^{N} \pi(l) \sum_{m=0}^{\infty} Poiss((T + 2 \cdot
@@ -800,16 +765,12 @@ d) \cdot \alpha \cdot \lambda, m) \cdot \left(\frac{\alpha}{1-\alpha}\right)^{(g
 - l - m)^+}.
 $$
 
-It is recommended to calculate $\pi$ with some well-tested Markov chain library such
-as the markovchain package in R.
+建议使用一些经过良好测试的马尔科夫链库来计算$\pi$被定义为:作为R中的markovchain包。
 
-The sum of series with index $m$ seems to be a sum of infinite series. However,
-for $m > g - l$ we have $(g - l - m)^+ = 0$ and
+指数为$m$的级数的和似乎是无穷级数的和。然而，对于$m > g - l$，我们有$(g - l - m)^+ = 0$ 和 
 $\left(\frac{\alpha}{1-\alpha}\right)^{(g - l - m)^+} = 1$.
 
-Therefore, the formula of $risk\_hidden$ can be further converted as below,
-where $Poiss_{cdf}$ is the cumulative distribution function (CDF) of Poisson
-distribution.
+因此，$risk\_hidden$的公式可以进一步转换为如下公式, 其中$Poiss_{cdf}$是泊松分布的累积分布函数(CDF)
 
 \begin{align*}
 risk\_hidden(T,g)
@@ -822,37 +783,38 @@ risk\_hidden(T,g)
 & (1 - Poiss_{cdf} ((T+2 \cdot d) \cdot \alpha \cdot \lambda, (g-l)^+))).
 \end{align*}
 
-With the converted formula we are able to calculate $risk\_hidden$ in numerical way. Figure 5 simulates the confirmation time on different block rates, it show that SPECTRE could achieve 5 seconds confirmation time on block rates higher than 10 blocks per second and 10\% faulty percentage, which is considerably promising.
+通过转换后的公式，我们可以用数值的方式计算$risk\_hidden$。图5模拟了不同块率下的确认时间，结果显示SPECTRE可以在高于10块/秒和10\%出错率的出块率下实现5秒的确认时间，这是很理想的。
 
 \begin{figure}[ht]
 	\centerline{%
 	   \resizebox{0.8\textwidth}{!}{\includegraphics{figures/confirmation.jpeg}}%
 	}
-\caption{Confirmation Time}
+\caption{确认时间}
 \end{figure}
 
 
-\subsection{Mining Algorithm}
-BlockDAG’s collaboration model provides much more fairness than the competition model of BlockChain on the protocol perspective. Every node gets rewards according to its contribution, regardless of how much hash power it possess. Qitmeer favors fairness over the scalability owing to the former is more in line with true spirit of blockchain. The intention of Nakamoto Consensus is fair - every node votes with electricity; however, only a small bunch of the mining pools have the odds to participate in consensus. solo miners suffer huge opportunity cost since they have to wait for an uncertain time, quite long in most cases, to mine a block to cover their cost; thus finally it will have to turn to the mining pools. BlockDAG incorporates every miner’s block, the miners have a strong expectation of their return and then discourage to join a mining pool.
+\subsection{挖矿算法}
 
+从协议的角度来看，BlockDAG的协作模型比区块链的竞争模型提供了更多的公平性。每个节点根据其贡献获得奖励，而不管它拥有多少算力。Qitmeer更倾向于公平性而不是可伸缩性，因为前者更符合区块链的真正精神。中本聪共识的意图是公平的——每个节点都用电力投票;然而，只有少数几个矿池有机会参与共识。独立矿工要付出巨大的机会成本，因为他们必须等待一段不确定的时间，在大多数情况下要等很长时间，才能开采一个区块来弥补成本;因此，它最终将不得不求助于矿坑。BlockDAG合并了每个矿工的区块，矿工有一个强烈的期望，他们的返回，然后不鼓励加入一个采矿池。
 
-In addition, the mining algorithm is  another factor of fairness. Mining fairness refers to a certain amount of mining cost, such as electricity in POW, should derive the relatively equivalent amount of hash power. Practically, the ASIC mining rigs have much more mining efficiency than their prices.
+从协议的角度来看，BlockDAG的协作模型比区块链的竞争模型提供了更多的公平性。每个节点根据其贡献获得奖励，而不管它拥有多少散列能力。Qitmeer更倾向于公平性而不是可伸缩性，因为前者更符合区块链的真正精神。中本聪共识的意图是公平的——每个节点都用电力投票;然而，只有少数几个矿池有机会参与共识。独立的矿工承受着巨大的风险，因为他们必须等待一段不确定的时间，在大多数情况下是相当长的时间，才能开采一个区块来弥补成本;因此，它最终将不得不求助于矿池。BlockDAG包括每个矿工的区块，矿工对他们的回报有一个稳定的期望，因此对他们来说加入一个矿池不是太有必要。。
+
+此外，挖矿算法是公平性的另一个因素。挖矿公平是指一定数量的挖矿成本，如在POW中产生的电量，应该得到相对等值的算力。实际上，ASIC矿机的开采效率远远高于其价格。
 
 \subsubsection{Cuckoo-Cycle-PoW}
-Proof-of-Work(PoW) is used to confirm transactions and produces new blocks, and acts as the driving force in PoW based cryptocurrencies. PoW must not enable a participant to have a significant advantage over another participant. That is why Satoshi said: "Proof-of-work is essentially one-CPU-one-vote."
+工作证明(PoW)用于确认交易和生成新块，并作为基于PoW的加密货币的驱动力。PoW不得使一个参与方比另一个参与方有明显的优势。这就是中本聪倡导的:“工作证明本质上是一CPU一票。”
 
-However, most widely used proof-of-work algorithms, such as SHA-256, Blake2b, Scrypt, are more efficient on ASIC devices when compared to CPUs and GPUs. This can lead to ASIC owners posses a much larger voting power than CPU and GPU owners, which violates the “one-CPU-one-vote” principle.
+然而，最广泛使用的工作证明算法，如SHA-256, Blake2b, Scrypt，在ASIC设备上比在CPU和GPU上更有效。这可能导致ASIC所有者拥有比CPU和GPU所有者大得多的投票权，这违反了“一CPU一票”原则。
 
-Cuckoo-Cycle-PoW, a graph-theoretic proof-of-work algorithm/ASIC-Resistant, is designed to find certain subgraphs in large pseudo-random graphs. This algorithm is ASIC resistant which  utilizes almost all parts of consumer-grade hardware in the  (GPUs, Graphic Processing Unit),
+Cuckoo-Cycle-PoW是一种基于图理论的抗ASIC工作证明算法，它被设计用来在大量伪随机生成的图中寻找某些子图。
+特别地，在一个有N个节点的M条边的二分图中搜索指定长度为L的环。如果找到一个环，并且哈希难度小于目标难度，则完成布谷鸟环PoW。
 
-The Cuckoo Cycle POW is designed to find certain subgraphs in large pseudo-random graphs. In particular, Search for cycles of specified length L in a bipartite graph with M edges of N nodes. If a cycle is found and the hash difficulty is less than the target difficulty, the cuckoo cycle PoW is completed.
+\textbf{边(图)生成}
 
 
-
-
-\textbf{Edge(Node) generation}
-
-For the sake of simplicity, we define 32 edges for the bipartite graph. We call the SIPHASH function twice to create two edge endpoints(U and V), with the first input value being 2 * nonce, and the second 2 * nonce+1. The key for this function is based on a hash of a block header.
+为了简单起见，我们定义了二分图为32条边。
+我们两次调用SIPHASH函数来创建两个边缘端点(U和V)，第一个输入值是2 * nonce，第二个输入值是2 * nonce+1。
+此函数的键基于区块头的散列。
 
 \begin{equation}
 {U = SIPHASH(headerHash, 2*nonce) \mod 31}
@@ -861,74 +823,65 @@ For the sake of simplicity, we define 32 edges for the bipartite graph. We call 
 {V = SIPHASH(headerHash, 2*nonce+1) \mod 31}
 \end{equation}
 
-where,
+其中,
 \begin{equation}
 0\leq\ {\bf nonce} \leq 31
-\end{equation}it is any number between 0 and 31. Each nonce corresponds to two edge endpoints(U and V).
+\end{equation} 是 0 到 31 的任意数字. 每个 nonce 对应边的两个端点(U和V).
 
-To throw 32 edges into a graph, randomly:
+随机在图中产生32条边:
 
 \begin{figure}[ht]
 	\centerline{%
 		 \resizebox{0.8\textwidth}{!}{\includegraphics{figures/edge_generation}}%
 	}
-	\caption{Building Nodes.}
+	\caption{产生节点.}
 \end{figure}
 
 
-\textbf{Edge Trimming}
+\textbf{边裁剪}
 
-There is a special edge in bipartite graph, which is leaf edge, and could never be part of a cycle. Leaf edge has a feature that the nodes it connects must have at least one node with the degree of the nodes being one. By eliminating leaf edge in the bipartite graph, it could greatly reduce the complexity of the graph, thus speeding up finding cycle from the bipartite graph.
+
+二分图中有一条特殊的边，即叶边，它不可能是一个循环的一部分。叶边的一个特征是它所连接的节点必须至少有一个节点，节点的度为1。通过消除二分图中的叶边，可以大大降低图的复杂度，从而加快在二分图的找环的速度。
 
 \begin{figure}[ht]
 	\centerline{%
 		 \resizebox{0.8\textwidth}{!}{\includegraphics{figures/edge_trimming}}%
 	}
-	\caption{Trimming of edges which cannot be part of a cycle.}
+	\caption{裁剪到不可能成为环的边.}
 \end{figure}
 
 \begin{itemize}
-	\item Step 1: node 0, node 3 and node 10 are one degree nodes, eliminating the edge (0,13), (6, 3) and the edge (10,9).
-	\item Step 2: node 9 and node 13 are one degree nodes, eliminating the edge (8,9) and the edge (2,13).
-	\item Step 3: node 8 is one degree nodes, eliminating the edge (8,11).
+	\item 步骤1:节点0、节点3、节点10为一度节点，去掉边(0,13)、边(6,3)、边(10,9)。
+	\item 步骤2:节点9和节点13为一度节点，去掉边(8,9)和边(2,13)。
+	\item 步骤3:节点8是一个节点,消除边缘(8,11)。
 \end{itemize}
 
 
-\textbf{Cycle detection}
-
-After edge trimming, if a cycle of length L is found, we think we have found a solution to this problem.
-we store the cycle edges in a set and put the nonce of the generated cycle in a set and
-return as the result of cycle detection.
+\textbf{环检测}
+经过边裁剪，如果找到一个长度为L的循环，我们认为我们已经找到了解决这个问题的方法。我们将环形边存储在一个集合中，并将生成环的nonce放入一个集合中作为返回环检测的结果。
 
 
-\textbf{Difficulty control}
+\textbf{难度控制}
+在图中找到一个环的难度与M/N成正比。这里M代表图的边数量。N表示图的节点数量。然而，在图形变化中找到一个环的难度并不大。对于加密货币，难度控制必须以精确控制的方式进行。通常的做法是M/N的比值保持不变，比如M/N = 1/2
+因此在实际使用中，它也增加了类似于比特币的哈希难度控制。通过一个哈希函数获得环nonces的摘要，然后比较目标难度。
 
-The difficulty of finding a cycle in the graph is proportional to M/N. Here M stands for edges of the graph.
-N stands for nodes of the graph. However, the difficulty of finding a cycle in the graph change is not smooth.
-For crypto currencies, difficulty control must be scale in precisely controlled manner. The usual practice is
-that the ratio of M/N remain fixed, such as M/N = 1/2.
+\subsubsection{难度调整}
+为了保持出块率稳定，Qitmeer定时调整挖矿难度。由于BlockDAG的分叉，调整规则和区块链是不一样的
 
-Thus in the actual use, it also adds a hash difficulty control similar to Bitcoin. The digest of the cycle nonces is obtained by a hash function,
-and then compared with the target difficulty.
+\subsubsection*{基于蓝色集}
+Qitmeer调整只基于蓝色块而非所有的方块。
 
-\subsubsection{Difficulty Adjustment}
-To keep block creation, a.k.a block rate, stable, Qitmeer adjust mining difficulty periodically. 
-The adjustment rule is deviated from BlockChain due to forks of BlockDAG
+\subsubsection*{动态调整周期}
+每个固定数量的蓝色块的难度调整是复杂的，因为不同的块有不同的蓝色集合，导致很难对哪个块是调整点达成一致。
 
-\subsubsection*{Blue Set Based}
-Rather than based on all the blocks, Qitmeer adjustment different merely on Blue blocks. 
-
-\subsubsection*{Dynamic adjustment interval}
-It is complicated to adjust the difficulty every fixed number of blue blocks, because different block has different blue set, leading difficult to make a agreement on which block to be the adjustment point.
-
-Qitmeer exploits main chain to overcome this problem. The rule is:
+Qitmeer利用主链来克服这个问题。规则是:
 
 \begin{enumerate}
-	\item  Wait until 144 blocks newer than last adjustment point in main chain.
-    \item  Calculate the actual time, which is the time span from last adjustment point to now.
-    \item  Calculate new blue blocks created.
-    \item  Calculate the expected time of those blue blocks by multiply the number with block time.
-    \item  Adjust the difficulty by comparing expected time and actual time.
+	\item  等待，直到比主链上的最后一个调整点后更新了144块。
+    \item  计算实际时间，即从上一次调整点到现在的时间跨度。
+    \item  计算新产生蓝色块的数量.
+    \item  用块时间乘以这个数字计算这些蓝色块的期望时间
+    \item  通过比较预期时间和实际时间来调整难度。
 \end{enumerate}
 
 
