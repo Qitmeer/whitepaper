@@ -183,7 +183,7 @@
 		\small\href{mailto:paper@qitmeer.io}
 			{\nolinkurl{paper@qitmeer.io}}
 	}
-\date{\today\\\small Version 0.6.4}
+\date{\today\\\small Version 0.6.5}
 \begin{document}
 
 %% Cover end
@@ -905,43 +905,44 @@ Qitmeer exploits main chain to overcome this problem. The rule is:
 
 
 \section{Incentive system}
-The economic drive for the miners to work for a blockchain network is a reasonable incentive system. Qitmeer distributes rewards in a fully decentralized way - mining. Qitmeer concerns fairness among all the nodes, regardless how much power one owns. For miners with strong hash power, they may strive for the block reward, which is abundant, though more competition intensive ; for those with less power, they still got the chance to share transaction fee, first come first serve.
+The economic drive for the miners to work for a blockchain network comes from a reasonable incentive system. Qitmeer distributes rewards in a fully decentralized way - mining. Qitmeer concerns fairness among all the nodes, regardless how much power one owns. For miners with strong hash power, they may strive for the block reward, which is abundant, though more competition intensive ; for those with less power, they still got the chance to share transaction fee, first come first serve.
 
 \subsection{Block Reward}
-Miners create a block, including all the unconfirmed transactions, and add a transaction funding to themselves with a commonly admitted amount, then find the cryptic solution and broadcast it to the network. That's simply how mining works, and  this self transfer is called coinbase reward or block reward. 
+The miner creates a block that includes all unconfirmed transactions and generates a transaction to a network recognized fund to himself, then finds a cryptographic solution and publishes it to the network. This is how mining works, and the self-transfer is known as a CoinBase reward, or block reward.
 
 Block reward is considerable and incentives miners to compete intensively to obtain.  BlockDAG paradigm is a collaboration model, therefore the threshold could be lower and the distribution  fairer, however, block reward is essentially a scare resource that requires miners with considerable hash power to take part in this game.
 
 \subsection*{Blue Set Only}
-As clarified in Consensus Protocol section, GhostDAG protocol colors the honest blocks with blue and the dishonest with red. Qitmeer gives block rewards only to those blocks colored as blue.
-Qitmeer identifies merely block rewards of blue blocks as valid, the reasons as below.
+As clarified in Consensus Protocol section, GhostDAG protocol colors the honest blocks with blue and the dishonest with red. Qitmeer gives block rewards only to those blocks colored as blue, the reasons as below.
 
 \subsubsection*{Encourage miners working actively}
-The network is rely on miners working hard to consolidate security. Competition in BlockDAG paradigm is not be as intensive as that in BlockChain, therefore we need to encourage miners working positively to better secure the network. Since working passively has higher probability to be identified as red block, miners will work hard to avoid such situation.
+The network is rely on miners working hard to consolidate security. Competition in BlockDAG paradigm is not as intensive as that in BlockChain, therefore we need to encourage miners working positively to better secure the network. Since working negatively  has higher probability to be identified as red block, miners will work hard to avoid such situation.
 
 \subsubsection*{Resilient to potential attack}
 The instinct of BlockDAG to incorporate forks makes it more inclusive than BlockChain. However, it would reduce the cost to perform an attack because even the failing blocks will be included in the ledger. Since the failing blocks are probably identified as red blocks and paid nothing, it increases the investment of attack dramatically and attacker would not carry on attacks abruptly.
 
+To include forks makes BlockDAG more inclusive than BlockChain. However, it would reduce the cost to perform an attack because even the failing blocks will be included in the ledger. Since the failing blocks are probably identified as red blocks and paid nothing, it increases the cost of attack dramatically and attacker would be more cautious to carry on attacks.
+
 \subsection{Transaction Fee}
-Blue Set policy would consolidate the security considerably, nonetheless it brings discrimination to those miners with less hash power or worse network traffic condition. Perhaps they are honest miners as well but still are identified as "dishonest" due to consensus protocol's limitation. Therefore, we could utilize transaction fee to compensate those less powerful honest miners. 
+Blue Set Only policy would consolidate the security considerably, nonetheless it brings discrimination to those miners with less hash power or worse network traffic condition. Perhaps they are honest miners as well but still are identified as "dishonest" due to consensus protocol's limitation. Therefore, we could utilize transaction fee to compensate those less powerful honest miners. 
 
 \subsubsection{Every block gets paid transaction fee}
-The block reward aims at security while the transaction fee is targeting more on underlying service - value transfer. So the reward policy for transaction fee cares more about fairness, if you devoted to the network, the network would pay you accordingly regardless how much hash power you have.
 
-Other than block reward is orientated merely from  blue blocks, transaction fee is transferred on every blocks, even marked as red. So, miners get paid as long as they work hard. E.g., due to locality, the miners prioritizes to incorporate transactions geographically around them. So, even if their blocks broadcast slower due to poor network traffic and eventually marked as red, they still could receive those transaction fee.
+The block reward aims at security while the transaction fee is targeting more on underlying service - value transfer. So the reward policy for transaction fee cares more about fairness, if you serve the network, the network will pay you accordingly regardless how much hash power you have.
+
+While block reward is orientated merely to  blue blocks, transaction fee is paid on every blocks, even marked as red. So, miners get paid as long as they work hard. E.g., due to locality, the miners prioritizes to include transactions close geographically to them. So, even if their blocks broadcast slower due to poor connectivity and eventually marked as red, they still could receive those transaction fee.
 
 \subsubsection{Weighted transaction fee}
-Due to asynchronous block submission, BlockDAG protocols inevitably incorporate repeating transactions, called transaction collisions.
-Miners tend to pack the transaction with higher fees to maximize their profit. This will result in high repetition rates of blocks. Repeated transactions will not contribute to the throughput, what is more, low fee transactions would wait indefinite time to get confirmed. In a fully decentralized network, nodes cannot coordinate each other to avoid collision, leaving the only option to devise a sophisticated incentive mechanism to penalize the selfish mining behaviors.
+Due to asynchronous block submission, BlockDAG protocols inevitably incorporate repeating transactions, called transaction collisions. Miners tend to pack the transaction with higher fees to maximize their profit. This will result in high repetition rates of blocks, repeated transactions will not contribute to the throughput. In a fully decentralized network, nodes cannot coordinate each other to avoid collision, leaving the only option to devise a sophisticated incentive mechanism to penalize the selfish mining behaviors.
 
-The intuitive way to solve this challenge is to share the transaction fee, and this method will make all the miners reach a Nash equilibrium that all the miners will choose transactions randomly from their memory pools. This approach will considerably reduce transactions collision; however, users would no longer pay higher fees to boost their transaction confirmation, so this policy would break the functionality of transaction fee.
+The intuitive way to solve this challenge is to share the transaction fee, and this method will make all the miners reach a Nash equilibrium that all the miners will choose transactions randomly from their memory pools. This approach will considerably reduce transactions collision; however, users would no longer pay higher fees to boost their transaction confirmation, so this strategy would damage the functionality of transaction fee.
 
 Inspired by inclusive protocol, Qitmeer takes on a simpler Weighted Transaction Fee policy to balance the functionality and collision. The policy is really simple, higher transaction has accordingly higher probability to be included. E.g., if one transaction fee is 2 times higher than another, it is two times more likely to be picked from the mempool.
 
 \subsubsection{First Come First Serve}
 Inspired by Inclusive protocol as well, Qitmeer takes on First Come First Serve policy for transaction fee. The idea is straightforward, whoever is the first one to include the transaction wins the transaction fee.
 
-However, the implementation of this idea is not as easy as expected and is not covered in Inclusive paper. By bitcoin's diagram, miners collect transactions fee in coinbase as well, at this phrase, its order is undetermined. Simply put, the miner has no idea which transaction will be the first included than the rest of the network, the only way is to assume all the the transactions will be the first and collect all the fee, but actually some of them would be identified invalid.
+However, the implementation of this idea is not as easy as expected and is not covered in Inclusive paper. By bitcoin's diagram, miners collect transactions fee in coinbase as well, at this phrase, its order is undetermined. Simply put, the miner has no idea which transaction will be the first included , the only way is to assume all the the transactions will be the first and collect all the fee, but actually some of them would be identified invalid.
 
 Qitmeer's solution to this problem is to balance this coinbase transaction when the miners tried to spend it. For instance, if a miner creates a block with 3 transactions with 0.1 meer fee each, finally identified 2 out of 3 are first included, the rest is not. When the miner creates a transaction to spend this block reward, he has to add an output pointing to a special address with amount 0.1 to burn the redundant fee.
 

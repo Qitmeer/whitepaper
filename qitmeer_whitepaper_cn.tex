@@ -186,7 +186,7 @@
 		\small\href{mailto:paper@qitmeer.io}
 			{\nolinkurl{paper@qitmeer.io}}
 	}
-\date{\today\\\small Version 0.6.4}
+\date{\today\\\small Version 0.6.5}
 \begin{document}
 
 %% Cover end
@@ -884,48 +884,54 @@ Qitmeer利用主链来克服这个问题。规则是:
     \item  通过比较预期时间和实际时间来调整难度。
 \end{enumerate}
 
+\section{激励系统}
+
+矿工为区块链网络工作的经济动力来源一个合理的激励制度。Qitmeer以一种完全去中心化的方式分配奖励——挖矿。Qitmeer关注所有节点之间的公平性，而不管一个节点拥有多少算力。对于算力强的矿工，他们可能会争取区块奖励，区块奖励比较丰富，但竞争比较激烈;对于那些算力较小的矿工，他们仍然有机会分享交易费用，先到先得。
+
+\subsection{区块奖励}
+矿工创建一个块，包括所有未经确认的交易，并生成一笔交易转一笔全网公认的资金给自己，然后找到密码学的解决方案并将其传播到网络。这就是挖矿的工作原理，这笔自我转账被称为币基(CoinBase)奖励或区块奖励。
+
+区块奖励是相当可观的，激励矿工为获取区块而激烈竞争。BlockDAG范式是一种协作模式，因此，门槛可以更低，分配更公平，然而，块奖励本质上是一个稀缺资源，需要矿工有相当大的算力参加这个游戏. 
+
+\subsection*{只基于蓝色集}
+如共识协议部分所阐明的，GhostDAG协议用蓝色表示诚实块，用红色表示不诚实块。Qitmeer只给蓝色的方块奖励，原因如下。
+
+\subsubsection*{鼓励矿工积极工作}
+网络是依靠矿工们努力工作来巩固安全的。
+BlockDAG模式的竞争不像区块链那么激烈，因此我们需要鼓励矿工积极工作，以更好地保护网络。
+由于消极地工作被认定为“红块”的概率较高，矿工将努力避免这种情况
+
+\subsubsection*{抵御潜在攻击}
+包含分叉使得BlockDAG比区块链更具包容性。然而，这将降低执行攻击的成本，因为即使失败的块也将包括在账本中。因为失败的方块很可能被识别为红色方块，并且不需要支付任何费用，这就大大增加了攻击的成本，攻击者会更加谨慎地进行攻击。
+
+\subsection{交易费}
+
+只基于蓝色集策略可以在很大程度上增强安全性，但同时也会给那算力较弱或网络连接较差的矿工带来歧视。也许他们也是诚实的矿工，但由于共识协议的限制，他们仍然被认为是“不诚实的”。因此，我们可以利用交易费来补偿这些诚实的矿工。
+
+\subsubsection{所有块都有交易费}
+区块奖励针对的是安全性，而交易费用则更多地针对底层服务 —— 价值转移。因此，交易费的奖励政策更关心公平性，如果你为网络服务，无论你有多少算力，网络都会相应地支付给你报酬。
 
 
-\section{Incentive system}
-The economic drive for the miners to work for a blockchain network is a reasonable incentive system. Qitmeer distributes rewards in a fully decentralized way - mining. Qitmeer concerns fairness among all the nodes, regardless how much power one owns. For miners with strong hash power, they may strive for the block reward, which is abundant, though more competition intensive ; for those with less power, they still got the chance to share transaction fee, first come first serve.
+与区块奖励只针对蓝色区块不同，每个区块都会产生交易费，即使标记为红色。因此，矿工只要努力工作就能得到报酬。例如，由于地理位置的关系，矿工优先将地理位置接近的交易包括在内。因此，即使他们的块由于网络连通性不好而传播速度变慢，并最终被标记为红色，他们仍然可以获得交易费。
 
-\subsection{Block Reward}
-Miners create a block, including all the unconfirmed transactions, and add a transaction funding to themselves with a commonly admitted amount, then find the cryptic solution and broadcast it to the network. That's simply how mining works, and  this self transfer is called coinbase reward or block reward. 
+\subsubsection{加权交易费}
 
-Block reward is considerable and incentives miners to compete intensively to obtain.  BlockDAG paradigm is a collaboration model, therefore the threshold could be lower and the distribution  fairer, however, block reward is essentially a scare resource that requires miners with considerable hash power to take part in this game.
+由于区块提异步交，BlockDAG协议不可避免地包含重复的交易，称为交易碰撞。矿工倾向于包含用更高的费用的成交易，以实现利润最大化。这将导致块的高重复率, 重复的交易不会增加吞吐量。在完全去中心化的网络中，节点之间无法相互协调以避免冲突，只有设计完善的激励机制来惩罚自私的挖矿行为。
 
-\subsection*{Blue Set Only}
-As clarified in Consensus Protocol section, GhostDAG protocol colors the honest blocks with blue and the dishonest with red. Qitmeer gives block rewards only to those blocks colored as blue.
-Qitmeer identifies merely block rewards of blue blocks as valid, the reasons as below.
+解决这一挑战最直观的方法是分摊交易费用，这种方法会使所有的参与者达到纳什均衡，所有的参与者都会从他们的内存池中随机选择交易。这种方法将大大减少交易冲突; 然而，用户将不再支付更高的费用来提高他们的交易确认，因此该策略将破坏交易费的功能。
 
-\subsubsection*{Encourage miners working actively}
-The network is rely on miners working hard to consolidate security. Competition in BlockDAG paradigm is not be as intensive as that in BlockChain, therefore we need to encourage miners working positively to better secure the network. Since working passively has higher probability to be identified as red block, miners will work hard to avoid such situation.
 
-\subsubsection*{Resilient to potential attack}
-The instinct of BlockDAG to incorporate forks makes it more inclusive than BlockChain. However, it would reduce the cost to perform an attack because even the failing blocks will be included in the ledger. Since the failing blocks are probably identified as red blocks and paid nothing, it increases the investment of attack dramatically and attacker would not carry on attacks abruptly.
+受到Inclusive协议的启发，Qitmeer采用了更简单的加权交易费用策略来平衡功能和碰撞。策略很简单，交易越高，相应的被包含的概率也就越高。例如，如果一个交易费用是另一个交易费用的2倍，那么从内存池中选择交易费用的可能性就是2倍。
 
-\subsection{Transaction Fee}
-Blue Set policy would consolidate the security considerably, nonetheless it brings discrimination to those miners with less hash power or worse network traffic condition. Perhaps they are honest miners as well but still are identified as "dishonest" due to consensus protocol's limitation. Therefore, we could utilize transaction fee to compensate those less powerful honest miners. 
+\subsubsection{先到先得}
 
-\subsubsection{Every block gets paid transaction fee}
-The block reward aims at security while the transaction fee is targeting more on underlying service - value transfer. So the reward policy for transaction fee cares more about fairness, if you devoted to the network, the network would pay you accordingly regardless how much hash power you have.
+受到包含协议的启发，Qitmeer对交易费用采取先到先得的政策。这个想法很简单，谁第一个包含交易，谁就赢得交易费。
 
-Other than block reward is orientated merely from  blue blocks, transaction fee is transferred on every blocks, even marked as red. So, miners get paid as long as they work hard. E.g., due to locality, the miners prioritizes to incorporate transactions geographically around them. So, even if their blocks broadcast slower due to poor network traffic and eventually marked as red, they still could receive those transaction fee.
 
-\subsubsection{Weighted transaction fee}
-Due to asynchronous block submission, BlockDAG protocols inevitably incorporate repeating transactions, called transaction collisions.
-Miners tend to pack the transaction with higher fees to maximize their profit. This will result in high repetition rates of blocks. Repeated transactions will not contribute to the throughput, what is more, low fee transactions would wait indefinite time to get confirmed. In a fully decentralized network, nodes cannot coordinate each other to avoid collision, leaving the only option to devise a sophisticated incentive mechanism to penalize the selfish mining behaviors.
+然而，这一想法的实施并不像预期的那么容易，也没有包含在包容性文件中。按照比特币的范式，矿商在coinbase也收取交易费，在这个阶段，它的顺序是不确定的。简单地说，矿工不知道哪个交易将是第一个包括在内，唯一的方法是假设所有的交易将是第一个，并收取所有的费用，但实际上其中一些将被认定无效。
 
-The intuitive way to solve this challenge is to share the transaction fee, and this method will make all the miners reach a Nash equilibrium that all the miners will choose transactions randomly from their memory pools. This approach will considerably reduce transactions collision; however, users would no longer pay higher fees to boost their transaction confirmation, so this policy would break the functionality of transaction fee.
 
-Inspired by inclusive protocol, Qitmeer takes on a simpler Weighted Transaction Fee policy to balance the functionality and collision. The policy is really simple, higher transaction has accordingly higher probability to be included. E.g., if one transaction fee is 2 times higher than another, it is two times more likely to be picked from the mempool.
-
-\subsubsection{First Come First Serve}
-Inspired by Inclusive protocol as well, Qitmeer takes on First Come First Serve policy for transaction fee. The idea is straightforward, whoever is the first one to include the transaction wins the transaction fee.
-
-However, the implementation of this idea is not as easy as expected and is not covered in Inclusive paper. By bitcoin's diagram, miners collect transactions fee in coinbase as well, at this phrase, its order is undetermined. Simply put, the miner has no idea which transaction will be the first included than the rest of the network, the only way is to assume all the the transactions will be the first and collect all the fee, but actually some of them would be identified invalid.
-
-Qitmeer's solution to this problem is to balance this coinbase transaction when the miners tried to spend it. For instance, if a miner creates a block with 3 transactions with 0.1 meer fee each, finally identified 2 out of 3 are first included, the rest is not. When the miner creates a transaction to spend this block reward, he has to add an output pointing to a special address with amount 0.1 to burn the redundant fee.
+对于这个问题，Qitmeer的解决方案是在矿工试图使用挖矿奖励时时平衡这笔交易。例如，如果一个矿工创建了一个块，其中包含3个交易，交易费均为0.1MEER，最后确定的3个交易中有2个首先被包含，其余的则不包含。当矿工创建一个交易来使用这个区块奖励时，他必须添加一个指向一个特殊地址的输出，其中包含金额0.1MEER，以消耗多余的交易费。
 
 \section{Protocols and Interoperability}
 BlockChain is the digital infrastructure for decentralized financial system, which would evolve into a complete ecosystem in the course of reaching maturity. This session analyses the typical applications available on  Qitmeer network and the protocols for interaction with Qitmeer. 
