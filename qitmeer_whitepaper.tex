@@ -952,9 +952,15 @@ BlockChain is the digital infrastructure for decentralized financial system, whi
 \subsection{Mining Protocol}
 \subsubsection{Proof-of-work Algorithm}
 
-The mining protocol is resistant to the centralization of mining power, which enables miner utilize almost all parts of commodity hardware (GPUs, CPUs).
+The mining protocol is resistant to the centralization of hash power, which enables miner utilize almost all parts of commodity hardware (GPUs, CPUs).
 Therefore, Qitmeer uses a Proof-Of-Work algorithm called Cuckoo Cycle\cite{cuckoocycle},
 a memory-hard algorithm. This algorithm is designed to find certain subgraphs in large pseudo-random graphs.
+An introduction of Qitmeer proof-of-work can be found here.\cite{qitmeerpow}
+
+A sophisticated mining protocol could effectively resist the centralization of hash power.
+Therefore, Qitmeer uses a Proof-Of-Work algorithm called Cuckoo Cycle\cite{cuckoocycle},
+This algorithm is designed to find certain subgraphs in large pseudo-random graphs, which is memory memory computation intensified.
+
 An introduction of Qitmeer proof-of-work can be found here.\cite{qitmeerpow}
 
 \subsubsection{Mining Protocol}
@@ -1052,7 +1058,7 @@ For example:
 \subsubsection{Overview}
    The blockchain wallet itself does not store any digital currency, and is primarily a computer program for creating digital currency transactions, tracking balances, and making it easy for users to manage addresses and private keys. Wallet software is the foundation of the whole block chain ecological development, any industry service can be realized through a block chain wallet value, block chain technology itself will reconstruct the traditional Internet business model in its own way. 
 \subsection*{Openness}
-   An excellent blockchain public chain project should be more inclusive and open. Therefore, in addition to its own official wallet, Qitmeer has designed all interfaces and SDK for third-party wallet development at the beginning of development. Third party wallet institutions can use these interfaces to develop a variety of wallet programs that support Qitmeer Token transactions. Including: HD wallet, SPV wallet, browser wallet to meet a variety of user needs.
+   An excellent blockchain public chain project should be more inclusive and open. Therefore, in addition to its own official wallet, Qitmeer has designed all interfaces and SDK for third-party wallet development at the beginning of development. Third party wallet institutions can use these interfaces to develop a variety of wallet programs that support Qitmeer Token transactions. Including: HD (Hierarchical Deterministic) wallet, SPV wallet, browser wallet to meet a variety of user needs.
 \subsection*{How to create a wallet}
    The following is a simple wallet creation and transaction steps:
 \begin{enumerate}
@@ -1067,18 +1073,7 @@ For example:
 \end{enumerate}
 
    To complete the above operations, we need to rely on qitmeer's Qitmeer SDK and RPC interface.
-   The Qitmeer SDK is a collection of tools that integrates various encryption, decryption, and signature functions. We can use the Qitmeer SDK to develop the following functions:
-
-   \begin{enumerate}
-     \item Generate seeder.
-     \item Derive private key.
-     \item Derive public key.
-     \item Derive address.
-     \item Create unsigned Transactions.
-	 \item Sign Transactions.
-   \end{enumerate}
-
-   RPC is a http-based network interface, it’s easy to interact with qitmeer network. We can use the Qitmeer SDK to develop the following functions:
+   The Qitmeer SDK is a collection of tools that integrates various encryption, decryption, and signature functions. RPC is a http-based network interface, it’s easy to interact with qitmeer network. We can use the Qitmeer SDK to develop the following functions:
 
    \begin{enumerate}
     \item  Get block count from block dag or block chain.
@@ -1091,7 +1086,8 @@ For example:
 
 
 \subsection{Cross Chain}
-Qitmeer is dedicated to undertake the tokenized liquidity and host applications of global ecosystem of Inclusive and Ethical finance. Consequently the design goal of Qitmeer is to build up a simple and robust UTXO-based value transfer network, which prefers interoperability solutions to integrate various blockchains and applications, such as smart contract. Eventually, they will be part of Qitmeer’s ecosystem and can interact with each other.
+Qitmeer is committed to  tokenize liquidity  and build application ecosystem  in global Inclusive and Ethical finance
+Consequently the design goal of Qitmeer is to build up a simple and robust UTXO-based value transfer network, which prefers interoperability solutions to integrate various blockchains and applications, such as smart contract. Eventually, they will be part of Qitmeer’s ecosystem and can interact with each other.
 
 \subsubsection{UTXO interoperability}
 Currently, Qitmeer has supported P2SH script contracts and cross-chain functions through hash-locking.

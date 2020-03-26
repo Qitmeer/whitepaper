@@ -933,27 +933,35 @@ BlockDAG模式的竞争不像区块链那么激烈，因此我们需要鼓励矿
 
 对于这个问题，Qitmeer的解决方案是在矿工试图使用挖矿奖励时时平衡这笔交易。例如，如果一个矿工创建了一个块，其中包含3个交易，交易费均为0.1MEER，最后确定的3个交易中有2个首先被包含，其余的则不包含。当矿工创建一个交易来使用这个区块奖励时，他必须添加一个指向一个特殊地址的输出，其中包含金额0.1MEER，以消耗多余的交易费。
 
-\section{Protocols and Interoperability}
-BlockChain is the digital infrastructure for decentralized financial system, which would evolve into a complete ecosystem in the course of reaching maturity. This session analyses the typical applications available on  Qitmeer network and the protocols for interaction with Qitmeer. 
+\section{协议与互操作}
+区块链是去中心的金融系统的数字基础设施，在逐渐成熟的过程中，它将演变成一个完整的生态系统。本部分分析了在Qitmeer网络上可用的典型应用程序以及与Qitmeer交互的协议。
 
-\subsection{Mining Protocol}
-\subsubsection{Proof-of-work Algorithm}
+\subsection{挖矿算法}
+\subsubsection{工作量证明算法}
 
-The mining protocol is resistant to the centralization of mining power, which enables miner utilize almost all parts of commodity hardware (GPUs, CPUs).
-Therefore, Qitmeer uses a Proof-Of-Work algorithm called Cuckoo Cycle\cite{cuckoocycle},
-a memory-hard algorithm. This algorithm is designed to find certain subgraphs in large pseudo-random graphs.
-An introduction of Qitmeer proof-of-work can be found here.\cite{qitmeerpow}
 
-\subsubsection{Mining Protocol}
+设计精妙的挖矿协议能有效地抵抗了算力的集中化。
+因此，Qitmeer使用了一种名为Cuckoo Cycle\cite{cuckoocycle}的工作证明算法，
+该算法主要用于寻找大型伪随机图中的某些子图, 需要高强度对内存运算。
+
+Qitmeer工作证明的介绍可以在这里\cite{qitmeerpow}找到。
+
+
+
+\subsubsection{挖矿协议}
 
 \begin{figure}[ht]
 	\centerline{%
 		\resizebox{0.8\textwidth}{!}{\includegraphics{figures/mining_process}}%
 	}
-	\caption{Mining process.}
+	\caption{挖矿流程.}
 \end{figure}
 
-Qitmeer supports getblocktemplate mining protocol. It make the miner to decide which transactions are put in the block. The miner send a request to the Qitmeer full node by getblocktemplate RPC.
+
+Qitmeer支持getblocktemplate挖矿协议。
+它让矿工决定将哪些交易放到块中。
+矿工通过getblocktemplate RPC向Qitmeer 全节点发送请求。
+
 \begin{lstlisting}
 {
 	"jsonrpc": "2.0",
@@ -966,7 +974,7 @@ Qitmeer supports getblocktemplate mining protocol. It make the miner to decide w
 	"id": 1
 }
 \end{lstlisting}
-getblocktemplate return a JSON Object.
+getblocktemplate 返回  JSON 对象.
 \begin{lstlisting}
 {
 	"jsonrpc": "2.0",
@@ -1010,7 +1018,9 @@ getblocktemplate return a JSON Object.
 }
 \end{lstlisting}
 
-Then the miner start PoW using the data from getblocktemplate RPC. If it get the right 'answer', submiting the potential block by submitblock RPC.
+
+然后矿工使用来自getblocktemplate RPC的数据启动PoW。如果它得到正确的“答案”，通过submitblock RPC提交潜在的块。
+
 \begin{lstlisting}
 {
 	"jsonrpc": "2.0",
@@ -1022,113 +1032,106 @@ Then the miner start PoW using the data from getblocktemplate RPC. If it get the
 }
 \end{lstlisting}
 
-\subsubsection{Miner Capability}
+\subsubsection{Miner 功能}
 
-The Qitmeer-Miner supports both solo mining and pool mining.
+Qitmeer挖矿工具(Qitmeer-Miner) 支持独立采矿和矿池采矿。
 
-\subsubsection*{Solo}
-If the miner  decided to mine Qitmeer without joining a pool, he would launch Solo mining mode. Solo miner connects one full node, call RPC service to mine blocks. Solo miner is recommended GPU implementation to gain better efficiency.
+\subsubsection*{独立模式(Solo)}
+如果矿工决定在不加入池的情况下挖Qitmeer，他将启动独立挖矿模式。Solo 矿工连接一个全节点，调用RPC服务来挖块。Solo 矿工推荐使用GPU实现，以获得更高的效率。
 
-\subsubsection*{Pool}
-Qitmeer mining pools support stratum mining protocol as most PoW mining pools do.
+\subsubsection*{矿池模式(Pool)}
 For example:
 
-\emph{miner.exe -o stratum+tcp://serverIp:3177 -m YourWalletAddress.YourMachineId}
+Qitmeer矿池与大多数PoW矿池一样支持stratum挖矿协议。
+例如
 
-\subsection{Wallet Protocol}
-\subsubsection{Overview}
-   The blockchain wallet itself does not store any digital currency, and is primarily a computer program for creating digital currency transactions, tracking balances, and making it easy for users to manage addresses and private keys. Wallet software is the foundation of the whole block chain ecological development, any industry service can be realized through a block chain wallet value, block chain technology itself will reconstruct the traditional Internet business model in its own way. 
-\subsection*{Openness}
-   An excellent blockchain public chain project should be more inclusive and open. Therefore, in addition to its own official wallet, Qitmeer has designed all interfaces and SDK for third-party wallet development at the beginning of development. Third party wallet institutions can use these interfaces to develop a variety of wallet programs that support Qitmeer Token transactions. Including: HD wallet, SPV wallet, browser wallet to meet a variety of user needs.
-\subsection*{How to create a wallet}
-   The following is a simple wallet creation and transaction steps:
+\emph{miner.exe -o stratum+tcp://服务器地址:3177 -m 钱包地址.机器ID}
+
+\subsection{钱包}
+\subsubsection{概述}
+   区块链钱包本身不存储任何数字货币，它主要是一个用于创建数字货币交易、跟踪余额和使用户易于管理地址和私钥的计算机程序。钱包软件是整个区块链生态发展的基础，任何行业服务都可以通过一个区块链钱包的价值来实现，区块链技术本身将以自己的方式重构传统的互联网商业模式。
+
+\subsection*{开放性}
+   一个优秀的区块链公链项目应该更具包容性和开放性。因此，除了自己的官方钱包，Qitmeer在开发之初就设计了第三方钱包开发的所有接口和SDK。第三方钱包机构可以使用这些接口来开发各种支持Qitmeer令牌交易的钱包程序。包括:HD(Hierarchical Deterministic, 层级确定性)钱包，SPV(Simplified Payment Verification, 简化支付验证)钱包，浏览器钱包，满足各种用户需求。
+\subsection*{怎样创建钱包}
+   如下为一个简单的创建钱包的步骤
 \begin{enumerate}
-	\item  Generate seeder.
-    \item  Derive private key.
-    \item  Derive public key.
-    \item  Derive address.
-    \item  Monitor for outputs.
-    \item  Create unsigned Transactions.
-    \item  Sign Transactions.
-    \item  Broadcast Transactions.
+	\item  生成种子.
+    \item  生成私钥.
+    \item  生成公钥.
+    \item  生成地址.
+    \item  监控输出.
+    \item  生成一笔未签名的交易.
+    \item  对交易签名.
+    \item  广播.
 \end{enumerate}
 
-   To complete the above operations, we need to rely on qitmeer's Qitmeer SDK and RPC interface.
-   The Qitmeer SDK is a collection of tools that integrates various encryption, decryption, and signature functions. We can use the Qitmeer SDK to develop the following functions:
+   为了完成上述操作，我们需要依赖qitmeer的qitmeer SDK和RPC接口。
+Qitmeer SDK是一组集成了各种加密、解密和签名功能的工具。RPC是一个基于http的网络接口，它很容易与qitmeer网络交互。
+我们可以使用Qitmeer SDK来开发以下功能:
 
    \begin{enumerate}
-     \item Generate seeder.
-     \item Derive private key.
-     \item Derive public key.
-     \item Derive address.
-     \item Create unsigned Transactions.
-	 \item Sign Transactions.
-   \end{enumerate}
-
-   RPC is a http-based network interface, it’s easy to interact with qitmeer network. We can use the Qitmeer SDK to develop the following functions:
-
-   \begin{enumerate}
-    \item  Get block count from block dag or block chain.
-    \item Get block data with block height.
-    \item  Gettransaction data with txid.
-    \item  Gets all transaction data waiting for confirmation.
-    \item  Monitor for outputs.
-    \item  Broadcast Txes.
+    \item  得到区块数量.
+    \item  通过高度得到区块信息.
+    \item  查询交易信息.
+    \item  得到所有待确认的交易.
+    \item  监控输出.
+    \item  广播交易.
    \end{enumerate}
 
 
-\subsection{Cross Chain}
-Qitmeer is dedicated to undertake the tokenized liquidity and host applications of global ecosystem of Inclusive and Ethical finance. Consequently the design goal of Qitmeer is to build up a simple and robust UTXO-based value transfer network, which prefers interoperability solutions to integrate various blockchains and applications, such as smart contract. Eventually, they will be part of Qitmeer’s ecosystem and can interact with each other.
+\subsection{跨链}
 
-\subsubsection{UTXO interoperability}
-Currently, Qitmeer has supported P2SH script contracts and cross-chain functions through hash-locking.
+Qitmeer致力于全球普惠和伦理金融的流动性通证化以及应用生态构建。因此，Qitmeer的设计目标是建立一个简单而健壮的基于UTXO模型的价值传输网络，该网络更倾向于使用链间互操作性解决方案来集成各种区块链和应用程序，比如智能合约。最终，它们将成为Qitmeer生态系统的一部分，并可以交互
 
-\subsubsection*{Process (BTC to MEER)}
+\subsubsection{UTXO 互操作性}
+目前，Qitmeer已经通过哈希锁定支持P2SH脚本合约和跨链功能
 
-The implementation process of hash locking across the chain is:
+\subsubsection*{流程 (BTC 到 MEER)}
+
+跨链哈希锁的实现过程为:
 
 \begin{enumerate}
-\item  Alice and Bob generate their addresses on 'MEER' and 'BTC' chains respectively;
+	\item  Alice和Bob分别在'MEER'和'BTC'链上生成地址;
 
-\item Alice generates her own \textit{Secret Key} and \textit{Secret Key hash};
+	\item Alice 生成她的 \textit{私钥} and \textit{私钥哈希};
 
-\item Alice locks her 'MEER' token into the hash-lock contract in the main chain of 'MEER'. The unlocking condition is that Bob holds the \textit{Secret Key} or returns it to Alice after exceeding the specified time;
+	\item Alice将她的'MEER'锁在'MEER'主链的哈希锁合约中。解锁条件是Bob持有\textit{私钥}或超过指定时间后返回给Alice;
 
-\item Bob checks the contract of Alice's main chain in 'MEER' and uses \textit{Secret Key hash}   to generate the corresponding contract in 'BTC'. The unlocking condition is that Alice holds the \textit{Secret Key} or returns it to Bob after the specified time;
+	\item Bob在'MEER'中检查Alice的主链的合约，并使用\textit{私钥哈希}在'BTC'中生成相应的合约。解锁条件是Alice持有\textit{私钥}或在指定时间后返回给Bob;
 
-\item Alice uses \textit{Secret Key}  to take  'BTC' locked by Bob from the hash-lock contract;
+	\item Alice使用\textit{私钥}从哈希锁合约中获取Bob锁定的'BTC';
 
-\item After obtaining \textit{Secret Key}, Bob  takes 'MEER' locked by Alice from the hash-lock contract and completes the transaction;
-
+	\item 获取\textit{私钥}后，Bob从哈希锁约中获取Alice锁定的'MEER'，完成交易;
 \end{enumerate}
 
 \begin{figure}[hbt]
 	\centerline{%
 	   \resizebox{0.8\textwidth}{!}{\includegraphics{figures/UTXOAtomicSwap.jpg}}%
 	}
-\caption{UTXO Atom Swap}
+\caption{UTXO 原子交换}
 \end{figure}
 
 
 
-\subsubsection{Smart Contract Interoperability}
+\subsubsection{智能合约互操作性}
 
-Qitmeer completes the cross- chain transaction between the block chain assets of Qitmeer and  other account models through hash lock Smart contract.
+Qitmeer通过哈希锁合约智能合约完成Qitmeer的区块链资产与其他账户模型之间的跨链交易。
 
-\subsubsection*{Smart Contract Interoperability Process (ETH to MEER)}
+\subsubsection*{智能合约互操作性过程 (ETH 到 MEER)}
 
 \begin{enumerate}
-\item  Alice and Bob generate their addresses on 'MEER' and 'ETH' chains respectively;
+	\item  Alice和Bob分别在'MEER'和'ETH'链上生成地址;
 
-\item   Alice generates her own \textit{Secret Key} and \textit{Secret Key hash};
+	\item Alice 生成她的 \textit{私钥} and \textit{私钥哈希};
 
- \item  Alice locks her 'MEER' token into the hash-lock contract in the main chain of 'MEER'. The unlocking condition is that Bob holds the \textit{Secret Key} or returns it to Alice after exceeding the specified time;
+	\item Alice将她的'MEER'锁在'MEER'主链的哈希锁合约中。解锁条件是Bob持有\textit{私钥}或超过指定时间后返回给Alice;
 
- \item  Bob checks the contract of Alice in the main chain of 'MEER' and generates the corresponding contract on 'ETH' using \textit{Secret Key hash}. The unlocking condition is that Alice holds the \textit{Secret Key } or returns it to Bob after exceeding the specified time.
+	\item Bob在'MEER'中检查Alice的主链的合约，并使用\textit{私钥哈希}在'ETH'中生成相应的合约。解锁条件是Alice持有\textit{私钥}或在指定时间后返回给Bob;
 
- \item  Alice uses \textit{Secret Key} to call Smart Contract to take 'ETH';
+	 \item  Alice 使用 \textit{私钥} to 调用 智能合约 去取出 'ETH';
 
- \item  After obtaining \textit{Secret Key}, Bob takes 'MEER' locked by Alice in the hash-lock contract and completes the transaction;
+	\item 获取\textit{私钥}后，Bob从哈希锁约中获取Alice锁定的'MEER'，完成交易;
 
 \end{enumerate}
 
